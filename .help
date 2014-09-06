@@ -1,0 +1,16 @@
+1.
+Issue: Foreign keys not getting created
+https://github.com/sequelize/sequelize/issues/1934
+
+Solution:
+User.hasMany(Task, { foreignKeyConstraint: true});
+Task.belongsTo(User, { foreignKeyConstraint: true});
+
+2.
+Associations:
+source.belongsTo(target, [options])
+
+Creates an association between this (the source) and the provided target. The foreign key is added on the source.
+
+source.hasMany(target. [options])
+adds foreign key to the target

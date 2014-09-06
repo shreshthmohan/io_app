@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1= title
+  p Create new gear retailer by adding relevant info
+
+  h2 Creating new gear retailer
+  form(action="gear/create_retailer", method="post")
+    input(type="text", name="retailer_name")
+    input(type="text", name="website_url")     
+    input(type="text", name="address_field")   
+    input(type="text", name="address_landmark")
+//    input(type="text", name="address_city_id")
+    select(name="address_city")
+      option(value='')
+    input(type="text", name="location_url")    
+    input(type="text", name="facebook_url")    
+    input(type="text", name="twitter_url")     
+    input(type="text", name="instagram_url")   
+    input(type="text", name="youtube_url")     
+    input(type="text", name="available_brands")
+    input(type="text", name="phone_primary")   
+    input(type="text", name="phone_secondary") 
+    input(type="text", name="phone_tertiary")  
+    input(type="text", name="retailer_email")  
+    input(type="text", name="comments")        
+    input(type="submit")
+
