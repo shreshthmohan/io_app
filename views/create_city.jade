@@ -1,19 +1,17 @@
-doctype html
-html
-  head
-    title= title
-  body
-    h1= title
-    p Create new city
-    
-    h2 Creating new city
-    form(action="/city/create", method="post")
-      input(type="text", name="city_name")
-      input(type="submit")
-    
-    h2 Cities
-    
-    ul
-    each city in cities
-      li
-        = city.city_name
+extends layout
+
+block content    
+  h1= title
+  p Create new city
+  
+  h2 Creating new city
+  form(action="/city/create", method="post")
+    input(type="text", name="city_name")
+    input(type="submit")
+  
+  h2 Cities
+  
+  ul
+  each city in cities
+    li
+      = city.city_name

@@ -2,6 +2,7 @@ var express  = require('express');
 var connect  = require('connect');
 //var routes   = require('./routes');
 var city     = require('./routes/city');
+var retailer = require('./routes/retailer');
 //var retailer = require('./routes/retailer');
 var  http    = require('http');
 var  path    = require('path');
@@ -52,6 +53,8 @@ app.use(connect.urlencoded())
 
 // create gear_retailer  
 //app.post('/gear/create_retailer', /* TODO */);
+
+app.get('/gear/create_retailer', retailer.index);
 
 // modify gear_retailer
 
