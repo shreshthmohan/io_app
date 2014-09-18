@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+  p All retailers of #{city.city_name}  
+
+  ul
+  each retailer in retailers
+    li
+      = retailer.retailer_name
+      = retailer.website_url
+  
