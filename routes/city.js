@@ -15,3 +15,16 @@ exports.index = function(req, res) {
     })
   });
 };
+
+exports.retailers = function(req, res) {
+  db.indian_city.find({ where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+     db.gear_retailer.find({ where: {indian_cityId: city.id}})
+     .success(function(retailers) {
+        res.render('city_retailers', {
+          city: city,
+          retailers: retailers
+        }) 
+     })
+  })
+};

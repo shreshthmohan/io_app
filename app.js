@@ -52,9 +52,15 @@ app.use(connect.urlencoded())
 // POSTs, GETs, DELETEs, PUTs
 
 // create gear_retailer  
-//app.post('/gear/create_retailer', /* TODO */);
 
 app.get('/gear/create_retailer', retailer.index);
+
+app.post('/gear/create_retailer', retailer.create);
+
+// List all retailers in a city
+// Whether or not to take care of uppercase, if yes, how?
+app.get('/gear/:city_name', city.retailers);
+
 
 // modify gear_retailer
 

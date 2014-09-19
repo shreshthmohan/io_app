@@ -5,7 +5,7 @@ block content
   p Create new gear retailer by adding relevant info
 
   h2 Creating new gear retailer
-  form(action="gear/create_retailer", method="post")
+  form(action="create_retailer", method="post")
     label(for="retailer_name") Retailer Name 
     input(type="text", name="retailer_name", id="retailer_name")
     br
@@ -18,8 +18,8 @@ block content
     label(for="address_landmark") address landmark
     input(type="text", name="address_landmark", id="address_landmark")
     br
-    label(for="city_name") City 
-    select(name="city_name", id="city_name")  
+    label(for="city_id") City 
+    select(name="city_id", id="city_name")  
       each city in cities
         option(value=city.id) #{city.city_name}
     br
