@@ -19,9 +19,11 @@ exports.index = function(req, res) {
 exports.retailers = function(req, res) {
   db.City.find({ where: {city_name: req.param('city_name')}})
   .success(function(city) {
-     console.log(city.city_name);
-     db.Retailer.find({ where: {indian_cityId: city.id}})
+     db.Retailer.findAll({ where: {CityId: city.id}})
      .success(function(retailers) {
+        console.log("before printing retailers");
+        console.log(retailers);
+        console.log("after printing retailers");
         res.render('city_retailers', {
           city: city,
           retailers: retailers

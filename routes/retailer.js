@@ -32,7 +32,7 @@ exports.create = function(req, res) {
           //city.addRetailer(retailer).success(function() { // adds FK in retailer ?
           retailer.setCity(city).success(function() { // adds FK in retailer ?
             //res.redirect('/gear/create_retailer');
-            res.redirect('/gear/' + city.name);
+            res.redirect('/gear/' + city.city_name);
           })
         })
    })

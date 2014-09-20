@@ -2,7 +2,7 @@ var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
 var lodash    = require('lodash');
-var sequelize = new Sequelize('io_app_exp', 'root', 'clock');
+var sequelize = new Sequelize('io_app', 'root', 'clock');
 var db        = {}; // array object that is key-value type
 
 // Importing models from each file in the models directory except index.js
