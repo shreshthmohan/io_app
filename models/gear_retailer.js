@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var gear_retailer = sequelize.define('gear_retailer',
+  var Retailer = sequelize.define('Retailer',
   {
     retailer_name:   {type: DataTypes.STRING(60), allowNull: false}, 
     website_url:     {type: DataTypes.STRING(50)},
@@ -20,12 +20,12 @@ module.exports = function(sequelize, DataTypes) {
   },
   {
     associate: function(models) { //create association/foreign key constraint
-      gear_retailer.hasMany(models.gear_tag, {foreignKeyConstraint: true});
-      // ^ will add FK to gear_tags table
-      gear_retailer.belongsTo(models.indian_city, {foreignKeyConstraint: true});
-      // ^ will add FK to gear_retailers table
+      Retailer.hasMany(models.GearTag, {foreignKeyConstraint: true});
+      // ^ will add FK to GearTags table
+      Retailer.belongsTo(models.City, {foreignKeyConstraint: true});
+      // ^ will add FK to Retailers table
     }
   });
 
-  return gear_retailer;
+  return Retailer;
 };

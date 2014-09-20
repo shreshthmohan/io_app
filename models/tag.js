@@ -1,15 +1,15 @@
 module.exports = function(sequelize, DataTypes) {
-  var tag = sequelize.define('tag',
+  var Tag = sequelize.define('Tag',
   {
     tag_name: {type: DataTypes.STRING(30), allowNull: false}
   },
   {
     associate: function(models) {
-      tag.hasMany(models.gear_tag, {foreignKeyConstraint: true});
-      // ^ will add FK to gear_tags table
+      Tag.hasMany(models.GearTag, {foreignKeyConstraint: true});
+      // ^ will add FK to GearTags table
     }
   });
 
-  return tag;
+  return Tag;
 
 };
