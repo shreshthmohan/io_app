@@ -3,10 +3,10 @@ var connect  = require('connect');
 //var routes   = require('./routes');
 var city     = require('./routes/city');
 var retailer = require('./routes/retailer');
-//var retailer = require('./routes/retailer');
-var  http    = require('http');
-var  path    = require('path');
-var  db      = require('./models');
+var routes   = require('./routes');
+var http     = require('http');
+var path     = require('path');
+var db       = require('./models');
 
 var app = express();
 
@@ -51,7 +51,11 @@ app.use(connect.urlencoded())
 
 // POSTs, GETs, DELETEs, PUTs
 
-// create gear_retailer  
+// Links to all available routes
+
+app.get('/', routes.index);
+
+// create (gear) retailer  
 
 app.get('/gear/create_retailer', retailer.index);
 
