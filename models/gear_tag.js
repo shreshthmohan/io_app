@@ -1,8 +1,9 @@
 module.exports = function(sequelize, DataTypes) {
   var GearTag = sequelize.define('GearTag',
   {
-    // nothing here! :-) Let's see if this works!
     cor_name: DataTypes.STRING
+    // Unnecessary field TODO: check if things will work without any explicit
+    // fields
   },
   {
     associate: function(models) {

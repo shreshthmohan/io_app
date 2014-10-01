@@ -14,8 +14,8 @@ module.exports = function(sequelize, DataTypes) {
   },
   {
     associate: function(models) { //create associations/foreign key constraint
-      Operator.hasMany(models.ActivityTag, {foreignKeyConstraint: true});
-      // ^ will add FK to ActivityTags table
+      Operator.hasMany(models.OperatorTag, {foreignKeyConstraint: true});
+      // ^ will add FK to OperatorTags table
       Operator.belongsTo(models.City, {foreignKeyConstraint: true});
       // ^ will add FK to Operators table
       Operator.hasMany(models.SocialLink, {foreignKeyConstraint: true});

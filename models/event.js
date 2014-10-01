@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
     associate: function(models) { //create associations/foreign key constraint
       Event.belongsTo(models.City, {foreignKeyConstraint: true});
       // ^ will add FK to Events table
-      //Event.hasMany(models.EventTag, {foreignKeyConstraint: true}); // TODO
+      Event.hasMany(models.EventTag, {foreignKeyConstraint: true}); // TODO
       // ^ will add FK to EventTag table
       Event.hasMany(models.SocialLink, {foreignKeyConstraint: true});
       // ^ will add FK to SocialLinks table
