@@ -15,6 +15,7 @@ fs
   .forEach(function(file) {
     var model = sequelize.import(path.join(__dirname, file))
     db[model.name] = model
+    // ^ name here is that given during sequelize.define
   });
 
 // Calling associate function to make associations or create foreign keys

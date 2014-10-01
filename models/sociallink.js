@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var SocialLink = sequelize.define('SocialLink,
+  var SocialLink = sequelize.define('SocialLink',
   {
     link: {type: DataTypes.STRING(), allowNull: false},
     // facebook, twitter, instagram, flickr, youtube
