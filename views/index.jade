@@ -3,7 +3,14 @@ extends layout
 block content
   h1= title
   p List of links for this 'app'
-  a(href='/city/index') list of cities
+  a(href='/city/index')  List of cities
   br
-  a(href='/gear/create_retailer') create new retailer
+  a(href='/gear/create_retailer')  Create New Retailer
+  br
+  br
+  p  All retailers of:
+  ul
+  each city in cities
+    li
+      a(href="/gear/" + city.city_name) #{city.city_name}
   

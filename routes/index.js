@@ -1,3 +1,9 @@
+var db = require('../models');
+
 exports.index = function(req, res) {
-  res.render('index');
+  db.City.findAll().success(function(cities){
+    res.render('index', {
+      cities: cities
+    })
+  })
 };
