@@ -19,7 +19,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
 // TODO Find out how to pass your favicon
-app.use(connect.favicon());
+app.use(connect.favicon('public/favicon.ico'));
 
 // TODO what does "dev" actually mean 
 // And where does logging actually show up
