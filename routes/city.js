@@ -31,3 +31,12 @@ exports.retailers = function(req, res) {
      })
   })
 };
+
+exports.destroy = function(req,res) {
+  db.City.find({where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+    city.destroy().success(function(){
+      res.redirect('/city/index');
+    })
+  })
+};

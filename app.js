@@ -1,6 +1,5 @@
 var express  = require('express');
 var connect  = require('connect');
-//var routes   = require('./routes');
 var city     = require('./routes/city');
 var retailer = require('./routes/retailer');
 var routes   = require('./routes');
@@ -12,8 +11,8 @@ var app = express();
 
 // TODO Find out how www.example.com will work instead of
 // There is a default port (80?)
-// www.example.com:8080
 app.set('port', process.env.port || 8080);
+// ^ www.example.com:8080
 
 app.set('views', __dirname + '/views');
 
@@ -34,8 +33,7 @@ app.use(connect.json())
 app.use(connect.urlencoded())
 
 // Used to enable the use of PUT and DELETE, which modern browsers don't support
-// TODO: not being used by the app as of now
-//app.use(connect.methodOverride())
+app.use(connect.methodOverride())
 
 // TODO Something related to routing, but not really sure how it works
 //app.use(app.router) // no longer used in express 4.x
@@ -46,8 +44,6 @@ app.use(connect.urlencoded())
 // name
 // Use module.exports if you have only single object (?) to export and refer
 // it as filename of the file in which you wrote module.exports
-
-//app.get('/', routes.index)
 
 // POSTs, GETs, DELETEs, PUTs
 
@@ -63,8 +59,8 @@ app.post('/gear/create_retailer', retailer.create);
 
 // List all retailers in a city
 // Whether or not to take care of uppercase, if yes, how?
+// it's taken care of by default
 app.get('/gear/:city_name', city.retailers);
-
 
 // modify gear_retailer
 
@@ -72,6 +68,9 @@ app.get('/gear/:city_name', city.retailers);
 
 // create indian_city
 app.post('/city/create', city.create);
+
+// destroy city
+app.get('/city/:city_name/destroy', city.destroy);
 
 // create tag
 
