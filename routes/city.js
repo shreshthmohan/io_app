@@ -1,4 +1,5 @@
 var db = require('../models');
+var Sequelize = require('sequelize');
 
 exports.create = function(req, res) {
   db.City.create({ city_name: req.param('city_name') })
@@ -16,7 +17,7 @@ exports.index = function(req, res) {
   });
 };
 
-exports.retailers = function(req, res) {
+exports.retailer_list = function(req, res) {
   db.City.find({ where: {city_name: req.param('city_name')}})
   .success(function(city) {
      db.Retailer.findAll({ where: {CityId: city.id}})
@@ -32,11 +33,32 @@ exports.retailers = function(req, res) {
   })
 };
 
+// destroy city record
 exports.destroy = function(req,res) {
   db.City.find({where: {city_name: req.param('city_name')}})
   .success(function(city) {
     city.destroy().success(function(){
       res.redirect('/city/index');
+    })
+  })
+};
+
+// Individual retailer in city
+exports.retailer = function(req, res) {
+  db.City.find({where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+    db.Retailer.find(
+      {where: 
+        Sequelize.and(
+          {CityId: city.id},
+          {retailer_name: req.param('retailer_name')}
+        )
+      }
+    )
+    .success(function(retailer) {
+      res.render('retailer', {
+        retailer: retailer
+      })
     })
   })
 };

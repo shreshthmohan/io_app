@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 #{retailer.retailer_name}
+  a(href=retailer.website_url) website
+  p
+    | #{retailer.address_field}
+    br
+    | #{retailer.address_landmark}
+    br
+    a(href=retailer.location_url) map location
+    br
+    | #{retailer.phone_primary}
+    br
+    | #{retailer.phone_secondary}
+    br
+    | #{retailer.phone_tertiary}
+    br
+    | #{retailer.retailer_email}
+    br
+    | #{retailer.comments}

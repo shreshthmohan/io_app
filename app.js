@@ -18,7 +18,7 @@ app.set('views', __dirname + '/views');
 
 app.set('view engine', 'jade');
 
-// TODO Find out how to pass your favicon
+// TODO Change to a better favicon 
 app.use(connect.favicon('public/favicon.ico'));
 
 // TODO what does "dev" actually mean 
@@ -34,9 +34,6 @@ app.use(connect.urlencoded())
 
 // Used to enable the use of PUT and DELETE, which modern browsers don't support
 app.use(connect.methodOverride())
-
-// TODO Something related to routing, but not really sure how it works
-//app.use(app.router) // no longer used in express 4.x
 
 // Really good explanation of how 'exports' work at 
 // http://blog.liangzan.net/blog/2012/06/04/how-to-use-exports-in-nodejs/
@@ -60,7 +57,10 @@ app.post('/gear/create_retailer', retailer.create);
 // List all retailers in a city
 // Whether or not to take care of uppercase, if yes, how?
 // it's taken care of by default
-app.get('/gear/:city_name', city.retailers);
+app.get('/gear/:city_name', city.retailer_list);
+
+// Individual retailer in specified city
+app.get('/gear/:city_name/:retailer_name', city.retailer);
 
 // modify gear_retailer
 
