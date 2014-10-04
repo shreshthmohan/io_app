@@ -1,4 +1,5 @@
 var db = require('../models');
+var Sequelize = require('sequelize');
 
 exports.index = function(req, res) {
   db.City.findAll().success(function(cities) {
@@ -38,3 +39,25 @@ exports.create = function(req, res) {
    })
 };
 
+
+exports.modify = function(req, res) {
+  db.City.find({where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+    db.Retailer.find(
+      {where: 
+        Sequelize.and(
+          {CityId: city.id},
+          {retailer_name: req.param('retailer_name')}
+        )
+      }
+    )
+    .success(function(retailer) {
+      retailer.updateAttributes({
+        phone_primary: req.param('phone_primary'),
+        phone_secondary: req.param('phone_secondary')}
+      ).success(function(retailer) {
+         res.redirect('/gear/' + city.city_name + '/' + retailer.retailer_name)
+      })
+    })
+   })
+};

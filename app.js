@@ -63,6 +63,8 @@ app.get('/gear/:city_name', city.retailer_list);
 app.get('/gear/:city_name/:retailer_name', city.retailer);
 
 // modify gear_retailer
+// should ideally be PUT, checking if POST will do the job
+app.post('/gear/:city_name/:retailer_name', retailer.modify);
 
 // destroy (?) gear_retailer
 
