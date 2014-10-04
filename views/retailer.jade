@@ -2,20 +2,26 @@ extends layout
 
 block content
   h1 #{retailer.retailer_name}
+  form(action="modify_retailer", method="")
   a(href=retailer.website_url) website
-  p
-    | #{retailer.address_field}
-    br
-    | #{retailer.address_landmark}
-    br
-    a(href=retailer.location_url) map location
-    br
+  br
+  | Address: #{retailer.address_field}
+  br
+  | near #{retailer.address_landmark}
+  br
+  a(href=retailer.location_url) Location on map
+  br
+  | phone 1: 
+  if (retailer.phone_primary)
     | #{retailer.phone_primary}
-    br
-    | #{retailer.phone_secondary}
-    br
-    | #{retailer.phone_tertiary}
-    br
-    | #{retailer.retailer_email}
-    br
-    | #{retailer.comments}
+  else
+    | none exists: add
+    | text box here
+  br
+  | #{retailer.phone_secondary}
+  br
+  | #{retailer.phone_tertiary}
+  br
+  | #{retailer.retailer_email}
+  br
+  | #{retailer.comments}

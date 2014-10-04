@@ -7,4 +7,4 @@ block content
   ul
   each retailer in retailers
     li
-      = retailer.retailer_name
+       a(href="/gear/" + city.city_name + "/" + retailer.retailer_name) #{retailer.retailer_name}
