@@ -53,8 +53,11 @@ exports.modify = function(req, res) {
     )
     .success(function(retailer) {
       retailer.updateAttributes({
-        phone_primary: req.param('phone_primary'),
-        phone_secondary: req.param('phone_secondary')}
+        phone_primary:   req.param('phone_primary'),
+        phone_secondary: req.param('phone_secondary'),
+        phone_tertiary:  req.param('phone_tertiary'),
+        retailer_email:  req.param('retailer_email'),
+        comments:        req.param('comments')}
       ).success(function(retailer) {
          res.redirect('/gear/' + city.city_name + '/' + retailer.retailer_name)
       })

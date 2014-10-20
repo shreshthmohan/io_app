@@ -64,6 +64,8 @@ app.get('/gear/:city_name/:retailer_name', city.retailer);
 
 // modify gear_retailer
 // should ideally be PUT, checking if POST will do the job
+// Yes, it will do the 'job', but it won't be true REST API
+// TODO make REST
 app.post('/gear/:city_name/:retailer_name', retailer.modify);
 
 // destroy (?) gear_retailer

@@ -25,10 +25,25 @@ block content
       | none exists; add:
       input(type="text", name="phone_secondary", id="phone_secondary")
     br
-    | #{retailer.phone_tertiary}
+    | phone 3: 
+    if (retailer.phone_tertiary)
+      | #{retailer.phone_tertiary}
+    else
+      | none exists; add:
+      input(type="text", name="phone_tertiary", id="phone_tertiary")
     br
-    | #{retailer.retailer_email}
+    | Email: 
+    if (retailer.retailer_email)
+      | #{retailer.retailer_email}
+    else
+      | none exists; add:
+      input(type="text", name="retailer_email", id="retailer_email")
     br
-    | #{retailer.comments}
+    | Comments: 
+    if (retailer.comments)
+      | #{retailer.comments}
+    else
+      | none exists; add:
+      input(type="text", name="comments", id="comments")
     br
     input(type="submit")
