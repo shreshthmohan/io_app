@@ -53,7 +53,8 @@ exports.retailer = function(req, res) {
           {CityId: city.id},
           {retailer_name: req.param('retailer_name')}
         )
-      }
+      } // eager loading for SocialLink doesn't seem to be working
+        // waiting for resolution on github else do a workaround by using another 'find where'
     )
     .success(function(retailer) {
       res.render('retailer', {

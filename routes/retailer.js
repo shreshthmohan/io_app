@@ -19,11 +19,6 @@ exports.create = function(req, res) {
        address_field:    req.param('address_field'),
        address_landmark: req.param('address_landmark'),
        location_url:     req.param('location_url'),
-       facebook_url:     req.param('facebook_url'),
-       twitter_url:      req.param('twitter_url'),
-       instagram_url:    req.param('instagram_url'),
-       youtube_url:      req.param('youtube_url'),
-       available_brands: req.param('available_brands'),
        phone_primary:    req.param('phone_primary'),
        phone_secondary:  req.param('phone_secondary'),
        phone_tertiary:   req.param('phone_tertiary'),
@@ -52,14 +47,26 @@ exports.modify = function(req, res) {
     )
     .success(function(retailer) {
       retailer.updateAttributes({
-        phone_primary:   req.param('phone_primary'),
-        phone_secondary: req.param('phone_secondary'),
-        phone_tertiary:  req.param('phone_tertiary'),
-        retailer_email:  req.param('retailer_email'),
-        comments:        req.param('comments')}
+        website_url:      req.param('website_url'),
+        address_field:    req.param('address_field'),
+        address_landmark: req.param('address_landmark'),
+        location_url:     req.param('location_url'),
+        phone_primary:    req.param('phone_primary'),
+        phone_secondary:  req.param('phone_secondary'),
+        phone_tertiary:   req.param('phone_tertiary'),
+        retailer_email:   req.param('retailer_email'),
+        comments:         req.param('comments')}
       ).success(function(retailer) {
-         res.redirect('/gear/' + city.city_name + '/' + retailer.retailer_name)
-      })
-    })
+         db.SocialLink.create({
+           link: req.param('social_link')
+         })
+         .success(function(slink) {
+           slink.setRetailer(retailer).success(function() {
+             res.redirect('/gear/' + city.city_name + '/' +
+                          retailer.retailer_name)
+           })
+         })
+       })
+     })
    })
 };

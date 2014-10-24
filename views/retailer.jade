@@ -3,13 +3,30 @@ extends layout
 block content
   h1 #{retailer.retailer_name}
   form(action="#{retailer.retailer_name}", method="post")
-    a(href=retailer.website_url) website
+    if (retailer.website_url)
+      a(href=retailer.website_url) website
+    else
+      | No web URL; add one:
+      input(type="text", name="website_url")
     br
-    | Address: #{retailer.address_field}
+    | Address: 
+    if (retailer.address_field)
+      | #{retailer.address_field}
+    else
+      | none exist; add:
+      input(type="text", name="address_field")
     br
-    | near #{retailer.address_landmark}
+    if (retailer.address_landmark)
+      | near #{retailer.address_landmark}
+    else
+      | no landmark; add one:
+      input(type="text", name="address_landmark")
     br
-    a(href=retailer.location_url) Location on map
+    if (retailer.location_url)
+      a(href=retailer.location_url) Location on map
+    else
+      | No location URL; add: 
+      input(type="text", name="location_url")
     br
     | phone 1: 
     if (retailer.phone_primary)
@@ -45,5 +62,10 @@ block content
     else
       | none exists; add:
       input(type="text", name="comments", id="comments")
+    br
+    | TODO: display social links here
+    br
+    | Add a social link: 
+    input(type="text", name="social_link")
     br
     input(type="submit")
