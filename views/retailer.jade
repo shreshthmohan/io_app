@@ -63,9 +63,17 @@ block content
       | none exists; add:
       input(type="text", name="comments", id="comments")
     br
-    | TODO: display social links here
-    br
+    ul
+      each link in social_links
+        li
+          | #{link.link}
     | Add a social link: 
     input(type="text", name="social_link")
+    br
+    | Add a brand that this retailer sells: 
+    input(type="text", name="brand")
+    br
+    | Add an activity tag: 
+    input(type="text", name="tag")
     br
     input(type="submit")

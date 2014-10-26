@@ -54,11 +54,16 @@ exports.retailer = function(req, res) {
           {retailer_name: req.param('retailer_name')}
         )
       } // eager loading for SocialLink doesn't seem to be working
-        // waiting for resolution on github else do a workaround by using another 'find where'
+        // waiting for resolution on github until then: workaround by using
+        // another 'findAll where'
     )
     .success(function(retailer) {
-      res.render('retailer', {
-        retailer: retailer
+      db.SocialLink.findAll({where: {RetailerID: retailer.id}})
+      .success(function(slink) {
+        res.render('retailer', {
+          retailer: retailer,
+          social_links: slink
+        })
       })
     })
   })
