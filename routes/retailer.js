@@ -70,3 +70,11 @@ exports.modify = function(req, res) {
      })
    })
 };
+
+exports.cities = function(req, res) {
+  db.City.findAll().success(function(cities) {
+    res.render('gear',
+    {title: 'List of gear retailers by city',
+     cities: cities});
+  })
+};

@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  p All gear retailers of:
+  ul
+  each city in cities
+    li
+      a(href="/gear/" + city.city_name) #{city.city_name}

@@ -54,6 +54,9 @@ app.get('/gear/create_retailer', retailer.index);
 
 app.post('/gear/create_retailer', retailer.create);
 
+// List of links to gear retailers by city
+app.get('/gear', retailer.cities);
+
 // List all retailers in a city
 // Whether or not to take care of uppercase, if yes, how?
 // it's taken care of by default
