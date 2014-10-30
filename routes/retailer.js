@@ -103,14 +103,19 @@ exports.individual = function(req, res) {
       .success(function(slink) {
         db.Brand.findAll().success(function(brands) {
           db.Tag.findAll().success(function(tags) {
-            sequelize.query('select * from GearBrands inner join Brands on GearBrands.BrandId = Brands.id where GearBrands.RetailerId = :retailerId', null, { raw: true }, {retailerId: retailer.id}).success(function(linked_brands) {
-              res.render('retailer', {
-                retailer: retailer,
-                social_links: slink,
-                brands: brands,
-                linked_brands: linked_brands,
-                tags: tags
-            })
+            sequelize.query('select * from GearBrands inner join Brands on GearBrands.BrandId = Brands.id where GearBrands.RetailerId = :retailerId', null, { raw: true }, {retailerId: retailer.id})
+            .success(function(linked_brands) {
+              sequelize.query('select * from GearTags inner join Tags on GearTags.TagId = Tags.id where GearTags.RetailerId = :retailerId', null, { raw: true }, {retailerId: retailer.id})
+              .success(function(linked_tags) {
+                res.render('retailer', {
+                  retailer: retailer,
+                  social_links: slink,
+                  brands: brands,
+                  linked_brands: linked_brands,
+                  tags: tags,
+                  linked_tags: linked_tags
+                })
+              })  
             })  
           })  
         })

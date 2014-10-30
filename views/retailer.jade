@@ -72,6 +72,10 @@ block content
     br
     input(type="submit")
     br
+  ul Brands they sell:
+    each lbrand in linked_brands
+      li
+        | #{lbrand.brand_name}
   form(action="#{retailer.retailer_name}/choose_brand", method="post")
     | Associate a brand with this retailer: 
     select(name="brand_id", id="brand_id")
@@ -84,6 +88,10 @@ block content
     input(type="text", name="new_brand")
     input(type="submit")
     br
+  ul Tags associated with this retailer:
+    each ltag in linked_tags
+      li
+        | #{ltag.tag_name}
   form(action="#{retailer.retailer_name}/choose_tag", method="post")
     | Associate an activity tag with this retailer: 
     select(name="tag_id", id="tag_id")
