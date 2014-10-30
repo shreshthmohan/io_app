@@ -63,13 +63,16 @@ app.get('/gear', retailer.cities);
 app.get('/gear/:city_name', city.retailer_list);
 
 // Individual retailer in specified city
-app.get('/gear/:city_name/:retailer_name', city.retailer);
+app.get('/gear/:city_name/:retailer_name', retailer.individual);
 
 // modify gear_retailer
 // should ideally be PUT, checking if POST will do the job
 // Yes, it will do the 'job', but it won't be true REST API
 // TODO make REST
 app.post('/gear/:city_name/:retailer_name', retailer.modify);
+
+app.post('/gear/:city_name/:retailer_name/add_brand', retailer.add_brand);
+app.post('/gear/:city_name/:retailer_name/add_tag', retailer.add_tag);
 
 // destroy (?) gear_retailer
 

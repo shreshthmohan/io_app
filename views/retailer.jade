@@ -70,10 +70,28 @@ block content
     | Add a social link: 
     input(type="text", name="social_link")
     br
-    | Add a brand that this retailer sells: 
-    input(type="text", name="brand")
+    input(type="submit")
     br
-    | Add an activity tag: 
-    input(type="text", name="tag")
+  form(action="#{retailer.retailer_name}/choose_brand", method="post")
+    | Associate a brand with this retailer: 
+    select(name="brand_id", id="brand_id")
+      each brand in brands
+        option(value=brand.id) #{brand.brand_name}
+    input(type="submit")
     br
+  form(action="#{retailer.retailer_name}/add_brand", method="post")
+    | Add a new brand
+    input(type="text", name="new_brand")
+    input(type="submit")
+    br
+  form(action="#{retailer.retailer_name}/choose_tag", method="post")
+    | Associate an activity tag with this retailer: 
+    select(name="tag_id", id="tag_id")
+      each tag in tags
+        option(value=tag.id) #{tag.tag_name}
+    input(type="submit")
+    br
+  form(action="#{retailer.retailer_name}/add_tag", method="post")
+    | Add a new tag
+    input(type="text", name="new_tag")
     input(type="submit")
