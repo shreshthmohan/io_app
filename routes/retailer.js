@@ -11,6 +11,7 @@ exports.index = function(req, res) {
   });
 };
 
+// Create new retailer
 exports.create = function(req, res) {
   db.City.find({ where: {id: req.param('city_id')}})
   .success(function(city) {
@@ -34,6 +35,7 @@ exports.create = function(req, res) {
    })
 };
 
+// Modify existing retailer, rather populate missing fields
 exports.modify = function(req, res) {
   db.City.find({where: {city_name: req.param('city_name')}})
   .success(function(city) {
@@ -84,7 +86,9 @@ exports.cities = function(req, res) {
   })
 };
 
-// Individual retailer in city
+// Display individual retailer in city
+// TODO: in the list of tags and brands that can be associated exclude linked
+// ones by raw query using join
 exports.individual = function(req, res) {
   db.City.find({where: {city_name: req.param('city_name')}})
   .success(function(city) {
@@ -163,7 +167,37 @@ exports.add_brand = function(req, res) {
   })
 };
 
-// 
+// Choose a brand from exisiting brands to be associated with retailer
+exports.choose_brand = function(req, res) {
+  db.City.find({where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+    db.Retailer.find(
+      {where: 
+        Sequelize.and(
+          {CityId: city.id},
+          {retailer_name: req.param('retailer_name')}
+        )
+      }
+    )
+    .success(function(retailer) {
+      db.GearBrand.create({
+        cor_name: ''
+      })
+      .success(function(gear_brand) {
+        db.Brand.find({where: {id: req.param('brand_id')}})
+        .success(function(brand) {
+          gear_brand.setRetailer(retailer).success(function() {
+            gear_brand.setBrand(brand).success(function() {
+              res.redirect('/gear/' + city.city_name + '/' +
+                           retailer.retailer_name)
+            })
+          })
+        })
+      })
+    })
+  })
+};
+
 exports.add_tag = function(req, res) {
   db.City.find({where: {city_name: req.param('city_name')}})
   .success(function(city) {
@@ -196,3 +230,35 @@ exports.add_tag = function(req, res) {
     })
   })
 };
+
+// Choose a tag from exisiting tags to be associated with retailer
+exports.choose_tag = function(req, res) {
+  db.City.find({where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+    db.Retailer.find(
+      {where: 
+        Sequelize.and(
+          {CityId: city.id},
+          {retailer_name: req.param('retailer_name')}
+        )
+      }
+    )
+    .success(function(retailer) {
+      db.GearTag.create({
+        cor_name: ''
+      })
+      .success(function(gear_tag) {
+        db.Tag.find({where: {id: req.param('tag_id')}})
+        .success(function(tag) {
+          gear_tag.setRetailer(retailer).success(function() {
+            gear_tag.setTag(tag).success(function() {
+              res.redirect('/gear/' + city.city_name + '/' +
+                           retailer.retailer_name)
+            })
+          })
+        })
+      })
+    })
+  })
+};
+

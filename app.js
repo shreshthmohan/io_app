@@ -72,7 +72,12 @@ app.get('/gear/:city_name/:retailer_name', retailer.individual);
 app.post('/gear/:city_name/:retailer_name', retailer.modify);
 
 app.post('/gear/:city_name/:retailer_name/add_brand', retailer.add_brand);
+
+app.post('/gear/:city_name/:retailer_name/choose_brand', retailer.choose_brand);
+
 app.post('/gear/:city_name/:retailer_name/add_tag', retailer.add_tag);
+
+app.post('/gear/:city_name/:retailer_name/choose_tag', retailer.choose_tag);
 
 // destroy (?) gear_retailer
 

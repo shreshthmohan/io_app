@@ -22,7 +22,6 @@ module.exports = function(sequelize, DataTypes) {
       // ^ will add FK to Retailers table
       Retailer.hasMany(models.SocialLink, {foreignKeyConstraint: true});
       // ^ will add FK to SocialLinks table
-      // TODO: Modify view for adding tags, brands and social links
     }
   });
 

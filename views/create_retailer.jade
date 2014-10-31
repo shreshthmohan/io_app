@@ -21,6 +21,8 @@ block content
     label(for="city_id") City 
     //- TODO Add an option: "none" and place a rule that selected option can't
     //- be none when submitting
+    //- TODO what to do if the retailer's online?
+    //- TODO Also what if the retailer's both online and offline?
     select(name="city_id", id="city_name")  
       each city in cities
         option(value=city.id) #{city.city_name}
