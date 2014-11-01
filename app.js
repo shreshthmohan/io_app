@@ -79,6 +79,14 @@ app.post('/gear/:city_name/:retailer_name/add_tag', retailer.add_tag);
 
 app.post('/gear/:city_name/:retailer_name/choose_tag', retailer.choose_tag);
 
+app.post('/add_tag', routes.add_tag);
+
+app.get('/add_tag', routes.new_tag_form);
+
+app.post('/add_brand', routes.add_brand);
+
+app.get('/add_brand', routes.new_brand_form);
+
 // destroy (?) gear_retailer
 
 // create indian_city

@@ -105,8 +105,12 @@ exports.individual = function(req, res) {
     .success(function(retailer) {
       db.SocialLink.findAll({where: {RetailerID: retailer.id}})
       .success(function(slink) {
-        db.Brand.findAll().success(function(brands) {
-          db.Tag.findAll().success(function(tags) {
+        // Select brands which are not associated with the said retailer
+        sequelize.query('select * from Brands left outer join (select * from GearBrands where GearBrands.RetailerId = :retailerId) linkedBrands on Brands.id = linkedBrands.BrandId where linkedBrands.RetailerId is null', null, { raw: true }, { retailerId: retailer.id })
+        .success(function(brands) {
+          // Select tags which are not associated with the said retailer
+          sequelize.query('select * from Tags left outer join (select * from GearTags where GearTags.RetailerId = :retailerId) linkedTags on Tags.id = linkedTags.TagId where linkedTags.RetailerId is null', null, { raw: true }, { retailerId: retailer.id })
+          .success(function(tags) {
             sequelize.query('select * from GearBrands inner join Brands on GearBrands.BrandId = Brands.id where GearBrands.RetailerId = :retailerId', null, { raw: true }, {retailerId: retailer.id})
             .success(function(linked_brands) {
               sequelize.query('select * from GearTags inner join Tags on GearTags.TagId = Tags.id where GearTags.RetailerId = :retailerId', null, { raw: true }, {retailerId: retailer.id})
@@ -129,7 +133,7 @@ exports.individual = function(req, res) {
 };
 
 
-// Add new brand
+// Add new brand and associate it with a retailer
 // After creating a new brand we need to associate that brand with correlation
 // and retailer
 // now since GearBrand belongsTo Brand and belongsTo Retailer
@@ -198,6 +202,7 @@ exports.choose_brand = function(req, res) {
   })
 };
 
+// Add a new tag and associate it with a retailer
 exports.add_tag = function(req, res) {
   db.City.find({where: {city_name: req.param('city_name')}})
   .success(function(city) {
@@ -262,3 +267,12 @@ exports.choose_tag = function(req, res) {
   })
 };
 
+// Just add a brand (and don't link it with a retailer just yet)
+exports.add_tag_only = function(req, res) {
+  db.Tag.create({
+    tag_name: req.param('new_tag')
+  })
+  .success(function(tag) {
+    res.redir
+  })
+};

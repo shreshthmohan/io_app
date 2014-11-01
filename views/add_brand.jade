@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1 Add new brand
+  form(action="add_brand", method="post")
+    input(type="text", name="new_brand")
+    br
+    input(type="submit")
