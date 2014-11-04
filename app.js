@@ -34,6 +34,7 @@ app.use(connect.urlencoded())
 
 // Used to enable the use of PUT and DELETE, which modern browsers don't support
 app.use(connect.methodOverride())
+// Seems to have been deprecated; TODO Use alternative.
 
 // Really good explanation of how 'exports' work at 
 // http://blog.liangzan.net/blog/2012/06/04/how-to-use-exports-in-nodejs/
