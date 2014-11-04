@@ -106,10 +106,14 @@ exports.individual = function(req, res) {
       db.SocialLink.findAll({where: {RetailerID: retailer.id}})
       .success(function(slink) {
         // Select brands which are not associated with the said retailer
-        sequelize.query('select * from Brands left outer join (select * from GearBrands where GearBrands.RetailerId = :retailerId) linkedBrands on Brands.id = linkedBrands.BrandId where linkedBrands.RetailerId is null', null, { raw: true }, { retailerId: retailer.id })
+        // renamed columns because in the older query there were two "id"
+        // columns which caused incorrect id to be selected in the 
+        // options
+        // Done the same for similar tags query
+        sequelize.query('select Brands.id as id, Brands.brand_name as brand_name, linkedBrands.id as linkedBrandsid, linkedBrands.BrandId as linkedBrandsBrandId, linkedBrands.RetailerId as linkedBrandsRetailerId from Brands left outer join (select * from GearBrands where GearBrands.RetailerId = :retailerId) linkedBrands on Brands.id = linkedBrands.BrandId where linkedBrands.RetailerId is null', null, { raw: true }, { retailerId: retailer.id })
         .success(function(brands) {
           // Select tags which are not associated with the said retailer
-          sequelize.query('select * from Tags left outer join (select * from GearTags where GearTags.RetailerId = :retailerId) linkedTags on Tags.id = linkedTags.TagId where linkedTags.RetailerId is null', null, { raw: true }, { retailerId: retailer.id })
+          sequelize.query('select Tags.id as id, Tags.tag_name as tag_name, linkedTags.id as linkedTagsid, linkedTags.TagId as linkedTagsTagId, linkedTags.RetailerId as linkedTagsRetailerId from Tags left outer join (select * from GearTags where GearTags.RetailerId = :retailerId) linkedTags on Tags.id = linkedTags.TagId where linkedTags.RetailerId is null', null, { raw: true }, { retailerId: retailer.id })
           .success(function(tags) {
             sequelize.query('select * from GearBrands inner join Brands on GearBrands.BrandId = Brands.id where GearBrands.RetailerId = :retailerId', null, { raw: true }, {retailerId: retailer.id})
             .success(function(linked_brands) {
