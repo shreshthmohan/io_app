@@ -6,3 +6,6 @@ block content
     input(type="text", name="new_brand")
     br
     input(type="submit")
+  ul Existing brands
+    each brand in brands
+      li #{brand.brand_name}

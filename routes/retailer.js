@@ -110,6 +110,7 @@ exports.individual = function(req, res) {
         // columns which caused incorrect id to be selected in the 
         // options
         // Done the same for similar tags query
+        // Hint: http://stackoverflow.com/questions/11978078/alias-a-column-name-on-a-left-join
         sequelize.query('select Brands.id as id, Brands.brand_name as brand_name, linkedBrands.id as linkedBrandsid, linkedBrands.BrandId as linkedBrandsBrandId, linkedBrands.RetailerId as linkedBrandsRetailerId from Brands left outer join (select * from GearBrands where GearBrands.RetailerId = :retailerId) linkedBrands on Brands.id = linkedBrands.BrandId where linkedBrands.RetailerId is null', null, { raw: true }, { retailerId: retailer.id })
         .success(function(brands) {
           // Select tags which are not associated with the said retailer
@@ -142,6 +143,8 @@ exports.individual = function(req, res) {
 // and retailer
 // now since GearBrand belongsTo Brand and belongsTo Retailer
 // we have GearBrand.setBrand and GearBrand.setRetailer
+// Add and if-else to prevent empty brand entries
+// TODO: ^Add something on the front-end as well?
 exports.add_brand = function(req, res) {
   db.City.find({where: {city_name: req.param('city_name')}})
   .success(function(city) {
@@ -154,23 +157,28 @@ exports.add_brand = function(req, res) {
       }
     )
     .success(function(retailer) {
-      db.Brand.create(
-      {
-        brand_name: req.param('new_brand')
-      })
-      .success(function(brand) {
-        db.GearBrand.create({
-          cor_name: ''
+      if(req.param('new_brand')) { 
+        db.Brand.create(
+        {
+          brand_name: req.param('new_brand')
         })
-        .success(function(gear_brand) {
-          gear_brand.setRetailer(retailer).success(function() {
-            gear_brand.setBrand(brand).success(function() {
-              res.redirect('/gear/' + city.city_name + '/' +
-                           retailer.retailer_name)
+        .success(function(brand) {
+          db.GearBrand.create({
+            cor_name: ''
+          })
+          .success(function(gear_brand) {
+            gear_brand.setRetailer(retailer).success(function() {
+              gear_brand.setBrand(brand).success(function() {
+                res.redirect('/gear/' + city.city_name + '/' +
+                             retailer.retailer_name)
+              })
             })
           })
         })
-      })
+      } else {
+        res.redirect('/gear/' + city.city_name + '/' +
+                     retailer.retailer_name)
+      }
     })
   })
 };
@@ -219,23 +227,28 @@ exports.add_tag = function(req, res) {
       }
     )
     .success(function(retailer) {
-      db.Tag.create(
-      {
-        tag_name: req.param('new_tag')
-      })
-      .success(function(tag) {
-        db.GearTag.create({
-          cor_name: ''
+      if(req.param('new_tag')) {
+        db.Tag.create(
+        {
+          tag_name: req.param('new_tag')
         })
-        .success(function(gear_tag) {
-          gear_tag.setRetailer(retailer).success(function() {
-            gear_tag.setTag(tag).success(function() {
-              res.redirect('/gear/' + city.city_name + '/' +
-                           retailer.retailer_name)
+        .success(function(tag) {
+          db.GearTag.create({
+            cor_name: ''
+          })
+          .success(function(gear_tag) {
+            gear_tag.setRetailer(retailer).success(function() {
+              gear_tag.setTag(tag).success(function() {
+                res.redirect('/gear/' + city.city_name + '/' +
+                             retailer.retailer_name)
+              })
             })
           })
         })
-      })
+      } else {
+        res.redirect('/gear/' + city.city_name + '/' +
+                     retailer.retailer_name)
+      }
     })
   })
 };
@@ -268,15 +281,5 @@ exports.choose_tag = function(req, res) {
         })
       })
     })
-  })
-};
-
-// Just add a brand (and don't link it with a retailer just yet)
-exports.add_tag_only = function(req, res) {
-  db.Tag.create({
-    tag_name: req.param('new_tag')
-  })
-  .success(function(tag) {
-    res.redir
   })
 };

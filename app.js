@@ -110,7 +110,6 @@ if ('development' === app.get('env')) {
   app.use(connect.errorHandler())
 }
 
-
 db
   .sequelize  // authenticates and connects with mysql
   .sync(/*{ force: true }*/) // force: true drops tables before recreating

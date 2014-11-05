@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
   },
   {
     associate: function(models) {
-      Tag.hasMany(models.GearTag, {foreignKeyConstraint: true});
+      Tag.hasMany(models.GearTag, {foreignKeyConstraint: true, onDelete: 'cascade' });
       // ^ will add FK to GearTags table
     }
   });

@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
   },
   {
     associate: function(models) {
-      Brand.hasMany(models.GearBrand, {foreignKeyConstraint: true});
+      Brand.hasMany(models.GearBrand, {foreignKeyConstraint: true, onDelete: 'cascade'});
       // ^ will add FK to GearBrands table
     }
   });

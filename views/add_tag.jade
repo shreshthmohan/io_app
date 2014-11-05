@@ -6,3 +6,6 @@ block content
     input(type="text", name="new_tag")
     br
     input(type="submit")
+  ul Existing tags
+    each tag in tags
+      li #{tag.tag_name}
