@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p All events in #{city.city_name}  
+
+  ul
+  each race in races 
+    li
+       a(href="/events/" + city.city_name + "/" + race.event_name) #{race.event_name}

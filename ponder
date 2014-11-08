@@ -1,0 +1,9 @@
+// This is for thinking about features, issues and solutions //
+
+1. How to handle brick-and-mortar retailers versus online retailers
+   listing-wise and in the database? Also there are some retailers 
+   who sell online as well as offline.
+
+2. How to handle things like NCR, Hyderabad-Secunderabad?
+
+3. How to handle aliases like Bangalore-Bengaluru, Mumbai-Bombay?

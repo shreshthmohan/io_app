@@ -1,0 +1,113 @@
+extends layout
+
+block content
+  h1 #{race.event_name}
+  form(action="#{race.event_name}", method="post")
+    if(race.event_url)
+      a(href=race.event_url) Event link
+    else
+      | No event URL; add one:
+      input(type="text", name="event_url")
+    br
+    if(race.event_url_social)
+      a(href=race.event_url_social) Event Social link
+    else
+      | No Social Event URL; add one:
+      input(type="text", name="event_url_social")
+    br
+    if(race.organiser_name)
+     | #{race.organiser_name}
+    else
+      | No organiser name; add:
+      input(type="text", name="organiser_name")
+    br
+    if(race.organiser_url)
+      a(href=race.organiser_url) Organiser URL
+    else
+      | No Organiser URL; add one:
+      input(type="text", name="organiser_url")
+    br
+    if(race.address_field)
+      | #{race.address_field} 
+    else
+      | No Address; add:
+      input(type="text", name="address_field")
+    br
+    if(race.location_url)
+      | a(herf=race.location_url) Location on map
+    else
+      | No location URL; add:
+      input(type="text", name="location_url")
+    br
+    if(race.start_date)
+      | #{race.start_date}
+    else
+      | No start date; add:
+      input(type="text", name="start_date")
+    br
+    if(race.end_date)
+      | #{race.end_date}
+    else
+      | No end date; add:
+      input(type="text", name="end_date")
+    br
+    | phone 1: 
+    //- TODO: add mobile-compatible phone numbers
+    if (race.phone_primary)
+      | #{race.phone_primary}
+    else
+      | none exists; add:
+      input(type="text", name="phone_primary", id="phone_primary")
+    br
+    | phone 2: 
+    if (race.phone_secondary)
+      | #{race.phone_secondary}
+    else
+      | none exists; add:
+      input(type="text", name="phone_secondary", id="phone_secondary")
+    br
+    | phone 3: 
+    if (race.phone_tertiary)
+      | #{race.phone_tertiary}
+    else
+      | none exists; add:
+      input(type="text", name="phone_tertiary", id="phone_tertiary")
+    br
+    | Email: 
+    if (race.email)
+      | #{race.email}
+    else
+      | none exists; add:
+      input(type="text", name="email", id="email")
+    br
+    | Comments: 
+    if (race.comments)
+      | #{race.comments}
+    else
+      | none exists; add:
+      input(type="text", name="comments", id="comments")
+    br
+    ul
+      each link in social_links
+        li
+          | #{link.link}
+    | Add a social link: 
+    input(type="text", name="social_link")
+    br
+    input(type="submit")
+  ul Tags associated with this retailer:
+    each ltag in linked_tags
+      li
+        | #{ltag.tag_name}
+  form(action="#{race.event_name}/choose_tag", method="post")
+    | Associate an activity tag with this retailer: 
+    select(name="tag_id", id="tag_id")
+      each tag in tags
+        option(value=tag.id) #{tag.tag_name}
+    input(type="submit")
+    br
+  form(action="#{race.event_name}/add_tag", method="post")
+    | Add a new tag
+    input(type="text", name="new_tag")
+    input(type="submit")
+

@@ -2,7 +2,7 @@ var db = require('../models');
 var Sequelize = require('sequelize');
 var sequelize = db.sequelize; // just to avoid the confusion
 
-exports.index = function(req, res) {
+exports.create_form = function(req, res) {
   db.City.findAll().success(function(cities) {
     res.render('create_retailer', {
       title: 'Create new retailer',
@@ -27,8 +27,7 @@ exports.create = function(req, res) {
        retailer_email:   req.param('retailer_email'),
        comments:         req.param('comments')
      }).success(function(retailer){
-          //city.addRetailer(retailer).success(function() { // adds FK in retailer ?
-          retailer.setCity(city).success(function() { // adds FK in retailer ?
+          retailer.setCity(city).success(function() { // adds FK in retailer
             res.redirect('/gear/' + city.city_name);
           })
         })
@@ -103,7 +102,7 @@ exports.individual = function(req, res) {
         // another 'findAll where'
     )
     .success(function(retailer) {
-      db.SocialLink.findAll({where: {RetailerID: retailer.id}})
+      db.SocialLink.findAll({where: {RetailerId: retailer.id}})
       .success(function(slink) {
         // Select brands which are not associated with the said retailer
         // renamed columns because in the older query there were two "id"
@@ -126,7 +125,8 @@ exports.individual = function(req, res) {
                   brands: brands,
                   linked_brands: linked_brands,
                   tags: tags,
-                  linked_tags: linked_tags
+                  linked_tags: linked_tags,
+                  city: city
                 })
               })  
             })  
@@ -253,7 +253,7 @@ exports.add_tag = function(req, res) {
   })
 };
 
-// Choose a tag from exisiting tags to be associated with retailer
+// Choose a tag from existing tags to be associated with retailer
 exports.choose_tag = function(req, res) {
   db.City.find({where: {city_name: req.param('city_name')}})
   .success(function(city) {

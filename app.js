@@ -2,6 +2,7 @@ var express  = require('express');
 var connect  = require('connect');
 var city     = require('./routes/city');
 var retailer = require('./routes/retailer');
+var race     = require('./routes/event');
 var routes   = require('./routes');
 var http     = require('http');
 var path     = require('path');
@@ -51,7 +52,7 @@ app.get('/', routes.index);
 
 // create (gear) retailer  
 
-app.get('/gear/create_retailer', retailer.index);
+app.get('/gear/create_retailer', retailer.create_form);
 
 app.post('/gear/create_retailer', retailer.create);
 
@@ -99,7 +100,24 @@ app.get('/city/:city_name/destroy', city.destroy);
 // create tag
 
 // List of all cities
-app.get('/city/index', city.index);
+app.get('/city/index', city.index)
+
+app.get('/events/create_new', race.create_form)
+
+// Create new event
+app.post('/events/create_new', race.create); 
+
+// List of cities as per events
+app.get('/events', race.cities);
+
+app.get('/events/:city_name', city.event_list);
+
+app.get('/events/:city_name/:event_name', race.individual);
+
+app.post('/events/:city_name/:event_name', race.modify);
+
+app.post('/events/:city_name/:event_name/add_tag', race.add_tag);
+app.post('/events/:city_name/:event_name/choose_tag', race.choose_tag);
 
 // To serve static files
 app.use(express.static(path.join(__dirname, 'public')))

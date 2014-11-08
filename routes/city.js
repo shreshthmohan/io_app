@@ -17,17 +17,29 @@ exports.index = function(req, res) {
   });
 };
 
+// List of gear retailers in given city
 exports.retailer_list = function(req, res) {
   db.City.find({ where: {city_name: req.param('city_name')}})
   .success(function(city) {
      db.Retailer.findAll({ where: {CityId: city.id}})
      .success(function(retailers) {
-        console.log("before printing retailers");
-        console.log(retailers);
-        console.log("after printing retailers");
         res.render('city_retailers', {
           city: city,
           retailers: retailers
+        }) 
+     })
+  })
+};
+
+// List of events in given city
+exports.event_list = function(req, res) {
+  db.City.find({ where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+     db.Event.findAll({ where: {CityId: city.id}})
+     .success(function(races) {
+        res.render('city_events', {
+          city: city,
+          races:races 
         }) 
      })
   })

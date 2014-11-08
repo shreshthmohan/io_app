@@ -16,12 +16,6 @@ block content
       | none exist; add:
       input(type="text", name="address_field")
     br
-    if (retailer.address_landmark)
-      | near #{retailer.address_landmark}
-    else
-      | no landmark; add one:
-      input(type="text", name="address_landmark")
-    br
     if (retailer.location_url)
       a(href=retailer.location_url) Location on map
     else
@@ -29,6 +23,7 @@ block content
       input(type="text", name="location_url")
     br
     | phone 1: 
+    //- TODO: add mobile-compatible phone numbers
     if (retailer.phone_primary)
       | #{retailer.phone_primary}
     else

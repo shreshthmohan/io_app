@@ -1,0 +1,58 @@
+extends layout
+
+block content
+  h1= title
+  p Create a new event
+
+  form(action="create_new", method="post")
+    label(for="event_name") Event name
+    input(type="text", name="event_name", id="event_name")
+    br
+    label(for="event_url") Event URL
+    input(type="text", name="event_url", id="event_url")
+    br
+    label(for="event_url_social") Event URL Social)
+    input(type="text", name="event_url_social", id="event_url_social")
+    br
+    label(for="organiser_name") Organiser
+    input(type="text", name="organiser_name", id="organiser_name")
+    br
+    label(for="organiser_url") Organiser URL
+    input(type="text", name="organiser_url", id="organiser_url")
+    br
+    label(for="address_field") Address
+    input(type="text", name="address_field", id="address_field")
+    br
+    label(for="address_landmark") Landmark
+    input(type="text", name="address_landmark", id="address_landmark")
+    br
+    label(for="city_id") City
+    select(name="city_id", id="city_name")  
+      each city in cities
+        option(value=city.id) #{city.city_name}
+    br
+    label(for="location_url") Location URL
+    input(type="text", name="location_url", id="location_url")
+    br
+    label(for="start_date") Start date (yyyy-mm-dd)
+    input(type="text", name="start_date", id="start_date")
+    br
+    label(for="end_date") End date (yyyy-mm-dd)
+    input(type="text", name="end_date", id="end_date")
+    br
+    label(for="phone_primary") Phone 1
+    input(type="text", name="phone_primary", id="phone_primary")
+    br
+    label(for="phone_secondary") Phone 2
+    input(type="text", name="phone_secondary", id="phone_secondary")
+    br
+    label(for="phone_tertiary") Phone 3
+    input(type="text", name="phone_tertiary", id="phone_tertiary")
+    br
+    label(for="email") E-mail
+    input(type="text", name="email", id="email")
+    br
+    label(for="comments") Comments
+    input(type="text", name="comments", id="comments")
+    br
+    input(type="submit")
