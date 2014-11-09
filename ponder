@@ -7,3 +7,8 @@
 2. How to handle things like NCR, Hyderabad-Secunderabad?
 
 3. How to handle aliases like Bangalore-Bengaluru, Mumbai-Bombay?
+
+4. How much load can an AWS-EC2 micro instance handle?
+   Wordpress (PHP/MySQL): http://hubcitylabs.org/375-million-pageviews-for-15-a-month/
+   For load-testing: blitz.io
+   http://www.quora.com/Which-EC2-instance-size-should-I-use-to-serve-1-million-pageviews-per-month
