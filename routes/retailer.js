@@ -19,7 +19,6 @@ exports.create = function(req, res) {
        retailer_name:    req.param('retailer_name'),
        website_url:      req.param('website_url'),
        address_field:    req.param('address_field'),
-       address_landmark: req.param('address_landmark'),
        location_url:     req.param('location_url'),
        phone_primary:    req.param('phone_primary'),
        phone_secondary:  req.param('phone_secondary'),
@@ -50,7 +49,6 @@ exports.modify = function(req, res) {
       retailer.updateAttributes({
         website_url:      req.param('website_url'),
         address_field:    req.param('address_field'),
-        address_landmark: req.param('address_landmark'),
         location_url:     req.param('location_url'),
         phone_primary:    req.param('phone_primary'),
         phone_secondary:  req.param('phone_secondary'),

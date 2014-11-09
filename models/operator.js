@@ -4,7 +4,6 @@ module.exports = function(sequelize, DataTypes) {
     operator_name:   {type: DataTypes.STRING(60), allowNull: false}, 
     website_url:     {type: DataTypes.STRING(50)},
     address_field:   {type: DataTypes.STRING(170)},
-    address_landmark:{type: DataTypes.STRING(50)},
     location_url:    {type: DataTypes.STRING(255)},
     phone_primary:   {type: DataTypes.STRING(20)},
     phone_secondary: {type: DataTypes.STRING(20)},
