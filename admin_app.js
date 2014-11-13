@@ -15,7 +15,7 @@ var app = express();
 app.set('port', process.env.port || 8080);
 // ^ www.example.com:8080
 
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/views/admin');
 
 app.set('view engine', 'jade');
 
