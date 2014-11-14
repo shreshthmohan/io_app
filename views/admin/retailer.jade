@@ -3,20 +3,23 @@ html
   head
     title= title
     link(rel='stylesheet', href='/bootstrap.css')
+    link(rel='stylesheet', href='/retailer.css')
     link(rel='shortcut icon', href='/favicon1.ico')
   body
     h1 #{retailer.retailer_name}
     form(action="#{retailer.retailer_name}", method="post")
       if (retailer.website_url)
-        a(href=retailer.website_url, target="_blank") website
+        a(href=retailer.website_url id="website_url"  class="data" target="_blank") Website
+        div(id="change_website_url" class="edit")  edit
       else
         | No web URL; add one:
         input(type="text", name="website_url")
       br
       | Address: 
+      br
       if (retailer.address_field)
-        div(id="address_field") #{retailer.address_field}
-        div(id="change_address") edit
+        div(id="address_field" class="data") #{retailer.address_field}
+        div(id="change_address" class="edit")  edit
       else
         | none exist; add:
         input(type="text", name="address_field")
