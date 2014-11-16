@@ -1,7 +1,7 @@
 // To enable editing of address field
 $(function() {
   $('#change_address').click(function() {
-    $('#address_field').after("<input type='text' name='address_field' value='"+ $('#address_field').text() + "'></input>");
+    $('#address_field').after('<input type="text" name="address_field" value="'+ $('#address_field').text() + '"></input>');
     $('#address_field').detach();
     $('#change_address').detach();
   });
@@ -49,5 +49,25 @@ $(function() {
     $('#phone_tertiary').after("<input type='text' name='phone_tertiary' value='" + $('#phone_tertiary').text() + "'></input>");
     $('#phone_tertiary').detach();
     $('#change_phone_tertiary').detach();
+  });
+});
+
+// To enable editing of retailer email
+$(function() {
+  $('#change_retailer_email').click(function() {
+    $('#retailer_email').after("<input type='text' name='retailer_email' value='" + $('#retailer_email').text() + "'></input>");
+    $('#retailer_email').detach();
+    $('#change_retailer_email').detach();
+  });
+});
+
+// To enable editing of comments 
+// NOTE: Use of ' was causing problems: If the text inside div had a ' in b/w
+// the amount of text extracted by text() would be truncated from ' onwards
+$(function() {
+  $('#change_comments').click(function() {
+    $('#comments').after('<input type="text" name="comments" value="' + $('#comments').text() + '"></input>');
+    $('#comments').detach();
+    $('#change_comments').detach();
   });
 });

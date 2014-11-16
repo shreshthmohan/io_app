@@ -58,14 +58,16 @@ html
       br
       | Email: 
       if (retailer.retailer_email)
-        | #{retailer.retailer_email}
+        div(id="retailer_email" class="data") #{retailer.retailer_email}
+        div(id="change_retailer_email" class="edit")  edit
       else
         | none exists; add:
         input(type="text", name="retailer_email", id="retailer_email")
       br
       | Comments: 
       if (retailer.comments)
-        | #{retailer.comments}
+        div(id="comments" class="data") #{retailer.comments}
+        div(id="change_comments" class="edit")  edit
       else
         | none exists; add:
         input(type="text", name="comments", id="comments")
@@ -110,5 +112,5 @@ html
       | Add a new tag
       input(type="text", name="new_tag")
       input(type="submit")
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')
+    script(src='/jquery.min.js')
     script(src='/retailer.js')
