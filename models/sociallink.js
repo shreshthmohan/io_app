@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       SocialLink.belongsTo(models.Retailer, {foreignKeyConstraint: true});
       // ^ will add FK to SocialLinks table
       SocialLink.belongsTo(models.Event, {foreignKeyConstraint: true});
+      // ^ will add FK to SocialLinks table
     }    
   });
 

@@ -81,6 +81,9 @@ app.post('/gear/:city_name/:retailer_name/add_tag', retailer.add_tag);
 
 app.post('/gear/:city_name/:retailer_name/choose_tag', retailer.choose_tag);
 
+// Destroy social link associated with a retailer
+app.get('/gear/:city_name/:retailer_name/slink/:slink_id', retailer.destroy_slink);
+
 app.post('/add_tag', routes.add_tag);
 
 app.get('/add_tag', routes.new_tag_form);

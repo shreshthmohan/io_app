@@ -281,3 +281,13 @@ exports.choose_tag = function(req, res) {
     })
   })
 };
+
+exports.destroy_slink = function(req, res) {
+  db.SocialLink.find({where: {id: req.param('slink_id')}})
+  .success(function(slink) {
+    slink.destroy().success(function() {
+      res.redirect('/gear/' + req.param('city_name') + '/' +
+        req.param('retailer_name'));
+    })
+  })
+};

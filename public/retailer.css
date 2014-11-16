@@ -1,3 +1,7 @@
-div.edit, div.data {
+div.edit, div.data, div.slink {
   display: inline;
+}
+
+div.slink {
+  margin-left: 5px;
 }
