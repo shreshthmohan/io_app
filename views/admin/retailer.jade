@@ -25,7 +25,8 @@ html
         input(type="text", name="address_field")
       br
       if (retailer.location_url)
-        a(href=retailer.location_url) Location on map
+        a(href=retailer.location_url id="location_url") Location on map
+        div(id="change_location_url" class="edit")  edit
       else
         | No location URL; add: 
         input(type="text", name="location_url")
@@ -33,21 +34,24 @@ html
       | phone 1: 
       //- TODO: add mobile-compatible phone numbers
       if (retailer.phone_primary)
-        | #{retailer.phone_primary}
+        div(id="phone_primary" class="data") #{retailer.phone_primary}
+        div(id="change_phone_primary" class="edit")  edit
       else
         | none exists; add:
         input(type="text", name="phone_primary", id="phone_primary")
       br
       | phone 2: 
       if (retailer.phone_secondary)
-        | #{retailer.phone_secondary}
+        div(id="phone_secondary" class="data") #{retailer.phone_secondary}
+        div(id="change_phone_secondary" class="edit")  edit
       else
         | none exists; add:
         input(type="text", name="phone_secondary", id="phone_secondary")
       br
       | phone 3: 
       if (retailer.phone_tertiary)
-        | #{retailer.phone_tertiary}
+        div(id="phone_tertiary" class="data") #{retailer.phone_tertiary}
+        div(id="change_phone_tertiary" class="edit")  edit
       else
         | none exists; add:
         input(type="text", name="phone_tertiary", id="phone_tertiary")
