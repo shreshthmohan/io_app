@@ -1,4 +1,4 @@
-// This is for thinking about features, issues and solutions //
+// This is for thinking about features, issues solutions and potential TODOs //
 
 1. How to handle brick-and-mortar retailers versus online retailers
    listing-wise and in the database? Also there are some retailers 
@@ -12,3 +12,11 @@
    Wordpress (PHP/MySQL): http://hubcitylabs.org/375-million-pageviews-for-15-a-month/
    For load-testing: blitz.io
    http://www.quora.com/Which-EC2-instance-size-should-I-use-to-serve-1-million-pageviews-per-month
+
+5. Remove primary field event_url_social? We already have social links table to take care of this.
+
+6. Remove 3 phone number fields and add them as separate table just like social links table?
+
+7. Email too(like #6)?
+
+AI: first finish the present change (adding the editing capability to event page)
