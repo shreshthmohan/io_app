@@ -4,10 +4,10 @@
   margin-left: 5px;
 }
 
-.edit, .data, .slink {
+.edit, .data, .destroy  {
   display: inline;
 }
 
-.slink {
+.destroy {
   margin-left: 5px;
 }

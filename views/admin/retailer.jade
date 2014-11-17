@@ -2,6 +2,9 @@ extends admin_layout
 
 block content
   h1 #{retailer.retailer_name}
+  //-
+  //-
+  //- Main 'modify' section starts
   form(action="#{retailer.retailer_name}", method="post")
     if (retailer.website_url)
       a(href=retailer.website_url id="website_url"  class="data" target="_blank") Website
@@ -26,39 +29,6 @@ block content
       | No location URL; add: 
       input(type="text", name="location_url")
     br
-    | phone 1: 
-    //- TODO: add mobile-compatible phone numbers
-    if (retailer.phone_primary)
-      div(id="phone_primary" class="data") #{retailer.phone_primary}
-      div(id="change_phone_primary" class="edit") edit
-    else
-      | none exists; add:
-      input(type="text", name="phone_primary", id="phone_primary")
-    br
-    | phone 2: 
-    if (retailer.phone_secondary)
-      div(id="phone_secondary" class="data") #{retailer.phone_secondary}
-      div(id="change_phone_secondary" class="edit") edit
-    else
-      | none exists; add:
-      input(type="text", name="phone_secondary", id="phone_secondary")
-    br
-    | phone 3: 
-    if (retailer.phone_tertiary)
-      div(id="phone_tertiary" class="data") #{retailer.phone_tertiary}
-      div(id="change_phone_tertiary" class="edit") edit
-    else
-      | none exists; add:
-      input(type="text", name="phone_tertiary", id="phone_tertiary")
-    br
-    | Email: 
-    if (retailer.retailer_email)
-      div(id="retailer_email" class="data") #{retailer.retailer_email}
-      div(id="change_retailer_email" class="edit") edit
-    else
-      | none exists; add:
-      input(type="text", name="retailer_email", id="retailer_email")
-    br
     | Comments: 
     if (retailer.comments)
       div(id="comments" class="data") #{retailer.comments}
@@ -67,19 +37,14 @@ block content
       | none exists; add:
       input(type="text", name="comments", id="comments")
     br
-    ul
-      each link in social_links
-        li
-          | #{link.link}
-          div(class="slink")
-            a(href=retailer.retailer_name + "/slink/" +link.id) x
-            //- TODO use "cross" instead of an 'x'
-    | Add a social link: 
-    input(type="text", name="social_link")
-    br
     input(type="submit")
     br
-  ul Brands they sell:
+  //- Main 'modify' section ends
+  //-
+  //-
+  //- Brands start
+  | Brands they sell:
+  ul 
     each lbrand in linked_brands
       li
         | #{lbrand.brand_name}
@@ -94,8 +59,57 @@ block content
     | Add a new brand
     input(type="text", name="new_brand")
     input(type="submit")
-    br
-  ul Tags associated with this retailer:
+  //- Brands end 
+  //-
+  //-
+  //- Social Links start
+  | Social Links:
+  ul
+    each link in social_links
+      li
+        | #{link.link}
+        div(class="destroy")
+          a(href=retailer.retailer_name + "/slink/" +link.id) x
+          //- TODO use "cross" instead of an 'x'
+  form(action="#{retailer.retailer_name}/add_slink", method="post")
+    | Add a social link: 
+    input(type="text", name="social_link")
+    input(type="submit")
+  //- Social Links end
+  //-
+  //-
+  //- Phone numbers start
+  form(action="#{retailer.retailer_name}/add_phone", method="post")
+    | Add a phone number: 
+    input(type="text", name="phone_number")
+    input(type="submit")
+    ul
+      each number in numbers
+        li
+          | #{number.number}
+          div(class="destroy")
+            a(href=retailer.retailer_name + "/number/" + number.id) x
+  //- TODO: add mobile-compatible phone numbers
+  //- Phone numbers end
+  //-
+  //-
+  //- Emails start
+  form(action="#{retailer.retailer_name}/add_email", method="post")
+    | Add an email: 
+    input(type="text", name="email")
+    input(type="submit")
+    ul
+      each email in mails 
+        li
+          | #{email.email}
+          div(class="destroy")
+            a(href=retailer.retailer_name + "/email/" + email.id) x
+  //- Emails end
+  //-
+  //-
+  //- Tags start
+  | Tags associated with this retailer:
+  ul 
     each ltag in linked_tags
       li
         | #{ltag.tag_name}
@@ -110,5 +124,8 @@ block content
     | Add a new tag
     input(type="text", name="new_tag")
     input(type="submit")
+  //- Tags end 
+  //-
+  //-
   script(src='/jquery.min.js')
   script(src='/retailer.js')

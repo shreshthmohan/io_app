@@ -5,10 +5,6 @@ module.exports = function(sequelize, DataTypes) {
     website_url:     {type: DataTypes.STRING(550)},
     address_field:   {type: DataTypes.STRING(170)},
     location_url:    {type: DataTypes.STRING(555)},
-    phone_primary:   {type: DataTypes.STRING(20)},
-    phone_secondary: {type: DataTypes.STRING(20)},
-    phone_tertiary:  {type: DataTypes.STRING(20)},
-    retailer_email:  {type: DataTypes.STRING(50)},
     comments:        {type: DataTypes.STRING(455)}
   },
   {
@@ -21,6 +17,10 @@ module.exports = function(sequelize, DataTypes) {
       // ^ will add FK to Retailers table
       Retailer.hasMany(models.SocialLink, {foreignKeyConstraint: true});
       // ^ will add FK to SocialLinks table
+      Retailer.hasMany(models.Email, {foreignKeyConstraint: true});
+      // ^ will add FK to Emails  table
+      Retailer.hasMany(models.PhoneNumber, {foreignKeyConstraint: true});
+      // ^ will add FK to PhoneNumbers table
     }
   });
 

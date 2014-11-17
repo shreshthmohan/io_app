@@ -5,9 +5,6 @@ module.exports = function(sequelize, DataTypes) {
     website_url:     {type: DataTypes.STRING(50)},
     address_field:   {type: DataTypes.STRING(170)},
     location_url:    {type: DataTypes.STRING(255)},
-    phone_primary:   {type: DataTypes.STRING(20)},
-    phone_secondary: {type: DataTypes.STRING(20)},
-    phone_tertiary:  {type: DataTypes.STRING(20)},
     operator_email:  {type: DataTypes.STRING(50)},
     comments:        {type: DataTypes.STRING(255)}
   },

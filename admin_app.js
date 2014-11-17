@@ -81,8 +81,22 @@ app.post('/gear/:city_name/:retailer_name/add_tag', retailer.add_tag);
 
 app.post('/gear/:city_name/:retailer_name/choose_tag', retailer.choose_tag);
 
+app.post('/gear/:city_name/:retailer_name/add_slink', retailer.add_slink);
+
+app.post('/gear/:city_name/:retailer_name/add_phone', retailer.add_phone);
+
+app.post('/gear/:city_name/:retailer_name/add_email', retailer.add_email);
+
 // Destroy social link associated with a retailer
 app.get('/gear/:city_name/:retailer_name/slink/:slink_id', retailer.destroy_slink);
+
+// Destroy phone number associated with a retailer
+app.get('/gear/:city_name/:retailer_name/number/:number', retailer.destroy_number);
+
+// Destroy email associated with a retailer
+app.get('/gear/:city_name/:retailer_name/email/:email_id', retailer.destroy_email);
+
+// TODO dissociating brands and tags from a given retailer(and event)
 
 app.post('/add_tag', routes.add_tag);
 

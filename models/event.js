@@ -25,6 +25,10 @@ module.exports = function(sequelize, DataTypes) {
       // ^ will add FK to EventTag table
       Event.hasMany(models.SocialLink, {foreignKeyConstraint: true});
       // ^ will add FK to SocialLinks table
+      Event.hasMany(models.Email, {foreignKeyConstraint: true});
+      // ^ will add FK to Emails  table
+      Event.hasMany(models.PhoneNumber, {foreignKeyConstraint: true});
+      // ^ will add FK to PhoneNumbers table
     }
   });
   return Event;
