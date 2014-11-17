@@ -1,0 +1,13 @@
+.edit {
+  color: green;
+  font-style: italic;
+  margin-left: 5px;
+}
+
+.edit, .data, .slink {
+  display: inline;
+}
+
+.slink {
+  margin-left: 5px;
+}
