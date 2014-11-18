@@ -45,9 +45,11 @@ block content
   //- Brands start
   | Brands they sell:
   ul 
-    each lbrand in linked_brands
+    each brand in linked_brands
       li
-        | #{lbrand.brand_name}
+        | #{brand.brand_name}
+        div(class="destroy")
+          a(href=retailer.retailer_name + "/brand/" + brand.id) x
   form(action="#{retailer.retailer_name}/choose_brand", method="post")
     | Associate a brand with this retailer: 
     select(name="brand_id", id="brand_id")
@@ -110,9 +112,11 @@ block content
   //- Tags start
   | Tags associated with this retailer:
   ul 
-    each ltag in linked_tags
+    each tag in linked_tags
       li
-        | #{ltag.tag_name}
+        | #{tag.tag_name}
+        div(class="destroy")
+          a(href=retailer.retailer_name + "/tag/" + tag.id) x
   form(action="#{retailer.retailer_name}/choose_tag", method="post")
     | Associate an activity tag with this retailer: 
     select(name="tag_id", id="tag_id")

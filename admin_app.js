@@ -96,7 +96,13 @@ app.get('/gear/:city_name/:retailer_name/number/:number', retailer.destroy_numbe
 // Destroy email associated with a retailer
 app.get('/gear/:city_name/:retailer_name/email/:email_id', retailer.destroy_email);
 
-// TODO dissociating brands and tags from a given retailer(and event)
+// Dissociate tag associated with a retailer
+// It effectively will destroy entry in GearTags table while retaining
+// corresponding entry in Tags table
+app.get('/gear/:city_name/:retailer_name/tag/:tag_id', retailer.dissociate_tag);
+app.get('/gear/:city_name/:retailer_name/brand/:brand_id', retailer.dissociate_brand);
+
+// TODO dissociating brands from a given retailer(and event)
 
 app.post('/add_tag', routes.add_tag);
 
@@ -134,6 +140,7 @@ app.get('/events/:city_name/:event_name', race.individual);
 app.post('/events/:city_name/:event_name', race.modify);
 
 app.post('/events/:city_name/:event_name/add_tag', race.add_tag);
+
 app.post('/events/:city_name/:event_name/choose_tag', race.choose_tag);
 
 // To serve static files

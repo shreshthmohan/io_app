@@ -390,3 +390,23 @@ exports.destroy_email = function(req, res) {
     })
   })
 };
+
+exports.dissociate_tag = function(req, res) {
+  db.GearTag.find({where: {id: req.param('tag_id')}})
+  .success(function(tag) {
+    tag.destroy().success(function() {
+      res.redirect('/gear/' + req.param('city_name') + '/' +
+        req.param('retailer_name'));
+    })
+  })
+};
+
+exports.dissociate_brand = function(req, res) {
+  db.GearBrand.find({where: {id: req.param('brand_id')}})
+  .success(function(brand) {
+    brand.destroy().success(function() {
+      res.redirect('/gear/' + req.param('city_name') + '/' +
+        req.param('retailer_name'));
+    })
+  })
+};

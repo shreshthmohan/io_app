@@ -16,4 +16,21 @@
 5. Models for social links, email and phone numbers have belongsTo only for
    events and retailers at the moment. When we add operators, schools and other
    endpoints. Will modifying MySQL schema be doable?
+   TODO: Research
+   DB best practices: building a modifiable database, something to which 
+   adding more later is straight-forward and easy.
 
+6. Routes should mention id instead of just the name. This is useful for 
+   avoiding confusion in case two endpoints have exactly same names.
+   Also increases query efficieny?
+   So the links should be like:
+   http://www.indiaoutside.org/gear/bangalore/1/decathlon-whitefield/3
+
+7. Remember to display 'hand' when user hovers over any element they can
+   interact with, like a link, a radio-button or a checkbox, especially when
+   doing end-user side frontend.
+
+8. Beautifying links ... from www.example.com/city/23/retailer%20name/21 to
+   www.example.com/city/retailer-name while taking care of #6
+
+9. Show more details about interactive elements on hover.
