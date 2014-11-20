@@ -3,7 +3,6 @@ module.exports = function(sequelize, DataTypes) {
   {
     event_name:      {type: DataTypes.STRING(60), allowNull: false}, 
     event_url:       {type: DataTypes.STRING(255)},
-    event_url_social:{type: DataTypes.STRING(255)},
     organiser_name:  {type: DataTypes.STRING(80)},
     organiser_url:   {type: DataTypes.STRING(255)},
     address_field:   {type: DataTypes.STRING(255)},
@@ -11,10 +10,6 @@ module.exports = function(sequelize, DataTypes) {
     start_date:      {type: DataTypes.DATE},
     end_date:        {type: DataTypes.DATE},
     // ^ http://dev.mysql.com/doc/refman/5.5/en/datetime.html
-    phone_primary:   {type: DataTypes.STRING(20)},
-    phone_secondary: {type: DataTypes.STRING(20)},
-    phone_tertiary:  {type: DataTypes.STRING(20)},
-    email:           {type: DataTypes.STRING(50)},
     comments:        {type: DataTypes.STRING(255)}
   },
   {

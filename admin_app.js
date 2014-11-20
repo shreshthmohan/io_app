@@ -102,8 +102,6 @@ app.get('/gear/:city_name/:retailer_name/email/:email_id', retailer.destroy_emai
 app.get('/gear/:city_name/:retailer_name/tag/:tag_id', retailer.dissociate_tag);
 app.get('/gear/:city_name/:retailer_name/brand/:brand_id', retailer.dissociate_brand);
 
-// TODO dissociating brands from a given retailer(and event)
-
 app.post('/add_tag', routes.add_tag);
 
 app.get('/add_tag', routes.new_tag_form);
@@ -142,6 +140,23 @@ app.post('/events/:city_name/:event_name', race.modify);
 app.post('/events/:city_name/:event_name/add_tag', race.add_tag);
 
 app.post('/events/:city_name/:event_name/choose_tag', race.choose_tag);
+
+app.post('/events/:city_name/:event_name/add_slink', race.add_slink);
+
+app.post('/events/:city_name/:event_name/add_phone', race.add_phone);
+
+app.post('/events/:city_name/:event_name/add_email', race.add_email);
+
+// Destroy social link associated with an event
+app.get('/events/:city_name/:event_name/slink/:slink_id', race.destroy_slink);
+
+// Destroy phone number associated with an event
+app.get('/events/:city_name/:event_name/number/:number', race.destroy_number);
+
+// Destroy email associated with an event
+app.get('/events/:city_name/:event_name/email/:email_id', race.destroy_email);
+
+app.get('/events/:city_name/:event_name/tag/:tag_id', race.dissociate_tag);
 
 // To serve static files
 app.use(express.static(path.join(__dirname, 'public')))

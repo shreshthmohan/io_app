@@ -19,17 +19,12 @@ exports.create = function(req, res) {
     db.Event.create({
       event_name:      req.param('event_name'),
       event_url:       req.param('event_url'),
-      event_url_social:req.param('event_url_social'),
       organiser_name:  req.param('organiser_name'),
       organiser_url:   req.param('organiser_url'),
       address_field:   req.param('address_field'),
       location_url:    req.param('location_url'),
       start_date:      req.param('start_date'),
       end_date:        req.param('end_date'),
-      phone_primary:   req.param('phone_primary'),
-      phone_secondary: req.param('phone_secondary'),
-      phone_tertiary:  req.param('phone_tertiary'),
-      email:           req.param('email'),
       comments:        req.param('comments')
     })
     .success(function(race) { // using 'race', as event is a keyword 
@@ -57,13 +52,21 @@ exports.individual = function(req, res) {
       .success(function(slink) {
         sequelize.query('select Tags.id as id, Tags.tag_name as tag_name, linkedTags.id as linkedTagsid, linkedTags.TagId as linkedTagsTagId, linkedTags.EventId as linkedTagsEventId from Tags left outer join (select * from EventTags where EventTags.EventId = :eventId) linkedTags on Tags.id = linkedTags.TagId where linkedTags.EventId is null', null, { raw: true }, { eventId: race.id })
         .success(function(tags) {
-          sequelize.query('select * from EventTags inner join Tags on EventTags.TagId = Tags.id where EventTags.EventId = :eventId', null, { raw: true }, {eventId: race.id})
+          sequelize.query('select EventTags.id as id, Tags.tag_name as tag_name from EventTags inner join Tags on EventTags.TagId = Tags.id where EventTags.EventId = :eventId', null, { raw: true }, {eventId: race.id})
           .success(function(linked_tags) {
-            res.render('event', {
-              race: race,
-              social_links: slink,
-              tags: tags,
-              linked_tags: linked_tags
+            db.PhoneNumber.findAll({where: {EventId: race.id}})
+            .success(function(numbers) {
+              db.Email.findAll({where: {EventId: race.id}})
+              .success(function(mails) {
+                res.render('event', {
+                  race: race,
+                  social_links: slink,
+                  tags: tags,
+                  numbers: numbers,
+                  mails: mails,
+                  linked_tags: linked_tags
+                })
+              })
             })
           })
         })
@@ -193,6 +196,142 @@ exports.choose_tag = function(req, res) {
           })
         })
       })
+    })
+  })
+};
+
+// Add a new social link for this event
+exports.add_slink = function(req, res) {
+  db.City.find({where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+    db.Event.find(
+      {where: 
+        Sequelize.and(
+          {CityId: city.id},
+          {event_name: req.param('event_name')}
+        )
+      }
+    )
+    .success(function(race) {
+      if(req.param('social_link')) {
+        db.SocialLink.create(
+        {
+          link: req.param('social_link')
+        })
+        .success(function(slink) {
+          slink.setEvent(race).success(function() {
+            res.redirect('/events/' + city.city_name + '/' +
+                             race.event_name)
+          })
+        })
+      } else {
+        res.redirect('/events/' + city.city_name + '/' +
+          race.event_name)
+      }
+    })
+  })
+};
+
+// Add a new phone number for this event
+exports.add_phone = function(req, res) {
+  db.City.find({where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+    db.Event.find(
+      {where: 
+        Sequelize.and(
+          {CityId: city.id},
+          {event_name: req.param('event_name')}
+        )
+      }
+    )
+    .success(function(race) {
+      if(req.param('phone_number')) {
+        db.PhoneNumber.create(
+        {
+          number: req.param('phone_number')
+        })
+        .success(function(number) {
+          number.setEvent(race).success(function() {
+            res.redirect('/events/' + city.city_name + '/' +
+                             race.event_name)
+          })
+        })
+      } else {
+        res.redirect('/events/' + city.city_name + '/' +
+          race.event_name)
+      }
+    })
+  })
+};
+
+// Add a new email for this event
+exports.add_email = function(req, res) {
+  db.City.find({where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+    db.Event.find(
+      {where: 
+        Sequelize.and(
+          {CityId: city.id},
+          {event_name: req.param('event_name')}
+        )
+      }
+    )
+    .success(function(race) {
+      if(req.param('email')) {
+        db.Email.create(
+        {
+          email: req.param('email')
+        })
+        .success(function(email) {
+          email.setEvent(race).success(function() {
+            res.redirect('/events/' + city.city_name + '/' +
+                             race.event_name)
+          })
+        })
+      } else {
+        res.redirect('/events/' + city.city_name + '/' +
+          race.event_name)
+      }
+    })
+  })
+};
+
+exports.destroy_slink = function(req, res) {
+  db.SocialLink.find({where: {id: req.param('slink_id')}})
+  .success(function(slink) {
+    slink.destroy().success(function() {
+      res.redirect('/events/' + req.param('city_name') + '/' +
+        req.param('event_name'));
+    })
+  })
+};
+
+exports.destroy_number = function(req, res) {
+  db.PhoneNumber.find({where: {id: req.param('number')}})
+  .success(function(number) {
+    number.destroy().success(function() {
+      res.redirect('/events/' + req.param('city_name') + '/' +
+        req.param('event_name'));
+    })
+  })
+};
+
+exports.destroy_email = function(req, res) {
+  db.Email.find({where: {id: req.param('email_id')}})
+  .success(function(email) {
+    email.destroy().success(function() {
+      res.redirect('/events/' + req.param('city_name') + '/' +
+        req.param('event_name'));
+    })
+  })
+};
+
+exports.dissociate_tag = function(req, res) {
+  db.EventTag.find({where: {id: req.param('tag_id')}})
+  .success(function(tag) {
+    tag.destroy().success(function() {
+      res.redirect('/events/' + req.param('city_name') + '/' +
+        req.param('event_name'));
     })
   })
 };

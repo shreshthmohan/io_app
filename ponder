@@ -1,36 +1,42 @@
-// This is for thinking about features, issues solutions and potential TODOs //
+// This is for thinking about features, issues, solutions and potential TODOs //
+// Basically anything related to io that comes to my mind. //
 
-1. How to handle brick-and-mortar retailers versus online retailers
-   listing-wise and in the database? Also there are some retailers 
-   who sell online as well as offline.
+1.  How to handle brick-and-mortar retailers versus online retailers
+    listing-wise and in the database? Also there are some retailers 
+    who sell online as well as offline.
 
-2. How to handle things like NCR, Hyderabad-Secunderabad?
+2.  How to handle things like NCR, Hyderabad-Secunderabad?
 
-3. How to handle aliases like Bangalore-Bengaluru, Mumbai-Bombay?
+3.  How to handle aliases like Bangalore-Bengaluru, Mumbai-Bombay?
 
-4. How much load can an AWS-EC2 micro instance handle?
-   Wordpress (PHP/MySQL): http://hubcitylabs.org/375-million-pageviews-for-15-a-month/
-   For load-testing: blitz.io
-   http://www.quora.com/Which-EC2-instance-size-should-I-use-to-serve-1-million-pageviews-per-month
+4.  How much load can an AWS-EC2 micro instance handle?
+    Wordpress (PHP/MySQL): http://hubcitylabs.org/375-million-pageviews-for-15-a-month/
+    For load-testing: blitz.io
+    http://www.quora.com/Which-EC2-instance-size-should-I-use-to-serve-1-million-pageviews-per-month
 
-5. Models for social links, email and phone numbers have belongsTo only for
-   events and retailers at the moment. When we add operators, schools and other
-   endpoints. Will modifying MySQL schema be doable?
-   TODO: Research
-   DB best practices: building a modifiable database, something to which 
-   adding more later is straight-forward and easy.
+5.  Models for social links, email and phone numbers have belongsTo only for
+    events and retailers at the moment. When we add operators, schools and other
+    endpoints. Will modifying MySQL schema be doable?
+    TODO: Research
+    DB best practices: building a modifiable database, something to which 
+    adding more later is straight-forward and easy.
 
-6. Routes should mention id instead of just the name. This is useful for 
-   avoiding confusion in case two endpoints have exactly same names.
-   Also increases query efficieny?
-   So the links should be like:
-   http://www.indiaoutside.org/gear/bangalore/1/decathlon-whitefield/3
+6.  Routes should mention id instead of just the name. This is useful for 
+    avoiding confusion in case two endpoints have exactly same names.
+    Also increases query efficieny.
+    So the links should be like:
+    http://www.indiaoutside.org/gear/bangalore/1/decathlon-whitefield/3
 
-7. Remember to display 'hand' when user hovers over any element they can
-   interact with, like a link, a radio-button or a checkbox, especially when
-   doing end-user side frontend.
+7.  Remember to display 'hand' when user hovers over any element they can
+    interact with, like a link, a radio-button or a checkbox, especially when
+    doing end-user side frontend.
 
-8. Beautifying links ... from www.example.com/city/23/retailer%20name/21 to
-   www.example.com/city/retailer-name while taking care of #6
+8.  Beautifying links ... from www.example.com/city/23/retailer%20name/21 to
+    www.example.com/city/retailer-name while taking care of #6
 
-9. Show more details about interactive elements on hover.
+9.  Show more details about interactive elements on hover.
+
+10. Character set and collation in Mysql DB schema. What it means? What to do?
+
+11. New table for linked images (basically just urls). Also check how FB picks
+    up images.
