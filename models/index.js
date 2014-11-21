@@ -2,7 +2,7 @@ var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
 var lodash    = require('lodash');
-var sequelize = new Sequelize('io_app_test', 'root', 'clock');
+var sequelize = new Sequelize('io_app', 'root', 'clock');
 // ^ TODO: fix collation, charset (UTF-8)
 var db        = {}; // array object that is key-value type
 

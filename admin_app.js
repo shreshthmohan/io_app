@@ -116,7 +116,7 @@ app.get('/add_brand', routes.new_brand_form);
 app.post('/city/create', city.create);
 
 // destroy city
-app.get('/city/:city_name/destroy', city.destroy);
+app.get('/city/:city_id/destroy', city.destroy);
 
 // create tag
 

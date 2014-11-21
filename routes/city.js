@@ -2,10 +2,14 @@ var db = require('../models');
 var Sequelize = require('sequelize');
 
 exports.create = function(req, res) {
-  db.City.create({ city_name: req.param('city_name') })
-    .success(function() {
-      res.redirect('/city/index')
-    });
+  if(req.param('city_name')) {
+    db.City.create({ city_name: req.param('city_name') })
+      .success(function() {
+        res.redirect('/city/index')
+      });
+  } else {
+    res.redirect('/city/index')
+  }
 };
 
 exports.index = function(req, res) {
@@ -47,7 +51,7 @@ exports.event_list = function(req, res) {
 
 // destroy city record
 exports.destroy = function(req,res) {
-  db.City.find({where: {city_name: req.param('city_name')}})
+  db.City.find({where: {id: req.param('city_id')}})
   .success(function(city) {
     city.destroy().success(function(){
       res.redirect('/city/index');
