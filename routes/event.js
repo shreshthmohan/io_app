@@ -88,20 +88,17 @@ exports.modify = function(req, res) {
       }
     )
     .success(function(retailer) {
+      // TODO: Now that I have your attention, there's an issue with the date
+      // field, sequelize is not treating the date/datetime datatype
       retailer.updateAttributes({
         event_name:      req.param('event_name'),
         event_url:       req.param('event_url'),
-        event_url_social:req.param('event_url_social'),
         organiser_name:  req.param('organiser_name'),
         organiser_url:   req.param('organiser_url'),
         address_field:   req.param('address_field'),
         location_url:    req.param('location_url'),
         start_date:      req.param('start_date'),
         end_date:        req.param('end_date'),
-        phone_primary:   req.param('phone_primary'),
-        phone_secondary: req.param('phone_secondary'),
-        phone_tertiary:  req.param('phone_tertiary'),
-        email:           req.param('email'),
         comments:        req.param('comments')
       })
       .success(function(race) {

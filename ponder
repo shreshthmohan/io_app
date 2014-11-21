@@ -48,3 +48,10 @@
 13. In a recent error I realised that node server should not crash on a error
     if it successfully started listening. It must keep running/listening and
     throw error in the browser.
+    It seems the "error" will have to be handled by rerouting to some other URL
+    when a query to DB returns an empty object.
+
+14. TODO: Also allow editing of City in retailer/event.modify
+
+15. The date/datetime sequelize issue. Now what sequelize is doing is that it
+    is converting entered date to datetime in UTC.
