@@ -48,6 +48,7 @@ exports.individual = function(req, res) {
       }
     )
     .success(function(race) {
+      console.log(race)
       db.SocialLink.findAll({where: {EventId: race.id}})
       .success(function(slink) {
         sequelize.query('select Tags.id as id, Tags.tag_name as tag_name, linkedTags.id as linkedTagsid, linkedTags.TagId as linkedTagsTagId, linkedTags.EventId as linkedTagsEventId from Tags left outer join (select * from EventTags where EventTags.EventId = :eventId) linkedTags on Tags.id = linkedTags.TagId where linkedTags.EventId is null', null, { raw: true }, { eventId: race.id })
@@ -332,3 +333,12 @@ exports.dissociate_tag = function(req, res) {
     })
   })
 };
+
+// experimenting
+// all upcoming events
+//exports.upcoming_events = function(req,res) {
+//  sequelize.query('select * from Events where start_date > NOW()', null, {raw: true} )
+//  //select * from Events where start_date > NOW() order by start_date
+//  .success(function(races) {
+//    res.render('', {})
+//}

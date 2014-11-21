@@ -52,6 +52,8 @@
     when a query to DB returns an empty object.
 
 14. TODO: Also allow editing of City in retailer/event.modify
+    Also event_name/retailer_name
 
 15. The date/datetime sequelize issue. Now what sequelize is doing is that it
-    is converting entered date to datetime in UTC.
+    is converting entered date to datetime in UTC. Can be overcome by simply 
+    using datetime with sequelize. TODO explain this thing properly 

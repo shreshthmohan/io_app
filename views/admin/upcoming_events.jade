@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1=title
+  p All upcoming events in order of occurrence
+
+  ul
+  each race in races
+    li
+      | #{race.event_name} #{race.start_date}
