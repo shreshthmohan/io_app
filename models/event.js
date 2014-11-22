@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
     // we manually have to alter table after creation of database like so,
     // "alter table Events modify column start_date date;"
     // "alter table Events modify column end_date date;"
-    // http://dev.mysql.com/doc/refman/5.5/en/date-qnd-time-functions.html
+    // http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html
     // ^ to properly display dates
     comments:        {type: DataTypes.STRING(255)}
   },

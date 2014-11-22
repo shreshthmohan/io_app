@@ -338,7 +338,10 @@ exports.dissociate_tag = function(req, res) {
 // all upcoming events
 //exports.upcoming_events = function(req,res) {
 //  sequelize.query('select * from Events where start_date > NOW()', null, {raw: true} )
+//  sequelize.query('select  from Events where start_date ')
 //  //select * from Events where start_date > NOW() order by start_date
+// select date_format(start_date, '%c %M %Y') start_date from Events
+// select id, event_name, event_url, organiser_name, organiser_url, address_field, location_url, date_format(start_date, '%c, %M, %Y') start_date, date_format(end_date, %c, %M, %Y)  end_date, comments, CityId from Events where start_date > NOW() order by start_date;
 //  .success(function(races) {
 //    res.render('', {})
 //}
