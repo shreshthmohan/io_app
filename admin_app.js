@@ -1,9 +1,9 @@
 var express  = require('express');
 var connect  = require('connect');
-var city     = require('./routes/city');
-var retailer = require('./routes/retailer');
-var race     = require('./routes/event');
-var routes   = require('./routes');
+var city     = require('./routes/admin/city');
+var retailer = require('./routes/admin/retailer');
+var race     = require('./routes/admin/event');
+var routes   = require('./routes/admin');
 var http     = require('http');
 var path     = require('path');
 var db       = require('./models');
@@ -27,15 +27,18 @@ app.use(connect.favicon('public/favicon.ico'));
 app.use(connect.logger('dev'))
 
 // Used to parse JSON data passed via POST method (as an example)
+// TODO: is it being used? 
 app.use(connect.json())
 
 // Used to parse data from body in the form
 // firstname=john&lastname=doe&location=montana
+// I think this is not being used as of now
 app.use(connect.urlencoded())
 
 // Used to enable the use of PUT and DELETE, which modern browsers don't support
 app.use(connect.methodOverride())
 // Seems to have been deprecated; TODO Use alternative.
+// TODO: USE
 
 // Really good explanation of how 'exports' work at 
 // http://blog.liangzan.net/blog/2012/06/04/how-to-use-exports-in-nodejs/
@@ -48,6 +51,7 @@ app.use(connect.methodOverride())
 
 // Links to all available routes
 
+// Home
 app.get('/', routes.index);
 
 // create (gear) retailer  
