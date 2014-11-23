@@ -1,0 +1,59 @@
+doctype html
+
+html(lang='en')
+  head
+    title = title
+    link(href="/bootstrap.css" rel="stylesheet")
+    link(href="/home.css" rel="stylesheet")
+    link(href="/navbar-fixed-top.css" rel="stylesheet")
+    script(src="/ie10-viewport-bug-workaround.js")
+    script(src="/ie-emulation-modes-warning.js")
+
+  body
+    div(class="navbar navbar-default navbar-fixed-top" role="navigation")
+      div(class="container")
+        div(class="navbar-header")
+          button(type="button" class="navbar-toggle" data-toggle="collaspe" data-target=".navbar-collapse")
+            span(class="sr-only") Toggle navigation
+            span(class="icon-bar")
+            span(class="icon-bar")
+            span(class="icon-bar")
+          a(class="navbar-brand" href="/") India Outside
+        div(class="navbar-collapse collapse")
+          ul(class="nav navbar-nav")
+            li(class="active")
+              a(href='/') Home
+            li
+              a(href='TODO') Events
+            li
+              a(href='TODO') Gear 
+          
+    div(class="container")
+      div(class="jumbotron")
+        h1= h1_title
+        form(class="home-radio")
+          input(id="gear" type="radio" name="search" value="gear")
+          label(for="gear" class="home-radio-label") Gear
+          input(id="events" type="radio" name="search" value="events")
+          label(for="events" class="home-radio-label") Events 
+        div(class="gear")
+          h2 Get equipped
+          form(class="search")
+            | Looking for 
+            input(class="form-control" type="text" name="geartype" placeholder="e.g. hiking")
+            | in
+            input(class="form-control" type="text" name="location" placeholder="e.g. Bangalore")
+        div(class="events")
+          h2 Upcoming Races and Events!
+          form(class="search")
+            | I want to participate in 
+            input(class="form-control" type="text" name="activitytype" placeholder="e.g. surfing")
+            | Event in 
+            input(class="form-control" type="text" name="location" placeholder="e.g. Goa")
+            | between
+            input(class="form-control" type="text" name="start_date" placeholder="e.g. 4 December 2014")
+            | and
+            input(class="form-control" type="text" name="location" placeholder="e.g. 12 January 2015")
+    script(src="/jquery.min.js")
+    script(src="/bootstrap.js")
+    script(src="/home.js")
