@@ -1,4 +1,4 @@
-var db = require('../models');
+var db = require('../../models');
 var Sequelize = require('sequelize');
 
 exports.create = function(req, res) {

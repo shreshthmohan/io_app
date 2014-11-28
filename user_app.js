@@ -26,12 +26,16 @@ app.use(connect.json())
 
 // Home
 app.get('/', routes.index);
+app.get('/exp', routes.index_exp)
 
 // All upcoming events
 app.get('/events/upcoming', race.upcoming)
 
 // All events
 app.get('/events/all', race.all)
+
+// Serving static files
+app.use(express.static(path.join(__dirname, 'public')))
 
 if ('development' === app.get('env')) {
   app.use(connect.errorHandler())

@@ -57,3 +57,9 @@
 15. The date/datetime sequelize issue. Now what sequelize is doing is that it
     is converting entered date to datetime in UTC. Can be overcome by simply 
     using datetime with sequelize. TODO explain this thing properly 
+
+16. What's the meaning of 'role' attribute in 'div' tag
+
+17. What's bootstrap.css.map for?!
+
+18. Expand menu in mobile view not working, see why.
