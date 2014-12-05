@@ -39,11 +39,12 @@
 10. Character set and collation in Mysql DB schema. What it means? What to do?
 
 11. New table for linked images (basically just urls). Also check how FB picks
-    up images.
+    up images from links.
 
 12. Analytics: How many views through newsletter, search engines, social
     networks. Outgoing clicks, stats based on activity, location and time of the
     year. Compare with existing data such as that of Google Trends.
+    What about Google Analytics?
 
 13. In a recent error I realised that node server should not crash on a error
     if it successfully started listening. It must keep running/listening and
