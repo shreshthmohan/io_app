@@ -25,7 +25,7 @@ app.use(lessMiddleware(
     debug: app.get('env') === 'development'
   }
   ,lessParserOptions = {
-    dumpLineNumbers: 'mediaquery'
+    dumpLineNumbers: 'comments'
     // mediaquery/comments
     // introduces mediaquery/comments in generated css
   }

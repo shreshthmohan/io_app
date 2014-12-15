@@ -1,67 +1,124 @@
 @import "bootstrap/bootstrap";
 
 @io-yellow: #f6cc23;
+
 @navbar-bg: #e7e7e7;
+
 @shadow-orange: #dd4814;
 @navbar-default-link-hover-color: #444444;
 @navbar-default-link-active-color: #444444;
 
-.form-control {
-  display: inline;
-  width: auto;
-}
+@navbar-link-under: @io-yellow;
 
-.navbar-default {
-  .navbar-nav {
-    > li > a {
-      font-size: 18px;
-      font-weight: bold;
+// form-control: box-border and shadow color
+@input-border-focus: @io-yellow;
+
+
+// Navbar 
+
+  .navbar-default {
+    .navbar-nav {
+      > li > a {
+        font-size: 18px;
+        font-weight: bold;
+        background-color: @navbar-bg;
+        &:hover,
+        &:focus {
+          color: @navbar-default-link-hover-color;
+          // For underline on hover
+          &:after {
+            @media (min-width: @grid-float-breakpoint) {
+              visibility: visible;
+            }
+          }
+        }
+        // For underline on hover
+        &:after {
+          @media (min-width: @grid-float-breakpoint) {
+            color: @navbar-link-under;
+            content: "";
+            width: 100%;
+            height: 0;
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0px;
+            visibility: hidden;
+            border-style: solid;
+            border-width: 1px 0 0;
+          }
+        }
+      }
+      > .active > a {
+        // For undeline on hover
+        &:after {
+          @media (min-width: @grid-float-breakpoint) {
+            visibility: visible;
+          }
+        }
+        &:hover {
+          background-color: @navbar-default-link-hover-bg; 
+        }
+      }
+    }
+    .navbar-brand {
+      color: @io-yellow;
       background-color: @navbar-bg;
       &:hover,
       &:focus {
-        color: @navbar-default-link-hover-color;
-        &:after {
-          visibility: visible;
-        }
-      }
-      &:after {
         color: @io-yellow;
-        content: "";
-        width: 100%;
-        height: 0;
-        display: block;
-        position: absolute;
-        bottom: 0;
-        left: 0px;
-        visibility: hidden;
-        border-style: solid;
-        border-width: 1px 0 0;
-      }
-    }
-    > .active > a {
-      &:after {
-        visibility: visible;
-      }
-      &:hover {
-        background-color: @navbar-default-link-hover-bg; 
       }
     }
   }
+  
   .navbar-brand {
+    font-size: ceil((@font-size-base * 2.25));
+    font-weight: bold;
+  }
+
+// To bring jumbotron container below navbar
+  body {
+    margin-top: 70px;
+  }
+
+// Home radio form 
+  .groups, .gear, .learn  {
+    display: none;
+  }
+  
+  .home-radio-label {
+    font-size: 18px;
     color: @io-yellow;
-    background-color: @navbar-bg;
-    &:hover,
-    &:focus {
-      color: @io-yellow;
-    }
+    margin-right: 15px;
+    margin-left: 3px;
+  }
+  
+  //input[type=radio]checked + label {
+  //}
+  
+  form.home-radio {
+    font-size: 18px;
+    margin-bottom: -10px;
+  }
+
+// Forms
+.form-control {
+  display: inline;
+  width: auto;
+  border-radius: 0px;
+  &:focus {
+    //border-color: @io-yellow;
   }
 }
 
-.navbar-brand {
-  font-size: ceil((@font-size-base * 2.25));
-  font-weight: bold;
+form.search {
+  font-size: 18px;
+  line-height: 40px;
 }
 
-body {
-  margin-top: 70px;
+// Jumbotron
+.container {
+  .jumbotron {
+    border-radius: 0px; 
+  }
 }
