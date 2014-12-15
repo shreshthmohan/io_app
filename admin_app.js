@@ -166,7 +166,8 @@ app.get('/events/:city_name/:event_name/tag/:tag_id', race.dissociate_tag);
 app.use(express.static(path.join(__dirname, 'public')))
 
 // development only
-// TODO But where is env being set
+// env being set to 'development' by default
+// see or set app.settings.env
 if ('development' === app.get('env')) {
   app.use(connect.errorHandler())
 }

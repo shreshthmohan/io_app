@@ -7,8 +7,33 @@ var routes   = require('./routes/user');
 var http     = require('http');
 var path     = require('path');
 var db       = require('./models');
+var lessMiddleware = require('less-middleware')
+var lessMiddlewareOptions = {}
+var lessParserOptions = {}
+var lessCompilerOptions = {}
 
 var app = express();
+
+app.use(lessMiddleware(
+  __dirname + '/stylesheets' 
+  // middleware looks for less files here
+  ,lessMiddlewareOptions = {
+    dest: __dirname + '/public',
+    relativeUrls: true, // what does this exactly mean
+    force: app.get('env') === 'development',
+    once: app.get('env') !== 'development', // generate once if not dev
+    debug: app.get('env') === 'development'
+  }
+  ,lessParserOptions = {
+    dumpLineNumbers: 'mediaquery'
+    // mediaquery/comments
+    // introduces mediaquery/comments in generated css
+  }
+  ,lessCompilerOptions = {
+    compress: app.get('env') !== 'development'
+    // Don't compress in development
+    // Note: If compress: true, then dumpLineNumbers will be ignored
+  }))
 
 // www.example.com:8080
 // localhost:8080

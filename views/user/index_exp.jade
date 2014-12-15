@@ -3,7 +3,7 @@ doctype html
 html(lang='en')
   head
     title= title
-    link(href="/bootstrap.css" rel="stylesheet")
+    link(href="/application.css" rel="stylesheet")
     link(href="/home.css" rel="stylesheet")
     link(href="/navbar-fixed-top.css" rel="stylesheet")
     script(src="/ie10-viewport-bug-workaround.js")
@@ -13,7 +13,7 @@ html(lang='en')
     div(class="navbar navbar-default navbar-fixed-top" role="navigation")
       div(class="container")
         div(class="navbar-header")
-          button(type="button" class="navbar-toggle" data-toggle="collaspe" data-target=".navbar-collapse")
+          button(type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse")
             span(class="sr-only") Toggle navigation
             span(class="icon-bar")
             span(class="icon-bar")
@@ -34,7 +34,7 @@ html(lang='en')
         form(class="home-radio")
           input(id="gear" type="radio" name="search" value="gear")
           label(for="gear" class="home-radio-label") Gear
-          input(id="events" type="radio" name="search" value="events")
+          input(id="events" type="radio" name="search" value="events" checked="checked")
           label(for="events" class="home-radio-label") Events 
         div(class="gear")
           h2 Get equipped
@@ -54,6 +54,6 @@ html(lang='en')
             input(class="form-control" type="text" name="start_date" placeholder="e.g. 4 December 2014")
             | and
             input(class="form-control" type="text" name="location" placeholder="e.g. 12 January 2015")
-    script(src="/jquery.min.js")
-    script(src="/bootstrap.js")
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+    script(src="/js/bootstrap.js")
     script(src="/home.js")
