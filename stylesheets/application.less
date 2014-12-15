@@ -1,0 +1,42 @@
+@import "bootstrap/bootstrap";
+
+@io-yellow: #f6cc23;
+@navbar-bg: #e7e7e7;
+@shadow-orange: #dd4814;
+@navbar-default-link-hover-color: #444444;
+@navbar-default-link-active-color: #444444;
+
+.form-control {
+  display: inline;
+  width: auto;
+}
+
+.navbar-default {
+  .navbar-nav {
+    > li > a {
+      font-size: 18px;
+      font-weight: bold;
+      background-color: @navbar-bg;
+      &:hover,
+      &:focus {
+        color: @navbar-default-link-hover-color;
+      }
+      &:after {
+        content: "";
+      }
+    }
+  }
+  .navbar-brand {
+    color: @io-yellow;
+    background-color: @navbar-bg;
+    &:hover,
+    &:focus {
+      color: @io-yellow;
+    }
+  }
+}
+
+.navbar-brand {
+  font-size: ceil((@font-size-base * 2.25));
+  font-weight: bold;
+}
