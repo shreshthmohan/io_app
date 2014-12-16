@@ -5,9 +5,7 @@ html(lang='en')
     title= title
     link(href="/application.css" rel="stylesheet")
     link(href="/home.css" rel="stylesheet")
-    link(href="/navbar-fixed-top.css" rel="stylesheet")
-    script(src="/ie10-viewport-bug-workaround.js")
-    script(src="/ie-emulation-modes-warning.js")
+    link(rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/flick/jquery-ui.css")
 
   body
     div(class="navbar navbar-default navbar-fixed-top" role="navigation")
@@ -46,14 +44,32 @@ html(lang='en')
         div(class="events")
           h2 Upcoming Races and Events!
           form(class="search")
-            | I want to participate in 
+            | I want to participate in
             input(class="form-control" type="text" name="activitytype" placeholder="e.g. surfing")
             | Event in 
             input(class="form-control" type="text" name="location" placeholder="e.g. Goa")
             | between
-            input(class="form-control" type="text" name="start_date" placeholder="e.g. 4 December 2014")
+            input(class="form-control" type="text" name="start_date" placeholder="e.g. 4 December 2014" id="from")
             | and
-            input(class="form-control" type="text" name="location" placeholder="e.g. 12 January 2015")
-    script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+            input(class="form-control" type="text" name="location" placeholder="e.g. 12 January 2015" id="to")
+    script(src="//code.jquery.com/jquery-1.11.1.js")
+    script(src="//code.jquery.com/ui/1.11.2/jquery-ui.js")
     script(src="/js/bootstrap.js")
+    script
+      | $(function() {
+      |   $( "#from" ).datepicker({
+      |     dateFormat: "dd/mm/yy",
+      |     onClose: function(selectedDate) {
+      |       $("#to").datepicker("option", "minDate", selectedDate); 
+      |     }
+      |   });
+      |   $( "#to" ).datepicker({
+      |     dateFormat: "dd/mm/yy",
+      |     onClose: function(selectedDate) {
+      |       $("#from").datepicker("option", "maxDate", selectedDate); 
+      |     }
+      |   });
+      | });
+    script(src="/ie10-viewport-bug-workaround.js TODO")
+    script(src="/ie-emulation-modes-warning.js TODO")
     script(src="/home.js")
