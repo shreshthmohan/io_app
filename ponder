@@ -76,3 +76,10 @@
     Frontend now, then move to backend and iron out ...
 
 21. Where is env being set?! See admin_app.js
+
+22. Responsive menu: Using bootstrap default as of now. Experiment in future
+    with the following or others:
+      1. http://responsivenavigation.net/examples/simple-padding/index.html
+
+23. Using Google's CDN:
+      1. http://www.lynda.com/WordPress-tutorials/003-Using-CDN-speed-up-your-sites/93388/103248-4.html
