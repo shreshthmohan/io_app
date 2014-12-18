@@ -30,6 +30,7 @@
 7.  Remember to display 'hand' when user hovers over any element they can
     interact with, like a link, a radio-button or a checkbox, especially when
     doing end-user side frontend.
+    Also not allowed hand like the one used in ixigo.com
 
 8.  Beautifying links ... from www.example.com/city/23/retailer%20name/21 to
     www.example.com/city/retailer-name while taking care of #6
@@ -63,8 +64,8 @@
 
 17. What's bootstrap.css.map for?!
 
-18. Expand menu in mobile view not working, see why.
-    Rethink mobile menu?
+18. Rethink mobile menu?
+      1. http://responsivenavigation.net/examples/simple-padding/index.html
 
 19. Inspiration:
       Look: ixigo.com
@@ -83,3 +84,9 @@
 
 23. Using Google's CDN:
       1. http://www.lynda.com/WordPress-tutorials/003-Using-CDN-speed-up-your-sites/93388/103248-4.html
+      2. https://developers.google.com/speed/libraries/devguide
+
+24. The dilemma of hosting js, css, svg and such files for speed:
+    1. Custom stuff has to be hosted locally.
+    2. There's Google's CDN and bootstrap CDN.
+    So TODO: update app accordingly.
