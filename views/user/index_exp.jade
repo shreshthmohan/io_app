@@ -54,8 +54,12 @@ html(lang='en')
           form(class="search")
             input(class="form-control" type="text" name="activitytype" placeholder="e.g. surfing")
             input(class="form-control" type="text" name="location" placeholder="e.g. Goa")
-            input(class="form-control" type="text" name="start_date" placeholder="e.g. 4 December 2014" id="from")
-            input(class="form-control" type="text" name="end_date" placeholder="e.g. 12 January 2015" id="to")
+            .cal
+              span(class="fa fa-calendar") 
+              input(class="form-control" type="text" name="start_date" placeholder="e.g. 4 December 2014" id="from")
+            .cal
+              span(class="fa fa-calendar") 
+              input(class="form-control" type="text" name="end_date" placeholder="e.g. 12 January 2015" id="to")
             br
             button(type="button" class="btn btn-warning ") Go! 
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
