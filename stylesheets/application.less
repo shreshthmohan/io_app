@@ -4,7 +4,8 @@
 //@io-yellow: #f6cc23;
 //@io-yellow: #f69b23;
 //@io-yellow: #fed20b;
-@io-yellow: #f4a43b;
+@io-yellow: #f0ad4e;
+//@io-yellow: #f4a43b;
 // color scheme experiments seem never to be over
 // ask people to vote over it? TODO
 
@@ -24,34 +25,37 @@
 
   .navbar-default {
     .navbar-nav {
-      > li > a {
-        font-size: 18px;
-        font-weight: bold;
-        background-color: @navbar-bg;
-        &:hover,
-        &:focus {
-          color: @navbar-default-link-hover-color;
+      > li {
+        text-align: center;
+        > a {
+          font-size: 18px;
+          font-weight: bold;
+          background-color: @navbar-bg;
+          &:hover,
+          &:focus {
+            color: @navbar-default-link-hover-color;
+            // For underline on hover
+            &:after {
+              @media (min-width: @grid-float-breakpoint) {
+                visibility: visible;
+              }
+            }
+          }
           // For underline on hover
           &:after {
             @media (min-width: @grid-float-breakpoint) {
-              visibility: visible;
+              color: @navbar-link-under;
+              content: "";
+              width: 100%;
+              height: 0;
+              display: block;
+              position: absolute;
+              bottom: 0;
+              left: 0px;
+              visibility: hidden;
+              border-style: solid;
+              border-width: 2px 0 0;
             }
-          }
-        }
-        // For underline on hover
-        &:after {
-          @media (min-width: @grid-float-breakpoint) {
-            color: @navbar-link-under;
-            content: "";
-            width: 100%;
-            height: 0;
-            display: block;
-            position: absolute;
-            bottom: 0;
-            left: 0px;
-            visibility: hidden;
-            border-style: solid;
-            border-width: 2px 0 0;
           }
         }
       }
@@ -86,6 +90,7 @@
   body {
     margin-top: 70px; // To bring jumbotron container below navbar
     font-size: 105%; // To control datepicker size
+    min-height: 2000px;
   }
 
 // Home radio form 
@@ -110,6 +115,7 @@
   display: inline;
   width: auto;
   border-radius: 0px;
+  margin: 0px 5px 0px 5px;
   &:focus {
     //border-color: @io-yellow;
   }
@@ -121,8 +127,27 @@ form.search {
 }
 
 // Jumbotron
-.container {
-  .jumbotron {
+.jumbotron {
+  text-align: center;
+  border-radius: 0px; 
+  padding: (@jumbotron-padding / 2) (@jumbotron-padding / 3);
+  .container & {
     border-radius: 0px; 
   }
+  @media screen and (min-width: @screen-sm-min) {
+    padding: 15px 0px;
+  }
+}
+
+// Social Icons
+li.social-icon {
+  min-width: 6em;
+  text-align: center;
+}
+
+// Buttons
+.btn {
+  border-radius: 0px;
+  border: 0px solid transparent;
+  margin: 0px 5px 0px 5px;
 }
