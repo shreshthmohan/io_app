@@ -2,8 +2,12 @@ var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
 var lodash    = require('lodash');
-var sequelize = new Sequelize('io_app', 'root', 'clock');
-// ^ TODO: fix collation, charset (UTF-8)
+var sequelize = new Sequelize('io_app', 'root', 'clock', {
+  define: {
+    charset: 'utf8',
+    collation: 'utf8_general_ci'
+  }
+});
 var db        = {}; // array object that is key-value type
 
 // Importing models from each file in the models directory except index.js
