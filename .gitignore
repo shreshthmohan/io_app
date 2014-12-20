@@ -1,3 +1,2 @@
 node_modules/**
-public/jquery.min.js
-public/application.css
+public/css/application.css
