@@ -27,12 +27,14 @@ app.use(connect.favicon('public/favicon.ico'));
 app.use(connect.logger('dev'))
 
 // Used to parse JSON data passed via POST method (as an example)
-// TODO: is it being used? 
+// Found by experimentation (i.e. by commenting out json and urlencoded
+// middleware one by one) that it's not being used right now
 app.use(connect.json())
 
 // Used to parse data from body in the form
-// firstname=john&lastname=doe&location=montana
-// I think this is not being used as of now
+// firstname=john&lastname=doe&location=montana (?)
+// Default form content type is x-www-form-urlencoded, this piece of connect 
+// middleware helps parse that kind of form. It is being used at the moment
 app.use(connect.urlencoded())
 
 // Used to enable the use of PUT and DELETE, which modern browsers don't support

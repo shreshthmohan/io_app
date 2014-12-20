@@ -49,6 +49,8 @@ app.use(connect.logger('dev'))
 
 app.use(connect.json())
 
+app.use(connect.urlencoded())
+
 // Home
 app.get('/', routes.index);
 app.get('/exp', routes.index_exp)
