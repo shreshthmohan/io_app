@@ -59,7 +59,7 @@ app.get('/exp', routes.index_exp)
 app.get('/events/upcoming', race.upcoming)
 
 // All events
-app.get('/events/all', race.all)
+app.get('/events', race.all)
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')))

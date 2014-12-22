@@ -2,7 +2,7 @@ var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
 var lodash    = require('lodash');
-var sequelize = new Sequelize('io_app', 'root', 'clock', {
+var sequelize = new Sequelize('io_app_imported', 'root', 'clock', {
   define: {
     charset: 'utf8',
     collation: 'utf8_general_ci'

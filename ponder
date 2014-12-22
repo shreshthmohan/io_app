@@ -90,3 +90,8 @@
     1. Custom stuff has to be hosted locally.
     2. There's Google's CDN and bootstrap CDN.
     So TODO: update app accordingly.
+
+25. Introduce secondary tags.
+    Say 'running' is a primary tag and 'marathon' is secondary.
+    Or 'climbing' is primary and 'bouldering' is secondary.
+    To introduce new table of modify existing Tags table. Think.
