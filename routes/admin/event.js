@@ -48,7 +48,6 @@ exports.individual = function(req, res) {
       }
     )
     .success(function(race) {
-      console.log(race)
       db.SocialLink.findAll({where: {EventId: race.id}})
       .success(function(slink) {
         sequelize.query('select Tags.id as id, Tags.tag_name as tag_name, linkedTags.id as linkedTagsid, linkedTags.TagId as linkedTagsTagId, linkedTags.EventId as linkedTagsEventId from Tags left outer join (select * from EventTags where EventTags.EventId = :eventId) linkedTags on Tags.id = linkedTags.TagId where linkedTags.EventId is null', null, { raw: true }, { eventId: race.id })
@@ -90,7 +89,7 @@ exports.modify = function(req, res) {
     )
     .success(function(retailer) {
       retailer.updateAttributes({
-        event_name:      req.param('event_name'),
+        event_name:      req.param('event_name_new'),
         event_url:       req.param('event_url'),
         organiser_name:  req.param('organiser_name'),
         organiser_url:   req.param('organiser_url'),

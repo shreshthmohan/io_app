@@ -7,7 +7,9 @@
 
 2. Import stuff from csv in to db:
      Place csv in /tmp directory for ease
+     run mysql -u root -p --local-infile
      http://www.mysqltutorial.org/import-csv-file-mysql-table/
      some example commands:
        load data local infile '/tmp/events.csv' into table Events fields terminated by ',' lines terminated by '\n' ignore 1 rows;
+    TODO: make a shell script for future
 

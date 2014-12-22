@@ -3,6 +3,8 @@ extends admin_layout
 block content
   h1 #{race.event_name}
   form(action="#{race.event_name}", method="post")
+    div(id="event_name" class="data") #{race.event_name}
+    div(id="change_event_name" class="edit") edit
     if(race.event_url)
       a(href=race.event_url id="event_url" class="data" target="_blank") Event URL 
       div(id="change_event_url" class="edit") edit

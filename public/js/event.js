@@ -1,3 +1,12 @@
+// To enable editing of Event Name
+$(function() {
+  $('#change_event_name').click(function() {
+    $('#event_name').after('<input type="text" name="event_name_new" value="' + $('#event_name').text() + '"></input>');
+    $('#event_name').detach();
+    $('#change_event_name').detach();
+  });
+});
+
 // To enable editing of Event URL
 $(function() {
   $('#change_event_url').click(function() {
