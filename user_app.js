@@ -18,7 +18,7 @@ app.use(lessMiddleware(
   __dirname + '/stylesheets' 
   // middleware looks for less files here
   ,lessMiddlewareOptions = {
-    dest: __dirname + '/public/css',
+    dest: __dirname + '/public',
     relativeUrls: true, // what does this exactly mean
     force: app.get('env') === 'development',
     once: app.get('env') !== 'development', // generate once if not dev

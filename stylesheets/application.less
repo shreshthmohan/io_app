@@ -17,8 +17,14 @@
 
 @navbar-link-under: @io-yellow;
 
+
 // form-control: box-border and shadow color
 @input-border-focus: @io-yellow;
+
+
+// Help:
+// padding/margin/border
+// top right bottom left 
 
 
 // Navbar 
@@ -123,12 +129,11 @@
 
 form.search {
   font-size: 18px;
-  line-height: 40px;
+  line-height: 19px;
 }
 
 // Jumbotron
 .jumbotron {
-  text-align: center;
   border-radius: 0px; 
   padding: (@jumbotron-padding / 2) (@jumbotron-padding / 3);
   .container & {
@@ -137,6 +142,10 @@ form.search {
   @media screen and (min-width: @screen-sm-min) {
     padding: 15px 0px;
   }
+}
+
+.home-search {
+  text-align: center;
 }
 
 // Social Icons
@@ -149,16 +158,16 @@ li.social-icon {
 .btn {
   border-radius: 0px;
   border: 0px solid transparent;
-  margin: 0px 5px 0px 5px;
+  margin: 5px 5px 5px 5px;
 }
 
 // Calendar on home
 // TODO Update when you add calendars elsewhere
 .cal {
   background-color: @input-bg;
-  display: inline;
-  padding: 5px 12px 7px 12px;
-  margin: 0px 5px 0px 5px;
+  display: inline-block;
+  padding: 6px 12px 6px 12px;
+  margin: 0px 5px 5px 5px;
   border: 1px solid @input-border;
   .form-control {
     margin: 0px 5px 0px 5px;
@@ -167,4 +176,19 @@ li.social-icon {
     height: auto;
     .box-shadow(none);
   }
+}
+
+@gray-lighte: lighten(@gray-base, 80%);
+
+// Events list
+.events-list {
+  margin-top: 5px;
+  border-left: 1px solid @gray-lighte; 
+}
+
+.event-el {
+  list-style: none;
+  border-bottom: 1px solid @gray-lighte; 
+  padding: 15px 0px 10px 15px;
+  font-size: medium;
 }

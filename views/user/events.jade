@@ -3,7 +3,8 @@ doctype html
 html(lang='en')
   head
     title= title
-    link(href="/css/application.css" rel="stylesheet")
+    link(href="/application.css" rel="stylesheet")
+    link(rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css")
   body
     div(class="navbar navbar-default navbar-fixed-top" role="navigation")
       div(class="container")
@@ -31,30 +32,30 @@ html(lang='en')
                 i(class="fa fa-facebook")
                 span(class="hide-for-small") 
     div(class="container")
-      div(class="jumbotron")
+      div(class="jumbotron col-md-12")
         h1= h1_title
-        div(class="filter-bar")
+        div(class="filter-bar col-md-12")
           h2 Races and Events!
           form(class="search")
-            input(class="form-control" type="text" name="activitytype" placeholder="e.g. surfing")
-            input(class="form-control" type="text" name="location" placeholder="e.g. Goa")
-            .cal
+            input(class="form-control col-md-3" type="text" name="activitytype" placeholder="e.g. surfing")
+            input(class="form-control col-md-3" type="text" name="location" placeholder="e.g. Goa")
+            .cal.col-md-3
               span(class="fa fa-calendar") 
               input(class="form-control" type="text" name="start_date" placeholder="e.g. 4 December 2014" id="from")
-            .cal
+            .cal.col-md-3
               span(class="fa fa-calendar") 
               input(class="form-control" type="text" name="end_date" placeholder="e.g. 12 January 2015" id="to")
-         .events-list
-           ul
-           each race in races
-             li
-               | #{race.event_name}
-               br
-               | #{race.start_date}
-               br
-               | #{race.end_date}
-               br
-               | #{race.CityId}
+        .events-list.col-md-12
+          ul
+          each race in races
+            li.event-el
+              h3 #{race.event_name}
+              br
+              | #{race.start_date}
+              br
+              | #{race.end_date}
+              br
+              | #{race.CityId}
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js")
     script(src="/js/bootstrap.js")
