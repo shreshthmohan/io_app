@@ -9,6 +9,8 @@
 // color scheme experiments seem never to be over
 // ask people to vote over it? TODO
 
+@io-red: #cb202d;
+
 @navbar-bg: #e7e7e7;
 
 @shadow-orange: #dd4814;
@@ -17,6 +19,20 @@
 
 @navbar-link-under: @io-yellow;
 
+@gray-light80: lighten(@gray-base, 80%);
+@gray-light85: lighten(@gray-base, 85%);
+@gray-light85: lighten(@gray-base, 85%);
+@gray-light86: lighten(@gray-base, 86%);
+@gray-light87: lighten(@gray-base, 87%);
+@gray-light88: lighten(@gray-base, 88%);
+@gray-light89: lighten(@gray-base, 89%);
+@gray-light90: lighten(@gray-base, 90%);
+@gray-light91: lighten(@gray-base, 91%);
+@gray-light92: lighten(@gray-base, 92%);
+@gray-light93: lighten(@gray-base, 93%);
+@gray-light95: lighten(@gray-base, 95%);
+@gray-light96: lighten(@gray-base, 96%);
+@gray-light97: lighten(@gray-base, 97%);
 
 // form-control: box-border and shadow color
 @input-border-focus: @io-yellow;
@@ -26,6 +42,19 @@
 // padding/margin/border
 // top right bottom left 
 
+// Header font-sizes
+@font-size-h1:            floor((@font-size-base * 2.38)); // ~36px
+@font-size-h2:            floor((@font-size-base * 1.93)); // ~30px
+@font-size-h3:            ceil((@font-size-base * 1.5)); // ~24px
+@font-size-h4:            ceil((@font-size-base * 1.13)); // ~18px
+@font-size-h5:            @font-size-base * 0.93;
+@font-size-h6:            ceil((@font-size-base * 0.80)); // ~12px
+
+// Header top margin
+h3 {
+  margin-top: (@line-height-computed / 2);
+  margin-bottom: ceil(@line-height-computed / 3);
+}
 
 // Navbar 
 
@@ -178,17 +207,32 @@ li.social-icon {
   }
 }
 
-@gray-lighte: lighten(@gray-base, 80%);
+
+// filter bar (events search) bar 
+.filter-bar {
+  padding-bottom: 20px;
+  margin-bottom: 5px;
+  background-color: @gray-light88;
+}
+
 
 // Events list
 .events-list {
-  margin-top: 5px;
-  border-left: 1px solid @gray-lighte; 
+  border-left: 3px solid @gray-light91; 
 }
 
 .event-el {
   list-style: none;
-  border-bottom: 1px solid @gray-lighte; 
-  padding: 15px 0px 10px 15px;
+  border-top: 4px solid @gray-light89; 
+  padding: 1px 0px 10px 15px;
   font-size: medium;
+  background-color: @gray-light91;
+  margin-bottom: 5px;
+}
+
+a {
+  color: darken(@io-yellow, 10%);
+  &:hover, &:focus {
+    color: darken(@io-yellow, 15%);
+  }
 }

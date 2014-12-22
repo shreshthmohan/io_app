@@ -49,11 +49,11 @@ html(lang='en')
           ul
           each race in races
             li.event-el
-              h3 #{race.event_name}
+              a(href='todo')
+                h3 #{race.event_name}
               br
-              | #{race.start_date}
-              br
-              | #{race.end_date}
+              |  starts #{race.start_date}
+              | - ends #{race.end_date}
               br
               | #{race.CityId}
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
