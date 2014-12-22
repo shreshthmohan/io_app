@@ -1,0 +1,13 @@
+// General help
+
+1. Since sequelize does not support mysql DATE, we need to manually change it
+   in the db schema. Here's how:
+     "alter table Events modify column start_date date;"
+     "alter table Events modify column end_date date;"
+
+2. Import stuff from csv in to db:
+     Place csv in /tmp directory for ease
+     http://www.mysqltutorial.org/import-csv-file-mysql-table/
+     some example commands:
+       load data local infile '/tmp/events.csv' into table Events fields terminated by ',' lines terminated by '\n' ignore 1 rows;
+
