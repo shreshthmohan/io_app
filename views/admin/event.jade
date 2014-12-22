@@ -39,22 +39,6 @@ block content
       | No location URL; add:
       input(type="text", name="location_url")
     br
-    | Start date 
-    if(race.start_date)
-      div(id="start_date" class="data") #{race.start_date}
-      div(id="change_start_date" class="edit") edit
-    else
-      | No start date; add:
-      input(type="text", name="start_date")
-    br
-    | End date 
-    if(race.end_date)
-      div(id="end_date" class="data") #{race.end_date}
-      div(id="change_end_date" class="edit") edit
-    else
-      | No end date; add:
-      input(type="text", name="end_date")
-    br
     | Comments: 
     if (race.comments)
       div(id="comments" class="data") #{race.comments}
@@ -64,6 +48,29 @@ block content
       input(type="text", name="comments", id="comments")
     br
     input(type="submit")
+
+  form(action="#{race.event_name}/modify_start_date", method="post")
+    | Start date 
+    if(race.start_date)
+      div(id="start_date" class="data") #{race.start_date}
+      div(id="change_start_date" class="edit") edit
+    else
+      | No start date; add:
+      input(type="text", name="start_date")
+    br
+    input(type="submit")
+
+  form(action="#{race.event_name}/modify_end_date", method="post")
+    | End date 
+    if(race.end_date)
+      div(id="end_date" class="data") #{race.end_date}
+      div(id="change_end_date" class="edit") edit
+    else
+      | No end date; add:
+      input(type="text", name="end_date")
+    br
+    input(type="submit")
+
   ul
     each link in social_links
       li

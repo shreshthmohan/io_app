@@ -153,6 +153,9 @@ app.post('/events/:city_name/:event_name/add_phone', race.add_phone);
 
 app.post('/events/:city_name/:event_name/add_email', race.add_email);
 
+app.post('/events/:city_name/:event_name/modify_start_date', race.modify_start_date);
+app.post('/events/:city_name/:event_name/modify_end_date', race.modify_end_date);
+
 // Destroy social link associated with an event
 app.get('/events/:city_name/:event_name/slink/:slink_id', race.destroy_slink);
 

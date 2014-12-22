@@ -89,8 +89,6 @@ exports.modify = function(req, res) {
       }
     )
     .success(function(retailer) {
-      // TODO: Now that I have your attention, there's an issue with the date
-      // field, sequelize is not treating the date/datetime datatype
       retailer.updateAttributes({
         event_name:      req.param('event_name'),
         event_url:       req.param('event_url'),
@@ -98,8 +96,6 @@ exports.modify = function(req, res) {
         organiser_url:   req.param('organiser_url'),
         address_field:   req.param('address_field'),
         location_url:    req.param('location_url'),
-        start_date:      req.param('start_date'),
-        end_date:        req.param('end_date'),
         comments:        req.param('comments')
       })
       .success(function(race) {
@@ -120,6 +116,59 @@ exports.modify = function(req, res) {
   })
 }
 
+// Added separate route for modifying start date as in the old way where all
+// fields were being modified together dates were not being handled properly
+// i.e. if the date was not modified the db value was still being changed to
+// something like 0000-00-00
+exports.modify_start_date = function(req, res) {
+  db.City.find({where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+    db.Event.find(
+      {where: 
+        Sequelize.and(
+          {CityId: city.id},
+          {event_name: req.param('event_name')}
+        )
+      }
+    )
+    .success(function(retailer) {
+      retailer.updateAttributes({
+        start_date:        req.param('start_date')
+      })
+      .success(function(race) {
+        res.redirect('/events/' + city.city_name + '/' + race.event_name)
+      })
+    })
+  })
+}
+
+// Added separate route for modifying end date as in the old way where all
+// fields were being modified together dates were not being handled properly
+// i.e. if the date was not modified the db value was still being changed to
+// something like 0000-00-00
+exports.modify_end_date = function(req, res) {
+  db.City.find({where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+    db.Event.find(
+      {where: 
+        Sequelize.and(
+          {CityId: city.id},
+          {event_name: req.param('event_name')}
+        )
+      }
+    )
+    .success(function(retailer) {
+      retailer.updateAttributes({
+        end_date:        req.param('end_date')
+      })
+      .success(function(race) {
+        res.redirect('/events/' + city.city_name + '/' + race.event_name)
+      })
+    })
+  })
+}
+
+//
 exports.cities = function(req, res) {
   db.City.findAll().success(function(cities) {
     res.render('events',
