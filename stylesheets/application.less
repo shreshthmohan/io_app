@@ -43,17 +43,23 @@
 // top right bottom left 
 
 // Header font-sizes
-@font-size-h1:            floor((@font-size-base * 2.38)); // ~36px
-@font-size-h2:            floor((@font-size-base * 1.93)); // ~30px
-@font-size-h3:            ceil((@font-size-base * 1.5)); // ~24px
-@font-size-h4:            ceil((@font-size-base * 1.13)); // ~18px
-@font-size-h5:            @font-size-base * 0.93;
-@font-size-h6:            ceil((@font-size-base * 0.80)); // ~12px
+@font-size-h1:            floor((@font-size-base * 1.9)); 
+@font-size-h2:            floor((@font-size-base * 1.7));
+@font-size-h3:            ceil((@font-size-base * 1.5));
+@font-size-h4:            ceil((@font-size-base * 1.23));
+@font-size-h5:            @font-size-base * 1;
+@font-size-h6:            ceil((@font-size-base * 0.90));
+
 
 // Header top margin
 h3 {
   margin-top: (@line-height-computed / 2);
   margin-bottom: ceil(@line-height-computed / 3);
+}
+
+h2 {
+  margin-top: (3 * (@line-height-computed / 4));
+  margin-bottom: (2* (@line-height-computed / 5));
 }
 
 // Navbar 
@@ -126,6 +132,7 @@ h3 {
     margin-top: 70px; // To bring jumbotron container below navbar
     font-size: 105%; // To control datepicker size
     min-height: 2000px;
+    background-color: @gray-lighter;
   }
 
 // Home radio form 
@@ -211,28 +218,47 @@ li.social-icon {
 // filter bar (events search) bar 
 .filter-bar {
   padding-bottom: 20px;
+  padding-top: 1px; // to accomodate h2's margin
   margin-bottom: 5px;
-  background-color: @gray-light88;
+  background-color: white; 
+  border: 1px solid; 
+  border-color: darken(@gray-lighter, 5%) darken(@gray-lighter, 12%) darken(@gray-lighter, 20%); 
+  h1 {
+    font-weight: bold;
+    color: lighten(@navbar-default-link-active-color, 10%);
+  }
 }
 
 
 // Events list
 .events-list {
-  border-left: 3px solid @gray-light91; 
+  //border-left: 3px solid @gray-light91; 
 }
 
 .event-el {
   list-style: none;
-  border-top: 4px solid @gray-light89; 
+  border: 1px solid; 
+  border-color: darken(@gray-lighter, 5%) darken(@gray-lighter, 12%) darken(@gray-lighter, 20%); 
+  // top left-right bottom
   padding: 1px 0px 10px 15px;
   font-size: medium;
-  background-color: @gray-light91;
+  background-color: white;
   margin-bottom: 5px;
+  > a > h2 {
+    font-weight: bold;
+  }
 }
 
 a {
-  color: darken(@io-yellow, 10%);
+ color: lighten(@navbar-default-link-active-color, 10%);
   &:hover, &:focus {
     color: darken(@io-yellow, 15%);
+    text-decoration: none;
   }
 }
+
+
+// TODO Events
+// 1. In line with Facebook's border styling make top border lighter than bg,
+//    left-right borders darker and bottom the darkest
+// 2. Fix top margin/padding for mobile view jumbotron

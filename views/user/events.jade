@@ -32,10 +32,9 @@ html(lang='en')
                 i(class="fa fa-facebook")
                 span(class="hide-for-small") 
     div(class="container")
-      div(class="jumbotron col-md-12")
-        h1= h1_title
+      div(class="col-md-12")
         div(class="filter-bar col-md-12")
-          h2 Races and Events!
+          h1 Upcoming Races and Events in India
           form(class="search")
             input(class="form-control col-md-3" type="text" name="activitytype" placeholder="e.g. surfing")
             input(class="form-control col-md-3" type="text" name="location" placeholder="e.g. Goa")
@@ -50,8 +49,7 @@ html(lang='en')
           each race in races
             li.event-el
               a(href='todo')
-                h3 #{race.event_name}
-              br
+                h2 #{race.event_name}
               |  starts #{race.start_date}
               | - ends #{race.end_date}
               br
