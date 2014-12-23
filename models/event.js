@@ -24,6 +24,8 @@ module.exports = function(sequelize, DataTypes) {
       // ^ will add FK to Events table
       Event.hasMany(models.EventTag, {foreignKeyConstraint: true});
       // ^ will add FK to EventTag table
+      Event.hasMany(models.EventSubtag, {foreignKeyConstraint: true});
+      // ^ will add FK to EventSubtag table
       Event.hasMany(models.SocialLink, {foreignKeyConstraint: true});
       // ^ will add FK to SocialLinks table
       Event.hasMany(models.Email, {foreignKeyConstraint: true});

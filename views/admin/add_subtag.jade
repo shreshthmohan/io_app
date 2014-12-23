@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Add new subtag
+  a(href='/') Admin Home
+  form(action="add_subtag", method="post")
+    input(type="text", name="new_subtag")
+    br
+    input(type="submit")
+  ul Existing subtags
+    each subtag in subtags
+      li #{subtag.subtag_name}

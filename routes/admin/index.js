@@ -29,6 +29,7 @@ exports.new_brand_form = function(req, res) {
   })
 };
 
+// tags
 exports.add_tag = function(req, res) {
   if(req.param('new_tag')) {
     db.Tag.create({
@@ -46,6 +47,28 @@ exports.new_tag_form = function(req, res) {
   db.Tag.findAll().success(function(tags) {
     res.render('add_tag', {
       tags: tags
+    })
+  })
+};
+
+// subtags
+exports.add_subtag = function(req, res) {
+  if(req.param('new_subtag')) {
+    db.Subtag.create({
+      subtag_name: req.param('new_subtag')
+    })
+    .success(function(subtag) {
+      res.redirect('/add_subtag')
+    })
+  } else {
+    res.redirect('/add_subtag')
+  }
+};
+
+exports.new_subtag_form = function(req, res) {
+  db.Subtag.findAll().success(function(subtags) {
+    res.render('add_subtag', {
+      subtags: subtags
     })
   })
 };

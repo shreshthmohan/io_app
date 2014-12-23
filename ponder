@@ -95,3 +95,10 @@
     Say 'running' is a primary tag and 'marathon' is secondary.
     Or 'climbing' is primary and 'bouldering' is secondary.
     To introduce new table of modify existing Tags table. Think.
+    Done. Added two new tables, Subtags and EventSubtags. Clearly only events
+    can have subtags at the moment.
+
+26. TODO: Allow destruction/modification of existing tags/subtags.
+    Associated tags/subtags will cause problem. Think.
+
+

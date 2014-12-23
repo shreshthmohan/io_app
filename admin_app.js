@@ -112,6 +112,12 @@ app.post('/add_tag', routes.add_tag);
 
 app.get('/add_tag', routes.new_tag_form);
 
+app.post('/add_subtag', routes.add_subtag);
+
+app.get('/add_subtag', routes.new_subtag_form);
+
+// Note: subtags are associated only with events at the moment
+
 app.post('/add_brand', routes.add_brand);
 
 app.get('/add_brand', routes.new_brand_form);
@@ -147,6 +153,10 @@ app.post('/events/:city_name/:event_name/add_tag', race.add_tag);
 
 app.post('/events/:city_name/:event_name/choose_tag', race.choose_tag);
 
+app.post('/events/:city_name/:event_name/add_subtag', race.add_subtag);
+
+app.post('/events/:city_name/:event_name/choose_subtag', race.choose_subtag);
+
 app.post('/events/:city_name/:event_name/add_slink', race.add_slink);
 
 app.post('/events/:city_name/:event_name/add_phone', race.add_phone);
@@ -165,7 +175,11 @@ app.get('/events/:city_name/:event_name/number/:number', race.destroy_number);
 // Destroy email associated with an event
 app.get('/events/:city_name/:event_name/email/:email_id', race.destroy_email);
 
+// Dissociate tag associated with an event
 app.get('/events/:city_name/:event_name/tag/:tag_id', race.dissociate_tag);
+
+// Dissociate tag associated with an event
+app.get('/events/:city_name/:event_name/subtag/:subtag_id', race.dissociate_subtag);
 
 // To serve static files
 app.use(express.static(path.join(__dirname, 'public')))

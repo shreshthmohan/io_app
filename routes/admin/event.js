@@ -58,13 +58,21 @@ exports.individual = function(req, res) {
             .success(function(numbers) {
               db.Email.findAll({where: {EventId: race.id}})
               .success(function(mails) {
-                res.render('event', {
-                  race: race,
-                  social_links: slink,
-                  tags: tags,
-                  numbers: numbers,
-                  mails: mails,
-                  linked_tags: linked_tags
+                sequelize.query('select Subtags.id as id, Subtags.subtag_name as subtag_name, linkedSubtags.id as linkedSubtagsid, linkedSubtags.SubtagId as linkedSubtagsSubtagId, linkedSubtags.EventId as linkedSubtagsEventId from Subtags left outer join (select * from EventSubtags where EventSubtags.EventId = :eventId) linkedSubtags on Subtags.id = linkedSubtags.SubtagId where linkedSubtags.EventId is null', null, { raw: true }, { eventId: race.id })
+                .success(function(subtags) {
+                  sequelize.query('select EventSubtags.id as id, Subtags.subtag_name as subtag_name from EventSubtags inner join Subtags on EventSubtags.SubtagId = Subtags.id where EventSubtags.EventId = :eventId', null, { raw: true }, {eventId: race.id})
+                  .success(function(linked_subtags) {
+                    res.render('event', {
+                      race: race,
+                      social_links: slink,
+                      tags: tags,
+                      numbers: numbers,
+                      mails: mails,
+                      linked_tags: linked_tags,
+                      subtags: subtags,
+                      linked_subtags: linked_subtags
+                    })
+                  })
                 })
               })
             })
@@ -246,6 +254,78 @@ exports.choose_tag = function(req, res) {
   })
 };
 
+// subtag starts
+// Add a new sub-tag and associate it with event 
+exports.add_subtag = function(req, res) {
+  db.City.find({where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+    db.Event.find(
+      {where: 
+        Sequelize.and(
+          {CityId: city.id},
+          {event_name: req.param('event_name')}
+        )
+      }
+    )
+    .success(function(race) {
+      if(req.param('new_subtag')) {
+        db.Subtag.create(
+        {
+          subtag_name: req.param('new_subtag')
+        })
+        .success(function(subtag) {
+          db.EventSubtag.create({
+            cor_name: ''
+          })
+          .success(function(event_subtag) {
+            event_subtag.setEvent(race).success(function() {
+              event_subtag.setSubtag(subtag).success(function() {
+                res.redirect('/events/' + city.city_name + '/' +
+                             race.event_name)
+              })
+            })
+          })
+        })
+      } else {
+        res.redirect('/events/' + city.city_name + '/' +
+                     race.event_name)
+      }
+    })
+  })
+};
+
+// Choose a subtag from existing subtags to be associated with event
+exports.choose_subtag = function(req, res) {
+  db.City.find({where: {city_name: req.param('city_name')}})
+  .success(function(city) {
+    db.Event.find(
+      {where: 
+        Sequelize.and(
+          {CityId: city.id},
+          {event_name: req.param('event_name')}
+        )
+      }
+    )
+    .success(function(race) {
+      db.EventSubtag.create({
+        cor_name: ''
+      })
+      .success(function(event_subtag) {
+        db.Subtag.find({where: {id: req.param('subtag_id')}})
+        .success(function(subtag) {
+          event_subtag.setEvent(race).success(function() {
+            event_subtag.setSubtag(subtag).success(function() {
+              res.redirect('/events/' + city.city_name + '/' +
+                           race.event_name)
+            })
+          })
+        })
+      })
+    })
+  })
+};
+// subtag ends
+
 // Add a new social link for this event
 exports.add_slink = function(req, res) {
   db.City.find({where: {city_name: req.param('city_name')}})
@@ -382,14 +462,12 @@ exports.dissociate_tag = function(req, res) {
   })
 };
 
-// experimenting
-// all upcoming events
-//exports.upcoming_events = function(req,res) {
-//  sequelize.query('select * from Events where start_date > NOW()', null, {raw: true} )
-//  sequelize.query('select  from Events where start_date ')
-//  //select * from Events where start_date > NOW() order by start_date
-// select date_format(start_date, '%c %M %Y') start_date from Events
-// select id, event_name, event_url, organiser_name, organiser_url, address_field, location_url, date_format(start_date, '%c, %M, %Y') start_date, date_format(end_date, %c, %M, %Y)  end_date, comments, CityId from Events where start_date > NOW() order by start_date;
-//  .success(function(races) {
-//    res.render('', {})
-//}
+exports.dissociate_subtag = function(req, res) {
+  db.EventSubtag.find({where: {id: req.param('subtag_id')}})
+  .success(function(subtag) {
+    subtag.destroy().success(function() {
+      res.redirect('/events/' + req.param('city_name') + '/' +
+        req.param('event_name'));
+    })
+  })
+};
