@@ -9,7 +9,8 @@
 // color scheme experiments seem never to be over
 // ask people to vote over it? TODO
 
-@io-red: #cb202d;
+@zomato-red: #cb202d;
+@ubuntu-orange: #dd4814;
 
 @navbar-bg: #e7e7e7;
 
@@ -41,6 +42,8 @@
 // Help:
 // padding/margin/border
 // top right bottom left 
+
+@font-size-base: 12px;
 
 // Header font-sizes
 @font-size-h1:            floor((@font-size-base * 1.9)); 
@@ -202,7 +205,7 @@ li.social-icon {
 .cal {
   background-color: @input-bg;
   display: inline-block;
-  padding: 6px 12px 6px 12px;
+  padding: 4.5px 12px 4.5px 12px;
   margin: 0px 5px 5px 5px;
   border: 1px solid @input-border;
   .form-control {
@@ -224,7 +227,7 @@ li.social-icon {
   border: 1px solid; 
   border-color: darken(@gray-lighter, 5%) darken(@gray-lighter, 12%) darken(@gray-lighter, 20%); 
   h1 {
-    font-weight: bold;
+    //font-weight: bold;
     color: lighten(@navbar-default-link-active-color, 10%);
   }
 }
@@ -245,12 +248,19 @@ li.social-icon {
   background-color: white;
   margin-bottom: 5px;
   > a > h2 {
-    font-weight: bold;
+    //font-weight: bold;
+    padding-left: 5px;
+    border-left: 2px solid transparent; 
+    &:hover, &:focus {
+      //border-left: 2px solid darken(@io-yellow, 10%);
+      //border-left: 2px solid @zomato-red;
+      border-left: 2px solid @ubuntu-orange;
+    }
   }
 }
 
 a {
- color: lighten(@navbar-default-link-active-color, 10%);
+ color: darken(@io-yellow, 15%);
   &:hover, &:focus {
     color: darken(@io-yellow, 15%);
     text-decoration: none;
