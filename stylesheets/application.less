@@ -241,7 +241,7 @@ li.social-icon {
 .event-el {
   list-style: none;
   border: 1px solid; 
-  border-color: darken(@gray-lighter, 5%) darken(@gray-lighter, 12%) darken(@gray-lighter, 20%); 
+  border-color: lighten(@io-yellow, 20%) lighten(@io-yellow, 12%) lighten(@io-yellow, 5%); 
   // top left-right bottom
   padding: 1px 0px 10px 15px;
   font-size: medium;
@@ -250,12 +250,24 @@ li.social-icon {
   > a > h2 {
     //font-weight: bold;
     padding-left: 5px;
-    border-left: 2px solid transparent; 
+    border-left: 3px solid transparent;
     &:hover, &:focus {
-      //border-left: 2px solid darken(@io-yellow, 10%);
-      //border-left: 2px solid @zomato-red;
-      border-left: 2px solid @ubuntu-orange;
+      //border-left: 3px solid darken(@io-yellow, 10%);
+      //border-left: 3px solid @zomato-red;
+      // border-left: 3px solid @ubuntu-orange;
+      border-left: 3px solid @io-yellow; 
     }
+  }
+  //event city
+  span.city {
+    background-color: gray;
+    padding: 2px 5px;
+    float: right;
+    margin-right: 7px;
+    color: white;
+  }
+  span.date {
+    margin-left: 10px
   }
 }
 

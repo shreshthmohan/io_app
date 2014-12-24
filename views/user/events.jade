@@ -50,10 +50,12 @@ html(lang='en')
             li.event-el
               a(href='todo')
                 h2 #{race.event_name}
-              |  starts #{race.start_date}
-              | - ends #{race.end_date}
-              br
-              | #{race.CityId}
+              span.city
+                | #{race.city_name}
+              span(class="fa fa-calendar date") 
+              |  #{race.start_date}
+              |  #{race.end_date}
+              | #{race.comments}
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js")
     script(src="/js/bootstrap.js")
