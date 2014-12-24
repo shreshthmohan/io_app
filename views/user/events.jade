@@ -31,9 +31,9 @@ html(lang='en')
               a(href='TODO')
                 i(class="fa fa-facebook")
                 span(class="hide-for-small") 
-    div(class="container")
-      div(class="col-md-12")
-        div(class="filter-bar col-md-12")
+    .container
+      .col-md-12#filter-bar-wrap
+        .filter-bar.col-md-12
           h1 Upcoming Races and Events in India
           form(class="search")
             input(class="form-control col-md-3" type="text" name="activitytype" placeholder="e.g. surfing")
@@ -44,26 +44,23 @@ html(lang='en')
             .cal.col-md-3
               span(class="fa fa-calendar") 
               input(class="form-control" type="text" name="end_date" placeholder="e.g. 12 January 2015" id="to")
-        .events-list.col-md-12
-          ul
+        .events-list.col-md-12.col-sm-12.col-xs-12
+          //- ul
           each race in races
-            li.event-el
+            div.event-el
+              each tag in race.eventTags
+                li.tag
+                  | #{tag.tag.tag_name}
+              each subtag in race.eventSubtags
+                li.subtag
+                  | #{subtag.subtag.subtag_name}
               a(href='todo')
                 h2 #{race.event_name}
-              span
-                | #{race.start_date}
-                | #{race.dataValues.start_date_f}
               span.city
                 | #{race.city.city_name}
               span(class="fa fa-calendar date") 
-              ul.tags
-              each tag in race.eventTags
-                li
-                  | #{tag.tag.tag_name}
-              ul.subtags
-              each subtag in race.eventSubtags
-                li
-                  | #{subtag.subtag.subtag_name}
+              span.date_value
+                | #{race.dataValues.start_date_f}
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js")
     script(src="/js/bootstrap.js")

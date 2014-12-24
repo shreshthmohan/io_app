@@ -4,9 +4,10 @@ var sequelize = db.sequelize; // just to avoid the confusion
 
 // all upcoming events
 exports.upcoming = function(req,res) {
-  sequelize.query("select Events.id as id, event_name, start_date as start_date_orig, date_format(start_date, '%e %M %Y') start_date, date_format(end_date, '%e %M %Y') end_date, comments, CityId, Cities.city_name as city_name, Cities.id as CityIdC from Events left outer join (select id, city_name from Cities) Cities on Events.CityId = Cities.id where start_date > NOW() order by start_date_orig", null, {raw: true} )
+  sequelize.query("select Events.id as id, event_name, start_date as start_date_orig, date_format(start_date, '%e %M %Y') start_date, date_format(end_date, '%e %M %Y') end_date, comments, CityId, Cities.city_name as city_name, Cities.id as CityIdC from Events left outer join (select id, city_name from Cities) Cities on Events.CityId = Cities.id where start_date > NOW() order by start_date_orig limit 2", null, {raw: true} )
   // join to find city name
   .success(function(races) {
+    console.log(races)
     res.render('events', {
       title: 'Upcoming Events',
       races: races
@@ -56,8 +57,9 @@ exports.exp2 = function(req, res) {
         model: db.EventSubtag,
         include: [db.Subtag]
       }],
-    where: ['start_date > NOW()'],
+    //where: ['start_date > NOW()'],
     raw: true
+    //limit: 10
   })
   .success(function(races) {
     res.render('events', {
