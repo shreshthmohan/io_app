@@ -51,15 +51,21 @@ app.use(connect.json())
 
 app.use(connect.urlencoded())
 
+app.use(connect.methodOverride())
+
 // Home
 app.get('/', routes.index);
-app.get('/exp', routes.index_exp)
+//app.get('/exp', routes.index_exp)
 
 // All upcoming events
 app.get('/events/upcoming', race.upcoming)
 
 // All events
 app.get('/events', race.all)
+
+
+// Exp
+app.get('/exp', race.exp);
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')))

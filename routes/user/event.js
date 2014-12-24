@@ -24,3 +24,14 @@ exports.all = function(req,res) {
     })
   })
 }
+
+// exp: eager loading tags
+exports.exp = function(req, res) {
+  db.Event.findAll({ include: [ db.City, db.EventTag ]})
+  .success(function(races) {
+    console.log(races)
+    res.render('events_exp', {
+      races: races 
+    })
+  })
+}
