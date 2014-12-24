@@ -50,12 +50,20 @@ html(lang='en')
             li.event-el
               a(href='todo')
                 h2 #{race.event_name}
+              span
+                | #{race.start_date}
+                | #{race.dataValues.start_date_f}
               span.city
-                | #{race.city_name}
+                | #{race.city.city_name}
               span(class="fa fa-calendar date") 
-              |  #{race.start_date}
-              |  #{race.end_date}
-              | #{race.comments}
+              ul.tags
+              each tag in race.eventTags
+                li
+                  | #{tag.tag.tag_name}
+              ul.subtags
+              each subtag in race.eventSubtags
+                li
+                  | #{subtag.subtag.subtag_name}
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js")
     script(src="/js/bootstrap.js")

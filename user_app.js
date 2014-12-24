@@ -67,6 +67,8 @@ app.get('/events', race.all)
 // Exp
 app.get('/exp', race.exp);
 
+app.get('/exp2', race.exp2);
+
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')))
 
