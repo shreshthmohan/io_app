@@ -69,4 +69,11 @@ exports.exp2 = function(req, res) {
   })
 }
                     
-
+exports.exp_event_search = function(req, res) {
+  res.render('exp_event_search', {
+    activity: req.param('activity'),
+    loc: req.param('location'),
+    start_date: req.param('start_date'),
+    end_date: req.param('end_date')
+  })
+}

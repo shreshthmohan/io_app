@@ -49,30 +49,37 @@ html(lang='en')
             button(type="button" class="btn btn-warning ") Grab some! 
         div(class="events")
           h2 Upcoming Races and Events!
-          form(class="search")
-            input(class="form-control" type="text" name="activitytype" placeholder="e.g. surfing")
-            input(class="form-control" type="text" name="location" placeholder="e.g. Goa")
+          form(class="search" action="exp_event_search")
+            select(class="form-control" type="text" name="activity" placeholder="what")
+              option(value=0) All
+              each tag in tags
+                option(value=tag.id) #{tag.tag_name}
+            select(class="form-control" type="text" name="location" placeholder="where")
+              option(value=0) All
+              each city in cities
+                option(value=city.id) #{city.city_name}
             .cal
               span(class="fa fa-calendar") 
-              input(class="form-control" type="text" name="start_date" placeholder="e.g. 4 December 2014" id="from")
+              input(class="form-control" type="text" name="start_date" placeholder="from" id="from")
             .cal
               span(class="fa fa-calendar") 
-              input(class="form-control" type="text" name="end_date" placeholder="e.g. 12 January 2015" id="to")
+              input(class="form-control" type="text" name="end_date" placeholder="to" id="to")
             br
-            button(type="button" class="btn btn-warning ") Go! 
+            button(type="button submit" class="btn btn-warning ") Go! 
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js")
     script(src="/js/bootstrap.js")
     script
       | $(function() {
       |   $( "#from" ).datepicker({
-      |     dateFormat: "dd/mm/yy",
+      |     dateFormat: "dd-mm-yy",
+      |     minDate: 0,
       |     onClose: function(selectedDate) {
       |       $("#to").datepicker("option", "minDate", selectedDate); 
       |     }
       |   });
       |   $( "#to" ).datepicker({
-      |     dateFormat: "dd/mm/yy",
+      |     dateFormat: "dd-mm-yy",
       |     onClose: function(selectedDate) {
       |       $("#from").datepicker("option", "maxDate", selectedDate); 
       |     }

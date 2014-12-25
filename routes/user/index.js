@@ -1,13 +1,15 @@
 var db = require('../../models');
 
 exports.index = function(req, res) {
-  res.render('index', {
-    title: 'User Home' 
-  })
-}
-
-exports.index_exp = function(req, res) {
-  res.render('index_exp', {
-    title: 'India Outside' 
+  db.City.findAll()
+  .success(function(cities) {
+    db.Tag.findAll()
+    .success(function(tags) {
+      res.render('index', {
+        title: 'India Outside',
+        cities: cities,
+        tags: tags
+      })
+    })
   })
 }
