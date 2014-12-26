@@ -5,6 +5,8 @@ module.exports = function(sequelize, DataTypes) {
   },
   {
     associate: function(models) {
+      Tag.hasMany(models.Event, {foreignKeyConstraint: true});
+      Tag.hasMany(models.Retailer, {foreignKeyConstraint: true});
     }
   });
 
