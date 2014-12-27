@@ -96,7 +96,7 @@ exports.exp_event_search = function(req, res) {
 // TODO: past events 
 
 // location: all; tag: all
-exports.up00 = function(req, res, where) {
+exports.up_all_loc_all_tag = function(req, res, where) {
   db.Event.findAll({
     attributes: [
       'id',
@@ -131,7 +131,7 @@ exports.up00 = function(req, res, where) {
 }
 
 // location: all; tag: [chosen]
-exports.up01 = function(req, res, where) {
+exports.up_all_loc_chosen_tag = function(req, res, where) {
   db.Tag.find({
     where: {id: req.param('activity')}
   })
@@ -142,9 +142,11 @@ exports.up01 = function(req, res, where) {
         {
          model: db.Event,
          where: [where],
-         include: [{
-          model: db.EventSubtag,
-          include: [db.Subtag]}],
+         include: [
+           db.City,
+           {
+            model: db.EventSubtag,
+            include: [db.Subtag]}],
          attributes: [
            'id',
            'event_name',
@@ -153,18 +155,19 @@ exports.up01 = function(req, res, where) {
       ],
       raw: true
     })
-    .success(function(races) {
-      res.render('events01', {
-        title: 'All Upcoming ' + races.tag_name + ' Events and Races',
+    .success(function(event_tags) {
+      console.log(JSON.stringify(event_tags))
+      res.render('events_chosen_tag', {
+        title: 'All Upcoming TODO Events and Races',
         tag: tag,
-        races: races
+        event_tags: event_tags
       })
     })
   })
 }
 
 // Location: [chosen]; tag: All
-exports.up10 = function(req, res, where) {
+exports.up_chosen_loc_all_tag = function(req, res, where) {
   db.Event.findAll({
     attributes: [
       'id',
@@ -193,8 +196,7 @@ exports.up10 = function(req, res, where) {
 }
 
 // Both location and tag are chosen
-
-exports.up11 = function(req, res, where) {
+exports.up_both_loc_tag_chosen = function(req, res, where) {
   db.Tag.find({
     where: {id: req.param('activity')}
   })
@@ -205,9 +207,11 @@ exports.up11 = function(req, res, where) {
         {
          model: db.Event,
          where: ["CityId = " + req.param('location') + " and " + where],
-         include: [{
-          model: db.EventSubtag,
-          include: [db.Subtag]}],
+         include: [
+           db.City, 
+           {
+            model: db.EventSubtag,
+            include: [db.Subtag]}],
          attributes: [
            'id',
            'event_name',
@@ -216,16 +220,19 @@ exports.up11 = function(req, res, where) {
       ],
       raw: true
     })
-    .success(function(races) {
-      res.render('events01', {
-        title: 'All Upcoming ' + races.tag_name + ' Events and Races',
+    .success(function(event_tags) {
+      res.render('events_chosen_tag', {
+        title: 'All Upcoming TODO  Events and Races',
         tag: tag,
-        races: races
+        event_tags: event_tags
       })
     })
   })
 }
 
+//Note: the 4 (location, tag) possiblities consist of two pairs.
+//i.e. we have used just two views to take care of 4 (location, tag)
+//possiblities
 
 // Searching all locations and all tags
 exports.upcoming = function(req, res) {
@@ -236,58 +243,58 @@ exports.upcoming = function(req, res) {
   var to   = req.param('end_date');
   if(loc == 0 && tag == 0) { // All locations and all activities
     if(from == '' && to == '') {
-      exports.up00(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+      exports.up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
     }
     else if(from == '') {
-      exports.up00(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      exports.up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
     else if(to == '') {
-      exports.up00(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+      exports.up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
     }
     else {
-      exports.up00(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      exports.up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
   }
   else if (loc == 0) { // All locations and a chose activity
     if(from == '' && to == '') {
-      exports.up01(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+      exports.up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
     }
     else if(from == '') {
-      exports.up01(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      exports.up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
     else if(to == '') {
-      exports.up01(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+      exports.up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
     }
     else {
-      exports.up01(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      exports.up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
   }
   else if (tag == 0) { // All activities for a chosen location
     if(from == '' && to == '') {
-      exports.up10(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+      exports.up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
     }
     else if(from == '') {
-      exports.up10(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      exports.up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
     else if(to == '') {
-      exports.up10(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+      exports.up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
     }
     else {
-      exports.up10(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      exports.up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
   }
   else {
     if(from == '' && to == '') { // Chosen location and chosen activity
-      exports.up11(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+      exports.up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
     }
     else if(from == '') {
-      exports.up11(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      exports.up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
     else if(to == '') {
-      exports.up11(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+      exports.up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
     }
     else {
-      exports.up11(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      exports.up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
   }
 }

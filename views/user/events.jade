@@ -48,16 +48,16 @@ html(lang='en')
           //- ul
           each race in races
             div.event-el
-              each tag in race.eventTags
+              each tag in race.EventTags
                 li.tag
-                  | #{tag.tag.tag_name}
-              each subtag in race.eventSubtags
+                  | #{tag.Tag.tag_name}
+              each subtag in race.EventSubtags
                 li.subtag
-                  | #{subtag.subtag.subtag_name}
+                  | #{subtag.Subtag.subtag_name}
               a(href='todo')
                 h2 #{race.event_name}
               span.city
-                | #{race.city.city_name}
+                | #{race.City.city_name}
               span(class="fa fa-calendar date") 
               span.date_value
                 | #{race.dataValues.start_date_f}
