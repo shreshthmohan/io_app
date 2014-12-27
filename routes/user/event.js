@@ -42,9 +42,9 @@ exports.exp2 = function(req, res) {
         model: db.EventSubtag,
         include: [db.Subtag]
       }],
-    where: ['start_date > NOW()'],
+    where: ['start_date >= NOW()'],
     // workaround for limit bug in sequelize:
-    // where: ['start_date > NOW() limit 10'],
+    // where: ['start_date >= NOW() limit 10'],
     raw: true
     //limit: 10
     // There's also a bug in sequelize related to limit
@@ -75,36 +75,28 @@ exports.exp_event_search = function(req, res) {
 //
 //16 posibilities
 //     location tag start end 
-//1.   0        0   0     0   : where start> NOW and end <now +3M
-//2.   0        0   0     1   : where start> NOW and end < ... 
-//3.   0        0   1     0   : where start> ... and end < ... + 3M 
-//4.   0        0   1     1   : where start> ... and end < ... 
+//1.   0        0   0     0   : where start>= NOW and end <=now +3M
+//2.   0        0   0     1   : where start>= NOW and end <= ... 
+//3.   0        0   1     0   : where start>= ... and end <= ... + 3M 
+//4.   0        0   1     1   : where start>= ... and end <= ... 
 //5.   0        1   0     0   : different query sequence i.e. first search for the tag by name, then related eventtag, then all the events
-//6.   0        1   0     1   : q#5 and where start > NOW  and  < ...
-//7.   0        1   1     0   : q#5 and where ... and  < ... + 3M
-//8.   0        1   1     1   : q#5 and where ... and  < ...
+//6.   0        1   0     1   : q#5 and where start >= NOW  and  <= ...
+//7.   0        1   1     0   : q#5 and where ... and  <= ... + 3M
+//8.   0        1   1     1   : q#5 and where ... and  <= ...
 //9.   1        0   0     0   : find city, then all associated events
-//10.  1        0   0     1   : q#9 and where start > NOW and < ...
-//11.  1        0   1     0   : q#9 and where start ... and < ... + 3M 
-//12.  1        0   1     1   : q#9 and where start ... and < ...
+//10.  1        0   0     1   : q#9 and where start >= NOW and <= ...
+//11.  1        0   1     0   : q#9 and where start ... and <= ... + 3M 
+//12.  1        0   1     1   : q#9 and where start ... and <= ...
 //13.  1        1   0     0   : search tag, then eventtags including events where city
-//14.  1        1   0     1   : q#13 and where start > NOW and < ...
-//15.  1        1   1     0   : q#13 and where start ... and < ... + 3M 
-//16.  1        1   1     1   : q#13 and where start ... and < ...
+//14.  1        1   0     1   : q#13 and where start >= NOW and <= ...
+//15.  1        1   1     0   : q#13 and where start ... and <= ... + 3M 
+//16.  1        1   1     1   : q#13 and where start ... and <= ...
 //
 // that makes 4 kinds of queries for upcoming events
 // TODO: past events 
 
-exports.up00 = function(req, res, start, end) {
-  console.log("up00 called");
-  var where = "start_date > NOW()";
-  if (start == '' && end == '') {
-    where = "start_date > NOW() and start_date < NOW() + interval 3 month"; // make a var for "3 month"
-    console.log("where: " + where)
-  } else if(start == '') {
-    where = "start_date > NOW() and start_date < STR_TO_DATE('" + end + "', '%d-%m-%Y'";
-    console.log("where: " + where)
-  }
+// location: all; tag: all
+exports.up00 = function(req, res, where) {
   db.Event.findAll({
     attributes: [
       'id',
@@ -125,7 +117,7 @@ exports.up00 = function(req, res, start, end) {
       }],
     where: [where],
     // workaround for limit bug in sequelize:
-    // where: ['start_date > NOW() limit 10'],
+    // where: ['start_date >= NOW() limit 10'],
     raw: true
     //limit: 10
     // There's also a bug in sequelize related to limit
@@ -138,16 +130,165 @@ exports.up00 = function(req, res, start, end) {
   })
 }
 
+// location: all; tag: [chosen]
+exports.up01 = function(req, res, where) {
+  db.Tag.find({
+    where: {id: req.param('activity')}
+  })
+  .success(function(tag) {
+    db.EventTag.findAll({
+      where: ['TagId = ' + tag.id],
+      include: [
+        {
+         model: db.Event,
+         where: [where],
+         include: [{
+          model: db.EventSubtag,
+          include: [db.Subtag]}],
+         attributes: [
+           'id',
+           'event_name',
+           [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
+        }
+      ],
+      raw: true
+    })
+    .success(function(races) {
+      res.render('events01', {
+        title: 'All Upcoming ' + races.tag_name + ' Events and Races',
+        tag: tag,
+        races: races
+      })
+    })
+  })
+}
 
-// q#1
+// Location: [chosen]; tag: All
+exports.up10 = function(req, res, where) {
+  db.Event.findAll({
+    attributes: [
+      'id',
+      'event_name',
+      [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
+    where: ["CityId = " + req.param('location') + " and " + where],
+    include: [
+      db.City, 
+      {
+        model: db.EventTag,
+        include: [db.Tag]
+      },
+      {
+        model: db.EventSubtag,
+        include: [db.Subtag]
+      }],
+    raw: true
+  })
+  .success(function(races) {
+    console.log(JSON.stringify(races))
+    res.render('events', {
+      title: 'All Upcoming Events and Races',
+      races: races
+    })
+  })
+}
+
+// Both location and tag are chosen
+
+exports.up11 = function(req, res, where) {
+  db.Tag.find({
+    where: {id: req.param('activity')}
+  })
+  .success(function(tag) {
+    db.EventTag.findAll({
+      where: ['TagId = ' + tag.id],
+      include: [
+        {
+         model: db.Event,
+         where: ["CityId = " + req.param('location') + " and " + where],
+         include: [{
+          model: db.EventSubtag,
+          include: [db.Subtag]}],
+         attributes: [
+           'id',
+           'event_name',
+           [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
+        }
+      ],
+      raw: true
+    })
+    .success(function(races) {
+      res.render('events01', {
+        title: 'All Upcoming ' + races.tag_name + ' Events and Races',
+        tag: tag,
+        races: races
+      })
+    })
+  })
+}
+
+
+// Searching all locations and all tags
 exports.upcoming = function(req, res) {
   console.log("upcoming called")
   var tag  = req.param('activity');
   var loc  = req.param('location');
   var from = req.param('start_date');
   var to   = req.param('end_date');
-  if(loc == 0 && tag == 0) {
-    exports.up00(req, res, from, to)
+  if(loc == 0 && tag == 0) { // All locations and all activities
+    if(from == '' && to == '') {
+      exports.up00(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+    }
+    else if(from == '') {
+      exports.up00(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+    else if(to == '') {
+      exports.up00(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+    }
+    else {
+      exports.up00(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+  }
+  else if (loc == 0) { // All locations and a chose activity
+    if(from == '' && to == '') {
+      exports.up01(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+    }
+    else if(from == '') {
+      exports.up01(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+    else if(to == '') {
+      exports.up01(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+    }
+    else {
+      exports.up01(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+  }
+  else if (tag == 0) { // All activities for a chosen location
+    if(from == '' && to == '') {
+      exports.up10(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+    }
+    else if(from == '') {
+      exports.up10(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+    else if(to == '') {
+      exports.up10(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+    }
+    else {
+      exports.up10(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+  }
+  else {
+    if(from == '' && to == '') { // Chosen location and chosen activity
+      exports.up11(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+    }
+    else if(from == '') {
+      exports.up11(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+    else if(to == '') {
+      exports.up11(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+    }
+    else {
+      exports.up11(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
   }
 }
 
@@ -157,7 +298,7 @@ exports.upcoming = function(req, res) {
 /*
 // all upcoming events
 exports.upcoming = function(req,res) {
-  sequelize.query("select Events.id as id, event_name, start_date as start_date_orig, date_format(start_date, '%e %M %Y') start_date, date_format(end_date, '%e %M %Y') end_date, comments, CityId, Cities.city_name as city_name, Cities.id as CityIdC from Events left outer join (select id, city_name from Cities) Cities on Events.CityId = Cities.id where start_date > NOW() order by start_date_orig limit 2", null, {raw: true} )
+  sequelize.query("select Events.id as id, event_name, start_date as start_date_orig, date_format(start_date, '%e %M %Y') start_date, date_format(end_date, '%e %M %Y') end_date, comments, CityId, Cities.city_name as city_name, Cities.id as CityIdC from Events left outer join (select id, city_name from Cities) Cities on Events.CityId = Cities.id where start_date >= NOW() order by start_date_orig limit 2", null, {raw: true} )
   // join to find city name
   .success(function(races) {
     console.log(races)
