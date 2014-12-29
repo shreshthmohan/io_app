@@ -1,5 +1,5 @@
 var db = require('../../models');
-var Sequelize = require('sequelize');
+var Sequelize = db.Sequelize;
 var sequelize = db.sequelize; // just to avoid the confusion
 
 
@@ -96,7 +96,7 @@ exports.exp_event_search = function(req, res) {
 // TODO: past events 
 
 // location: all; tag: all
-exports.up_all_loc_all_tag = function(req, res, where) {
+var up_all_loc_all_tag = function(req, res, where) {
   db.Event.findAll({
     attributes: [
       'id',
@@ -131,7 +131,7 @@ exports.up_all_loc_all_tag = function(req, res, where) {
 }
 
 // location: all; tag: [chosen]
-exports.up_all_loc_chosen_tag = function(req, res, where) {
+up_all_loc_chosen_tag = function(req, res, where) {
   db.Tag.find({
     where: {id: req.param('activity')}
   })
@@ -167,7 +167,7 @@ exports.up_all_loc_chosen_tag = function(req, res, where) {
 }
 
 // Location: [chosen]; tag: All
-exports.up_chosen_loc_all_tag = function(req, res, where) {
+up_chosen_loc_all_tag = function(req, res, where) {
   db.Event.findAll({
     attributes: [
       'id',
@@ -196,7 +196,7 @@ exports.up_chosen_loc_all_tag = function(req, res, where) {
 }
 
 // Both location and tag are chosen
-exports.up_both_loc_tag_chosen = function(req, res, where) {
+up_both_loc_tag_chosen = function(req, res, where) {
   db.Tag.find({
     where: {id: req.param('activity')}
   })
@@ -243,58 +243,58 @@ exports.upcoming = function(req, res) {
   var to   = req.param('end_date');
   if(loc == 0 && tag == 0) { // All locations and all activities
     if(from == '' && to == '') {
-      exports.up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
     }
     else if(from == '') {
-      exports.up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
     else if(to == '') {
-      exports.up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+      up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
     }
     else {
-      exports.up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
   }
   else if (loc == 0) { // All locations and a chose activity
     if(from == '' && to == '') {
-      exports.up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
     }
     else if(from == '') {
-      exports.up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
     else if(to == '') {
-      exports.up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+      up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
     }
     else {
-      exports.up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
   }
   else if (tag == 0) { // All activities for a chosen location
     if(from == '' && to == '') {
-      exports.up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
     }
     else if(from == '') {
-      exports.up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
     else if(to == '') {
-      exports.up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+      up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
     }
     else {
-      exports.up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
   }
   else {
     if(from == '' && to == '') { // Chosen location and chosen activity
-      exports.up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
     }
     else if(from == '') {
-      exports.up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
     else if(to == '') {
-      exports.up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+      up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
     }
     else {
-      exports.up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
   }
 }
