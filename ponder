@@ -52,6 +52,10 @@
     throw error in the browser.
     It seems the "error" will have to be handled by rerouting to some other URL
     when a query to DB returns an empty object.
+    Use promises for this?
+    Yes, but no need for a new module.
+    use .error() just like you use .success also see this once
+    https://github.com/sequelize/sequelize/issues/638
 
 14. TODO: Also allow editing of City in retailer/event.modify
     Also event_name/retailer_name
@@ -109,3 +113,6 @@ SELECT `Events`.`event_name`, date_format(`start_date`, '%e %M %Y') as `start_da
 
     // query sent by sequelize with limit 10
 SELECT `Events`.*, `City`.`id` AS `City.id`, `City`.`city_name` AS `City.city_name`, `City`.`createdAt` AS `City.createdAt`, `City`.`updatedAt` AS `City.updatedAt`, `EventTags`.`id` AS `EventTags.id`, `EventTags`.`cor_name` AS `EventTags.cor_name`, `EventTags`.`createdAt` AS `EventTags.createdAt`, `EventTags`.`updatedAt` AS `EventTags.updatedAt`, `EventTags`.`EventId` AS `EventTags.EventId`, `EventTags`.`TagId` AS `EventTags.TagId`, `EventTags.Tag`.`id` AS `EventTags.Tag.id`, `EventTags.Tag`.`tag_name` AS `EventTags.Tag.tag_name`, `EventTags.Tag`.`createdAt` AS `EventTags.Tag.createdAt`, `EventTags.Tag`.`updatedAt` AS `EventTags.Tag.updatedAt`, `EventSubtags`.`id` AS `EventSubtags.id`, `EventSubtags`.`cor_name` AS `EventSubtags.cor_name`, `EventSubtags`.`createdAt` AS `EventSubtags.createdAt`, `EventSubtags`.`updatedAt` AS `EventSubtags.updatedAt`, `EventSubtags`.`EventId` AS `EventSubtags.EventId`, `EventSubtags`.`SubtagId` AS `EventSubtags.SubtagId`, `EventSubtags.Subtag`.`id` AS `EventSubtags.Subtag.id`, `EventSubtags.Subtag`.`subtag_name` AS `EventSubtags.Subtag.subtag_name`, `EventSubtags.Subtag`.`createdAt` AS `EventSubtags.Subtag.createdAt`, `EventSubtags.Subtag`.`updatedAt` AS `EventSubtags.Subtag.updatedAt` FROM (SELECT `Events`.`event_name`, date_format(`start_date`, '%e %M %Y') as `start_date_f`, `Events`.`id` FROM `Events` WHERE start_date > NOW() LIMIT 10) AS `Events` LEFT OUTER JOIN `Cities` AS `City` ON `City`.`id` = `Events`.`CityId` LEFT OUTER JOIN `EventTags` AS `EventTags` ON `Events`.`id` = `EventTags`.`EventId` LEFT OUTER JOIN `Tags` AS `EventTags.Tag` ON `EventTags.Tag`.`id` = `EventTags`.`TagId` LEFT OUTER JOIN `EventSubtags` AS `EventSubtags` ON `Events`.`id` = `EventSubtags`.`EventId` LEFT OUTER JOIN `Subtags` AS `EventSubtags.Subtag` ON `EventSubtags.Subtag`.`id` = `EventSubtags`.`SubtagId`
+
+28. TODO: Use validations in sequelize 
+    Example: citynames should be unique (or should they? add states too?)

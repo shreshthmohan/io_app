@@ -4,10 +4,12 @@ var connect  = require('connect');
 //var retailer = require('./routes/retailer');
 var race     = require('./routes/user/event');
 var routes   = require('./routes/user');
+var user     = require('./routes/user/user')
 var http     = require('http');
 var path     = require('path');
 var db       = require('./models');
 var lessMiddleware = require('less-middleware')
+var passport = require('passport');
 var lessMiddlewareOptions = {}
 var lessParserOptions = {}
 var lessCompilerOptions = {}
@@ -53,9 +55,32 @@ app.use(connect.urlencoded())
 
 app.use(connect.methodOverride())
 
+app.use(connect.cookieParser()) 
+app.use(connect.cookieSession({secret: "shreshth", key: "session"})) 
+
+//********************************************//
+// NOTE: (IMPORTANT) The following 3 function calls must be called in order
+// i.e. no mixing with other middleware
+require('./auth/passport').init()
+app.use(passport.initialize()) // boots up passport and attaches to express instance
+app.use(passport.session()) // tells passport we want to use cookies
+
+//********************************************//
+
 // Home
 app.get('/', routes.index);
 //app.get('/exp', routes.index_exp)
+
+app.get('/sign_up', user.sign_up_form);
+app.post('/sign_up', user.sign_up);
+
+app.get('/sign_in', user.sign_in_form);
+app.post('/sign_in', passport.authenticate(
+  'local',
+  {
+    successRedirect: '/',
+    failureRedirect: '/sign_in' }));
+    // TODO failureFlash
 
 // All upcoming events
 app.get('/events/upcoming', race.upcoming)

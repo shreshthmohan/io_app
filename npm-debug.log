@@ -1,0 +1,158 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/bin/npm', 'install', 'bcrypt' ]
+2 info using npm@2.1.16
+3 info using node@v0.10.35
+4 warn package.json io_app@0.0.0 No repository field.
+5 warn package.json io_app@0.0.0 No README data
+6 silly cache add args [ 'bcrypt@^0.8.0', null ]
+7 verbose cache add spec bcrypt@^0.8.0
+8 silly cache add parsed spec { raw: 'bcrypt@^0.8.0',
+8 silly cache add   scope: null,
+8 silly cache add   name: 'bcrypt',
+8 silly cache add   rawSpec: '^0.8.0',
+8 silly cache add   spec: '>=0.8.0 <0.9.0',
+8 silly cache add   type: 'range' }
+9 verbose addNamed bcrypt@>=0.8.0 <0.9.0
+10 silly addNamed semver.valid null
+11 silly addNamed semver.validRange >=0.8.0 <0.9.0
+12 silly addNameRange { name: 'bcrypt', range: '>=0.8.0 <0.9.0', hasData: false }
+13 silly mapToRegistry name bcrypt
+14 silly mapToRegistry using default registry
+15 silly mapToRegistry registry https://registry.npmjs.org/
+16 silly mapToRegistry uri https://registry.npmjs.org/bcrypt
+17 verbose addNameRange registry:https://registry.npmjs.org/bcrypt not in flight; fetching
+18 verbose request uri https://registry.npmjs.org/bcrypt
+19 verbose request no auth needed
+20 info attempt registry request try #1 at 16:47:48
+21 verbose request id 10ff7dcb0f8e6b72
+22 verbose etag "AJJ9FTSJS0R7UP5IDU36E9MV6"
+23 http request GET https://registry.npmjs.org/bcrypt
+24 http 304 https://registry.npmjs.org/bcrypt
+25 silly get cb [ 304,
+25 silly get   { date: 'Mon, 29 Dec 2014 11:17:50 GMT',
+25 silly get     server: 'Apache',
+25 silly get     via: '1.1 varnish',
+25 silly get     'last-modified': 'Mon, 29 Dec 2014 11:17:50 GMT',
+25 silly get     'cache-control': 'max-age=60',
+25 silly get     etag: '"AJJ9FTSJS0R7UP5IDU36E9MV6"',
+25 silly get     age: '0',
+25 silly get     'x-served-by': 'cache-lax1435-LAX',
+25 silly get     'x-cache': 'HIT',
+25 silly get     'x-cache-hits': '1',
+25 silly get     'x-timer': 'S1419851870.018897,VS0,VE175',
+25 silly get     vary: 'Accept',
+25 silly get     'content-length': '0',
+25 silly get     'keep-alive': 'timeout=10, max=50',
+25 silly get     connection: 'Keep-Alive' } ]
+26 verbose etag https://registry.npmjs.org/bcrypt from cache
+27 silly addNameRange number 2 { name: 'bcrypt', range: '>=0.8.0 <0.9.0', hasData: true }
+28 silly addNameRange versions [ 'bcrypt',
+28 silly addNameRange   [ '0.1.2',
+28 silly addNameRange     '0.2.0',
+28 silly addNameRange     '0.2.1',
+28 silly addNameRange     '0.1.3',
+28 silly addNameRange     '0.2.2',
+28 silly addNameRange     '0.2.3',
+28 silly addNameRange     '0.2.4',
+28 silly addNameRange     '0.3.0',
+28 silly addNameRange     '0.3.1',
+28 silly addNameRange     '0.3.2',
+28 silly addNameRange     '0.4.0',
+28 silly addNameRange     '0.4.1',
+28 silly addNameRange     '0.5.0',
+28 silly addNameRange     '0.6.0',
+28 silly addNameRange     '0.7.0',
+28 silly addNameRange     '0.7.1',
+28 silly addNameRange     '0.7.2',
+28 silly addNameRange     '0.7.3',
+28 silly addNameRange     '0.7.4',
+28 silly addNameRange     '0.7.5',
+28 silly addNameRange     '0.7.6',
+28 silly addNameRange     '0.7.7',
+28 silly addNameRange     '0.7.8',
+28 silly addNameRange     '0.8.0' ] ]
+29 verbose addNamed bcrypt@0.8.0
+30 silly addNamed semver.valid 0.8.0
+31 silly addNamed semver.validRange 0.8.0
+32 silly cache afterAdd bcrypt@0.8.0
+33 verbose afterAdd /home/shreshth/.npm/bcrypt/0.8.0/package/package.json not in flight; writing
+34 verbose afterAdd /home/shreshth/.npm/bcrypt/0.8.0/package/package.json written
+35 silly install resolved [ { name: 'bcrypt',
+35 silly install resolved     description: 'A bcrypt library for NodeJS.',
+35 silly install resolved     keywords:
+35 silly install resolved      [ 'bcrypt',
+35 silly install resolved        'password',
+35 silly install resolved        'auth',
+35 silly install resolved        'authentication',
+35 silly install resolved        'encryption',
+35 silly install resolved        'crypt',
+35 silly install resolved        'crypto' ],
+35 silly install resolved     main: './bcrypt',
+35 silly install resolved     version: '0.8.0',
+35 silly install resolved     author: { name: 'Nick Campbell', url: 'https://github.com/ncb000gt' },
+35 silly install resolved     engines: { node: '>= 0.6.0' },
+35 silly install resolved     repository:
+35 silly install resolved      { type: 'git',
+35 silly install resolved        url: 'https://github.com/ncb000gt/node.bcrypt.js.git' },
+35 silly install resolved     licenses: [ [Object] ],
+35 silly install resolved     bugs: { url: 'https://github.com/ncb000gt/node.bcrypt.js/issues' },
+35 silly install resolved     scripts:
+35 silly install resolved      { test: 'node-gyp configure build && nodeunit test',
+35 silly install resolved        install: 'node-gyp rebuild' },
+35 silly install resolved     dependencies: { bindings: '1.0.0', nan: '1.3.0' },
+35 silly install resolved     devDependencies: { nodeunit: '>=0.6.4' },
+35 silly install resolved     contributors:
+35 silly install resolved      [ [Object],
+35 silly install resolved        [Object],
+35 silly install resolved        [Object],
+35 silly install resolved        [Object],
+35 silly install resolved        [Object],
+35 silly install resolved        [Object],
+35 silly install resolved        [Object],
+35 silly install resolved        [Object],
+35 silly install resolved        [Object],
+35 silly install resolved        [Object],
+35 silly install resolved        [Object],
+35 silly install resolved        [Object],
+35 silly install resolved        [Object],
+35 silly install resolved        [Object] ],
+35 silly install resolved     gypfile: true,
+35 silly install resolved     gitHead: '067b4e5fea672f1953632668acb40b88222eb737',
+35 silly install resolved     homepage: 'https://github.com/ncb000gt/node.bcrypt.js',
+35 silly install resolved     _id: 'bcrypt@0.8.0',
+35 silly install resolved     _shasum: 'b8f226406e5b78c838833a8468a4a0402cbc93c9',
+35 silly install resolved     _from: 'bcrypt@>=0.8.0 <0.9.0',
+35 silly install resolved     _npmVersion: '1.4.14',
+35 silly install resolved     _npmUser: { name: 'shtylman', email: 'shtylman@gmail.com' },
+35 silly install resolved     maintainers: [ [Object], [Object], [Object], [Object] ],
+35 silly install resolved     dist:
+35 silly install resolved      { shasum: 'b8f226406e5b78c838833a8468a4a0402cbc93c9',
+35 silly install resolved        tarball: 'http://registry.npmjs.org/bcrypt/-/bcrypt-0.8.0.tgz' },
+35 silly install resolved     directories: {},
+35 silly install resolved     _resolved: 'https://registry.npmjs.org/bcrypt/-/bcrypt-0.8.0.tgz',
+35 silly install resolved     readme: 'ERROR: No README data found!' } ]
+36 info install bcrypt@0.8.0 into /home/shreshth/Projects/io_app
+37 info installOne bcrypt@0.8.0
+38 verbose installOne of bcrypt to /home/shreshth/Projects/io_app not in flight; installing
+39 warn locking Error: EACCES, open '/home/shreshth/.npm/_locks/bcrypt-8c80d2c9013da3c4.lock'
+39 warn locking  /home/shreshth/.npm/_locks/bcrypt-8c80d2c9013da3c4.lock failed { [Error: EACCES, open '/home/shreshth/.npm/_locks/bcrypt-8c80d2c9013da3c4.lock']
+39 warn locking   errno: 3,
+39 warn locking   code: 'EACCES',
+39 warn locking   path: '/home/shreshth/.npm/_locks/bcrypt-8c80d2c9013da3c4.lock' }
+40 verbose stack Error: Attempt to unlock /home/shreshth/Projects/io_app/node_modules/bcrypt, which hasn't been locked
+40 verbose stack     at unlock (/usr/lib/node_modules/npm/lib/utils/locker.js:66:11)
+40 verbose stack     at cb (/usr/lib/node_modules/npm/lib/install.js:929:5)
+40 verbose stack     at /usr/lib/node_modules/npm/lib/install.js:933:20
+40 verbose stack     at /usr/lib/node_modules/npm/lib/utils/locker.js:40:9
+40 verbose stack     at cb (/usr/lib/node_modules/npm/node_modules/lockfile/lockfile.js:149:38)
+40 verbose stack     at /usr/lib/node_modules/npm/node_modules/lockfile/lockfile.js:177:38
+40 verbose stack     at Object.oncomplete (fs.js:108:15)
+41 verbose cwd /home/shreshth/Projects/io_app
+42 error Linux 3.13.0-43-generic
+43 error argv "node" "/usr/bin/npm" "install" "bcrypt"
+44 error node v0.10.35
+45 error npm  v2.1.16
+46 error Attempt to unlock /home/shreshth/Projects/io_app/node_modules/bcrypt, which hasn't been locked
+47 error If you need help, you may report this error at:
+47 error     <http://github.com/npm/npm/issues>
+48 verbose exit [ 1, true ]
