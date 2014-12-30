@@ -54,7 +54,7 @@ var up_all_loc_all_tag = function(req, res, where) {
     // There's also a bug in sequelize related to limit
   })
   .success(function(races) {
-    res.render('events_new', {
+    res.render('events', {
       title: 'All Upcoming Events and Races',
       races: races
     })
@@ -88,7 +88,7 @@ up_all_loc_chosen_tag = function(req, res, where) {
     })
     .success(function(event_tags) {
       console.log(JSON.stringify(event_tags))
-      res.render('events_chosen_tag_new', {
+      res.render('events_chosen_tag', {
         tag: tag,
         event_tags: event_tags
       })
@@ -118,7 +118,7 @@ up_chosen_loc_all_tag = function(req, res, where) {
   })
   .success(function(races) {
     console.log(JSON.stringify(races))
-    res.render('events_new', {
+    res.render('events', {
       title: 'All Upcoming Events and Races',
       races: races
     })
@@ -151,7 +151,7 @@ up_both_loc_tag_chosen = function(req, res, where) {
       raw: true
     })
     .success(function(event_tags) {
-      res.render('events_chosen_tag_new', {
+      res.render('events_chosen_tag', {
         tag: tag,
         event_tags: event_tags
       })
