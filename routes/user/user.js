@@ -30,3 +30,8 @@ exports.sign_up = function(req, res) {
 }
 // TODO: user type admin/normal
 
+exports.log_out = function(req, res) {
+  req.logout();
+  //req.flash('notice', 'You have been logged out successfully.');
+  res.redirect('/');
+}

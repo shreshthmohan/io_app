@@ -10,6 +10,7 @@ var path     = require('path');
 var db       = require('./models');
 var lessMiddleware = require('less-middleware')
 var passport = require('passport');
+var auth_middleware = require('./auth/middlewares');
 var lessMiddlewareOptions = {}
 var lessParserOptions = {}
 var lessCompilerOptions = {}
@@ -68,12 +69,13 @@ app.use(passport.session()) // tells passport we want to use cookies
 //********************************************//
 
 // Home
-app.get('/', routes.index);
 //app.get('/exp', routes.index_exp)
 
+// TODO remove this route before setting up on AWS
 app.get('/sign_up', user.sign_up_form);
 app.post('/sign_up', user.sign_up);
 
+// Sign-in routing
 app.get('/sign_in', user.sign_in_form);
 app.post('/sign_in', passport.authenticate(
   'local',
@@ -82,18 +84,27 @@ app.post('/sign_in', passport.authenticate(
     failureRedirect: '/sign_in' }));
     // TODO failureFlash
 
+// Log-out route
+app.get('/log_out', user.log_out);
+
+// Redirect users from root to home
+app.get('/', function(req, res) {res.redirect('/app/home')})
+
+// Checking if user is authenticated for every route except sign-in/up
+app.all('/app/*', auth_middleware.ensure_auth);
+
+app.get('/app/home', routes.index);
 // All upcoming events
-app.get('/events/upcoming', race.upcoming)
+app.get('/app/events/upcoming', race.upcoming)
 
 // All events
-app.get('/events', race.all)
+app.get('/app/events', race.all)
 
 
 // Exp
-app.get('/exp', race.exp);
-
-app.get('/exp2', race.exp2);
-app.get('/exp_event_search', race.exp_event_search);
+//app.get('/exp', race.exp);
+//app.get('/exp2', race.exp2);
+//app.get('/exp_event_search', race.exp_event_search);
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')))

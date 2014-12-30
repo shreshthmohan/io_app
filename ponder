@@ -116,3 +116,5 @@ SELECT `Events`.*, `City`.`id` AS `City.id`, `City`.`city_name` AS `City.city_na
 
 28. TODO: Use validations in sequelize 
     Example: citynames should be unique (or should they? add states too?)
+
+29. TODO: fix /app/events/upcoming (without any key-value pairs or so to say ... activity=null)
