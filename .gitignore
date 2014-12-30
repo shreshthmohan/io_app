@@ -2,5 +2,7 @@ node_modules/**
 public/css/application.css
 public/application.css
 **/*.log
-**/*.swp
+**/.*.swp
+**/*.*swp
+**/*.*swo
 **/*.swo

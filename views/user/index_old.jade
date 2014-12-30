@@ -17,9 +17,9 @@ html(lang='en')
           a(class="navbar-brand" href="/app/home") India Outside
         div(class="navbar-collapse collapse")
           ul(class="nav navbar-nav")
-            li
-              a(href='/app/home') Home
             li(class="active")
+              a(href='/app/home') Home
+            li
               a(href='/app/events/upcoming') Events
             li
               a(href='TODO') Gear 
@@ -31,49 +31,55 @@ html(lang='en')
               a(href='TODO')
                 i(class="fa fa-facebook")
                 span(class="hide-for-small") 
-    .container
-      .col-md-12#filter-bar-wrap
-        .filter-bar.col-md-12
-          h1 Upcoming Races and Events in India
+    div(class="container")
+      div(class="jumbotron home-search")
+        h1= h1_title
+        form(class="home-radio")
+          input(id="gear" type="radio" name="search" value="gear")
+          label(for="gear" class="home-radio-label") Gear
+          input(id="events" type="radio" name="search" value="events" checked="checked")
+          label(for="events" class="home-radio-label") Events 
+        div(class="gear")
+          h2 Get equipped
           form(class="search")
-            input(class="form-control col-md-3" type="text" name="activitytype" placeholder="e.g. surfing")
-            input(class="form-control col-md-3" type="text" name="location" placeholder="e.g. Goa")
-            .cal.col-md-3
+            input(class="form-control" type="text" name="geartype" placeholder="e.g. hiking")
+            | gear in
+            input(class="form-control" type="text" name="location" placeholder="e.g. Bangalore")
+            br
+            button(type="button" class="btn btn-warning ") Grab some! 
+        div(class="events")
+          h2 Upcoming Races and Events!
+          form(class="search" action="/app/events/upcoming")
+            select(class="form-control" type="text" name="activity" placeholder="what")
+              option(value=0) All
+              each tag in tags
+                option(value=tag.id) #{tag.tag_name}
+            select(class="form-control" type="text" name="location" placeholder="where")
+              option(value=0) All
+              each city in cities
+                option(value=city.id) #{city.city_name}
+            .cal
               span(class="fa fa-calendar") 
-              input(class="form-control" type="text" name="start_date" placeholder="e.g. 4 December 2014" id="from")
-            .cal.col-md-3
+              input(class="form-control" type="text" name="start_date" placeholder="from" id="from")
+            .cal
               span(class="fa fa-calendar") 
-              input(class="form-control" type="text" name="end_date" placeholder="e.g. 12 January 2015" id="to")
-        .events-list.col-md-12.col-sm-12.col-xs-12
-          //- ul
-          each race in races
-            div.event-el
-              each tag in race.EventTags
-                li.tag
-                  | #{tag.Tag.tag_name}
-              each subtag in race.EventSubtags
-                li.subtag
-                  | #{subtag.Subtag.subtag_name}
-              a(href='todo')
-                h2 #{race.event_name}
-              span.city
-                | #{race.City.city_name}
-              span(class="fa fa-calendar date") 
-              span.date_value
-                | #{race.dataValues.start_date_f}
+              input(class="form-control" type="text" name="end_date" placeholder="to" id="to")
+            br
+            button(type="button submit" class="btn btn-warning ") Go! 
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js")
     script(src="/js/bootstrap.js")
     script
       | $(function() {
       |   $( "#from" ).datepicker({
-      |     dateFormat: "dd/mm/yy",
+      |     dateFormat: "dd-mm-yy",
+      |     minDate: 0,
       |     onClose: function(selectedDate) {
       |       $("#to").datepicker("option", "minDate", selectedDate); 
       |     }
       |   });
       |   $( "#to" ).datepicker({
-      |     dateFormat: "dd/mm/yy",
+      |     dateFormat: "dd-mm-yy",
       |     onClose: function(selectedDate) {
       |       $("#from").datepicker("option", "maxDate", selectedDate); 
       |     }
@@ -81,3 +87,4 @@ html(lang='en')
       | });
     script(src="/ie10-viewport-bug-workaround.js TODO")
     script(src="/ie-emulation-modes-warning.js TODO")
+    script(src="/js/home.js")

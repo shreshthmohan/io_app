@@ -1,9 +1,32 @@
 doctype html
-html
+
+html(lang='en')
   head
     title= title
-    link(rel='stylesheet', href='/bootstrap.css')
-    link(rel='shortcut icon', href='/favicon.ico')
+    link(href="/application.css" rel="stylesheet")
+    link(rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css")
   body
-    a(href='/') User Home
-    block content
+    include navbar
+    .container
+      block content
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+    script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js")
+    script(src="/js/bootstrap.js")
+    script
+      | $(function() {
+      |   $( "#from" ).datepicker({
+      |     dateFormat: "dd-mm-yy",
+      |     onClose: function(selectedDate) {
+      |       $("#to").datepicker("option", "minDate", selectedDate); 
+      |     }
+      |   });
+      |   $( "#to" ).datepicker({
+      |     dateFormat: "dd-mm-yy",
+      |     onClose: function(selectedDate) {
+      |       $("#from").datepicker("option", "maxDate", selectedDate); 
+      |     }
+      |   });
+      | });
+    script(src="/ie10-viewport-bug-workaround.js TODO")
+    script(src="/ie-emulation-modes-warning.js TODO")
+    block extrajs

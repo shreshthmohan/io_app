@@ -68,8 +68,8 @@ app.use(passport.session()) // tells passport we want to use cookies
 
 //********************************************//
 
-// Home
-//app.get('/exp', routes.index_exp)
+//app.use(require('connect-flash')());
+
 
 // TODO remove this route before setting up on AWS
 app.get('/sign_up', user.sign_up_form);
@@ -94,6 +94,7 @@ app.get('/', function(req, res) {res.redirect('/app/home')})
 app.all('/app/*', auth_middleware.ensure_auth);
 
 app.get('/app/home', routes.index);
+
 // All upcoming events
 app.get('/app/events/upcoming', race.upcoming)
 
