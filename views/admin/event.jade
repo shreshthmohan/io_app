@@ -12,6 +12,7 @@ block content
       | No event URL; add one:
       input(type="text", name="event_url")
     br
+    | organiser name
     if(race.organiser_name)
       div(id="organiser_name" class="data") #{race.organiser_name}
       div(id="change_organiser_name" class="edit") edit

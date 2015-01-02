@@ -39,7 +39,7 @@ block content
           each subtag in race.EventSubtags
             li.subtag
               | #{subtag.Subtag.subtag_name}
-          a(href='todo')
+          a(href="/app/events/" + race.City.city_name + "/" + race.City.id + "/" + race.id)
             h2 #{race.event_name}
           span.city
             | #{race.City.city_name}

@@ -2,8 +2,6 @@ var db = require('../../models');
 var Sequelize = db.Sequelize;
 var sequelize = db.sequelize; // just to avoid the confusion
 
-
-
 //
 //16 posibilities
 //     location tag start end 
@@ -87,7 +85,6 @@ up_all_loc_chosen_tag = function(req, res, where) {
       raw: true
     })
     .success(function(event_tags) {
-      console.log(JSON.stringify(event_tags))
       res.render('events_chosen_tag', {
         tag: tag,
         event_tags: event_tags
@@ -117,7 +114,6 @@ up_chosen_loc_all_tag = function(req, res, where) {
     raw: true
   })
   .success(function(races) {
-    console.log(JSON.stringify(races))
     res.render('events', {
       title: 'All Upcoming Events and Races',
       races: races
@@ -226,6 +222,41 @@ exports.upcoming = function(req, res) {
       up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
   }
+}
+
+// Individual events
+exports.individual = function(req, res) {
+  db.Event.find({
+    where: {id: req.param('event_id')},
+    include: [ 
+      db.City,
+      db.Email,
+      db.SocialLink,
+      db.PhoneNumber,
+      {
+        model: db.EventTag,
+        include: [db.Tag]},
+      {
+        model: db.EventSubtag,
+        include: [db.Subtag]}
+      ],
+    attributes: [
+      'id',
+      'event_name',
+      'event_url',
+      'organiser_name',
+      'organiser_url',
+      'location_url',
+      'address_field',
+      'comments',
+      [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'),
+       'start_date_f'],
+      [Sequelize.fn('date_format', Sequelize.col('end_date'), '%e %M %Y'), 'end_date_f']],
+    })
+  .success(function(race) {
+     res.render('individual_event', {
+       race: race}) 
+  }) 
 }
 
 // TODO: past events 

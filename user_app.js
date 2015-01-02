@@ -95,12 +95,18 @@ app.all('/app/*', auth_middleware.ensure_auth);
 
 app.get('/app/home', routes.index);
 
+////////////////////////////////
+// Events' routes
+////////////////////////////////
+
 // All upcoming events
 app.get('/app/events/upcoming', race.upcoming)
 
 // All events
 app.get('/app/events', race.all)
 
+// Individual event
+app.get('/app/events/:city_name/:city_id/:event_id', race.individual)
 
 // Exp
 //app.get('/exp', race.exp);

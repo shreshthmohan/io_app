@@ -20,6 +20,7 @@
 
 @navbar-link-under: @io-yellow;
 
+@gray-light50: lighten(@gray-base, 50%);
 @gray-light80: lighten(@gray-base, 80%);
 @gray-light85: lighten(@gray-base, 85%);
 @gray-light85: lighten(@gray-base, 85%);
@@ -37,6 +38,13 @@
 
 // form-control: box-border and shadow color
 @input-border-focus: @io-yellow;
+
+// Font family
+//@font-family-base: 'Lato', Helvetica, Arial, sans-serif;
+//@font-family-base: 'Cabin', Helvetica, Arial, sans-serif;
+//@font-family-base: 'Droid Sans', Helvetica, Arial, sans-serif;
+@font-family-base: 'Roboto', Helvetica, Arial, sans-serif;
+
 
 
 // Help:
@@ -306,5 +314,64 @@ a {
   padding: 0px 0px 0px 0px; 
 }
 
-// TODO 
-// Try fonts, esp. Google webfonts
+// Individual event page
+.event {
+  background-color: white;
+  > span.organiser > a, > span.location {
+    > h3 {
+      display: inline;
+    }
+  }
+  > span.location > a > span.fa {
+    margin-left: 5px
+  }
+  > span {
+    margin: 5px 0px 5px 5px;
+  }
+  > span.organiser, > span.location, span.dates {
+    display: block; 
+    font-size: 150%;
+    > span.helper {
+      margin-right: 5px;
+      color: @gray-light50;
+    }
+    > span.fa {
+      margin-right: 7px;
+      color: @gray-light50;
+    }
+  }
+  li.social-link {
+    list-style: none;
+    float: left;
+    margin-left: 10px;
+    font-size: 180%;
+  }
+  li.tag, li.subtag {
+    list-style: none;
+    background: gray;
+    float: right;
+    padding: 2px 5px;
+    color: white;
+    margin: 5px 2px;
+    font-size: 130%;
+  }
+  ul.emails {
+    clear: both;
+    li {
+      list-style: none;
+      margin-left: 5px;
+    }
+  }
+  ul.numbers{
+    clear: both;
+    li {
+      list-style: none;
+      margin-left: 5px;
+    }
+  }
+}
+
+ul {
+  -webkit-padding-start: 0px !important;
+}
+
