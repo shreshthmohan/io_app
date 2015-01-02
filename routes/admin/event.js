@@ -96,8 +96,8 @@ exports.modify = function(req, res) {
       }
     )
     .success(function(retailer) {
+      console.log("got event instance")
       retailer.updateAttributes({
-        event_name:      req.param('event_name_new'),
         event_url:       req.param('event_url'),
         organiser_name:  req.param('organiser_name'),
         organiser_url:   req.param('organiser_url'),
@@ -118,6 +118,10 @@ exports.modify = function(req, res) {
         } else {
           res.redirect('/events/' + city.city_name + '/' + race.event_name)
         }
+      })
+      .failure(function(error) {
+        console.log(JSON.stringify(error))
+        res.redirect('/error', {error: error}) 
       })
     })
   })
