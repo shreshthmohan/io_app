@@ -317,34 +317,33 @@ a {
 // Individual event page
 .event {
   background-color: white;
+  padding-bottom: 12px;
   > span.organiser > a, > span.location {
     > h3 {
       display: inline;
     }
   }
   > span.location > a > span.fa {
-    margin-left: 5px
+    margin-right: 7px
   }
   > span {
     margin: 5px 0px 5px 5px;
   }
-  > span.organiser, > span.location, span.dates {
+  > span.organiser, > span.location, > span.dates {
     display: block; 
     font-size: 150%;
     > span.helper {
       margin-right: 5px;
-      color: @gray-light50;
     }
     > span.fa {
       margin-right: 7px;
-      color: @gray-light50;
     }
   }
   li.social-link {
     list-style: none;
     float: left;
     margin-left: 10px;
-    font-size: 180%;
+    font-size: 200%;
   }
   li.tag, li.subtag {
     list-style: none;
@@ -355,18 +354,11 @@ a {
     margin: 5px 2px;
     font-size: 130%;
   }
-  ul.emails {
-    clear: both;
+  ul.emails, ul.numbers {
     li {
       list-style: none;
       margin-left: 5px;
-    }
-  }
-  ul.numbers{
-    clear: both;
-    li {
-      list-style: none;
-      margin-left: 5px;
+      font-size: 130%
     }
   }
 }
@@ -375,3 +367,7 @@ ul {
   -webkit-padding-start: 0px !important;
 }
 
+.helper {
+  color: @gray-light50;
+  margin-right: 5px;
+}

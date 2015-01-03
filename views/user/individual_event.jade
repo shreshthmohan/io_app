@@ -24,7 +24,7 @@ block content
     - else
         h1 #{race.event_name}
     span.dates
-      span.fa.fa-calendar
+      span.fa.fa-calendar.helper
       | #{race.dataValues.start_date_f}
       - if(race.dataValues.end_date_f)
       -   if(race.dataValues.start_date_f != race.dataValues.end_date_f)
@@ -38,11 +38,25 @@ block content
           - else
               h3 #{race.organiser_name}
     span.location
-      span.fa.fa-map-marker
-      h3 #{race.City.city_name}
       - if(race.location_url)
           a(href=race.location_url)
-            span.fa.fa-location-arrow
+            span.fa.fa-map-marker
+      - else
+          span.fa.fa-marker
+      h3 #{race.City.city_name}
+    - if(race.Emails != '')
+        ul.emails
+          each mail in race.Emails
+            li.email
+              span.fa.fa-envelope.helper
+              a(href="mailto:" + mail.email)
+                | #{mail.email}
+    - if(race.PhoneNumbers != '')
+        ul.numbers
+          each number in race.PhoneNumbers
+            li.number
+              span.fa.fa-phone-square.helper
+              | #{number.number}
     each slink in race.SocialLinks
       li.social-link
         - if(slink.link.indexOf('facebook.com') > -1)
@@ -74,16 +88,3 @@ block content
       li.subtag
         span
           | #{event_subtag.Subtag.subtag_name}
-    - if(race.Emails != '')
-        ul.emails
-          span.fa.fa-envelope
-          each mail in race.Emails
-            li.email
-              a(href="mailto:" + mail.email)
-                | #{mail.email}
-    - if(race.PhoneNumbers != '')
-        ul.numbers
-          span.fa.fa-phone-square
-          each number in race.PhoneNumbers
-            li.number
-              | #{number.number}
