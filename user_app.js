@@ -71,9 +71,8 @@ app.use(passport.session()) // tells passport we want to use cookies
 //app.use(require('connect-flash')());
 
 
-// TODO remove this route before setting up on AWS
-app.get('/sign_up', user.sign_up_form);
-app.post('/sign_up', user.sign_up);
+app.get('/app/admin/sign_up', user.sign_up_form);
+app.post('/app/admin/sign_up', user.sign_up);
 
 // Sign-in routing
 app.get('/sign_in', user.sign_in_form);
@@ -92,6 +91,9 @@ app.get('/', function(req, res) {res.redirect('/app/home')})
 
 // Checking if user is authenticated for every route except sign-in/up
 app.all('/app/*', auth_middleware.ensure_auth);
+
+app.all('/app/admin*', auth_middleware.ensure_admin);
+app.get('/app/admin', routes.admin);
 
 app.get('/app/home', routes.index);
 

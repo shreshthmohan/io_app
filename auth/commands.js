@@ -3,7 +3,7 @@ var db = require('../models');
 exports.serialize_user = function() {
   return function _serialize_user(user, callback) {
     console.log('serializing user')
-    callback(null, {'type': 'user',
+    callback(null, {'type': user.type,
                     'id': user.id})
   }
 }

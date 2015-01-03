@@ -13,3 +13,7 @@ exports.index = function(req, res) {
     })
   })
 }
+
+exports.admin = function(req, res) {
+  res.render('admin')
+}
