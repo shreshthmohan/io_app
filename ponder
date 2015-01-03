@@ -118,3 +118,8 @@ SELECT `Events`.*, `City`.`id` AS `City.id`, `City`.`city_name` AS `City.city_na
     Example: citynames should be unique (or should they? add states too?)
 
 29. TODO: fix /app/events/upcoming (without any key-value pairs or so to say ... activity=null)
+
+30. Useful bootstrap css guide
+    http://getbootstrap.com/css/#type-lists
+    http://getbootstrap.com/css/#forms
+    http://getbootstrap.com/css/#responsive-utilities
