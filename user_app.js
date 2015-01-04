@@ -254,23 +254,24 @@ app.get('/app/home', routes.index);
 
 
 
-////////////////////////////////
-// Events' routes
-////////////////////////////////
+//////////////////
+// Event routes //
+//////////////////
 
 // All upcoming events
-app.get('/app/events/upcoming', race.upcoming)
+app.get('/app/events/upcoming', race.upcoming);
 
 // All events
-app.get('/app/events', race.all)
+app.get('/app/events', function(req, res) {res.redirect('/app/events/upcoming')});
 
 // Individual event
 app.get('/app/events/:city_name/:city_id/:event_id', race.individual)
 
-// Exp
-//app.get('/exp', race.exp);
-//app.get('/exp2', race.exp2);
-//app.get('/exp_event_search', race.exp_event_search);
+/////////////////
+// Gear routes //
+/////////////////
+
+
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')))

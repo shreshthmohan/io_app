@@ -134,3 +134,5 @@ SELECT `Events`.*, `City`.`id` AS `City.id`, `City`.`city_name` AS `City.city_na
     name
     Use module.exports if you have only single object (?) to export and refer
     it as filename of the file in which you wrote module.exports
+
+33. Improve city lists of retailers and events. Merge to one page? And/Or list only those cities that have at least one retailer

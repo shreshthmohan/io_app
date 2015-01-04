@@ -27,7 +27,7 @@ block content
       span.fa.fa-calendar.helper
       | #{race.dataValues.start_date_f}
       - if(race.dataValues.end_date_f)
-      -   if(race.dataValues.start_date_f != race.dataValues.end_date_f)
+        - if(race.dataValues.start_date_f != race.dataValues.end_date_f)
             |   -  #{race.dataValues.end_date_f}
     - if(race.organiser_name)
         span.organiser
@@ -42,7 +42,7 @@ block content
           a(href=race.location_url)
             span.fa.fa-map-marker
       - else
-          span.fa.fa-marker
+          span.fa.fa-map-marker
       h3 #{race.City.city_name}
     - if(race.Emails != '')
         ul.emails
