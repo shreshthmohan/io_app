@@ -5,7 +5,7 @@ var sequelize = db.sequelize; // just to avoid the confusion
 // Create form (GET)
 exports.create_form = function(req, res) {
   db.City.findAll().success(function(cities) {
-    res.render('create_event', {
+    res.render('admin_create_event', {
       title: 'Create new event',
       cities: cities
     })
@@ -29,7 +29,7 @@ exports.create = function(req, res) {
     })
     .success(function(race) { // using 'race', as event is a keyword 
       race.setCity(city).success(function() {
-        res.redirect('/events/' + city.city_name)
+        res.redirect('/app/admin/events/' + city.city_name)
       })
     })
   })
@@ -62,7 +62,7 @@ exports.individual = function(req, res) {
                 .success(function(subtags) {
                   sequelize.query('select EventSubtags.id as id, Subtags.subtag_name as subtag_name from EventSubtags inner join Subtags on EventSubtags.SubtagId = Subtags.id where EventSubtags.EventId = :eventId', null, { raw: true }, {eventId: race.id})
                   .success(function(linked_subtags) {
-                    res.render('event', {
+                    res.render('admin_event', {
                       race: race,
                       social_links: slink,
                       tags: tags,
@@ -112,16 +112,16 @@ exports.modify = function(req, res) {
           })
           .success(function(slink) {
             slink.setEvent(race).success(function() {
-              res.redirect('/events/' + city.city_name + '/' + race.event_name)
+              res.redirect('/app/admin/events/' + city.city_name + '/' + race.event_name)
             })
           })
         } else {
-          res.redirect('/events/' + city.city_name + '/' + race.event_name)
+          res.redirect('/app/admin/events/' + city.city_name + '/' + race.event_name)
         }
       })
       .failure(function(error) {
         console.log(JSON.stringify(error))
-        res.redirect('/error', {error: error}) 
+        res.redirect('/app/admin/error', {error: error}) 
       })
     })
   })
@@ -147,7 +147,7 @@ exports.modify_start_date = function(req, res) {
         start_date:        req.param('start_date')
       })
       .success(function(race) {
-        res.redirect('/events/' + city.city_name + '/' + race.event_name)
+        res.redirect('/app/admin/events/' + city.city_name + '/' + race.event_name)
       })
     })
   })
@@ -173,7 +173,7 @@ exports.modify_end_date = function(req, res) {
         end_date:        req.param('end_date')
       })
       .success(function(race) {
-        res.redirect('/events/' + city.city_name + '/' + race.event_name)
+        res.redirect('/app/admin/events/' + city.city_name + '/' + race.event_name)
       })
     })
   })
@@ -182,7 +182,7 @@ exports.modify_end_date = function(req, res) {
 //
 exports.cities = function(req, res) {
   db.City.findAll().success(function(cities) {
-    res.render('events',
+    res.render('admin_events',
     {title: 'List of events by city',
      cities: cities});
   })
@@ -213,14 +213,14 @@ exports.add_tag = function(req, res) {
           .success(function(event_tag) {
             event_tag.setEvent(race).success(function() {
               event_tag.setTag(tag).success(function() {
-                res.redirect('/events/' + city.city_name + '/' +
+                res.redirect('/app/admin/events/' + city.city_name + '/' +
                              race.event_name)
               })
             })
           })
         })
       } else {
-        res.redirect('/events/' + city.city_name + '/' +
+        res.redirect('/app/admin/events/' + city.city_name + '/' +
                      race.event_name)
       }
     })
@@ -248,7 +248,7 @@ exports.choose_tag = function(req, res) {
         .success(function(tag) {
           event_tag.setEvent(race).success(function() {
             event_tag.setTag(tag).success(function() {
-              res.redirect('/events/' + city.city_name + '/' +
+              res.redirect('/app/admin/events/' + city.city_name + '/' +
                            race.event_name)
             })
           })
@@ -284,14 +284,14 @@ exports.add_subtag = function(req, res) {
           .success(function(event_subtag) {
             event_subtag.setEvent(race).success(function() {
               event_subtag.setSubtag(subtag).success(function() {
-                res.redirect('/events/' + city.city_name + '/' +
+                res.redirect('/app/admin/events/' + city.city_name + '/' +
                              race.event_name)
               })
             })
           })
         })
       } else {
-        res.redirect('/events/' + city.city_name + '/' +
+        res.redirect('/app/admin/events/' + city.city_name + '/' +
                      race.event_name)
       }
     })
@@ -319,7 +319,7 @@ exports.choose_subtag = function(req, res) {
         .success(function(subtag) {
           event_subtag.setEvent(race).success(function() {
             event_subtag.setSubtag(subtag).success(function() {
-              res.redirect('/events/' + city.city_name + '/' +
+              res.redirect('/app/admin/events/' + city.city_name + '/' +
                            race.event_name)
             })
           })
@@ -350,12 +350,12 @@ exports.add_slink = function(req, res) {
         })
         .success(function(slink) {
           slink.setEvent(race).success(function() {
-            res.redirect('/events/' + city.city_name + '/' +
+            res.redirect('/app/admin/events/' + city.city_name + '/' +
                              race.event_name)
           })
         })
       } else {
-        res.redirect('/events/' + city.city_name + '/' +
+        res.redirect('/app/admin/events/' + city.city_name + '/' +
           race.event_name)
       }
     })
@@ -382,12 +382,12 @@ exports.add_phone = function(req, res) {
         })
         .success(function(number) {
           number.setEvent(race).success(function() {
-            res.redirect('/events/' + city.city_name + '/' +
+            res.redirect('/app/admin/events/' + city.city_name + '/' +
                              race.event_name)
           })
         })
       } else {
-        res.redirect('/events/' + city.city_name + '/' +
+        res.redirect('/app/admin/events/' + city.city_name + '/' +
           race.event_name)
       }
     })
@@ -414,12 +414,12 @@ exports.add_email = function(req, res) {
         })
         .success(function(email) {
           email.setEvent(race).success(function() {
-            res.redirect('/events/' + city.city_name + '/' +
+            res.redirect('/app/admin/events/' + city.city_name + '/' +
                              race.event_name)
           })
         })
       } else {
-        res.redirect('/events/' + city.city_name + '/' +
+        res.redirect('/app/admin/events/' + city.city_name + '/' +
           race.event_name)
       }
     })
@@ -430,7 +430,7 @@ exports.destroy_slink = function(req, res) {
   db.SocialLink.find({where: {id: req.param('slink_id')}})
   .success(function(slink) {
     slink.destroy().success(function() {
-      res.redirect('/events/' + req.param('city_name') + '/' +
+      res.redirect('/app/admin/events/' + req.param('city_name') + '/' +
         req.param('event_name'));
     })
   })
@@ -440,7 +440,7 @@ exports.destroy_number = function(req, res) {
   db.PhoneNumber.find({where: {id: req.param('number')}})
   .success(function(number) {
     number.destroy().success(function() {
-      res.redirect('/events/' + req.param('city_name') + '/' +
+      res.redirect('/app/admin/events/' + req.param('city_name') + '/' +
         req.param('event_name'));
     })
   })
@@ -450,7 +450,7 @@ exports.destroy_email = function(req, res) {
   db.Email.find({where: {id: req.param('email_id')}})
   .success(function(email) {
     email.destroy().success(function() {
-      res.redirect('/events/' + req.param('city_name') + '/' +
+      res.redirect('/app/admin/events/' + req.param('city_name') + '/' +
         req.param('event_name'));
     })
   })
@@ -460,7 +460,7 @@ exports.dissociate_tag = function(req, res) {
   db.EventTag.find({where: {id: req.param('tag_id')}})
   .success(function(tag) {
     tag.destroy().success(function() {
-      res.redirect('/events/' + req.param('city_name') + '/' +
+      res.redirect('/app/admin/events/' + req.param('city_name') + '/' +
         req.param('event_name'));
     })
   })
@@ -470,7 +470,7 @@ exports.dissociate_subtag = function(req, res) {
   db.EventSubtag.find({where: {id: req.param('subtag_id')}})
   .success(function(subtag) {
     subtag.destroy().success(function() {
-      res.redirect('/events/' + req.param('city_name') + '/' +
+      res.redirect('/app/admin/events/' + req.param('city_name') + '/' +
         req.param('event_name'));
     })
   })

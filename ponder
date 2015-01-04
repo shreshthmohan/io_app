@@ -127,3 +127,10 @@ SELECT `Events`.*, `City`.`id` AS `City.id`, `City`.`city_name` AS `City.city_na
     http://getbootstrap.com/css/#responsive-utilities
 
 31. TODO: MySQL security
+
+32. Really good explanation of how 'exports' work at 
+    http://blog.liangzan.net/blog/2012/06/04/how-to-use-exports-in-nodejs/
+    In short, use exports.name to export multiple objects (?) and refer to it as
+    name
+    Use module.exports if you have only single object (?) to export and refer
+    it as filename of the file in which you wrote module.exports

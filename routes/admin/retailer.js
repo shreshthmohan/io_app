@@ -4,7 +4,7 @@ var sequelize = db.sequelize; // just to avoid the confusion
 
 exports.create_form = function(req, res) {
   db.City.findAll().success(function(cities) {
-    res.render('create_retailer', {
+    res.render('admin_create_retailer', {
       title: 'Create new retailer',
       cities: cities
     })
@@ -23,7 +23,7 @@ exports.create = function(req, res) {
        comments:         req.param('comments')
      }).success(function(retailer){
           retailer.setCity(city).success(function() { // adds FK in retailer
-            res.redirect('/gear/' + city.city_name);
+            res.redirect('/app/admin/gear/' + city.city_name);
           })
         })
    })
@@ -48,7 +48,7 @@ exports.modify = function(req, res) {
         location_url:     req.param('location_url'),
         comments:         req.param('comments')}
       ).success(function(retailer) {
-         res.redirect('/gear/' + city.city_name + '/' +
+         res.redirect('/app/admin/gear/' + city.city_name + '/' +
                       retailer.retailer_name)
        })
     })
@@ -57,7 +57,7 @@ exports.modify = function(req, res) {
 
 exports.cities = function(req, res) {
   db.City.findAll().success(function(cities) {
-    res.render('gear',
+    res.render('admin_gear',
     {title: 'List of gear retailers by city',
      cities: cities});
   })
@@ -99,7 +99,7 @@ exports.individual = function(req, res) {
                 .success(function(numbers) {
                   db.Email.findAll({where: {RetailerId: retailer.id}})
                   .success(function(mails) {
-                    res.render('retailer', {
+                    res.render('admin_retailer', {
                       retailer: retailer,
                       social_links: slink,
                       brands: brands,
@@ -153,14 +153,14 @@ exports.add_brand = function(req, res) {
           .success(function(gear_brand) {
             gear_brand.setRetailer(retailer).success(function() {
               gear_brand.setBrand(brand).success(function() {
-                res.redirect('/gear/' + city.city_name + '/' +
+                res.redirect('/app/admin/gear/' + city.city_name + '/' +
                              retailer.retailer_name)
               })
             })
           })
         })
       } else {
-        res.redirect('/gear/' + city.city_name + '/' +
+        res.redirect('/app/admin/gear/' + city.city_name + '/' +
                      retailer.retailer_name)
       }
     })
@@ -188,7 +188,7 @@ exports.choose_brand = function(req, res) {
         .success(function(brand) {
           gear_brand.setRetailer(retailer).success(function() {
             gear_brand.setBrand(brand).success(function() {
-              res.redirect('/gear/' + city.city_name + '/' +
+              res.redirect('/app/admin/gear/' + city.city_name + '/' +
                            retailer.retailer_name)
             })
           })
@@ -223,14 +223,14 @@ exports.add_tag = function(req, res) {
           .success(function(gear_tag) {
             gear_tag.setRetailer(retailer).success(function() {
               gear_tag.setTag(tag).success(function() {
-                res.redirect('/gear/' + city.city_name + '/' +
+                res.redirect('/app/admin/gear/' + city.city_name + '/' +
                              retailer.retailer_name)
               })
             })
           })
         })
       } else {
-        res.redirect('/gear/' + city.city_name + '/' +
+        res.redirect('/app/admin/gear/' + city.city_name + '/' +
                      retailer.retailer_name)
       }
     })
@@ -258,7 +258,7 @@ exports.choose_tag = function(req, res) {
         .success(function(tag) {
           gear_tag.setRetailer(retailer).success(function() {
             gear_tag.setTag(tag).success(function() {
-              res.redirect('/gear/' + city.city_name + '/' +
+              res.redirect('/app/admin/gear/' + city.city_name + '/' +
                            retailer.retailer_name)
             })
           })
@@ -286,13 +286,13 @@ exports.add_slink = function(req, res) {
           link: req.param('social_link')
         }).success(function(slink) {
             slink.setRetailer(retailer).success(function() {
-              res.redirect('/gear/' + city.city_name + '/' +
+              res.redirect('/app/admin/gear/' + city.city_name + '/' +
                            retailer.retailer_name)
             })
           })
       }
       else {
-        res.redirect('/gear/' + city.city_name + '/' +
+        res.redirect('/app/admin/gear/' + city.city_name + '/' +
                      retailer.retailer_name)
       }
     })
@@ -317,13 +317,13 @@ exports.add_phone = function(req, res) {
           number: req.param('phone_number')
         }).success(function(number) {
             number.setRetailer(retailer).success(function() {
-              res.redirect('/gear/' + city.city_name + '/' +
+              res.redirect('/app/admin/gear/' + city.city_name + '/' +
                            retailer.retailer_name)
             })
           })
       }
       else {
-        res.redirect('/gear/' + city.city_name + '/' +
+        res.redirect('/app/admin/gear/' + city.city_name + '/' +
                      retailer.retailer_name)
       }
     })
@@ -348,13 +348,13 @@ exports.add_email = function(req, res) {
           email: req.param('email')
         }).success(function(email) {
             email.setRetailer(retailer).success(function() {
-              res.redirect('/gear/' + city.city_name + '/' +
+              res.redirect('/app/admin/gear/' + city.city_name + '/' +
                            retailer.retailer_name)
             })
           })
       }
       else {
-        res.redirect('/gear/' + city.city_name + '/' +
+        res.redirect('/app/admin/gear/' + city.city_name + '/' +
                      retailer.retailer_name)
       }
     })
@@ -365,7 +365,7 @@ exports.destroy_slink = function(req, res) {
   db.SocialLink.find({where: {id: req.param('slink_id')}})
   .success(function(slink) {
     slink.destroy().success(function() {
-      res.redirect('/gear/' + req.param('city_name') + '/' +
+      res.redirect('/app/admin/gear/' + req.param('city_name') + '/' +
         req.param('retailer_name'));
     })
   })
@@ -375,7 +375,7 @@ exports.destroy_number = function(req, res) {
   db.PhoneNumber.find({where: {id: req.param('number')}})
   .success(function(number) {
     number.destroy().success(function() {
-      res.redirect('/gear/' + req.param('city_name') + '/' +
+      res.redirect('/app/admin/gear/' + req.param('city_name') + '/' +
         req.param('retailer_name'));
     })
   })
@@ -385,7 +385,7 @@ exports.destroy_email = function(req, res) {
   db.Email.find({where: {id: req.param('email_id')}})
   .success(function(email) {
     email.destroy().success(function() {
-      res.redirect('/gear/' + req.param('city_name') + '/' +
+      res.redirect('/app/admin/gear/' + req.param('city_name') + '/' +
         req.param('retailer_name'));
     })
   })
@@ -395,7 +395,7 @@ exports.dissociate_tag = function(req, res) {
   db.GearTag.find({where: {id: req.param('tag_id')}})
   .success(function(tag) {
     tag.destroy().success(function() {
-      res.redirect('/gear/' + req.param('city_name') + '/' +
+      res.redirect('/app/admin/gear/' + req.param('city_name') + '/' +
         req.param('retailer_name'));
     })
   })
@@ -405,7 +405,7 @@ exports.dissociate_brand = function(req, res) {
   db.GearBrand.find({where: {id: req.param('brand_id')}})
   .success(function(brand) {
     brand.destroy().success(function() {
-      res.redirect('/gear/' + req.param('city_name') + '/' +
+      res.redirect('/app/admin/gear/' + req.param('city_name') + '/' +
         req.param('retailer_name'));
     })
   })

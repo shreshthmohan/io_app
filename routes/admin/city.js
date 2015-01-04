@@ -5,16 +5,16 @@ exports.create = function(req, res) {
   if(req.param('city_name')) {
     db.City.create({ city_name: req.param('city_name') })
       .success(function() {
-        res.redirect('/city/index')
+        res.redirect('/app/admin/city/index')
       });
   } else {
-    res.redirect('/city/index')
+    res.redirect('/app/admin/city/index')
   }
 };
 
 exports.index = function(req, res) {
   db.City.findAll().success(function(cities) {
-    res.render('create_city', {
+    res.render('admin_create_city', {
       title: 'Indian Cities',
       cities: cities
     })
@@ -27,7 +27,7 @@ exports.retailer_list = function(req, res) {
   .success(function(city) {
      db.Retailer.findAll({ where: {CityId: city.id}})
      .success(function(retailers) {
-        res.render('city_retailers', {
+        res.render('admin_city_retailers', {
           city: city,
           retailers: retailers
         }) 
@@ -41,7 +41,7 @@ exports.event_list = function(req, res) {
   .success(function(city) {
      db.Event.findAll({ where: {CityId: city.id}})
      .success(function(races) {
-        res.render('city_events', {
+        res.render('admin_city_events', {
           city: city,
           races:races 
         }) 
@@ -54,7 +54,7 @@ exports.destroy = function(req,res) {
   db.City.find({where: {id: req.param('city_id')}})
   .success(function(city) {
     city.destroy().success(function(){
-      res.redirect('/city/index');
+      res.redirect('/app/admin/city/index');
     })
   })
 };
