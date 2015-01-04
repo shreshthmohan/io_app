@@ -104,6 +104,7 @@
 
 26. TODO: Allow destruction/modification of existing tags/subtags.
     Associated tags/subtags will cause problem. Think.
+    TODO: Prevent creation of duplicates
 
 27. Issue with sequelize (when using limit with nested joins?)
     See file: /routes/user/event.js (exp2) commit 07745f2e2e12bfff7aa2ad2c3a769066f0495656
@@ -117,9 +118,12 @@ SELECT `Events`.*, `City`.`id` AS `City.id`, `City`.`city_name` AS `City.city_na
 28. TODO: Use validations in sequelize 
     Example: citynames should be unique (or should they? add states too?)
 
-29. TODO: fix /app/events/upcoming (without any key-value pairs or so to say ... activity=null)
+29. fix /app/events/upcoming (without any key-value pairs or so to say ... activity=null)
+    Done
 
 30. Useful bootstrap css guide
     http://getbootstrap.com/css/#type-lists
     http://getbootstrap.com/css/#forms
     http://getbootstrap.com/css/#responsive-utilities
+
+31. TODO: MySQL security

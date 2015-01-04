@@ -4,6 +4,7 @@
    in the db schema. Here's how:
      "alter table Events modify column start_date date;"
      "alter table Events modify column end_date date;"
+   TODO script.
 
 2. Import stuff from csv in to db:
      Place csv in /tmp directory for ease
