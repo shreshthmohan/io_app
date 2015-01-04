@@ -27,6 +27,7 @@ exports.retailer_list = function(req, res) {
   .success(function(city) {
      db.Retailer.findAll({ where: {CityId: city.id}})
      .success(function(retailers) {
+        console.log(JSON.stringify(retailers))
         res.render('admin_city_retailers', {
           city: city,
           retailers: retailers

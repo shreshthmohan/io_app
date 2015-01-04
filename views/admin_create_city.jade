@@ -5,7 +5,7 @@ block content
   p Create new city
   
   h2 Creating new city
-  form(action="/city/create", method="post")
+  form(action="/app/admin/city/create", method="post")
     input(type="text", name="city_name")
     input(type="submit")
   
@@ -16,4 +16,4 @@ block content
     li
       = city.city_name 
       | &nbsp;
-      a(href="/city/" + city.id + "/destroy") destroy
+      a(href="/app/admin/city/" + city.id + "/destroy") destroy

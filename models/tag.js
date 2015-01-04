@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
   {
     associate: function(models) {
       Tag.hasMany(models.EventTag, {foreignKeyConstraint: true});
-      Tag.hasMany(models.Retailer, {foreignKeyConstraint: true}); // This is wrong too I guess. TODO
+      Tag.hasMany(models.GearTag, {foreignKeyConstraint: true});
     }
   });
   return Tag;
