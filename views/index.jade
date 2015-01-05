@@ -17,15 +17,15 @@ block nav_element_list
       span(class="hide-for-small") 
 
 block content
-  div(class="jumbotron home-search")
-    h1= h1_title
+  .home-search
+    h1 Look for Adventure!
     form(class="home-radio")
       input(id="gear" type="radio" name="search" value="gear")
       label(for="gear" class="home-radio-label") Gear
       input(id="events" type="radio" name="search" value="events" checked="checked")
       label(for="events" class="home-radio-label") Events 
     div(class="gear")
-      h2 Get equipped
+      h2 Get equipped.
       form(class="search")
         input(class="form-control" type="text" name="geartype" placeholder="e.g. hiking")
         | gear in
@@ -33,24 +33,33 @@ block content
         br
         button(type="button" class="btn btn-warning ") Grab some! 
     div(class="events")
-      h2 Upcoming Races and Events!
-      form(class="search" action="/app/events/upcoming")
-        select(class="form-control" type="text" name="activity" placeholder="what")
-          option(value=0) All
-          each tag in tags
-            option(value=tag.id) #{tag.tag_name}
-        select(class="form-control" type="text" name="location" placeholder="where")
-          option(value=0) All
-          each city in cities
-            option(value=city.id) #{city.city_name}
-        .cal
-          span(class="fa fa-calendar") 
-          input(class="form-control" type="text" name="start_date" placeholder="from" id="from")
-        .cal
-          span(class="fa fa-calendar") 
-          input(class="form-control" type="text" name="end_date" placeholder="to" id="to")
-        br
-        button(type="button submit" class="btn btn-warning ") Go! 
+      h2 Upcoming Races and Events.
+      form(class="search form-inline" action="/app/events/upcoming")
+        .form-group
+          label.sr-only(for='event_activity') Activity
+          select(class="form-control" type="text" name="activity" id="event_activity")
+            option(value=0) All
+            each tag in tags
+              option(value=tag.id) #{tag.tag_name}
+        .form-group
+          label.sr-only(for='event_location') Location
+          select(class="form-control" type="text" name="location" id="event_location")
+            option(value=0) All
+            each city in cities
+              option(value=city.id) #{city.city_name}
+        .form-group
+          label.sr-only(for="from") From
+          .input-group
+            .input-group-addon
+              span.fa.fa-calendar
+            input(class="form-control" type="text" name="start_date" placeholder="from" id="from")
+        .form-group
+          label.sr-only(for="to") To
+          .input-group
+            .input-group-addon
+              span.fa.fa-calendar
+            input(class="form-control" type="text" name="end_date" placeholder="to" id="to")
+        button(type="submit" class="btn btn-warning ") Go! 
 
 block extrajs
   script(src="/js/home.js")

@@ -26,3 +26,15 @@ module.exports = function(sequelize, DataTypes) {
 
   return Retailer;
 };
+
+
+// Name
+// City
+// Address
+// Map URL
+// Numbers
+// Web URL, if any
+// Comments:
+//   Days open, timings
+//   Other things, parking? play-field? 
+

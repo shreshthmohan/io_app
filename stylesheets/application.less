@@ -169,18 +169,19 @@ h2 {
 
 // Forms
 .form-control {
-  display: inline;
-  width: auto;
   border-radius: 0px;
-  margin: 0px 5px 0px 5px;
   &:focus {
-    //border-color: @io-yellow;
+    border-color: @io-yellow;
   }
 }
 
-form.search {
-  font-size: 18px;
-  line-height: 19px;
+.input-group-addon {
+  border-radius: 0px;
+  font-size: 16px;
+}
+
+.form-group {
+  margin-left: 5px;
 }
 
 // Jumbotron
@@ -198,6 +199,7 @@ form.search {
 .home-search {
   text-align: center;
   background: white;
+  padding: 1px 15px 25px 15px;
 }
 
 // Social Icons
@@ -213,29 +215,12 @@ li.social-icon {
   margin: 5px 5px 5px 5px;
 }
 
-// Calendar on home
-// TODO Update when you add calendars elsewhere
-.cal {
-  background-color: @input-bg;
-  display: inline-block;
-  padding: 4.5px 12px 4.5px 12px;
-  margin: 0px 5px 5px 5px;
-  border: 1px solid @input-border;
-  .form-control {
-    margin: 0px 5px 0px 5px;
-    padding: 0px;
-    border: 0px solid transparent;
-    height: auto;
-    .box-shadow(none);
-  }
-}
-
-
 // filter bar (events search) bar 
 .filter-bar {
   padding-bottom: 20px;
-  padding-top: 1px; // to accomodate h2's margin
-  margin-bottom: 30px;
+  padding-top: 20px;
+  margin-bottom: 25px;
+  text-align: center;
   // shadow
   -webkit-box-shadow: 0px 8px 6px 2px #ddd;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    0px 8px 6px 2px #ddd;  /* Firefox 3.5 - 3.6 */
@@ -263,9 +248,9 @@ li.social-icon {
   // top left-right bottom
   padding: 1px 0px 10px 15px;
   // shadow
-  -webkit-box-shadow: 0px 3px 5px 6px #ddd;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow:    0px 3px 5px 6px #ddd;  /* Firefox 3.5 - 3.6 */
-  box-shadow:         0px 3px 5px 6px #ddd;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  -webkit-box-shadow: 0px 8px 6px 2px #ddd;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    0px 8px 6px 2px #ddd;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         0px 8px 6px 2px #ddd;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
   font-size: medium;
   background-color: white;
   margin-bottom: 20px;
@@ -309,10 +294,6 @@ a {
     color: darken(@io-yellow, 15%);
     text-decoration: none;
   }
-}
-
-.col-md-12#filter-bar-wrap {
-  padding: 0px 0px 0px 0px; 
 }
 
 // Individual event page

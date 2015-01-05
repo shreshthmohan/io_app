@@ -17,32 +17,20 @@ block nav_element_list
       span(class="hide-for-small") 
 
 block content
-  .col-md-12#filter-bar-wrap
-    .filter-bar.col-md-12
-      h1 Upcoming Races and Events in India
-      form(class="search")
-        input(class="form-control col-md-3" type="text" name="activitytype" placeholder="e.g. surfing")
-        input(class="form-control col-md-3" type="text" name="location" placeholder="e.g. Goa")
-        .cal.col-md-3
-          span(class="fa fa-calendar") 
-          input(class="form-control" type="text" name="start_date" placeholder="e.g. 4 December 2014" id="from")
-        .cal.col-md-3
-          span(class="fa fa-calendar") 
-          input(class="form-control" type="text" name="end_date" placeholder="e.g. 12 January 2015" id="to")
-    .events-list.col-md-12.col-sm-12.col-xs-12
-      //- ul
-      each race in races
-        div.event-el
-          each tag in race.EventTags
-            li.tag
-              | #{tag.Tag.tag_name}
-          each subtag in race.EventSubtags
-            li.subtag
-              | #{subtag.Subtag.subtag_name}
-          a(href="/app/events/" + race.City.city_name + "/" + race.City.id + "/" + race.id)
-            h2 #{race.event_name}
-          span.city
-            | #{race.City.city_name}
-          span(class="fa fa-calendar date") 
-          span.date_value
-            | #{race.dataValues.start_date_f}
+  include event_filter_bar
+  .events-list
+    each race in races
+      div.event-el
+        each tag in race.EventTags
+          li.tag
+            | #{tag.Tag.tag_name}
+        each subtag in race.EventSubtags
+          li.subtag
+            | #{subtag.Subtag.subtag_name}
+        a(href="/app/events/" + race.City.city_name + "/" + race.City.id + "/" + race.id)
+          h2 #{race.event_name}
+        span.city
+          | #{race.City.city_name}
+        span(class="fa fa-calendar date") 
+        span.date_value
+          | #{race.dataValues.start_date_f}

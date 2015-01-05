@@ -1,0 +1,27 @@
+.filter-bar
+  form(class="search form-inline" action="/app/events/upcoming")
+    .form-group
+      label.sr-only(for='event_activity') Activity
+      select(class="form-control" type="text" name="activity" id="event_activity")
+        option(value=0) All
+        //each tag in tags
+        //  option(value=tag.id) #{tag.tag_name}
+    .form-group
+      label.sr-only(for='event_location') Location
+      select(class="form-control" type="text" name="location" id="event_location")
+        option(value=0) All
+        //each city in cities
+        //  option(value=city.id) #{city.city_name}
+    .form-group
+      label.sr-only(for="from") From
+      .input-group
+        .input-group-addon
+          span.fa.fa-calendar
+        input(class="form-control" type="text" name="start_date" placeholder="from" id="from")
+    .form-group
+      label.sr-only(for="to") To
+      .input-group
+        .input-group-addon
+          span.fa.fa-calendar
+        input(class="form-control" type="text" name="end_date" placeholder="to" id="to")
+    button(type="submit" class="btn btn-warning ") Go! 
