@@ -3,15 +3,27 @@
     .form-group
       label.sr-only(for='event_activity') Activity
       select(class="form-control" type="text" name="activity" id="event_activity")
-        option(value=0) All
-        //each tag in tags
-        //  option(value=tag.id) #{tag.tag_name}
+        - if(activity == null || activity == '' || activity == 0)
+            option(value=0 selected="selected") All
+        - else 
+            option(value=0) All
+        each tag in tags 
+          - if(activity == tag.id)
+              option(value=tag.id selected="selected") #{tag.tag_name}
+          - else
+              option(value=tag.id) #{tag.tag_name}
     .form-group
       label.sr-only(for='event_location') Location
       select(class="form-control" type="text" name="location" id="event_location")
-        option(value=0) All
-        //each city in cities
-        //  option(value=city.id) #{city.city_name}
+        - if(loc == null || loc == '' || loc == 0)
+            option(value=0 selected="selected") All
+        - else 
+            option(value=0) All
+        each city in cities
+          - if(loc== city.id)
+              option(value=city.id selected="selected") #{city.city_name}
+          - else
+              option(value=city.id) #{city.city_name}
     .form-group
       label.sr-only(for="from") From
       .input-group

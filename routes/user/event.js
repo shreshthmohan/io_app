@@ -2,7 +2,6 @@ var db = require('../../models');
 var Sequelize = db.Sequelize;
 var sequelize = db.sequelize; // just to avoid the confusion
 
-//
 //16 posibilities
 //     location tag start end 
 //1.   0        0   0     0   : where start>= NOW and end <=now +3M
@@ -21,7 +20,6 @@ var sequelize = db.sequelize; // just to avoid the confusion
 //14.  1        1   0     1   : q#13 and where start >= NOW and <= ...
 //15.  1        1   1     0   : q#13 and where start ... and <= ... + 3M 
 //16.  1        1   1     1   : q#13 and where start ... and <= ...
-//
 // that makes 4 kinds of queries for upcoming events
 
 // location: all; tag: all
@@ -52,9 +50,19 @@ var up_all_loc_all_tag = function(req, res, where) {
     // There's also a bug in sequelize related to limit
   })
   .success(function(races) {
-    res.render('events', {
-      title: 'All Upcoming Events and Races',
-      races: races
+    db.City.findAll()
+    .success(function(cities) {
+      db.Tag.findAll()
+      .success(function(tags) {
+        res.render('events', {
+          title_: 'All Upcoming Events and Races',
+          races: races,
+          cities: cities,
+          tags: tags,
+          loc: req.param('location'),
+          activity: req.param('activity')
+        })
+      })
     })
   })
 }
@@ -85,9 +93,20 @@ up_all_loc_chosen_tag = function(req, res, where) {
       raw: true
     })
     .success(function(event_tags) {
-      res.render('events_chosen_tag', {
-        tag: tag,
-        event_tags: event_tags
+      db.City.findAll()
+      .success(function(cities) {
+        db.Tag.findAll()
+        .success(function(tags) {
+          res.render('events_chosen_tag', {
+            title_: 'All Upcoming ' + tag.tag_name + ' events',
+            tag: tag, // chosen tag
+            event_tags: event_tags,
+            tags: tags,
+            cities: cities,
+            loc: req.param('location'),
+            activity: req.param('activity')
+          })
+        })
       })
     })
   })
@@ -114,9 +133,22 @@ up_chosen_loc_all_tag = function(req, res, where) {
     raw: true
   })
   .success(function(races) {
-    res.render('events', {
-      title: 'All Upcoming Events and Races',
-      races: races
+    db.City.find({where: {id: req.param('location')}})
+    .success(function(city) {
+      db.City.findAll()
+      .success(function(cities) {
+        db.Tag.findAll()
+        .success(function(tags) {
+          res.render('events', {
+            title_: 'All Upcoming Events and Races in ' + city.city_name,
+            races: races,
+            cities: cities,
+            tags: tags,
+            loc: req.param('location'),
+            activity: req.param('activity')
+          })
+        })
+      })
     })
   })
 }
@@ -147,9 +179,23 @@ up_both_loc_tag_chosen = function(req, res, where) {
       raw: true
     })
     .success(function(event_tags) {
-      res.render('events_chosen_tag', {
-        tag: tag,
-        event_tags: event_tags
+      db.City.find({where: {id: req.param('location')}})
+      .success(function(city) {
+        db.City.findAll()
+        .success(function(cities) {
+          db.Tag.findAll()
+          .success(function(tags) {
+            res.render('events_chosen_tag', {
+              title_: 'Upcoming ' + tag.tag_name + ' events in ' + city.city_name,
+              tag: tag,
+              event_tags: event_tags,
+              tags: tags,
+              cities: cities,
+              loc: req.param('location'),
+              activity: req.param('activity')
+            })
+          })
+        })
       })
     })
   })
@@ -158,6 +204,7 @@ up_both_loc_tag_chosen = function(req, res, where) {
 //Note: the 4 (location, tag) possiblities consist of two pairs.
 //i.e. we have used just two views to take care of 4 (location, tag)
 //possiblities
+
 
 // Searching all locations and all tags
 exports.upcoming = function(req, res) {
