@@ -4,7 +4,7 @@ var sequelize = db.sequelize; // just to avoid the confusion
 
 exports.create_form = function(req, res) {
   db.City.findAll().success(function(cities) {
-    res.render('admin_create_retailer', {
+    res.render('admin/create_retailer', {
       title: 'Create new retailer',
       cities: cities
     })
@@ -57,7 +57,7 @@ exports.modify = function(req, res) {
 
 exports.cities = function(req, res) {
   db.City.findAll().success(function(cities) {
-    res.render('admin_gear',
+    res.render('admin/gear',
     {title: 'List of gear retailers by city',
      cities: cities});
   })
@@ -99,7 +99,7 @@ exports.individual = function(req, res) {
                 .success(function(numbers) {
                   db.Email.findAll({where: {RetailerId: retailer.id}})
                   .success(function(mails) {
-                    res.render('admin_retailer', {
+                    res.render('admin/retailer', {
                       retailer: retailer,
                       social_links: slink,
                       brands: brands,

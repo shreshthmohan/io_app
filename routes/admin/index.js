@@ -2,14 +2,14 @@ var db = require('../../models');
 
 exports.index = function(req, res) {
   db.City.findAll().success(function(cities){
-    res.render('admin_index', {
+    res.render('admin/index', {
       cities: cities
     })
   })
 };
 
 exports.error = function(req, res) {
-  res.render('admin_error', {error: error})
+  res.render('admin/error', {error: error})
 }
 
 exports.add_brand = function(req, res) {
@@ -27,7 +27,7 @@ exports.add_brand = function(req, res) {
 
 exports.new_brand_form = function(req, res) {
   db.Brand.findAll().success(function(brands) {
-    res.render('admin_add_brand', {
+    res.render('admin/add_brand', {
       brands: brands
     })
   })
@@ -49,7 +49,7 @@ exports.add_tag = function(req, res) {
 
 exports.new_tag_form = function(req, res) {
   db.Tag.findAll().success(function(tags) {
-    res.render('admin_add_tag', {
+    res.render('admin/add_tag', {
       tags: tags
     })
   })
@@ -71,7 +71,7 @@ exports.add_subtag = function(req, res) {
 
 exports.new_subtag_form = function(req, res) {
   db.Subtag.findAll().success(function(subtags) {
-    res.render('admin_add_subtag', {
+    res.render('admin/add_subtag', {
       subtags: subtags
     })
   })

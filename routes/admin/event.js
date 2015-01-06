@@ -5,7 +5,7 @@ var sequelize = db.sequelize; // just to avoid the confusion
 // Create form (GET)
 exports.create_form = function(req, res) {
   db.City.findAll().success(function(cities) {
-    res.render('admin_create_event', {
+    res.render('admin/create_event', {
       title: 'Create new event',
       cities: cities
     })
@@ -62,7 +62,7 @@ exports.individual = function(req, res) {
                 .success(function(subtags) {
                   sequelize.query('select EventSubtags.id as id, Subtags.subtag_name as subtag_name from EventSubtags inner join Subtags on EventSubtags.SubtagId = Subtags.id where EventSubtags.EventId = :eventId', null, { raw: true }, {eventId: race.id})
                   .success(function(linked_subtags) {
-                    res.render('admin_event', {
+                    res.render('admin/event', {
                       race: race,
                       social_links: slink,
                       tags: tags,
@@ -182,7 +182,7 @@ exports.modify_end_date = function(req, res) {
 //
 exports.cities = function(req, res) {
   db.City.findAll().success(function(cities) {
-    res.render('admin_events',
+    res.render('admin/events',
     {title: 'List of events by city',
      cities: cities});
   })

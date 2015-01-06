@@ -14,7 +14,7 @@ exports.create = function(req, res) {
 
 exports.index = function(req, res) {
   db.City.findAll().success(function(cities) {
-    res.render('admin_create_city', {
+    res.render('admin/create_city', {
       title: 'Indian Cities',
       cities: cities
     })
@@ -28,7 +28,7 @@ exports.retailer_list = function(req, res) {
      db.Retailer.findAll({ where: {CityId: city.id}})
      .success(function(retailers) {
         console.log(JSON.stringify(retailers))
-        res.render('admin_city_retailers', {
+        res.render('admin/city_retailers', {
           city: city,
           retailers: retailers
         }) 
@@ -42,7 +42,7 @@ exports.event_list = function(req, res) {
   .success(function(city) {
      db.Event.findAll({ where: {CityId: city.id}})
      .success(function(races) {
-        res.render('admin_city_events', {
+        res.render('admin/city_events', {
           city: city,
           races:races 
         }) 

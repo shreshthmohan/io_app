@@ -5,7 +5,7 @@ exports.index = function(req, res) {
   .success(function(cities) {
     db.Tag.findAll()
     .success(function(tags) {
-      res.render('index', {
+      res.render('user/index', {
         title: 'India Outside',
         cities: cities,
         tags: tags

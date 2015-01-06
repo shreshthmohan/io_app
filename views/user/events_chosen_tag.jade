@@ -1,4 +1,4 @@
-extends layout
+extends ../layout
 
 block nav_element_list
   li
@@ -10,29 +10,28 @@ block nav_element_list
   li(class="social-icon")
     a(href='TODO')
       i(class="fa fa-twitter")
-      span(class="hide-for-small")  
+      span(class="hide-for-small TODO")  
   li(class="social-icon")
     a(href='TODO')
       i(class="fa fa-facebook")
-      span(class="hide-for-small") 
+      span(class="hide-for-small TODO") 
 
 block content
   include event_filter_bar
   .heading
     h1= title_
   .events-list
-    each race in races
+    each event_tag in event_tags
       div.event-el
-        each tag in race.EventTags
-          li.tag
-            | #{tag.Tag.tag_name}
-        each subtag in race.EventSubtags
+        li.tag
+          | #{tag.tag_name}
+        each subtag in event_tag.Event.EventSubtags
           li.subtag
             | #{subtag.Subtag.subtag_name}
-        a(href="/app/events/" + race.City.city_name + "/" + race.City.id + "/" + race.id)
-          h2 #{race.event_name}
+        a(href="/app/events/" + event_tag.Event.City.city_name + "/" + event_tag.Event.City.id + "/" + event_tag.Event.id)
+          h2 #{event_tag.Event.event_name}
         span.city
-          | #{race.City.city_name}
+          | #{event_tag.Event.City.city_name}
         span(class="fa fa-calendar date") 
         span.date_value
-          | #{race.dataValues.start_date_f}
+          | #{event_tag.Event.dataValues.start_date_f}

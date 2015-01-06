@@ -266,6 +266,8 @@ app.get('/app/events', function(req, res) {res.redirect('/app/events/upcoming')}
 
 // Individual event
 app.get('/app/events/:city_name/:city_id/:event_id', race.individual)
+// TODO: better URL
+//app.get('/app/events/:city_name/:city_id/:event_id/:event_slug', race.individual)
 
 /////////////////
 // Gear routes //

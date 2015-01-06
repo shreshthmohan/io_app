@@ -54,7 +54,7 @@ var up_all_loc_all_tag = function(req, res, where) {
     .success(function(cities) {
       db.Tag.findAll()
       .success(function(tags) {
-        res.render('events', {
+        res.render('user/events', {
           title_: 'All Upcoming Events and Races',
           races: races,
           cities: cities,
@@ -97,7 +97,7 @@ up_all_loc_chosen_tag = function(req, res, where) {
       .success(function(cities) {
         db.Tag.findAll()
         .success(function(tags) {
-          res.render('events_chosen_tag', {
+          res.render('user/events_chosen_tag', {
             title_: 'All Upcoming ' + tag.tag_name + ' events',
             tag: tag, // chosen tag
             event_tags: event_tags,
@@ -139,7 +139,7 @@ up_chosen_loc_all_tag = function(req, res, where) {
       .success(function(cities) {
         db.Tag.findAll()
         .success(function(tags) {
-          res.render('events', {
+          res.render('user/events', {
             title_: 'All Upcoming Events and Races in ' + city.city_name,
             races: races,
             cities: cities,
@@ -185,7 +185,7 @@ up_both_loc_tag_chosen = function(req, res, where) {
         .success(function(cities) {
           db.Tag.findAll()
           .success(function(tags) {
-            res.render('events_chosen_tag', {
+            res.render('user/events_chosen_tag', {
               title_: 'Upcoming ' + tag.tag_name + ' events in ' + city.city_name,
               tag: tag,
               event_tags: event_tags,
@@ -301,7 +301,7 @@ exports.individual = function(req, res) {
       [Sequelize.fn('date_format', Sequelize.col('end_date'), '%e %M %Y'), 'end_date_f']],
     })
   .success(function(race) {
-     res.render('individual_event', {
+     res.render('user/individual_event', {
        race: race}) 
   }) 
 }
@@ -316,7 +316,7 @@ exports.exp = function(req, res) {
   db.Event.findAll({ include: [ db.City, db.EventTag ]})
   .success(function(races) {
     console.log(races)
-    res.render('events_exp', {
+    res.render('user/events_exp', {
       races: races 
     })
   })
@@ -351,7 +351,7 @@ exports.exp2 = function(req, res) {
     // There's also a bug in sequelize related to limit
   })
   .success(function(races) {
-    res.render('events', {
+    res.render('user/events', {
       title: 'All Upcoming Events and Races',
       races: races
     })
@@ -362,7 +362,7 @@ exports.exp_event_search = function(req, res) {
   if (req.param('start_date') == '') {
     var from = "null";
   }
-  res.render('exp_event_search', {
+  res.render('user/exp_event_search', {
     activity: req.param('activity'),
     loc: req.param('location'),
     start_date: from, 
@@ -374,7 +374,7 @@ exports.exp_event_search = function(req, res) {
 exports.all = function(req,res) {
   sequelize.query("select id, event_name, event_url, organiser_name, organiser_url, address_field, location_url, start_date as start_date_orig, date_format(start_date, '%e %M %Y') start_date, date_format(end_date, '%c %M %Y') end_date, comments, CityId from Events order by start_date_orig", null, {raw: true} )
   .success(function(races) {
-    res.render('events', {
+    res.render('user/events', {
       title: 'All Events',
       races: races
     })
@@ -389,7 +389,7 @@ exports.upcoming = function(req,res) {
   // join to find city name
   .success(function(races) {
     console.log(races)
-    res.render('events', {
+    res.render('user/events', {
       title: 'Upcoming Events',
       races: races
     })
