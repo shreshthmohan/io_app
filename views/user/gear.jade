@@ -1,0 +1,42 @@
+extends ../layout
+
+block nav_element_list
+  li
+    a(href='/app/home') Home
+  li
+    a(href='/app/events/upcoming') Events
+  li(class="active")
+    a(href='/app/gear') Gear 
+  li(class="social-icon")
+    a(href='TODO')
+      i(class="fa fa-twitter")
+      span(class="hide-for-small")  
+  li(class="social-icon")
+    a(href='TODO')
+      i(class="fa fa-facebook")
+      span(class="hide-for-small") 
+
+block content
+  include gear_filter_bar
+  .heading
+    h1= title_
+  .category-list
+    - if(retailers)
+        each retailer in retailers
+          .category-el
+            each tag in retailer.GearTags
+              li.tag
+                | #{tag.Tag.tag_name}
+            a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.id)
+              h2 #{retailer.retailer_name}
+            .city
+              | #{retailer.City.city_name}
+    - if(gear_tags)
+        each gear_tag in gear_tags
+          .category-el
+            li.tag
+              | #{tag.tag_name}
+            a(href="/app/gear/" + gear_tag.Retailer.City.city_name + "/" + gear_tag.Retailer.id)
+              h2 #{gear_tag.Retailer.retailer_name}
+            .city
+              | #{gear_tag.Retailer.City.city_name}

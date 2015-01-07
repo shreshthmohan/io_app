@@ -3,61 +3,50 @@ extends ../layout
 block nav_element_list
   li
     a(href='/app/home') Home
-  li(class="active")
-    a(href='/app/events/upcoming') Events
   li
-    a(href='TODO') Gear 
+    a(href='/app/events/upcoming') Events
+  li(class="active")
+    a(href='/app/gear') Gear 
   li(class="social-icon")
     a(href='TODO')
       i(class="fa fa-twitter")
-      span(class="hide-for-small TODO")  
+      span(class="hide-for-small")  
   li(class="social-icon")
     a(href='TODO')
       i(class="fa fa-facebook")
-      span(class="hide-for-small TODO") 
+      span(class="hide-for-small") 
 
 block content
   .entity.col-md-6
-    - if(race.event_url) 
-        a(href=race.event_url target='_blank')
-          h1 #{race.event_name}
+    - if(retailer.website_url) 
+        a(href=retailer.website_url target='_blank')
+          h1 #{retailer.retailer_name}
     - else
-        h1 #{race.event_name}
-    span.dates
-      span.fa.fa-calendar.helper
-      | #{race.dataValues.start_date_f}
-      - if(race.dataValues.end_date_f)
-        - if(race.dataValues.start_date_f != race.dataValues.end_date_f)
-            |   -  #{race.dataValues.end_date_f}
-    - if(race.organiser_name)
-        span.organiser
-          span.helper by
-          - if(race.organiser_url)
-              a(href=race.organiser_url target='_blank')
-                h3 #{race.organiser_name}
-          - else
-              h3 #{race.organiser_name}
+        h1 #{retailer.retailer_name}
     span.location
-      - if(race.location_url)
-          a(href=race.location_url)
+      - if(retailer.location_url)
+          a(href=retailer.location_url)
             span.fa.fa-map-marker
       - else
           span.fa.fa-map-marker
-      h3 #{race.City.city_name}
-    - if(race.Emails != '')
+      h3 #{retailer.City.city_name}
+    - if(retailer.address_field)
+        span.address
+          | #{retailer.address_field}
+    - if(retailer.Emails != '')
         ul.emails
-          each mail in race.Emails
+          each mail in retailer.Emails
             li.email
               span.fa.fa-envelope.helper
               a(href="mailto:" + mail.email)
                 | #{mail.email}
-    - if(race.PhoneNumbers != '')
+    - if(retailer.PhoneNumbers != '')
         ul.numbers
-          each number in race.PhoneNumbers
+          each number in retailer.PhoneNumbers
             li.number
               span.fa.fa-phone-square.helper
               | #{number.number}
-    each slink in race.SocialLinks
+    each slink in retailer.SocialLinks
       li.social-link
         - if(slink.link.indexOf('facebook.com') > -1)
             a(href=slink.link)
@@ -80,11 +69,7 @@ block content
         - else
             a(href=slink.link)
                span.fa.fa-external-link
-    each event_tag in race.EventTags
+    each gear_tag in retailer.GearTags
       li.tag
         span
-          | #{event_tag.Tag.tag_name}
-    each event_subtag in race.EventSubtags
-      li.subtag
-        span
-          | #{event_subtag.Subtag.subtag_name}
+          | #{gear_tag.Tag.tag_name}

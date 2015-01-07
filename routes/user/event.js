@@ -97,7 +97,7 @@ up_all_loc_chosen_tag = function(req, res, where) {
       .success(function(cities) {
         db.Tag.findAll()
         .success(function(tags) {
-          res.render('user/events_chosen_tag', {
+          res.render('user/events', {
             title_: 'All Upcoming ' + tag.tag_name + ' events',
             tag: tag, // chosen tag
             event_tags: event_tags,
@@ -185,7 +185,7 @@ up_both_loc_tag_chosen = function(req, res, where) {
         .success(function(cities) {
           db.Tag.findAll()
           .success(function(tags) {
-            res.render('user/events_chosen_tag', {
+            res.render('user/events', {
               title_: 'Upcoming ' + tag.tag_name + ' events in ' + city.city_name,
               tag: tag,
               event_tags: event_tags,
@@ -208,7 +208,6 @@ up_both_loc_tag_chosen = function(req, res, where) {
 
 // Searching all locations and all tags
 exports.upcoming = function(req, res) {
-  console.log("upcoming called")
   var tag  = req.param('activity');
   var loc  = req.param('location');
   var from = req.param('start_date');
@@ -227,7 +226,7 @@ exports.upcoming = function(req, res) {
       up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
   }
-  else if (loc == 0) { // All locations and a chose activity
+  else if (loc == 0) { // All locations and a chosen activity
     if((from == '' || from == null) && (to == '' || to == null)) {
       up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
     }

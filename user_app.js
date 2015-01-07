@@ -8,6 +8,7 @@ var admin_race     = require('./routes/admin/event');
 
 var routes   = require('./routes/user');
 var race     = require('./routes/user/event');
+var gear     = require('./routes/user/gear');
 var user     = require('./routes/user/user')
 
 var http     = require('http');
@@ -265,15 +266,17 @@ app.get('/app/events/upcoming', race.upcoming);
 app.get('/app/events', function(req, res) {res.redirect('/app/events/upcoming')});
 
 // Individual event
-app.get('/app/events/:city_name/:city_id/:event_id', race.individual)
+app.get('/app/events/:city_name/:event_id', race.individual)
 // TODO: better URL
-//app.get('/app/events/:city_name/:city_id/:event_id/:event_slug', race.individual)
+//app.get('/app/events/:city_name/:event_id/:event_slug', race.individual)
 
 /////////////////
 // Gear routes //
 /////////////////
 
+app.get('/app/gear', gear.all);
 
+app.get('/app/gear/:city_name/:retailer_id', gear.individual)
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')))

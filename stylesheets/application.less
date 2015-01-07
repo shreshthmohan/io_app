@@ -235,17 +235,13 @@ li.social-icon {
 }
 
 
-// Events list
-.events-list {
+.category-list {
   padding: 0px 0px 0px 0px;
 }
  
 
-.event-el {
+.category-el {
   list-style: none;
-  //border: 1px solid; 
-  //border-color: lighten(@io-yellow, 20%) lighten(@io-yellow, 12%) lighten(@io-yellow, 5%); 
-  // top left-right bottom
   padding: 1px 0px 10px 15px;
   // shadow
   -webkit-box-shadow: 0px 8px 6px 2px #ddd;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
@@ -266,12 +262,12 @@ li.social-icon {
     }
   }
   //event city
-  > span.city {
-    background-color: gray;
-    padding: 2px 5px;
-    float: right;
-    margin-right: 7px;
-    color: white;
+  > .city {
+    //background-color: gray;
+    //padding: 2px 5px;
+    //float: right;
+    margin-left: 10px;
+    //color: white;
   }
   > span.date {
     margin-left: 10px
@@ -297,7 +293,7 @@ a {
 }
 
 // Individual event page
-.event {
+.entity {
   background-color: white;
   padding-bottom: 12px;
   > span.organiser > a, > span.location {
