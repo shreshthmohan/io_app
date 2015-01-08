@@ -30,6 +30,7 @@ block content
             a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.id)
               h2 #{retailer.retailer_name}
             .city
+              span.fa.fa-map-marker.helper
               | #{retailer.City.city_name}
     - if(gear_tags)
         each gear_tag in gear_tags

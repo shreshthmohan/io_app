@@ -33,8 +33,9 @@ block content
             a(href="/app/events/" + race.City.city_name + "/" + race.id)
               h2 #{race.event_name}
             .city
+              span.fa.fa-map-marker.helper
               | #{race.City.city_name}
-            span(class="fa fa-calendar date") 
+            span.fa.fa-calendar.date.helper
             span.date_value
               | #{race.dataValues.start_date_f}
     - if(event_tags)
