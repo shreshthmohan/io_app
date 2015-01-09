@@ -43,23 +43,23 @@
 //@font-family-base: 'Lato', Helvetica, Arial, sans-serif;
 //@font-family-base: 'Cabin', Helvetica, Arial, sans-serif;
 //@font-family-base: 'Droid Sans', Helvetica, Arial, sans-serif;
-@font-family-base: 'Roboto', Helvetica, Arial, sans-serif;
+@font-family-base: 'Open Sans', Helvetica, Arial, sans-serif;
 
-
+@grid-gutter-width: 20px;
 
 // Help:
 // padding/margin/border
 // top right bottom left 
 
-@font-size-base: 12px;
+//@font-size-base: 14px;
 
 // Header font-sizes
-@font-size-h1:            floor((@font-size-base * 1.9)); 
-@font-size-h2:            floor((@font-size-base * 1.7));
-@font-size-h3:            ceil((@font-size-base * 1.5));
-@font-size-h4:            ceil((@font-size-base * 1.23));
-@font-size-h5:            @font-size-base * 1;
-@font-size-h6:            ceil((@font-size-base * 0.90));
+//@font-size-h1:            floor((@font-size-base * 1.9)); 
+//@font-size-h2:            floor((@font-size-base * 1.7));
+//@font-size-h3:            ceil((@font-size-base * 1.5));
+//@font-size-h4:            ceil((@font-size-base * 1.23));
+//@font-size-h5:            @font-size-base * 1;
+//@font-size-h6:            ceil((@font-size-base * 0.90));
 
 
 // Header top margin
@@ -72,6 +72,8 @@ h2 {
   margin-top: (3 * (@line-height-computed / 4));
   margin-bottom: (2* (@line-height-computed / 5));
 }
+//
+@navbar-height: 35px;
 
 // Navbar 
 
@@ -84,8 +86,8 @@ h2 {
       > li {
         text-align: center;
         > a {
-          font-size: 18px;
-          font-weight: bold;
+          font-size: 14px;
+          //font-weight: bold;
           background-color: @navbar-bg;
           &:hover,
           &:focus {
@@ -110,7 +112,7 @@ h2 {
               left: 0px;
               visibility: hidden;
               border-style: solid;
-              border-width: 2px 0 0;
+              border-width: 1px 0 0;
             }
           }
         }
@@ -120,7 +122,7 @@ h2 {
         &:after {
           @media (min-width: @grid-float-breakpoint) {
             visibility: visible;
-            border-width: 4px 0 0;
+            border-width: 2px 0 0;
           }
         }
         &:hover {
@@ -139,12 +141,12 @@ h2 {
   }
   
   .navbar-brand {
-    font-size: ceil((@font-size-base * 2.25));
+    font-size: ceil((@font-size-base * 1.40));
     font-weight: bold;
   }
 
   body {
-    margin-top: 70px; // To bring jumbotron container below navbar
+    margin-top: 50px; // To bring jumbotron container below navbar
     font-size: 105%; // To control datepicker size
     min-height: 2000px;
     background-color: @gray-lighter;
@@ -177,7 +179,7 @@ h2 {
 
 .input-group-addon {
   border-radius: 0px;
-  font-size: 16px;
+  //font-size: 16px;
 }
 
 .form-group {
@@ -242,12 +244,12 @@ li.social-icon {
 
 .category-el {
   list-style: none;
-  padding: 1px 0px 10px 15px;
+  //padding: 1px 0px 10px 15px;
   // shadow
   -webkit-box-shadow: 0px 8px 6px 2px #ddd;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
   -moz-box-shadow:    0px 8px 6px 2px #ddd;  /* Firefox 3.5 - 3.6 */
   box-shadow:         0px 8px 6px 2px #ddd;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
-  font-size: medium;
+  font-size: 115%;
   background-color: white;
   margin-bottom: 20px;
   > a > h2 {
@@ -273,13 +275,6 @@ li.social-icon {
     margin-left: 10px
   }
   > span.date_value {
-  }
-  > li.tag, li.subtag {
-    float: right;
-    padding: 2px 3px;
-    background-color: @io-yellow;
-    margin: 7px 7px 0px 0px;
-    color: white;
   }
 }
 
@@ -308,7 +303,7 @@ a {
   }
   > span.organiser, > span.location, > span.dates {
     display: block; 
-    font-size: 150%;
+    //font-size: 150%;
     > span.helper {
       margin-right: 5px;
     }
@@ -320,7 +315,7 @@ a {
     list-style: none;
     float: left;
     margin-left: 10px;
-    font-size: 200%;
+    //font-size: 200%;
   }
   li.tag, li.subtag {
     list-style: none;
@@ -329,13 +324,13 @@ a {
     padding: 2px 5px;
     color: white;
     margin: 5px 2px;
-    font-size: 130%;
+    //font-size: 130%;
   }
   ul.emails, ul.numbers {
     li {
       list-style: none;
       margin-left: 5px;
-      font-size: 130%
+      //font-size: 130%
     }
   }
 }
@@ -358,4 +353,44 @@ ul {
   padding: 1px 0px 10px 20px;
   margin-bottom: 15px;
   color: gray;
+}
+
+.info {
+  padding: 10px;
+}
+
+.tags {
+  background: @gray-light80;
+  padding: 5px;
+}
+
+li.tag, li.subtag {
+  float: right;
+  padding: 2px 3px;
+  background-color: @io-yellow;
+  margin-left: 5px;
+  color: white;
+}
+
+.img-pre {
+}
+
+.bold {
+  font-weight:bold;
+}
+
+@h2-sm-font-size: 15px;
+@h2-sm-margin-top: 7px;
+@h2-sm-margin-bottom: 5px;
+
+h2.sm {
+  font-size: @h2-sm-font-size;
+  margin-top: @h2-sm-margin-top;
+  margin-bottom: @h2-sm-margin-bottom;
+}
+
+h1.sm {
+  font-size: (@h2-sm-font-size * 1.15);
+  margin-top: (@h2-sm-margin-top * 1.15);
+  margin-bottom: (@h2-sm-margin-bottom * 1.15);
 }

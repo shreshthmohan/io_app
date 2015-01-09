@@ -46,30 +46,32 @@ block content
             li.number
               span.fa.fa-phone-square.helper
               | #{number.number}
-    each slink in retailer.SocialLinks
-      li.social-link
-        - if(slink.link.indexOf('facebook.com') > -1)
-            a(href=slink.link)
-              span.fa.fa-facebook-square
-        - else if(slink.link.indexOf('twitter.com') > -1)
-            a(href=slink.link)
-              span.fa.fa-twitter-square
-        - else if(slink.link.indexOf('plus.google.com') > -1)
-            a(href=slink.link)
-              span.fa.fa-google-plus-square
-        - else if(slink.link.indexOf('instagram.com') > -1)
-            a(href=slink.link)
-              span.fa.fa-instagram
-        - else if(slink.link.indexOf('flickr.com') > -1)
-            a(href=slink.link)
-              span.fa.fa-flickr
-        - else if(slink.link.indexOf('youtube.com') > -1)
-            a(href=slink.link)
-              span.fa.fa-youtube
-        - else
-            a(href=slink.link)
-               span.fa.fa-external-link
-    each gear_tag in retailer.GearTags
-      li.tag
-        span
-          | #{gear_tag.Tag.tag_name}
+    .slinks
+      each slink in retailer.SocialLinks
+        li.social-link
+          - if(slink.link.indexOf('facebook.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-facebook-square
+          - else if(slink.link.indexOf('twitter.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-twitter-square
+          - else if(slink.link.indexOf('plus.google.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-google-plus-square
+          - else if(slink.link.indexOf('instagram.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-instagram
+          - else if(slink.link.indexOf('flickr.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-flickr
+          - else if(slink.link.indexOf('youtube.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-youtube
+          - else
+              a(href=slink.link)
+                 span.fa.fa-external-link
+    .tags           
+      each gear_tag in retailer.GearTags
+        li.tag
+          span
+            | #{gear_tag.Tag.tag_name}
