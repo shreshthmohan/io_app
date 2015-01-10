@@ -327,6 +327,7 @@ exports.individual = function(req, res) {
 //  })
 //}
 
+// List of tags with number of events associated with each tag
 exports.events_grouped = function(req, res) {
   db.Tag.findAll()
   .then(function(tags) {
@@ -346,9 +347,9 @@ exports.events_grouped = function(req, res) {
   })
   .then(function(tags_c) {
     //console.log(JSON.stringify(tags))
-    console.log(JSON.stringify(tag_c))
+    console.log(JSON.stringify(tags_c))
     res.render('user/events_groups', {
-      tags: tags_c
+      tags: tags_c //tags with counts of respective events
     })
   })
 }

@@ -1,0 +1,36 @@
+extends ../layout
+
+block nav_element_list
+  li
+    a(href='/app/home') Home
+  li(class="active")
+    a(href='/app/events/upcoming') Events
+  li
+    a(href='/app/gear') Gear 
+  li(class="social-icon")
+    a(href='TODO')
+      i(class="fa fa-twitter")
+      span(class="hide-for-small")  
+  li(class="social-icon")
+    a(href='TODO')
+      i(class="fa fa-facebook")
+      span(class="hide-for-small") 
+
+block content
+  .heading
+    h1 Events grouped by activity
+  .category-list
+    each tag in tags
+      - if(tag.event_count > 0)
+          .col-md-4
+            a(href="todo")
+              .category-el
+                .info.clearfix
+                  .info-text.col-xs-12
+                    h2.sm.uppercase
+                      | #{tag.tag_name}
+                    span.number
+                      | #{tag.event_count} EVENT
+                      - if(tag.event_count >1)
+                        | S
+                  .info-overlay
