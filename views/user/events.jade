@@ -25,8 +25,8 @@ block content
           each race in races
             div.col-md-4
               .category-el.clearfix
-                .info.clearfix
-                  .col-xs-8
+                .info.clearfix(style="background-image: url(http://ashishlimaye.files.wordpress.com/2012/05/anpdgrjceaikw8v.jpg);")
+                  .col-xs-8.info-text
                     a(href="/app/events/" + race.City.city_name + "/" + race.id)
                       h2.sm.bold #{race.event_name}
                     .city
@@ -36,6 +36,8 @@ block content
                     span.date_value
                       | #{race.dataValues.start_date_f}
                   .col-xs-4.img-pre.clearfix
+                    //img(src="http://content.nike.com/content/dam/one-nike/en_us/season-2012-su/open-graph/onenike_homepage_v1_opengraph_100x100.jpg" alt=race.event_name height="100px")
+                  .info-overlay
                 .tags.clearfix
                   each tag in race.EventTags
                     li.tag
@@ -47,8 +49,8 @@ block content
           each event_tag in event_tags
             div.category-el.col-md-4
               .category-el.clearfix
-                .info.clearfix
-                  .col-xs-8
+                .info.clearfix(style="background-image: url(http://ashishlimaye.files.wordpress.com/2012/05/anpdgrjceaikw8v.jpg);")
+                  .col-xs-8.info-text
                     a(href="/app/events/" + event_tag.Event.City.city_name + "/" + event_tag.Event.City.id + "/" + event_tag.Event.id)
                       h2.sm.bold #{event_tag.Event.event_name}
                     .city
@@ -57,6 +59,8 @@ block content
                     span.date_value
                       | #{event_tag.Event.dataValues.start_date_f}
                   .col-xs-4.img-pre.clearfix
+                    //img(src="http://content.nike.com/content/dam/one-nike/en_us/season-2012-su/open-graph/onenike_homepage_v1_opengraph_100x100.jpg" alt=race.event_name height="100px")
+                  .info-overlay
                 .tags.clearfix
                   li.tag
                     | #{tag.tag_name}

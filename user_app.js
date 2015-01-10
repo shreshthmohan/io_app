@@ -270,6 +270,9 @@ app.get('/app/events/:city_name/:event_id', race.individual)
 // TODO: better URL
 //app.get('/app/events/:city_name/:event_id/:event_slug', race.individual)
 
+// Experimental events group route
+app.get('/app/events/grouped', race.events_grouped)
+
 /////////////////
 // Gear routes //
 /////////////////

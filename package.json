@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^0.8.0",
+    "bluebird": "^2.6.2",
     "connect": "^2.25.9",
     "connect-flash": "^0.1.1",
     "express": "^4.8.5",

@@ -1,6 +1,7 @@
 var db = require('../../models');
 var Sequelize = db.Sequelize;
 var sequelize = db.sequelize; // just to avoid the confusion
+var Promise = require('bluebird');
 
 //16 posibilities
 //     location tag start end 
@@ -310,6 +311,50 @@ exports.individual = function(req, res) {
 ///////////////////////////////////////////////////////
 // Experimental stuff                                //
 ///////////////////////////////////////////////////////
+
+// Events grouped
+
+// All activities in all locations group by activities
+// find all tags
+
+//exports.events_grouped = function(req, res) {
+//  db.EventTag.count({where: {TagId: 1}})
+//  .success(function(tag_count) {
+//    console.log(JSON.stringify(tag_count))
+//    res.render('user/events_groups', {
+//      tag_count: tag_count}
+//    )
+//  })
+//}
+
+exports.events_grouped = function(req, res) {
+  db.Tag.findAll()
+  .then(function(tags) {
+    var promises = [] // array to be filled with function calls
+    var tag
+    tags.forEach(function(t) {
+      promises.push(
+        db.EventTag.count({where: {TagId: t.id}})
+        .then(function(event_count) {
+          tag = t.toJSON();
+          tag.event_count = event_count;
+          return tag
+        })
+      )
+    })
+    return Promise.all(promises);
+  })
+  .then(function(tags_c) {
+    //console.log(JSON.stringify(tags))
+    console.log(JSON.stringify(tag_c))
+    res.render('user/events_groups', {
+      tags: tags_c
+    })
+  })
+}
+// Note: in the above function tags array is modified and passed on further
+// as tags_c. The original array of objects in no more. Only the modified object exists
+
 // exp: eager loading tags
 exports.exp = function(req, res) {
   db.Event.findAll({ include: [ db.City, db.EventTag ]})
