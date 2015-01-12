@@ -20,7 +20,11 @@
 
 @navbar-link-under: @io-yellow;
 
+@gray-light30: lighten(@gray-base, 30%);
+@gray-light40: lighten(@gray-base, 40%);
 @gray-light50: lighten(@gray-base, 50%);
+@gray-light60: lighten(@gray-base, 60%);
+@gray-light70: lighten(@gray-base, 70%);
 @gray-light80: lighten(@gray-base, 80%);
 @gray-light85: lighten(@gray-base, 85%);
 @gray-light85: lighten(@gray-base, 85%);
@@ -279,10 +283,10 @@ li.social-icon {
 }
 
 a {
- color: darken(@io-yellow, 15%);
+ color: darken(@io-yellow, 20%);
   &:hover, &:focus {
-    color: darken(@io-yellow, 15%);
-    text-decoration: none;
+    color: darken(@io-yellow, 20%);
+    //text-decoration: none;
   }
 }
 
@@ -304,13 +308,8 @@ a {
   > span.organiser, > span.location, > span.dates {
     display: block; 
     //font-size: 150%;
-    > span.helper {
-      margin-right: 5px;
-    }
-    > span.fa {
-      margin-right: 7px;
-    }
   }
+
   li.social-link {
     list-style: none;
     float: left;
@@ -340,9 +339,10 @@ ul {
 }
 
 .helper {
-  color: @gray-light50;
-  margin-right: 5px;
+  //color: @gray-light50;
+  width: 15px;
 }
+
 
 .heading {
   background: white;
@@ -369,23 +369,51 @@ ul {
 }
 
 .tags {
-  background: @gray-light80;
+  background: @gray-light95;
   padding: 5px;
+  // TODO should not be needed as all events must have at least one associated
+  // tag.
+  height: 30px;
 }
 
 li.tag, li.subtag {
-  float: right;
+  float: left;
   padding: 2px 3px;
-  background-color: @io-yellow;
-  margin-left: 5px;
+  background-color: @gray-light70;
+  margin-right: 5px;
   color: white;
 }
 
 .img-pre {
+  padding: 0px;
+}
+
+.info-box-sub {
+  margin-left: 5px;
+  margin-top: 20px;
+}
+
+.b-l-4 {
+  border-left: 4px solid @io-yellow;
+  //&:hover, &focus {
+  //  border-left: 4px solid orange;
+  //}
+}
+
+.b-l-1 {
+  border-left: 1px solid @gray-light80;
+}
+
+.right {
+  float: right;
 }
 
 .bold {
   font-weight:bold;
+}
+
+.gray {
+  color: @gray-light30;
 }
 
 @h2-sm-font-size: 15px;
