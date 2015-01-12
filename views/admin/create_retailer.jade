@@ -25,8 +25,11 @@ block content
         option(value=city.id) #{city.city_name}
       //- option(value='null') None
     br
-    label(for="location_url") location_url
+    label(for="location_url") Location URL
     input(type="text", name="location_url", id="location_url")    
+    br
+    label(for="img_url_square") image URL (square, 160x160?)
+    input(type="text", name="img_url_square", id="img_url_square")    
     br
     label(for="comments") comments
     input(type="text", name="comments", id="comments")        

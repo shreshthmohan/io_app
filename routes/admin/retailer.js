@@ -20,6 +20,7 @@ exports.create = function(req, res) {
        website_url:      req.param('website_url'),
        address_field:    req.param('address_field'),
        location_url:     req.param('location_url'),
+       img_url_square:   req.param('img_url_square'),
        comments:         req.param('comments')
      }).success(function(retailer){
           retailer.setCity(city).success(function() { // adds FK in retailer
@@ -46,6 +47,7 @@ exports.modify = function(req, res) {
         website_url:      req.param('website_url'),
         address_field:    req.param('address_field'),
         location_url:     req.param('location_url'),
+        img_url_square:   req.param('img_url_square'),
         comments:         req.param('comments')}
       ).success(function(retailer) {
          res.redirect('/app/admin/gear/' + city.city_name + '/' +
@@ -54,6 +56,19 @@ exports.modify = function(req, res) {
     })
   })
 };
+
+exports.modify_retailer_name = function(req, res) {
+  db.Retailer.find({where: {id: req.param('TODO')}})
+  .then(function(retailer) {
+    retailer.updateAttributes({
+      retailer_name: req.param('new_retailer_name')
+    })
+    .then(function(retailer) {
+      res.redirect('/app/admin/gear/' + city.city_name + '/' +
+                   retailer.retailer_name)
+    })
+  })
+}
 
 exports.cities = function(req, res) {
   db.City.findAll().success(function(cities) {
@@ -392,7 +407,7 @@ exports.destroy_email = function(req, res) {
 };
 
 exports.dissociate_tag = function(req, res) {
-  db.GearTag.find({where: {id: req.param('tag_id')}})
+  db.GearTag.find({where: {TagId: req.param('tag_id')}})
   .success(function(tag) {
     tag.destroy().success(function() {
       res.redirect('/app/admin/gear/' + req.param('city_name') + '/' +
@@ -402,7 +417,7 @@ exports.dissociate_tag = function(req, res) {
 };
 
 exports.dissociate_brand = function(req, res) {
-  db.GearBrand.find({where: {id: req.param('brand_id')}})
+  db.GearBrand.find({where: {BrandId: req.param('brand_id')}})
   .success(function(brand) {
     brand.destroy().success(function() {
       res.redirect('/app/admin/gear/' + req.param('city_name') + '/' +

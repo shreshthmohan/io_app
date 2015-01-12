@@ -29,6 +29,7 @@ var up_all_loc_all_tag = function(req, res, where) {
     attributes: [
       'id',
       'event_name',
+      'img_url_square',
       [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
       // There is some issue with sequelize when using fn, it seems values are not directly available,
       // for instance in this case (remember for loop) race.start_date_ed appears empty in jade output, whereas 
@@ -88,6 +89,7 @@ up_all_loc_chosen_tag = function(req, res, where) {
          attributes: [
            'id',
            'event_name',
+           'img_url_square',
            [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
         }
       ],
@@ -119,6 +121,7 @@ up_chosen_loc_all_tag = function(req, res, where) {
     attributes: [
       'id',
       'event_name',
+      'img_url_square',
       [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
     where: ["CityId = " + req.param('location') + " and " + where],
     include: [
@@ -174,6 +177,7 @@ up_both_loc_tag_chosen = function(req, res, where) {
          attributes: [
            'id',
            'event_name',
+           'img_url_square',
            [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
         }
       ],
@@ -290,6 +294,7 @@ exports.individual = function(req, res) {
     attributes: [
       'id',
       'event_name',
+      'img_url_square',
       'event_url',
       'organiser_name',
       'organiser_url',

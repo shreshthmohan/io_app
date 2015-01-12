@@ -3,9 +3,14 @@ extends layout
 block content
   h1 Add new tag
   form(action="add_tag", method="post")
-    input(type="text", name="new_tag")
+    label(for="tag_name") tag name
+    input(type="text" id="tag_name" name="new_tag")
+    br
+    label(for="tag_name") tag image URL (preferably landscape, less than 200kB)
+    input(type="text" id="image_url" name="new_tag_image_url")
     br
     input(type="submit")
   ul Existing tags
     each tag in tags
-      li #{tag.tag_name}
+      li
+        a(href='/app/admin/tag/' + tag.id) #{tag.tag_name}

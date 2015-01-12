@@ -61,6 +61,15 @@ $(function() {
   });
 });
 
+// To enable editing of square image URL
+$(function() {
+  $('#change_img_url_square').click(function() {
+    $('#img_url_square').after("<input type='text' name='img_url_square' value='" + $('#img_url_square').attr("src") + "'></input>");
+    $('#img_url_square').detach();
+    $('#change_img_url_square').detach();
+  });
+});
+
 // To enable editing of start date
 $(function() {
   $('#change_start_date').click(function() {

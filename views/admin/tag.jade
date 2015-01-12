@@ -1,0 +1,14 @@
+extends layout
+
+block content
+ form(action='/app/admin/tag/' + tag.id + '/tag_name' method="post")
+   #tag_name #{tag.tag_name}
+   div(id="change_tag_name" class="edit") edit
+   input(type="submit")
+ form(action='/app/admin/tag/' + tag.id + '/image_url' method="post")
+   #image_url
+     img(src=tag.image_url)
+   div(id="change_image_url" class="edit") edit
+   input(type="submit")
+ script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+ script(src='/js/tag.js')

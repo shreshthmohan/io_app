@@ -42,6 +42,13 @@ block content
       | No location URL; add:
       input(type="text", name="location_url")
     br
+    if(race.img_url_square)
+      img(src=race.img_url_square id="img_url_square" class="data")
+      div(id="change_img_url_square" class="edit") edit
+    else
+      | No image URL; add(square, 160x160?): 
+      input(type="text", name="img_url_square")
+    br
     | Comments: 
     if (race.comments)
       div(id="comments" class="data") #{race.comments}

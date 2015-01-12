@@ -96,13 +96,13 @@ exports.modify = function(req, res) {
       }
     )
     .success(function(retailer) {
-      console.log("got event instance")
       retailer.updateAttributes({
         event_url:       req.param('event_url'),
         organiser_name:  req.param('organiser_name'),
         organiser_url:   req.param('organiser_url'),
         address_field:   req.param('address_field'),
         location_url:    req.param('location_url'),
+        img_url_square:  req.param('img_url_square'),
         comments:        req.param('comments')
       })
       .success(function(race) {

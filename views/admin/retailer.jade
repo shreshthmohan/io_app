@@ -1,7 +1,10 @@
 extends layout
 
 block content
-  h1 #{retailer.retailer_name}
+  form(action='#{retailer.retailer_name}/modify_name')
+    h1 #{retailer.retailer_name}
+    input(type="text", name="retailer_name" placeholder="New retailer name")
+    input(type="submit")
   //-
   //-
   //- Main 'modify' section starts
@@ -28,6 +31,13 @@ block content
     else
       | No location URL; add: 
       input(type="text", name="location_url")
+    br
+    if (retailer.img_url_square)
+      img(src=retailer.img_url_square id="img_url_square")
+      div(id="change_img_url_square" class="edit") edit
+    else
+      | No image URL; add(square, 160x160?): 
+      input(type="text", name="img_url_square")
     br
     | Comments: 
     if (retailer.comments)

@@ -19,9 +19,17 @@ $(function() {
 // To enable editing of location URL
 $(function() {
   $('#change_location_url').click(function() {
-    $('#location_url').after("<input type='text' name='location_url' value='" + $('#location_url').attr("href") + "'></input>");
+    $('#location_url').after("<input type='text' name='location_url' value='" + $('#location_url').attr("src") + "'></input>");
     $('#location_url').detach();
     $('#change_location_url').detach();
+  });
+});
+// To enable editing of square image URL
+$(function() {
+  $('#change_img_url_square').click(function() {
+    $('#img_url_square').after("<input type='text' name='img_url_square' value='" + $('#img_url_square').attr("href") + "'></input>");
+    $('#img_url_square').detach();
+    $('#change_img_url_square').detach();
   });
 });
 

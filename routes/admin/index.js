@@ -37,7 +37,8 @@ exports.new_brand_form = function(req, res) {
 exports.add_tag = function(req, res) {
   if(req.param('new_tag')) {
     db.Tag.create({
-      tag_name: req.param('new_tag')
+      tag_name:  req.param('new_tag'),
+      image_url: req.param('new_tag_image_url')
     })
     .success(function(tag) {
       res.redirect('/app/admin/add_tag')
@@ -47,6 +48,39 @@ exports.add_tag = function(req, res) {
   }
 };
 
+// Individual tag
+exports.individual_tag = function(req, res) {
+  db.Tag.find({where: {id: req.param('tag_id')}})
+  .success(function(tag) {
+    res.render('admin/tag', {tag: tag})
+  })
+}
+
+// Modify tag name
+exports.modify_tag_name = function(req, res) {
+  db.Tag.find({where: {id: req.param('tag_id')}})
+  .success(function(tag) {
+    tag.updateAttributes({
+      tag_name: req.param('new_tag_name')
+    })
+    .success(function(new_tag) {
+      res.redirect('/app/admin/tag/' + new_tag.id)
+    })
+  })
+}
+
+// Modify tag image URL
+exports.modify_tag_image_url = function(req, res) {
+  db.Tag.find({where: {id: req.param('tag_id')}})
+  .success(function(tag) {
+    tag.updateAttributes({
+      image_url: req.param('new_image_url')
+    })
+    .success(function(new_tag) {
+      res.redirect('/app/admin/tag/' + new_tag.id)
+    })
+  })
+}
 exports.new_tag_form = function(req, res) {
   db.Tag.findAll().success(function(tags) {
     res.render('admin/add_tag', {

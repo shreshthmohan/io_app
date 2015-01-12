@@ -149,10 +149,12 @@ app.get('/app/admin/gear/:city_name/:retailer_name', admin_retailer.individual);
 // Yes, it will do the 'job', but it won't be true REST API
 // TODO make REST
 app.post('/app/admin/gear/:city_name/:retailer_name', admin_retailer.modify);
+app.post('/app/admin/gear/:city_name/:retailer_name/modify_name', admin_retailer.modify_retailer_name);
 app.post('/app/admin/gear/:city_name/:retailer_name/add_brand', admin_retailer.add_brand);
 app.post('/app/admin/gear/:city_name/:retailer_name/choose_brand', admin_retailer.choose_brand);
 app.post('/app/admin/gear/:city_name/:retailer_name/add_tag', admin_retailer.add_tag);
 app.post('/app/admin/gear/:city_name/:retailer_name/choose_tag', admin_retailer.choose_tag);
+
 app.post('/app/admin/gear/:city_name/:retailer_name/add_slink', admin_retailer.add_slink);
 app.post('/app/admin/gear/:city_name/:retailer_name/add_phone', admin_retailer.add_phone);
 app.post('/app/admin/gear/:city_name/:retailer_name/add_email', admin_retailer.add_email);
@@ -169,12 +171,16 @@ app.get('/app/admin/gear/:city_name/:retailer_name/email/:email_id', admin_retai
 // Dissociate tag associated with a retailer
 // It effectively will destroy entry in GearTags table while retaining
 // corresponding entry in Tags table
+// TODO fix routes, using names is useless. Use id instead.
 app.get('/app/admin/gear/:city_name/:retailer_name/tag/:tag_id', admin_retailer.dissociate_tag);
 app.get('/app/admin/gear/:city_name/:retailer_name/brand/:brand_id', admin_retailer.dissociate_brand);
 
 app.post('/app/admin/add_tag', admin_routes.add_tag);
 
 app.get('/app/admin/add_tag', admin_routes.new_tag_form);
+app.get('/app/admin/tag/:tag_id', admin_routes.individual_tag);
+app.post('/app/admin/tag/:tag_id/tag_name', admin_routes.modify_tag_name);
+app.post('/app/admin/tag/:tag_id/image_url', admin_routes.modify_tag_image_url);
 
 app.post('/app/admin/add_subtag', admin_routes.add_subtag);
 

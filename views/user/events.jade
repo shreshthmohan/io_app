@@ -25,19 +25,21 @@ block content
           each race in races
             div.col-md-4
               .category-el.clearfix
-                .info.clearfix(style="background-image: url(http://ashishlimaye.files.wordpress.com/2012/05/anpdgrjceaikw8v.jpg);")
+                .info.clearfix
                   .col-xs-8.info-text
                     a(href="/app/events/" + race.City.city_name + "/" + race.id)
                       h2.sm.bold #{race.event_name}
                     .city
-                      span.fa.fa-map-marker.helper
+                      span.fa.fa-map-marker
                       | #{race.City.city_name}
-                    span.fa.fa-calendar.date.helper
+                    span.fa.fa-calendar.date
                     span.date_value
                       | #{race.dataValues.start_date_f}
                   .col-xs-4.img-pre.clearfix
-                    //img(src="http://content.nike.com/content/dam/one-nike/en_us/season-2012-su/open-graph/onenike_homepage_v1_opengraph_100x100.jpg" alt=race.event_name height="100px")
-                  .info-overlay
+                    - if(race.img_url_square)
+                        img(src=race.img_url_square alt=race.event_name height="100px")
+                    - else
+                        img(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=race.event_name height="100px")
                 .tags.clearfix
                   each tag in race.EventTags
                     li.tag
@@ -49,18 +51,21 @@ block content
           each event_tag in event_tags
             div.category-el.col-md-4
               .category-el.clearfix
-                .info.clearfix(style="background-image: url(http://ashishlimaye.files.wordpress.com/2012/05/anpdgrjceaikw8v.jpg);")
+                .info.clearfix
                   .col-xs-8.info-text
                     a(href="/app/events/" + event_tag.Event.City.city_name + "/" + event_tag.Event.City.id + "/" + event_tag.Event.id)
                       h2.sm.bold #{event_tag.Event.event_name}
                     .city
+                      span.fa.fa-map-marker
                       | #{event_tag.Event.City.city_name}
                     span(class="fa fa-calendar date") 
                     span.date_value
                       | #{event_tag.Event.dataValues.start_date_f}
                   .col-xs-4.img-pre.clearfix
-                    //img(src="http://content.nike.com/content/dam/one-nike/en_us/season-2012-su/open-graph/onenike_homepage_v1_opengraph_100x100.jpg" alt=race.event_name height="100px")
-                  .info-overlay
+                    - if(event_tag.Event.img_url_square)
+                        img(src=event_tag.Event.img_url_square alt=race.event_name height="100px")
+                    - else
+                        img(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=event_tag.Event.event_name height="100px")
                 .tags.clearfix
                   li.tag
                     | #{tag.tag_name}
