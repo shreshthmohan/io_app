@@ -210,6 +210,8 @@ up_both_loc_tag_chosen = function(req, res, where) {
 //i.e. we have used just two views to take care of 4 (location, tag)
 //possiblities
 
+// Default search interval (when user misses out date(s))
+var int_dur = "12 month";
 
 // Searching all locations and all tags
 exports.upcoming = function(req, res) {
@@ -218,56 +220,59 @@ exports.upcoming = function(req, res) {
   var from = req.param('start_date');
   var to   = req.param('end_date');
   if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
-    if((from == '' || from == null) && (to == '' || to == null)) {
-      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
-    }
-    else if((from == '' || from == null)) {
-      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-    else if((to == '' || to == null)) {
-      up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
-    }
-    else {
-      up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
+    //if((from == '' || from == null) && (to == '' || to == null)) {
+    //  up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+    //}
+    //else if((from == '' || from == null)) {
+    //  up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    //}
+    //else if((to == '' || to == null)) {
+    //  up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
+    //}
+    //else {
+    //  up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    //}
+    exports.grouped_by_activity(req, res) 
   }
   else if (loc == 0) { // All locations and a chosen activity
-    if((from == '' || from == null) && (to == '' || to == null)) {
-      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
-    }
-    else if((from == '' || from == null)) {
-      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-    else if((to == '' || to == null)) {
-      up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
-    }
-    else {
-      up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
+    //if((from == '' || from == null) && (to == '' || to == null)) {
+    //  up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+    //}
+    //else if((from == '' || from == null)) {
+    //  up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    //}
+    //else if((to == '' || to == null)) {
+    //  up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
+    //}
+    //else {
+    //  up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    //}
+    exports.grouped_by_location_chosen_tag(req, res)
   }
   else if (tag == 0) { // All activities for a chosen location
-    if((from == '' || from == null) && (to == '' || to == null)) {
-      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
-    }
-    else if((from == '' || from == null)) {
-      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-    else if((to == '' || to == null)) {
-      up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
-    }
-    else {
-      up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
+    //if((from == '' || from == null) && (to == '' || to == null)) {
+    //  up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+    //}
+    //else if((from == '' || from == null)) {
+    //  up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    //}
+    //else if((to == '' || to == null)) {
+    //  up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
+    //}
+    //else {
+    //  up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    //}
+    exports.grouped_by_activity_chosen_loc(req, res)
   }
   else {
     if((from == '' || from == null) && (to == '' || to == null)) { // Chosen location and chosen activity
-      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= NOW() + interval 3 month")
+      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
     }
     else if((from == '' || from == null)) {
       up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
     }
     else if((to == '' || to == null)) {
-      up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval 3 month")
+      up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
     }
     else {
       up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
@@ -318,6 +323,11 @@ exports.individual = function(req, res) {
 ///////////////////////////////////////////////////////
 
 // Events grouped
+// All activities, all locations: events grouped by activity
+// All locations, chosen activity: events grouped by locations
+// All activites, chosen location: events grouped by activity
+// Chosen location, chosen activity: events not to be grouped
+
 
 // All activities in all locations group by activities
 // find all tags
@@ -332,15 +342,23 @@ exports.individual = function(req, res) {
 //  })
 //}
 
+// Will land up here when people search for all locations with all tags
+// All activities, all locations: events grouped by activity
 // List of tags with number of events associated with each tag
-exports.events_grouped = function(req, res) {
+exports.grouped_by_activity = function(req, res) {
   db.Tag.findAll()
   .then(function(tags) {
     var promises = [] // array to be filled with function calls
     var tag
     tags.forEach(function(t) {
       promises.push(
-        db.EventTag.count({where: {TagId: t.id}})
+        db.EventTag.count({
+          where: {TagId: t.id},
+          include: [{
+            model: db.Event,
+            where: ['start_date > NOW()']
+          }]
+          })
         .then(function(event_count) {
           tag = t.toJSON();
           tag.event_count = event_count;
@@ -353,13 +371,87 @@ exports.events_grouped = function(req, res) {
   .then(function(tags_c) {
     //console.log(JSON.stringify(tags))
     console.log(JSON.stringify(tags_c))
-    res.render('user/events_groups', {
+    res.render('user/event_groups', {
+      // TODO: title
       tags: tags_c //tags with counts of respective events
     })
   })
 }
 // Note: in the above function tags array is modified and passed on further
 // as tags_c. The original array of objects in no more. Only the modified object exists
+
+// All activities, chosen locations
+exports.grouped_by_activity_chosen_loc = function(req, res) {
+  db.Tag.findAll()
+  .then(function(tags) {
+    var promises = [] // array to be filled with function calls
+    var tag
+    tags.forEach(function(t) {
+      promises.push(
+        db.Event.count({
+            include: [{
+                model: db.EventTag,
+                where: {TagId: t.id}
+            }],
+            where: Sequelize.and(
+              {CityId: req.param('location')},
+              {start_date: {gte: new Date()}})
+        })
+        .then(function(event_count) {
+          tag = t.toJSON();
+          tag.event_count = event_count;
+          return tag
+        })
+      )
+    })
+    return Promise.all(promises);
+  })
+  .then(function(tags_c) {
+    db.City.findOne({where: {id: req.param('location')}})
+    .then(function(city) {
+      res.render('user/event_groups', {
+        tags: tags_c, //tags with counts of respective events
+        city: city
+      })
+    })
+  })
+}
+
+// Chosen activity, all locations, group by location
+exports.grouped_by_location_chosen_tag = function(req, res) {
+  db.City.findAll()
+  .then(function(cities) {
+    var promises = []
+    var city
+    cities.forEach(function(c) {
+      promises.push(
+        db.Event.count({
+          where: Sequelize.and(
+            {CityId: c.id},
+            {start_date: {gt: new Date()}}),
+          include: [{
+              model: db.EventTag,
+              where: {TagId: req.param('activity')}}]
+        })
+        .then(function(event_count) {
+          city = c.toJSON();
+          city.event_count = event_count;
+          return city
+        })
+      )
+    })
+    return Promise.all(promises)
+  })
+  .then(function(cities_c) {
+    db.Tag.findOne({where: {id: req.param('activity')}})
+    .then(function(tag) {
+      res.render('user/event_groups', {
+        cities: cities_c,
+        tag: tag
+      })
+    })
+  })
+}
 
 // exp: eager loading tags
 exports.exp = function(req, res) {
