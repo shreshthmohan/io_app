@@ -3,10 +3,13 @@ var Sequelize = require('sequelize');
 
 exports.create = function(req, res) {
   if(req.param('city_name')) {
-    db.City.create({ city_name: req.param('city_name') })
-      .success(function() {
-        res.redirect('/app/admin/city/index')
-      });
+    db.City.create({
+      city_name: req.param('city_name'),
+      image_url: req.param('image_url')
+    })
+    .success(function() {
+      res.redirect('/app/admin/city/index')
+    });
   } else {
     res.redirect('/app/admin/city/index')
   }
@@ -50,6 +53,15 @@ exports.event_list = function(req, res) {
   })
 };
 
+// Individual City
+exports.individual = function(req, res) {
+  db.City.findOne({where: {id: req.param('city_id')}})
+  .then(function(city) {
+    console.log("going to render city.jade")
+    res.render('admin/city', {city: city})
+  })
+}
+
 // destroy city record
 exports.destroy = function(req,res) {
   db.City.find({where: {id: req.param('city_id')}})
@@ -59,3 +71,27 @@ exports.destroy = function(req,res) {
     })
   })
 };
+
+exports.modify_name = function(req, res) {
+  db.City.find({where: {id: req.param('city_id')}})
+  .then(function(city) {
+    city.updateAttributes({
+      city_name: req.param('new_city_name')
+    })
+    .then(function(new_city) {
+      res.redirect('/app/admin/city/' + new_city.id)
+    })
+  })
+}
+
+exports.modify_image_url = function(req, res) {
+  db.City.find({where: {id: req.param('city_id')}})
+  .then(function(city) {
+    city.updateAttributes({
+      image_url : req.param('new_image_url')
+    })
+    .then(function(new_city) {
+      res.redirect('/app/admin/city/' + new_city.id)
+    })
+  })
+}

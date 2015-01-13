@@ -195,7 +195,11 @@ app.get('/app/admin/add_brand', admin_routes.new_brand_form);
 // destroy (?) gear_retailer
 
 // create indian_city
-app.post('/app/admin/city/create', admin_city.create);
+app.post('/app/admin/city_create', admin_city.create);
+
+app.get('/app/admin/city/:city_id', admin_city.individual)
+app.post('/app/admin/city/:city_id/modify_name', admin_city.modify_name)
+app.post('/app/admin/city/:city_id/modify_image_url', admin_city.modify_image_url)
 
 // destroy city
 app.get('/app/admin/city/:city_id/destroy', admin_city.destroy);
@@ -203,7 +207,7 @@ app.get('/app/admin/city/:city_id/destroy', admin_city.destroy);
 // create tag
 
 // List of all cities
-app.get('/app/admin/city/index', admin_city.index)
+app.get('/app/admin/city_index', admin_city.index)
 
 app.get('/app/admin/events/create_new', admin_race.create_form)
 

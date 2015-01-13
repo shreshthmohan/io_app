@@ -4,9 +4,11 @@ block content
   h1= title
   p Create new city
   
-  h2 Creating new city
-  form(action="/app/admin/city/create", method="post")
-    input(type="text", name="city_name")
+  form(action="/app/admin/city_create", method="post")
+    label(for="city_name") City Name
+    input(type="text" id="city_name" name="city_name")
+    label(for="image_url") Image URL
+    input(type="text" id="image_url" name="image_url")
     input(type="submit")
   
   h2 Cities
@@ -14,6 +16,7 @@ block content
   ul
   each city in cities
     li
-      = city.city_name 
+      a(href="/app/admin/city/" + city.id)
+        h3= city.city_name
       | &nbsp;
       a(href="/app/admin/city/" + city.id + "/destroy") destroy
