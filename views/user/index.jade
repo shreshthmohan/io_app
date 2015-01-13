@@ -73,6 +73,47 @@ block content
               span.fa.fa-calendar
             input(class="form-control" type="text" name="end_date" placeholder="to" id="to")
         button(type="submit" class="btn btn-warning ") Go! 
+  .home-explore
+    .row
+      .col-md-12
+        | Don't want to search? It's okay, you can explore too!
+    .row
+      .col-md-3.home-events
+        | some cool events
+        each tag in tags
+          - if(tag.event_count > 0)
+              .col-md-12
+                a(href="todo")
+                  .category-el
+                    .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                      .info-text.col-xs-12
+                        h2.sm.uppercase
+                          | #{tag.tag_name}
+                        span.number.uppercase
+                          | #{tag.event_count} EVENT
+                          - if(tag.event_count >1)
+                            | S
+                       .info-overlay
+      .col-md-3.home-gear
+        | some cool gear
+        each tag in tags
+          - if(tag.event_count > 0)
+              .col-md-12
+                a(href="todo")
+                  .category-el
+                    .info.clearfix
+                      .info-text.col-xs-12
+                        h2.sm.uppercase
+                          | Dummy #{tag.id}
+                        span.number.uppercase
+                          | #{tag.event_count} retailer
+                          - if(tag.event_count >1)
+                            | S
+                       .info-overlay
+      .col-md-3.home-groups
+        | some cool groups
+      .col-md-3.home-groups
+        | featured
 
 block extrajs
   script(src="/js/home.js")

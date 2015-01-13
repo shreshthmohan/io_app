@@ -369,8 +369,6 @@ exports.grouped_by_activity = function(req, res) {
     return Promise.all(promises);
   })
   .then(function(tags_c) {
-    //console.log(JSON.stringify(tags))
-    console.log(JSON.stringify(tags_c))
     res.render('user/event_groups', {
       // TODO: title
       tags: tags_c //tags with counts of respective events
