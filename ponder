@@ -144,6 +144,7 @@ SELECT `Events`.*, `City`.`id` AS `City.id`, `City`.`city_name` AS `City.city_na
     DONE.
 
 36. TODOs 14 Jan 2015:
-    1. URLs from category/location clusters
-    2. Visual improvements to homepage
+    1. URLs from category/location clusters: DONE 
+    2. Visual improvements to homepage: blur background
     3. Sticky filter bars (not in mobile view)
+    4. Page titles and headers (admin titles remain)

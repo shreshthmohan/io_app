@@ -312,15 +312,13 @@ exports.individual = function(req, res) {
     })
   .success(function(race) {
      res.render('user/individual_event', {
+       title_: race.event_name + ' in ' + race.City.city_name,
        race: race}) 
   }) 
 }
 
 // TODO: past events 
 
-///////////////////////////////////////////////////////
-// Experimental stuff                                //
-///////////////////////////////////////////////////////
 
 // Events grouped
 // All activities, all locations: events grouped by activity
@@ -329,18 +327,8 @@ exports.individual = function(req, res) {
 // Chosen location, chosen activity: events not to be grouped
 
 
-// All activities in all locations group by activities
 // find all tags
 
-//exports.events_grouped = function(req, res) {
-//  db.EventTag.count({where: {TagId: 1}})
-//  .success(function(tag_count) {
-//    console.log(JSON.stringify(tag_count))
-//    res.render('user/events_groups', {
-//      tag_count: tag_count}
-//    )
-//  })
-//}
 
 // Will land up here when people search for all locations with all tags
 // All activities, all locations: events grouped by activity
@@ -370,7 +358,7 @@ exports.grouped_by_activity = function(req, res) {
   })
   .then(function(tags_c) {
     res.render('user/event_groups', {
-      // TODO: title
+      title_: 'Upcoming outdoor and adventure events all over India',
       tags: tags_c //tags with counts of respective events
     })
   })
@@ -408,6 +396,7 @@ exports.grouped_by_activity_chosen_loc = function(req, res) {
     db.City.findOne({where: {id: req.param('location')}})
     .then(function(city) {
       res.render('user/event_groups', {
+        title_: 'All upcoming outdoor and adventure events in ' + city.city_name,
         tags: tags_c, //tags with counts of respective events
         city: city
       })
@@ -444,6 +433,7 @@ exports.grouped_by_location_chosen_tag = function(req, res) {
     db.Tag.findOne({where: {id: req.param('activity')}})
     .then(function(tag) {
       res.render('user/event_groups', {
+        title_: 'Upcoming ' + tag.tag_name + ' events all over India',
         cities: cities_c,
         tag: tag
       })
@@ -451,7 +441,22 @@ exports.grouped_by_location_chosen_tag = function(req, res) {
   })
 }
 
+///////////////////////////////////////////////////////
+// Experimental stuff                                //
+///////////////////////////////////////////////////////
+
+//exports.events_grouped = function(req, res) {
+//  db.EventTag.count({where: {TagId: 1}})
+//  .success(function(tag_count) {
+//    console.log(JSON.stringify(tag_count))
+//    res.render('user/events_groups', {
+//      tag_count: tag_count}
+//    )
+//  })
+//}
+
 // exp: eager loading tags
+
 exports.exp = function(req, res) {
   db.Event.findAll({ include: [ db.City, db.EventTag ]})
   .success(function(races) {
