@@ -18,8 +18,15 @@ block nav_element_list
 
 
 block content
-  .heading
-    h1 Events grouped by activity/location
+  .heading.text-center.border-gray
+    - if(tags)
+        h1.md All Events 
+          - if(city)
+              | in #{city.city_name}
+          - else
+              | all over India
+    - else if(cities)
+        h1.md All #{tag.tag_name} events all over India
   .category-list
     - if(tags)
         each tag in tags
