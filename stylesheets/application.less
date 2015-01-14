@@ -40,6 +40,8 @@
 @gray-light96: lighten(@gray-base, 96%);
 @gray-light97: lighten(@gray-base, 97%);
 
+// @gray-lighter is 93.5% i.e #eee
+
 // form-control: box-border and shadow color
 @input-border-focus: @io-yellow;
 
@@ -79,82 +81,85 @@ h2 {
 //
 @navbar-height: 35px;
 
+
+
+
 // Navbar 
 
-  .navbar-default {
-    // shadow
-    -webkit-box-shadow: 0px 0px 8px 2px #ddd;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-    -moz-box-shadow:    0px 0px 8px 2px #ddd;  /* Firefox 3.5 - 3.6 */
-    box-shadow:         0px 0px 8px 2px #ddd;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
-    .navbar-nav {
-      > li {
-        text-align: center;
-        > a {
-          font-size: 14px;
-          //font-weight: bold;
-          background-color: @navbar-bg;
-          &:hover,
-          &:focus {
-            color: @navbar-default-link-hover-color;
-            // For underline on hover
-            &:after {
-              @media (min-width: @grid-float-breakpoint) {
-                visibility: visible;
-              }
-            }
-          }
+.navbar-default {
+  // shadow
+  -webkit-box-shadow: 0px 0px 8px 2px #ddd;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    0px 0px 8px 2px #ddd;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         0px 0px 8px 2px #ddd;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  .navbar-nav {
+    > li {
+      text-align: center;
+      > a {
+        font-size: 14px;
+        //font-weight: bold;
+        background-color: @navbar-bg;
+        &:hover,
+        &:focus {
+          color: @navbar-default-link-hover-color;
           // For underline on hover
           &:after {
             @media (min-width: @grid-float-breakpoint) {
-              color: @navbar-link-under;
-              content: "";
-              width: 100%;
-              height: 0;
-              display: block;
-              position: absolute;
-              bottom: 0;
-              left: 0px;
-              visibility: hidden;
-              border-style: solid;
-              border-width: 1px 0 0;
+              visibility: visible;
             }
           }
         }
-      }
-      > .active > a {
-        // For undeline on hover
+        // For underline on hover
         &:after {
           @media (min-width: @grid-float-breakpoint) {
-            visibility: visible;
-            border-width: 2px 0 0;
+            color: @navbar-link-under;
+            content: "";
+            width: 100%;
+            height: 0;
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0px;
+            visibility: hidden;
+            border-style: solid;
+            border-width: 1px 0 0;
           }
         }
-        &:hover {
-          background-color: @navbar-default-link-hover-bg; 
+      }
+    }
+    > .active > a {
+      // For undeline on hover
+      &:after {
+        @media (min-width: @grid-float-breakpoint) {
+          visibility: visible;
+          border-width: 2px 0 0;
         }
       }
-    }
-    .navbar-brand {
-      color: @io-yellow;
-      background-color: @navbar-bg;
-      &:hover,
-      &:focus {
-        color: @io-yellow;
+      &:hover {
+        background-color: @navbar-default-link-hover-bg; 
       }
     }
   }
-  
   .navbar-brand {
-    font-size: ceil((@font-size-base * 1.40));
-    font-weight: bold;
+    color: @io-yellow;
+    background-color: @navbar-bg;
+    &:hover,
+    &:focus {
+      color: @io-yellow;
+    }
   }
+}
 
-  body {
-    margin-top: 50px; // To bring jumbotron container below navbar
-    font-size: 105%; // To control datepicker size
-    min-height: 2000px;
-    background-color: @gray-lighter;
-  }
+.navbar-brand {
+  font-size: ceil((@font-size-base * 1.40));
+  font-weight: bold;
+}
+
+body {
+  margin-top: 50px; // To bring jumbotron container below navbar
+  font-size: 105%; // To control datepicker size
+  min-height: 2000px;
+  background-color: @gray-lighter;
+}
 
 // Home radio form 
   .groups, .gear, .learn  {
@@ -437,7 +442,6 @@ h1.sm {
   background:rgba(0,0,0,.3);
   background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(0,0,0,0)),color-stop(1%,rgba(0,0,0,0)),color-stop(100%,rgba(0,0,0,.65)));
   background:-webkit-linear-gradient(top,rgba(0,0,0,0)0,rgba(0,0,0,0)1%,rgba(0,0,0,.65)100%);
-  background:-webkit-linear-gradient(top,rgba(0,0,0,0)0,rgba(0,0,0,0)1%,rgba(0,0,0,.65)100%);
   background:linear-gradient(to bottom,rgba(0,0,0,0)0,rgba(0,0,0,0)1%,rgba(0,0,0,.65)100%);
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000', GradientType=0);
   width:100%;
@@ -447,4 +451,34 @@ h1.sm {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+//////////////////
+// Home explore //
+//////////////////
+
+.home-hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid @gray-light90;
+}
+
+.explore-head {
+  margin: 0px 10px 10px 10px;
+  background: white;
+  font-size: 18px;
+}
+
+.home-category-head {
+  margin: 10px;
+  color: @io-yellow;
+  background: white;
+  font-size: 16px;
+}
+.home-events, .home-gear, .home-groups {
+  border-right: 1px solid @gray-light90;
+}
+
+.border-gray {
+  border: 1px solid @gray-light85;
 }

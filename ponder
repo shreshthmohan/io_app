@@ -141,3 +141,9 @@ SELECT `Events`.*, `City`.`id` AS `City.id`, `City`.`city_name` AS `City.city_na
 
 35. A usecase very close to what I need for fecthing things for each tag instance: https://gist.github.com/jagged3dge/1ae038cf050662986121
     Using promises i.e.
+    DONE.
+
+36. TODOs 14 Jan 2015:
+    1. URLs from category/location clusters
+    2. Visual improvements to homepage
+    3. Sticky filter bars (not in mobile view)

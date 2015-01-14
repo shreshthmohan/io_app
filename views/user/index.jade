@@ -17,7 +17,7 @@ block nav_element_list
       span(class="hide-for-small") 
 
 block content
-  .home-search
+  .home-search.border-gray
     h1 Look for Adventure!
     form(class="home-radio")
       input(id="gear" type="radio" name="search" value="gear")
@@ -73,17 +73,18 @@ block content
               span.fa.fa-calendar
             input(class="form-control" type="text" name="end_date" placeholder="to" id="to")
         button(type="submit" class="btn btn-warning ") Go! 
+  hr.home-hr
   .home-explore
     .row
-      .col-md-12
+      .explore-head.text-center.border-gray
         | Don't want to search? It's okay, you can explore too!
     .row
       .col-md-3.home-events
-        | some cool events
+        .home-category-head.text-center.border-gray Events
         each tag in tags
           - if(tag.event_count > 0)
               .col-md-12
-                a(href="todo")
+                a(href="/app/events/upcoming?activity=" + tag.id + "&location=0", title="All upcoming " + tag.tag_name  + " events all over India")
                   .category-el
                     .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                       .info-text.col-xs-12
@@ -95,7 +96,7 @@ block content
                             | S
                        .info-overlay
       .col-md-3.home-gear
-        | some cool gear
+        .home-category-head.text-center.border-gray Gear
         each tag in tags
           - if(tag.event_count > 0)
               .col-md-12
@@ -111,9 +112,9 @@ block content
                             | S
                        .info-overlay
       .col-md-3.home-groups
-        | some cool groups
-      .col-md-3.home-groups
-        | featured
+        .home-category-head.text-center.border-gray Groups
+      .col-md-3.home-featured
+        .home-category-head.text-center.border-gray Featured
 
 block extrajs
   script(src="/js/home.js")
