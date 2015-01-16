@@ -2,6 +2,7 @@ module.exports = function(sequelize, DataTypes) {
   var Event = sequelize.define('Event',
   {
     event_name:      {type: DataTypes.STRING(60), allowNull: false}, 
+    event_name_slug: {type: DataTypes.STRING(60), allowNull: false}, 
     event_url:       {type: DataTypes.STRING(555)},
     organiser_name:  {type: DataTypes.STRING(80)},
     organiser_url:   {type: DataTypes.STRING(555)},

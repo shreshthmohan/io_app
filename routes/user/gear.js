@@ -195,7 +195,7 @@ exports.individual = function(req, res) {
   })
   .success(function(retailer) {
      res.render('user/individual_retailer', {
-       title_: retailer.retailer_name + ' in ' + retailer_name.City.city_name,
+       title_: retailer.retailer_name + ' in ' + retailer.City.city_name,
        retailer: retailer}) 
   }) 
 }

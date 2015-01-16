@@ -7,11 +7,11 @@ exports.create = function(req, res) {
       city_name: req.param('city_name'),
       image_url: req.param('image_url')
     })
-    .success(function() {
-      res.redirect('/app/admin/city/index')
+    .success(function(city) {
+      res.redirect('/app/admin/city/' + city.id)
     });
   } else {
-    res.redirect('/app/admin/city/index')
+    res.redirect('/app/admin/city_index')
   }
 };
 
@@ -26,17 +26,16 @@ exports.index = function(req, res) {
 
 // List of gear retailers in given city
 exports.retailer_list = function(req, res) {
-  db.City.find({ where: {city_name: req.param('city_name')}})
-  .success(function(city) {
-     db.Retailer.findAll({ where: {CityId: city.id}})
-     .success(function(retailers) {
-        console.log(JSON.stringify(retailers))
-        res.render('admin/city_retailers', {
-          city: city,
-          retailers: retailers
-        }) 
-     })
-  })
+   db.Retailer.findAll({
+     where: {CityId: req.param('city_id')}
+   })
+   .success(function(retailers) {
+      console.log(JSON.stringify(retailers))
+      res.render('admin/city_retailers', {
+        city: city,
+        retailers: retailers
+      }) 
+   })
 };
 
 // List of events in given city
@@ -58,6 +57,7 @@ exports.individual = function(req, res) {
   db.City.findOne({where: {id: req.param('city_id')}})
   .then(function(city) {
     console.log("going to render city.jade")
+    console.log(JSON.stringify(city))
     res.render('admin/city', {city: city})
   })
 }

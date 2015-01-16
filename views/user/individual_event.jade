@@ -88,3 +88,7 @@ block content
       li.subtag
         span
           | #{event_subtag.Subtag.subtag_name}
+    - if(admin)
+        | Dear Admin, if you see something wrong or missing with this event you can modify it 
+        a(href="/app/admin/events/" + race.City.city_name + "/" + race.event_name, target="_blank") here
+      

@@ -143,8 +143,14 @@ SELECT `Events`.*, `City`.`id` AS `City.id`, `City`.`city_name` AS `City.city_na
     Using promises i.e.
     DONE.
 
-36. TODOs 14 Jan 2015:
+36. Urgent TODOs
     1. URLs from category/location clusters: DONE 
-    2. Visual improvements to homepage: blur background
+    2. Visual improvements to homepage:
+         blur background
     3. Sticky filter bars (not in mobile view)
     4. Page titles and headers (admin titles remain)
+    5. Make things easy for admin to edit:
+         Provide link to admin page for individual entity in user view iff user is admin
+    6. Suggestions:
+         tag links to all say running events in location(in search results for chosen tag chosen location)
+         and so on

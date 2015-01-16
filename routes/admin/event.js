@@ -1,6 +1,7 @@
 var db = require('../../models');
 var Sequelize = require('sequelize');
 var sequelize = db.sequelize; // just to avoid the confusion
+var slugify = require('./slugify');
 
 // Create form (GET)
 exports.create_form = function(req, res) {
@@ -18,6 +19,7 @@ exports.create = function(req, res) {
   .success(function(city) {
     db.Event.create({
       event_name:      req.param('event_name'),
+      event_name_slug: slugify(req.param('event_name')),
       event_url:       req.param('event_url'),
       organiser_name:  req.param('organiser_name'),
       organiser_url:   req.param('organiser_url'),

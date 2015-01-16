@@ -80,18 +80,10 @@ exports.cities = function(req, res) {
 
 // Display individual retailer in city
 exports.individual = function(req, res) {
-  db.City.find({where: {city_name: req.param('city_name')}})
-  .success(function(city) {
-    db.Retailer.find(
-      {where: 
-        Sequelize.and(
-          {CityId: city.id},
-          {retailer_name: req.param('retailer_name')}
-        )
-      } // eager loading for SocialLink doesn't seem to be working
-        // waiting for resolution on github until then: workaround by using
-        // another 'findAll where'
-    )
+    db.Retailer.find({
+      where: {id: req.param('retailer_id')},
+      include: [db.City]
+    })
     .success(function(retailer) {
       db.SocialLink.findAll({where: {RetailerId: retailer.id}})
       .success(function(slink) {
@@ -122,8 +114,7 @@ exports.individual = function(req, res) {
                       numbers: numbers,
                       tags: tags,
                       mails: mails,
-                      linked_tags: linked_tags,
-                      city: city
+                      linked_tags: linked_tags
                     })
                   })
                 })
@@ -133,7 +124,6 @@ exports.individual = function(req, res) {
         })
       })
     })
-  })
 };
 
 

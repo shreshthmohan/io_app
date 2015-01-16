@@ -75,3 +75,6 @@ block content
         li.tag
           span
             | #{gear_tag.Tag.tag_name}
+    - if(admin)
+        | Dear Admin, if you see something wrong or missing with this retailer you can modify it 
+        a(href="/app/admin/gear/" + retailer.City.city_name + "/" + retailer.retailer_name + "/" + retailer.id, target="_blank") here

@@ -114,11 +114,14 @@ app.get('/', function(req, res) {res.redirect('/app/home')})
 
 // Checking if user is authenticated for every route except sign-in/up
 app.all('/app/*', auth_middleware.ensure_auth);
+// Adding a boolean 'admin' to res.locals
+app.all('/app/*', auth_middleware.add_admin_bool);
 
 ////////////////////////
 // Admin routes start //
 ////////////////////////
 
+// Checking if user has admin privileges
 app.all('/app/admin*', auth_middleware.ensure_admin);
 
 app.get('/app/admin/sign_up', user.sign_up_form);
@@ -139,10 +142,10 @@ app.get('/app/admin/gear', admin_retailer.cities);
 // List all retailers in a city
 // Whether or not to take care of uppercase, if yes, how?
 // it's taken care of by default
-app.get('/app/admin/gear/:city_name', admin_city.retailer_list);
+app.get('/app/admin/gear/:city_name/:city_id', admin_city.retailer_list);
 
 // Individual retailer in specified city
-app.get('/app/admin/gear/:city_name/:retailer_name', admin_retailer.individual);
+app.get('/app/admin/gear/:city_name/:retailer_name/:retailer_id', admin_retailer.individual);
 
 // modify gear_retailer
 // should ideally be PUT, checking if POST will do the job
@@ -276,9 +279,9 @@ app.get('/app/events/upcoming', race.upcoming);
 app.get('/app/events', function(req, res) {res.redirect('/app/events/upcoming')});
 
 // Individual event
-app.get('/app/events/:city_name/:event_id', race.individual)
-// TODO: better URL
-//app.get('/app/events/:city_name/:event_id/:event_slug', race.individual)
+app.get('/app/events/:city_name/:event_name_slug/:event_id', race.individual)
+// TODO: works fine even in someone tries to access /app/events/:some-text/:some-random-text/:event_id
+// Need to figure out how to display correct name in URL bar. Some kind of redirection
 
 // Experimental events group route
 //app.get('/app/events/grouped', race.events_grouped)
