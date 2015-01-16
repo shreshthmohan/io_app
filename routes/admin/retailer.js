@@ -1,6 +1,7 @@
 var db = require('../../models');
 var Sequelize = require('sequelize');
 var sequelize = db.sequelize; // just to avoid the confusion
+var slugify = require('./slugify');
 
 exports.create_form = function(req, res) {
   db.City.findAll().success(function(cities) {
@@ -24,7 +25,7 @@ exports.create = function(req, res) {
        comments:         req.param('comments')
      }).success(function(retailer){
           retailer.setCity(city).success(function() { // adds FK in retailer
-            res.redirect('/app/admin/gear/' + city.city_name);
+            res.redirect('/app/admin/gear/city/' + city.id);
           })
         })
    })
@@ -32,40 +33,31 @@ exports.create = function(req, res) {
 
 // Modify existing retailer, rather populate missing fields
 exports.modify = function(req, res) {
-  db.City.find({where: {city_name: req.param('city_name')}})
-  .success(function(city) {
-    db.Retailer.find(
-      {where: 
-        Sequelize.and(
-          {CityId: city.id},
-          {retailer_name: req.param('retailer_name')}
-        )
-      }
-    )
-    .success(function(retailer) {
-      retailer.updateAttributes({
-        website_url:      req.param('website_url'),
-        address_field:    req.param('address_field'),
-        location_url:     req.param('location_url'),
-        img_url_square:   req.param('img_url_square'),
-        comments:         req.param('comments')}
-      ).success(function(retailer) {
-         res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                      retailer.retailer_name)
-       })
-    })
+  db.Retailer.find({
+    where: {id: req.param('retailer_id')},
+  })
+  .success(function(retailer) {
+    retailer.updateAttributes({
+      website_url:      req.param('website_url'),
+      address_field:    req.param('address_field'),
+      location_url:     req.param('location_url'),
+      img_url_square:   req.param('img_url_square'),
+      comments:         req.param('comments')}
+    ).success(function(retailer) {
+       res.redirect('/app/admin/gear/retailer/' + retailer.id)
+     })
   })
 };
 
 exports.modify_retailer_name = function(req, res) {
-  db.Retailer.find({where: {id: req.param('TODO')}})
+  db.Retailer.find({where: {id: req.param('retailer_id')}})
   .then(function(retailer) {
     retailer.updateAttributes({
-      retailer_name: req.param('new_retailer_name')
+      retailer_name: req.param('new_retailer_name'),
+      retailer_name_slug: slugify(req.param('new_retailer_name'))
     })
     .then(function(retailer) {
-      res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                   retailer.retailer_name)
+      res.redirect('/app/admin/gear/retailer/' + retailer.id)
     })
   })
 }
@@ -135,67 +127,50 @@ exports.individual = function(req, res) {
 // Add and if-else to prevent empty brand entries
 // TODO: ^Add something on the front-end as well?
 exports.add_brand = function(req, res) {
-  db.City.find({where: {city_name: req.param('city_name')}})
-  .success(function(city) {
-    db.Retailer.find(
-      {where: 
-        Sequelize.and(
-          {CityId: city.id},
-          {retailer_name: req.param('retailer_name')}
-        )
-      }
-    )
-    .success(function(retailer) {
-      if(req.param('new_brand')) { 
-        db.Brand.create(
-        {
-          brand_name: req.param('new_brand')
+  db.Retailer.find(
+    {where: {id: req.param('retailer_id')}
+    }
+  )
+  .success(function(retailer) {
+    if(req.param('new_brand')) { 
+      db.Brand.create(
+      {
+        brand_name: req.param('new_brand')
+      })
+      .success(function(brand) {
+        db.GearBrand.create({
+          cor_name: ''
         })
-        .success(function(brand) {
-          db.GearBrand.create({
-            cor_name: ''
-          })
-          .success(function(gear_brand) {
-            gear_brand.setRetailer(retailer).success(function() {
-              gear_brand.setBrand(brand).success(function() {
-                res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                             retailer.retailer_name)
-              })
+        .success(function(gear_brand) {
+          gear_brand.setRetailer(retailer).success(function() {
+            gear_brand.setBrand(brand).success(function() {
+              res.redirect('/app/admin/gear/retailer/' + retailer.id)
             })
           })
         })
-      } else {
-        res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                     retailer.retailer_name)
-      }
-    })
+      })
+    } else {
+      res.redirect('/app/admin/gear/retailer/' + retailer.id)
+    }
   })
 };
 
 // Choose a brand from exisiting brands to be associated with retailer
 exports.choose_brand = function(req, res) {
-  db.City.find({where: {city_name: req.param('city_name')}})
-  .success(function(city) {
-    db.Retailer.find(
-      {where: 
-        Sequelize.and(
-          {CityId: city.id},
-          {retailer_name: req.param('retailer_name')}
-        )
-      }
-    )
-    .success(function(retailer) {
-      db.GearBrand.create({
-        cor_name: ''
-      })
-      .success(function(gear_brand) {
-        db.Brand.find({where: {id: req.param('brand_id')}})
-        .success(function(brand) {
-          gear_brand.setRetailer(retailer).success(function() {
-            gear_brand.setBrand(brand).success(function() {
-              res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                           retailer.retailer_name)
-            })
+  db.Retailer.find(
+    {where: {id: req.param('retailer_id')}
+    }
+  )
+  .success(function(retailer) {
+    db.GearBrand.create({
+      cor_name: ''
+    })
+    .success(function(gear_brand) {
+      db.Brand.find({where: {id: req.param('brand_id')}})
+      .success(function(brand) {
+        gear_brand.setRetailer(retailer).success(function() {
+          gear_brand.setBrand(brand).success(function() {
+            res.redirect('/app/admin/gear/retailer/' + retailer.id)
           })
         })
       })
@@ -205,67 +180,50 @@ exports.choose_brand = function(req, res) {
 
 // Add a new tag and associate it with a retailer
 exports.add_tag = function(req, res) {
-  db.City.find({where: {city_name: req.param('city_name')}})
-  .success(function(city) {
-    db.Retailer.find(
-      {where: 
-        Sequelize.and(
-          {CityId: city.id},
-          {retailer_name: req.param('retailer_name')}
-        )
-      }
-    )
-    .success(function(retailer) {
-      if(req.param('new_tag')) {
-        db.Tag.create(
-        {
-          tag_name: req.param('new_tag')
+  db.Retailer.find(
+    {where: {id: req.param('retailer_id')}
+    }
+  )
+  .success(function(retailer) {
+    if(req.param('new_tag')) {
+      db.Tag.create(
+      {
+        tag_name: req.param('new_tag')
+      })
+      .success(function(tag) {
+        db.GearTag.create({
+          cor_name: ''
         })
-        .success(function(tag) {
-          db.GearTag.create({
-            cor_name: ''
-          })
-          .success(function(gear_tag) {
-            gear_tag.setRetailer(retailer).success(function() {
-              gear_tag.setTag(tag).success(function() {
-                res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                             retailer.retailer_name)
-              })
+        .success(function(gear_tag) {
+          gear_tag.setRetailer(retailer).success(function() {
+            gear_tag.setTag(tag).success(function() {
+              res.redirect('/app/admin/gear/retailer/' + retailer.id)
             })
           })
         })
-      } else {
-        res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                     retailer.retailer_name)
-      }
-    })
+      })
+    } else {
+      res.redirect('/app/admin/gear/retailer/' + retailer.id)
+    }
   })
 };
 
 // Choose a tag from existing tags to be associated with retailer
 exports.choose_tag = function(req, res) {
-  db.City.find({where: {city_name: req.param('city_name')}})
-  .success(function(city) {
-    db.Retailer.find(
-      {where: 
-        Sequelize.and(
-          {CityId: city.id},
-          {retailer_name: req.param('retailer_name')}
-        )
-      }
-    )
-    .success(function(retailer) {
-      db.GearTag.create({
-        cor_name: ''
-      })
-      .success(function(gear_tag) {
-        db.Tag.find({where: {id: req.param('tag_id')}})
-        .success(function(tag) {
-          gear_tag.setRetailer(retailer).success(function() {
-            gear_tag.setTag(tag).success(function() {
-              res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                           retailer.retailer_name)
-            })
+  db.Retailer.find(
+    {where: {id: req.param('retailer_id')}
+    }
+  )
+  .success(function(retailer) {
+    db.GearTag.create({
+      cor_name: ''
+    })
+    .success(function(gear_tag) {
+      db.Tag.find({where: {id: req.param('tag_id')}})
+      .success(function(tag) {
+        gear_tag.setRetailer(retailer).success(function() {
+          gear_tag.setTag(tag).success(function() {
+            res.redirect('/app/admin/gear/retailer/' + retailer.id)
           })
         })
       })
@@ -275,94 +233,67 @@ exports.choose_tag = function(req, res) {
 
 // Add a social link for the retailer
 exports.add_slink = function(req, res) {
-  db.City.find({where: {city_name: req.param('city_name')}})
-  .success(function(city) {
-    db.Retailer.find(
-      {where: 
-        Sequelize.and(
-          {CityId: city.id},
-          {retailer_name: req.param('retailer_name')}
-        )
-      }
-    )
-    .success(function(retailer) {
-      if(req.param('social_link')){
-        db.SocialLink.create({
-          link: req.param('social_link')
-        }).success(function(slink) {
-            slink.setRetailer(retailer).success(function() {
-              res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                           retailer.retailer_name)
-            })
+  db.Retailer.find(
+    {where: {id: req.param('retailer_id')}
+    }
+  )
+  .success(function(retailer) {
+    if(req.param('social_link')){
+      db.SocialLink.create({
+        link: req.param('social_link')
+      }).success(function(slink) {
+          slink.setRetailer(retailer).success(function() {
+            res.redirect('/app/admin/gear/retailer/' + retailer.id)
           })
-      }
-      else {
-        res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                     retailer.retailer_name)
-      }
-    })
+        })
+    }
+    else {
+      res.redirect('/app/admin/gear/retailer/' + retailer.id)
+    }
   })
 };
 
 // Add a phone number for the retailer
 exports.add_phone = function(req, res) {
-  db.City.find({where: {city_name: req.param('city_name')}})
-  .success(function(city) {
-    db.Retailer.find(
-      {where: 
-        Sequelize.and(
-          {CityId: city.id},
-          {retailer_name: req.param('retailer_name')}
-        )
-      }
-    )
-    .success(function(retailer) {
-      if(req.param('phone_number')){
-        db.PhoneNumber.create({
-          number: req.param('phone_number')
-        }).success(function(number) {
-            number.setRetailer(retailer).success(function() {
-              res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                           retailer.retailer_name)
-            })
+  db.Retailer.find(
+    {where: {id: req.param('retailer_id')}
+    }
+  )
+  .success(function(retailer) {
+    if(req.param('phone_number')){
+      db.PhoneNumber.create({
+        number: req.param('phone_number')
+      }).success(function(number) {
+          number.setRetailer(retailer).success(function() {
+            res.redirect('/app/admin/gear/retailer/' + retailer.id)
           })
-      }
-      else {
-        res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                     retailer.retailer_name)
-      }
-    })
+        })
+    }
+    else {
+      res.redirect('/app/admin/gear/retailer/' + retailer.id)
+    }
   })
 };
 
 // Add an email for the retailer
 exports.add_email = function(req, res) {
-  db.City.find({where: {city_name: req.param('city_name')}})
-  .success(function(city) {
-    db.Retailer.find(
-      {where: 
-        Sequelize.and(
-          {CityId: city.id},
-          {retailer_name: req.param('retailer_name')}
-        )
-      }
-    )
-    .success(function(retailer) {
-      if(req.param('email')){
-        db.Email.create({
-          email: req.param('email')
-        }).success(function(email) {
-            email.setRetailer(retailer).success(function() {
-              res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                           retailer.retailer_name)
-            })
+  db.Retailer.find(
+    {where: {id: req.param('retailer_id')}
+    }
+  )
+  .success(function(retailer) {
+    if(req.param('email')){
+      db.Email.create({
+        email: req.param('email')
+      }).success(function(email) {
+          email.setRetailer(retailer).success(function() {
+            res.redirect('/app/admin/gear/retailer/' + retailer.id)
           })
-      }
-      else {
-        res.redirect('/app/admin/gear/' + city.city_name + '/' +
-                     retailer.retailer_name)
-      }
-    })
+        })
+    }
+    else {
+      res.redirect('/app/admin/gear/retailer/' + retailer.id)
+    }
   })
 };
 
@@ -370,8 +301,7 @@ exports.destroy_slink = function(req, res) {
   db.SocialLink.find({where: {id: req.param('slink_id')}})
   .success(function(slink) {
     slink.destroy().success(function() {
-      res.redirect('/app/admin/gear/' + req.param('city_name') + '/' +
-        req.param('retailer_name'));
+      res.redirect('/app/admin/gear/retailer/' + req.param('retailer_id'));
     })
   })
 };
@@ -380,8 +310,7 @@ exports.destroy_number = function(req, res) {
   db.PhoneNumber.find({where: {id: req.param('number')}})
   .success(function(number) {
     number.destroy().success(function() {
-      res.redirect('/app/admin/gear/' + req.param('city_name') + '/' +
-        req.param('retailer_name'));
+      res.redirect('/app/admin/gear/retailer/' + req.param('retailer_id'));
     })
   })
 };
@@ -390,8 +319,7 @@ exports.destroy_email = function(req, res) {
   db.Email.find({where: {id: req.param('email_id')}})
   .success(function(email) {
     email.destroy().success(function() {
-      res.redirect('/app/admin/gear/' + req.param('city_name') + '/' +
-        req.param('retailer_name'));
+      res.redirect('/app/admin/gear/retailer/' + req.param('retailer_id'));
     })
   })
 };
@@ -400,8 +328,7 @@ exports.dissociate_tag = function(req, res) {
   db.GearTag.find({where: {TagId: req.param('tag_id')}})
   .success(function(tag) {
     tag.destroy().success(function() {
-      res.redirect('/app/admin/gear/' + req.param('city_name') + '/' +
-        req.param('retailer_name'));
+      res.redirect('/app/admin/gear/retailer/' + req.param('retailer_id'));
     })
   })
 };
@@ -410,8 +337,7 @@ exports.dissociate_brand = function(req, res) {
   db.GearBrand.find({where: {BrandId: req.param('brand_id')}})
   .success(function(brand) {
     brand.destroy().success(function() {
-      res.redirect('/app/admin/gear/' + req.param('city_name') + '/' +
-        req.param('retailer_name'));
+      res.redirect('/app/admin/gear/retailer/' + req.param('retailer_id'));
     })
   })
 };

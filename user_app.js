@@ -142,41 +142,41 @@ app.get('/app/admin/gear', admin_retailer.cities);
 // List all retailers in a city
 // Whether or not to take care of uppercase, if yes, how?
 // it's taken care of by default
-app.get('/app/admin/gear/:city_name/:city_id', admin_city.retailer_list);
+app.get('/app/admin/gear/city/:city_id', admin_city.retailer_list);
 
 // Individual retailer in specified city
-app.get('/app/admin/gear/:city_name/:retailer_name/:retailer_id', admin_retailer.individual);
+app.get('/app/admin/gear/retailer/:retailer_id', admin_retailer.individual);
 
 // modify gear_retailer
 // should ideally be PUT, checking if POST will do the job
 // Yes, it will do the 'job', but it won't be true REST API
 // TODO make REST
-app.post('/app/admin/gear/:city_name/:retailer_name', admin_retailer.modify);
-app.post('/app/admin/gear/:city_name/:retailer_name/modify_name', admin_retailer.modify_retailer_name);
-app.post('/app/admin/gear/:city_name/:retailer_name/add_brand', admin_retailer.add_brand);
-app.post('/app/admin/gear/:city_name/:retailer_name/choose_brand', admin_retailer.choose_brand);
-app.post('/app/admin/gear/:city_name/:retailer_name/add_tag', admin_retailer.add_tag);
-app.post('/app/admin/gear/:city_name/:retailer_name/choose_tag', admin_retailer.choose_tag);
+app.post('/app/admin/gear/retailer/:retailer_id', admin_retailer.modify);
+app.post('/app/admin/gear/retailer/:retailer_id/modify_name', admin_retailer.modify_retailer_name);
+app.post('/app/admin/gear/retailer/:retailer_id/add_brand', admin_retailer.add_brand);
+app.post('/app/admin/gear/retailer/:retailer_id/choose_brand', admin_retailer.choose_brand);
+app.post('/app/admin/gear/retailer/:retailer_id/add_tag', admin_retailer.add_tag);
+app.post('/app/admin/gear/retailer/:retailer_id/choose_tag', admin_retailer.choose_tag);
 
-app.post('/app/admin/gear/:city_name/:retailer_name/add_slink', admin_retailer.add_slink);
-app.post('/app/admin/gear/:city_name/:retailer_name/add_phone', admin_retailer.add_phone);
-app.post('/app/admin/gear/:city_name/:retailer_name/add_email', admin_retailer.add_email);
+app.post('/app/admin/gear/retailer/:retailer_id/add_slink', admin_retailer.add_slink);
+app.post('/app/admin/gear/retailer/:retailer_id/add_phone', admin_retailer.add_phone);
+app.post('/app/admin/gear/retailer/:retailer_id/add_email', admin_retailer.add_email);
 
 // Destroy social link associated with a retailer
-app.get('/app/admin/gear/:city_name/:retailer_name/slink/:slink_id', admin_retailer.destroy_slink);
+app.get('/app/admin/gear/slink/:slink_id', admin_retailer.destroy_slink);
 
 // Destroy phone number associated with a retailer
-app.get('/app/admin/gear/:city_name/:retailer_name/number/:number', admin_retailer.destroy_number);
+app.get('/app/admin/gear/number/:number', admin_retailer.destroy_number);
 
 // Destroy email associated with a retailer
-app.get('/app/admin/gear/:city_name/:retailer_name/email/:email_id', admin_retailer.destroy_email);
+app.get('/app/admin/gear/email/:email_id', admin_retailer.destroy_email);
 
 // Dissociate tag associated with a retailer
 // It effectively will destroy entry in GearTags table while retaining
 // corresponding entry in Tags table
 // TODO fix routes, using names is useless. Use id instead.
-app.get('/app/admin/gear/:city_name/:retailer_name/tag/:tag_id', admin_retailer.dissociate_tag);
-app.get('/app/admin/gear/:city_name/:retailer_name/brand/:brand_id', admin_retailer.dissociate_brand);
+app.get('/app/admin/gear/dissociate_tag/:tag_id', admin_retailer.dissociate_tag);
+app.get('/app/admin/gear/dissociate_brand/:brand_id', admin_retailer.dissociate_brand);
 
 app.post('/app/admin/add_tag', admin_routes.add_tag);
 
@@ -277,14 +277,13 @@ app.get('/app/events/upcoming', race.upcoming);
 
 // All events
 app.get('/app/events', function(req, res) {res.redirect('/app/events/upcoming')});
+// TODO: better URLs: /app/events/upcoming/running/bengaluru/1/2
 
 // Individual event
-app.get('/app/events/:city_name/:event_name_slug/:event_id', race.individual)
+app.get('/app/events/:city_name_slug/:event_name_slug/:event_id', race.individual)
 // TODO: works fine even in someone tries to access /app/events/:some-text/:some-random-text/:event_id
 // Need to figure out how to display correct name in URL bar. Some kind of redirection
-
-// Experimental events group route
-//app.get('/app/events/grouped', race.events_grouped)
+// Yes, redirection. Find out how much more resources this will use
 
 /////////////////
 // Gear routes //
@@ -292,7 +291,7 @@ app.get('/app/events/:city_name/:event_name_slug/:event_id', race.individual)
 
 app.get('/app/gear', gear.all);
 
-app.get('/app/gear/:city_name/:retailer_id', gear.individual)
+app.get('/app/gear/:city_name_slug/:retailer_name_slug/:retailer_id', gear.individual)
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')))
