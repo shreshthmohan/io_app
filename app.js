@@ -27,6 +27,9 @@ var lessMiddlewareOptions = {}
 var lessParserOptions = {}
 var lessCompilerOptions = {}
 
+// To change env
+//app.settings.env = 'production'
+
 app.use(lessMiddleware(
   __dirname + '/stylesheets' 
   // middleware looks for less files here
