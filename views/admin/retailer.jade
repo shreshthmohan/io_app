@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  form(action="/app/admin/gear/retailer/" + retailer.id + "modify_name", method="post")
+  form(action="/app/admin/gear/retailer/" + retailer.id + "/modify_name", method="post")
     h1 #{retailer.retailer_name}
     input(type="text", name="new_retailer_name" placeholder="New retailer name")
     input(type="submit")
@@ -59,15 +59,15 @@ block content
       li
         | #{brand.brand_name}
         div(class="destroy")
-          a(href="/app/admin/gear/dissociate_brand/" + brand.id) x
-  form(action="/app/admin/gear/retailer/" + retailer.id + "choose_brand", method="post")
+          a(href="/app/admin/gear/" + retailer.id + "/dissociate_brand/" + brand.id) x
+  form(action="/app/admin/gear/retailer/" + retailer.id + "/choose_brand", method="post")
     | Associate a brand with this retailer: 
     select(name="brand_id", id="brand_id")
       each brand in brands
         option(value=brand.id) #{brand.brand_name}
     input(type="submit")
     br
-  form(action="/app/admin/gear/retailer/" + retailer.id + "add_brand", method="post")
+  form(action="/app/admin/gear/retailer/" + retailer.id + "/add_brand", method="post")
     | Add a new brand
     input(type="text", name="new_brand")
     input(type="submit")
@@ -81,9 +81,9 @@ block content
       li
         | #{link.link}
         div(class="destroy")
-          a(href="/app/admin/gear/slink/" + link.id) x
+          a(href="/app/admin/gear/" + retailer.id + "/destroy_slink/" + link.id) x
           //- TODO use "cross" instead of an 'x'
-  form(action="/app/admin/gear/retailer/" + retailer.id + "add_slink", method="post")
+  form(action="/app/admin/gear/retailer/" + retailer.id + "/add_slink", method="post")
     | Add a social link: 
     input(type="text", name="social_link")
     input(type="submit")
@@ -91,7 +91,7 @@ block content
   //-
   //-
   //- Phone numbers start
-  form(action="/app/admin/gear/retailer/" + retailer.id + "add_phone", method="post")
+  form(action="/app/admin/gear/retailer/" + retailer.id + "/add_phone", method="post")
     | Add a phone number: 
     input(type="text", name="phone_number")
     input(type="submit")
@@ -100,13 +100,13 @@ block content
         li
           | #{number.number}
           div(class="destroy")
-            a(href="/app/admin/gear/number/" + number.id) x
+            a(href="/app/admin/gear/" + retailer.id + "/destroy_number/" + number.id) x
   //- TODO: add mobile-compatible phone numbers
   //- Phone numbers end
   //-
   //-
   //- Emails start
-  form(action="/app/admin/gear/retailer/" + retailer.id + "add_email", method="post")
+  form(action="/app/admin/gear/retailer/" + retailer.id + "/add_email", method="post")
     | Add an email: 
     input(type="text", name="email")
     input(type="submit")
@@ -115,7 +115,7 @@ block content
         li
           | #{email.email}
           div(class="destroy")
-            a(href="/app/admin/gear/email/" + email.id) x
+            a(href="/app/admin/gear/" + retailer.id + "/destroy_email/" + email.id) x
   //- Emails end
   //-
   //-
@@ -126,15 +126,15 @@ block content
       li
         | #{tag.tag_name}
         div(class="destroy")
-          a(href="/app/admin/gear/dissociate_tag/" + tag.id) x
-  form(action="/app/admin/gear/retailer/" + retailer.id + "choose_tag", method="post")
+          a(href="/app/admin/gear/" + retailer.id + "/dissociate_tag/" + tag.id) x
+  form(action="/app/admin/gear/retailer/" + retailer.id + "/choose_tag", method="post")
     | Associate an activity tag with this retailer: 
     select(name="tag_id", id="tag_id")
       each tag in tags
         option(value=tag.id) #{tag.tag_name}
     input(type="submit")
     br
-  form(action="/app/admin/gear/retailer/" + retailer.id + "add_tag", method="post")
+  form(action="/app/admin/gear/retailer/" + retailer.id + "/add_tag", method="post")
     | Add a new tag
     input(type="text", name="new_tag")
     input(type="submit")

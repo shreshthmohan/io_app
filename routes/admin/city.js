@@ -26,16 +26,20 @@ exports.index = function(req, res) {
 
 // List of gear retailers in given city
 exports.retailer_list = function(req, res) {
-   db.Retailer.findAll({
-     where: {CityId: req.param('city_id')}
-   })
-   .success(function(retailers) {
+  db.City.find({where: {id: req.param('city_id')}})
+  .then(function(city) {
+    db.Retailer.findAll({
+      where: {CityId: req.param('city_id')}
+    })
+    .success(function(retailers) {
       console.log(JSON.stringify(retailers))
       res.render('admin/city_retailers', {
+        title: 'All gear retailers of ' + city.city_name,
         city: city,
         retailers: retailers
       }) 
-   })
+    })
+  })
 };
 
 // List of events in given city
@@ -45,6 +49,7 @@ exports.event_list = function(req, res) {
      db.Event.findAll({ where: {CityId: city.id}})
      .success(function(races) {
         res.render('admin/city_events', {
+          title: 'All events of ' + city.city_name,
           city: city,
           races:races 
         }) 
@@ -56,9 +61,9 @@ exports.event_list = function(req, res) {
 exports.individual = function(req, res) {
   db.City.findOne({where: {id: req.param('city_id')}})
   .then(function(city) {
-    console.log("going to render city.jade")
-    console.log(JSON.stringify(city))
-    res.render('admin/city', {city: city})
+    res.render('admin/city', {
+      title: city.city_name,
+      city: city})
   })
 }
 

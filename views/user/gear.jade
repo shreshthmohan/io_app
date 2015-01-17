@@ -27,7 +27,7 @@ block content
             each tag in retailer.GearTags
               li.tag
                 | #{tag.Tag.tag_name}
-            a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.id)
+            a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.retailer_name_slug + "/" retailer.id)
               h2 #{retailer.retailer_name}
             .city
               span.fa.fa-map-marker.helper
@@ -37,7 +37,7 @@ block content
           .category-el
             li.tag
               | #{tag.tag_name}
-            a(href="/app/gear/" + gear_tag.Retailer.City.city_name + "/" + gear_tag.Retailer.id)
+            a(href="/app/gear/" + gear_tag.Retailer.City.city_name + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
               h2 #{gear_tag.Retailer.retailer_name}
             .city
               | #{gear_tag.Retailer.City.city_name}

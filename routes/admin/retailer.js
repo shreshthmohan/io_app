@@ -49,7 +49,7 @@ exports.modify = function(req, res) {
   })
 };
 
-exports.modify_retailer_name = function(req, res) {
+exports.modify_name = function(req, res) {
   db.Retailer.find({where: {id: req.param('retailer_id')}})
   .then(function(retailer) {
     retailer.updateAttributes({
@@ -99,6 +99,7 @@ exports.individual = function(req, res) {
                   db.Email.findAll({where: {RetailerId: retailer.id}})
                   .success(function(mails) {
                     res.render('admin/retailer', {
+                      title: retailer.retailer_name + ' in TODO',
                       retailer: retailer,
                       social_links: slink,
                       brands: brands,

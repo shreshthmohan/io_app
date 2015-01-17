@@ -1,8 +1,11 @@
 extends event_layout
 
 block content
-  h1 #{race.event_name}
-  form(action="#{race.event_name}", method="post")
+  form(action="/app/admin/events/" + race.id + "/modify_name", method="post")
+    h1 #{race.event_name}
+    input(type="text", name="new_event_name" placeholder="New event name")
+    input(type="submit")
+  form(action="/app/admin/events/" + race.id, method="post")
     div(id="event_name" class="data") #{race.event_name}
     div(id="change_event_name" class="edit") edit
     if(race.event_url)
@@ -59,7 +62,7 @@ block content
     br
     input(type="submit")
 
-  form(action="#{race.event_name}/modify_start_date", method="post")
+  form(action="/app/admin/events/" + race.id + "/modify_start_date", method="post")
     | Start date 
     if(race.start_date)
       div(id="start_date" class="data") #{race.start_date}
@@ -70,7 +73,7 @@ block content
     br
     input(type="submit")
 
-  form(action="#{race.event_name}/modify_end_date", method="post")
+  form(action="/app/admin/events/" + race.id + "/modify_end_date", method="post")
     | End date 
     if(race.end_date)
       div(id="end_date" class="data") #{race.end_date}
@@ -86,8 +89,8 @@ block content
       li
         | #{link.link}
         div(class="destroy")
-          a(href=race.event_name + "/slink/" + link.id) x
-  form(action="#{race.event_name}/add_slink" method="post")
+          a(href='/app/admin/events/' + race.id + "/destroy_slink/" + link.id) x
+  form(action="/app/admin/events/" + race.id + "/add_slink" method="post")
     | Add a social link: 
     input(type="text", name="social_link")
     input(type="submit")
@@ -96,15 +99,15 @@ block content
       li
         | #{tag.tag_name}
         div(class="destroy")
-          a(href=race.event_name + "/tag/" + tag.id) x
-  form(action="#{race.event_name}/choose_tag", method="post")
+          a(href="/app/admin/events/" + race.id + "/dissociate_tag/" + tag.id) x
+  form(action="/app/admin/events/" + race.id + "/choose_tag", method="post")
     | Associate an activity tag with this race: 
     select(name="tag_id", id="tag_id")
       each tag in tags
         option(value=tag.id) #{tag.tag_name}
     input(type="submit")
     br
-  form(action="#{race.event_name}/add_tag", method="post")
+  form(action="/app/admin/events/" + race.id + "/add_tag", method="post")
     | Add a new tag
     input(type="text", name="new_tag")
     input(type="submit")
@@ -113,19 +116,19 @@ block content
       li
         | #{subtag.subtag_name}
         div(class="destroy")
-          a(href=race.event_name + "/subtag/" + subtag.id) x
-  form(action="#{race.event_name}/choose_subtag", method="post")
+          a(href="/app/admin/events/" + race.id + "/dissociate_subtag/" + subtag.id) x
+  form(action="/app/admin/events/" + race.id + "/choose_subtag", method="post")
     | Associate a sub-tag with this race: 
     select(name="subtag_id", id="subtag_id")
       each subtag in subtags
         option(value=subtag.id) #{subtag.subtag_name}
     input(type="submit")
     br
-  form(action="#{race.event_name}/add_subtag", method="post")
+  form(action="/app/admin/events/" + race.id + "/add_subtag", method="post")
     | Add a new sub-tag
     input(type="text", name="new_subtag")
     input(type="submit")
-  form(action="#{race.event_name}/add_phone", method="post")
+  form(action="/app/admin/events/" + race.id + "/add_phone", method="post")
     | Add a phone number: 
     input(type="text", name="phone_number")
     input(type="submit")
@@ -134,8 +137,8 @@ block content
         li
           | #{number.number}
           div(class="destroy")
-            a(href=race.event_name + "/number/" + number.id) x
-  form(action="#{race.event_name}/add_email", method="post")
+            a(href="/app/admin/events/" + race.id + "/destroy_number/" + number.id) x
+  form(action="/app/admin/events/" + race.id + "/add_email", method="post")
     | Add an email: 
     input(type="text", name="email")
     input(type="submit")
@@ -144,6 +147,6 @@ block content
         li
           | #{email.email}
           div(class="destroy")
-            a(href=race.event_name + "/email/" + email.id) x
+            a(href="/app/admin/events/" + race.id + "/destroy_email/" + email.id) x
   script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
   script(src='/js/event.js')

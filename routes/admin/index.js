@@ -3,13 +3,16 @@ var db = require('../../models');
 exports.index = function(req, res) {
   db.City.findAll().success(function(cities){
     res.render('admin/index', {
+      title: 'All admin links | India Outside',
       cities: cities
     })
   })
 };
 
 exports.error = function(req, res) {
-  res.render('admin/error', {error: error})
+  res.render('admin/error', {
+    title: 'Some erorr occurred',
+    error: error})
 }
 
 exports.add_brand = function(req, res) {
@@ -28,6 +31,7 @@ exports.add_brand = function(req, res) {
 exports.new_brand_form = function(req, res) {
   db.Brand.findAll().success(function(brands) {
     res.render('admin/add_brand', {
+      title: 'Add a gear brand',
       brands: brands
     })
   })
@@ -52,7 +56,10 @@ exports.add_tag = function(req, res) {
 exports.individual_tag = function(req, res) {
   db.Tag.find({where: {id: req.param('tag_id')}})
   .success(function(tag) {
-    res.render('admin/tag', {tag: tag})
+    res.render('admin/tag', {
+      title: tag.tag_name + ' tag',
+      tag: tag
+    })
   })
 }
 
@@ -84,6 +91,7 @@ exports.modify_tag_image_url = function(req, res) {
 exports.new_tag_form = function(req, res) {
   db.Tag.findAll().success(function(tags) {
     res.render('admin/add_tag', {
+      title: 'Add a tag',
       tags: tags
     })
   })
@@ -106,6 +114,7 @@ exports.add_subtag = function(req, res) {
 exports.new_subtag_form = function(req, res) {
   db.Subtag.findAll().success(function(subtags) {
     res.render('admin/add_subtag', {
+      title: 'Add a subtag',
       subtags: subtags
     })
   })

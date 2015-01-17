@@ -155,7 +155,7 @@ app.get('/app/admin/gear/retailer/:retailer_id', admin_retailer.individual);
 // Yes, it will do the 'job', but it won't be true REST API
 // TODO make REST
 app.post('/app/admin/gear/retailer/:retailer_id', admin_retailer.modify);
-app.post('/app/admin/gear/retailer/:retailer_id/modify_name', admin_retailer.modify_retailer_name);
+app.post('/app/admin/gear/retailer/:retailer_id/modify_name', admin_retailer.modify_name);
 app.post('/app/admin/gear/retailer/:retailer_id/add_brand', admin_retailer.add_brand);
 app.post('/app/admin/gear/retailer/:retailer_id/choose_brand', admin_retailer.choose_brand);
 app.post('/app/admin/gear/retailer/:retailer_id/add_tag', admin_retailer.add_tag);
@@ -166,20 +166,20 @@ app.post('/app/admin/gear/retailer/:retailer_id/add_phone', admin_retailer.add_p
 app.post('/app/admin/gear/retailer/:retailer_id/add_email', admin_retailer.add_email);
 
 // Destroy social link associated with a retailer
-app.get('/app/admin/gear/slink/:slink_id', admin_retailer.destroy_slink);
+app.get('/app/admin/gear/:retailer_id/destroy_slink/:slink_id', admin_retailer.destroy_slink);
 
 // Destroy phone number associated with a retailer
-app.get('/app/admin/gear/number/:number', admin_retailer.destroy_number);
+app.get('/app/admin/gear/:retailer_id/destroy_number/:number', admin_retailer.destroy_number);
 
 // Destroy email associated with a retailer
-app.get('/app/admin/gear/email/:email_id', admin_retailer.destroy_email);
+app.get('/app/admin/gear/:retailer_id/destroy_email/:email_id', admin_retailer.destroy_email);
 
 // Dissociate tag associated with a retailer
 // It effectively will destroy entry in GearTags table while retaining
 // corresponding entry in Tags table
 // TODO fix routes, using names is useless. Use id instead.
-app.get('/app/admin/gear/dissociate_tag/:tag_id', admin_retailer.dissociate_tag);
-app.get('/app/admin/gear/dissociate_brand/:brand_id', admin_retailer.dissociate_brand);
+app.get('/app/admin/gear/:retailer_id/dissociate_tag/:tag_id', admin_retailer.dissociate_tag);
+app.get('/app/admin/gear/:retailer_id/dissociate_brand/:brand_id', admin_retailer.dissociate_brand);
 
 app.post('/app/admin/add_tag', admin_routes.add_tag);
 
@@ -223,43 +223,46 @@ app.post('/app/admin/events/create_new', admin_race.create);
 // List of cities as per events
 app.get('/app/admin/events', admin_race.cities);
 
-app.get('/app/admin/events/:city_name', admin_city.event_list);
+//app.get('/app/admin/events/:city_name', admin_city.event_list);
+// TODO fix
 
-app.get('/app/admin/events/:city_name/:event_name', admin_race.individual);
+app.get('/app/admin/events/:event_id', admin_race.individual);
 
-app.post('/app/admin/events/:city_name/:event_name', admin_race.modify);
+app.post('/app/admin/events/:event_id/modify_name', admin_race.modify_name);
 
-app.post('/app/admin/events/:city_name/:event_name/add_tag', admin_race.add_tag);
+app.post('/app/admin/events/:event_id', admin_race.modify);
 
-app.post('/app/admin/events/:city_name/:event_name/choose_tag', admin_race.choose_tag);
+app.post('/app/admin/events/:event_id/add_tag', admin_race.add_tag);
 
-app.post('/app/admin/events/:city_name/:event_name/add_subtag', admin_race.add_subtag);
+app.post('/app/admin/events/:event_id/choose_tag', admin_race.choose_tag);
 
-app.post('/app/admin/events/:city_name/:event_name/choose_subtag', admin_race.choose_subtag);
+app.post('/app/admin/events/:event_id/add_subtag', admin_race.add_subtag);
 
-app.post('/app/admin/events/:city_name/:event_name/add_slink', admin_race.add_slink);
+app.post('/app/admin/events/:event_id/choose_subtag', admin_race.choose_subtag);
 
-app.post('/app/admin/events/:city_name/:event_name/add_phone', admin_race.add_phone);
+app.post('/app/admin/events/:event_id/add_slink', admin_race.add_slink);
 
-app.post('/app/admin/events/:city_name/:event_name/add_email', admin_race.add_email);
+app.post('/app/admin/events/:event_id/add_phone', admin_race.add_phone);
 
-app.post('/app/admin/events/:city_name/:event_name/modify_start_date', admin_race.modify_start_date);
-app.post('/app/admin/events/:city_name/:event_name/modify_end_date', admin_race.modify_end_date);
+app.post('/app/admin/events/:event_id/add_email', admin_race.add_email);
+
+app.post('/app/admin/events/:event_id/modify_start_date', admin_race.modify_start_date);
+app.post('/app/admin/events/:event_id/modify_end_date', admin_race.modify_end_date);
 
 // Destroy social link associated with an event
-app.get('/app/admin/events/:city_name/:event_name/slink/:slink_id', admin_race.destroy_slink);
+app.get('/app/admin/events/:event_id/destroy_slink/:slink_id', admin_race.destroy_slink);
 
 // Destroy phone number associated with an event
-app.get('/app/admin/events/:city_name/:event_name/number/:number', admin_race.destroy_number);
+app.get('/app/admin/events/:event_id/destroy_number/:number', admin_race.destroy_number);
 
 // Destroy email associated with an event
-app.get('/app/admin/events/:city_name/:event_name/email/:email_id', admin_race.destroy_email);
+app.get('/app/admin/events/:event_id/destroy_email/:email_id', admin_race.destroy_email);
 
 // Dissociate tag associated with an event
-app.get('/app/admin/events/:city_name/:event_name/tag/:tag_id', admin_race.dissociate_tag);
+app.get('/app/admin/events/:event_id/dissociate_tag/:tag_id', admin_race.dissociate_tag);
 
-// Dissociate tag associated with an event
-app.get('/app/admin/events/:city_name/:event_name/subtag/:subtag_id', admin_race.dissociate_subtag);
+// Dissociate subtag associated with an event
+app.get('/app/admin/events/:event_id/dissociate_subtag/:subtag_id', admin_race.dissociate_subtag);
 
 //////////////////////
 // Admin routes end //

@@ -16,6 +16,7 @@ all_loc_all_tags = function(req, res ) {
   db.Retailer.findAll({
     attributes: [
       'id',
+      'retailer_name_slug',
       'retailer_name'],
     include: [
       db.City, 
@@ -45,6 +46,7 @@ chosen_loc_all_tags = function(req, res) {
   db.Retailer.findAll({
     attributes: [
       'id',
+      'retailer_name_slug',
       'retailer_name'],
     include: [
       db.City,
@@ -87,6 +89,7 @@ all_loc_chosen_tag = function(req, res) {
           model: db.Retailer,
           attributes: [
             'id',
+            'retailer_name_slug',
             'retailer_name'
           ],
           include: [db.City]
@@ -126,6 +129,7 @@ chosen_loc_chosen_tag = function(req, res) {
         }],
       attributes: [
         'id',
+        'retailer_name_slug',
         'retailer_name'
       ]
     })
@@ -188,6 +192,7 @@ exports.individual = function(req, res) {
     attributes: [
       'id',
       'retailer_name',
+      'retailer_name_slug',
       'website_url',
       'location_url',
       'address_field',
