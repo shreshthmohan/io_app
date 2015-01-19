@@ -143,17 +143,26 @@ SELECT `Events`.*, `City`.`id` AS `City.id`, `City`.`city_name` AS `City.city_na
     Using promises i.e.
     DONE.
 
-36. Urgent TODOs
+DONEs:
     1. URLs from category/location clusters: DONE 
     2. Visual improvements to homepage: DONE
          blur background
-    3. Sticky filter bars (not in mobile view)
+    3. Sticky filter bars (not in mobile view): DONE
     4. Page titles and headers (admin titles remain) DONE
     5. Make things easy for admin to edit: DONE
          Provide link to admin page for individual entity in user view iff user is admin
-    6. Suggestions:
+TODOs:
+
+    1. Suggestions:
          tag links to all say running events in location(in search results for chosen tag chosen location)
          and so on
+    2. Empty results: #1 will take care of this to some extent.
+    3. User forms for submitting data. Take cues from Zomato.
+    4. Comment system.
+    5. SEO:
+         1. meta tags
+         2. rich snippets
+    6. Embedded maps in individual entities.
 
 37. Rich search results on Google (rich snippets)
     https://support.google.com/webmasters/topic/4598337?hl=en&ref_topic=3309300
