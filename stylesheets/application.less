@@ -243,8 +243,7 @@ li.social-icon {
 
 // filter bar (events search) bar 
 .filter-bar {
-  padding-bottom: 10px;
-  padding-top: 10px;
+  padding: 10px;
   margin-bottom: 20px;
   text-align: center;
   // shadow
@@ -257,6 +256,23 @@ li.social-icon {
   h1 {
     //font-weight: bold;
     color: lighten(@navbar-default-link-active-color, 10%);
+  }
+  @media (min-width: @grid-float-breakpoint) {
+    position: fixed;
+    top: 36px;
+    padding: 5px;
+    left: 0;
+    right: 0;
+    z-index: 1030;
+  }
+}
+
+// Adjusting for sticky filter bar
+.filter-margin {
+  display: none;
+  @media (min-width: @grid-float-breakpoint) {
+    height: 52px;
+    display: block;
   }
 }
 
