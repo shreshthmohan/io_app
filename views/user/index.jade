@@ -4,7 +4,7 @@ block nav_element_list
   li(class="active")
     a(href='/app/home') Home
   li
-    a(href='/app/events/upcoming') Events
+    a(href='/app/events/upcoming/grouped') Events
   li
     a(href='/app/gear') Gear 
   li(class="social-icon")
@@ -84,7 +84,7 @@ block content
         each tag in tags
           - if(tag.event_count > 0)
               .col-md-12
-                a(href="/app/events/upcoming?activity=" + tag.id + "&location=0", title="All upcoming " + tag.tag_name  + " events all over India")
+                a(href="/app/events/upcoming/grouped?activity=" + tag.id + "&location=0", title="All upcoming " + tag.tag_name  + " events all over India")
                   .category-el
                     .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                       .info-text.col-xs-12

@@ -279,7 +279,8 @@ app.get('/app/home', routes.index);
 //////////////////
 
 // All upcoming events
-app.get('/app/events/upcoming', race.upcoming);
+app.get('/app/events/upcoming', race.upcoming); // from home search bar
+app.get('/app/events/upcoming/grouped', race.upcoming_grouped); // from home explore
 
 // All events
 app.get('/app/events', function(req, res) {res.redirect('/app/events/upcoming')});

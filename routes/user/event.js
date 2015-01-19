@@ -63,7 +63,9 @@ var up_all_loc_all_tag = function(req, res, where) {
           cities: cities,
           tags: tags,
           loc: req.param('location'),
-          activity: req.param('activity')
+          activity: req.param('activity'),
+          start_date: req.param('start_date'),
+          end_date: req.param('end_date')
         })
       })
     })
@@ -109,7 +111,9 @@ up_all_loc_chosen_tag = function(req, res, where) {
             tags: tags,
             cities: cities,
             loc: req.param('location'),
-            activity: req.param('activity')
+            activity: req.param('activity'),
+            start_date: req.param('start_date'),
+            end_date: req.param('end_date')
           })
         })
       })
@@ -152,7 +156,9 @@ up_chosen_loc_all_tag = function(req, res, where) {
             cities: cities,
             tags: tags,
             loc: req.param('location'),
-            activity: req.param('activity')
+            activity: req.param('activity'),
+            start_date: req.param('start_date'),
+            end_date: req.param('end_date')
           })
         })
       })
@@ -201,7 +207,9 @@ up_both_loc_tag_chosen = function(req, res, where) {
               tags: tags,
               cities: cities,
               loc: req.param('location'),
-              activity: req.param('activity')
+              activity: req.param('activity'),
+              start_date: req.param('start_date'),
+              end_date: req.param('end_date')
             })
           })
         })
@@ -224,48 +232,74 @@ exports.upcoming = function(req, res) {
   var from = req.param('start_date');
   var to   = req.param('end_date');
   if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
-    //if((from == '' || from == null) && (to == '' || to == null)) {
-    //  up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
-    //}
-    //else if((from == '' || from == null)) {
-    //  up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    //}
-    //else if((to == '' || to == null)) {
-    //  up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
-    //}
-    //else {
-    //  up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    //}
+    if((from == '' || from == null) && (to == '' || to == null)) {
+      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+    }
+    else if((from == '' || from == null)) {
+      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+    else if((to == '' || to == null)) {
+      up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
+    }
+    else {
+      up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+  }
+  else if (loc == 0) { // All locations and a chosen activity
+    if((from == '' || from == null) && (to == '' || to == null)) {
+      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+    }
+    else if((from == '' || from == null)) {
+      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+    else if((to == '' || to == null)) {
+      up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
+    }
+    else {
+      up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+  }
+  else if (tag == 0) { // All activities for a chosen location
+    if((from == '' || from == null) && (to == '' || to == null)) {
+      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+    }
+    else if((from == '' || from == null)) {
+      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+    else if((to == '' || to == null)) {
+      up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
+    }
+    else {
+      up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+  }
+  else {
+    if((from == '' || from == null) && (to == '' || to == null)) { // Chosen location and chosen activity
+      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+    }
+    else if((from == '' || from == null)) {
+      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+    else if((to == '' || to == null)) {
+      up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
+    }
+    else {
+      up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+  }
+}
+
+// Events grouped by either by activity or location (dates diregarded)
+exports.upcoming_grouped = function(req, res) {
+  var tag  = req.param('activity');
+  var loc  = req.param('location');
+  if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
     exports.grouped_by_activity(req, res) 
   }
   else if (loc == 0) { // All locations and a chosen activity
-    //if((from == '' || from == null) && (to == '' || to == null)) {
-    //  up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
-    //}
-    //else if((from == '' || from == null)) {
-    //  up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    //}
-    //else if((to == '' || to == null)) {
-    //  up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
-    //}
-    //else {
-    //  up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    //}
     exports.grouped_by_location_chosen_tag(req, res)
   }
   else if (tag == 0) { // All activities for a chosen location
-    //if((from == '' || from == null) && (to == '' || to == null)) {
-    //  up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
-    //}
-    //else if((from == '' || from == null)) {
-    //  up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    //}
-    //else if((to == '' || to == null)) {
-    //  up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
-    //}
-    //else {
-    //  up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    //}
     exports.grouped_by_activity_chosen_loc(req, res)
   }
   else {
@@ -362,9 +396,19 @@ exports.grouped_by_activity = function(req, res) {
     return Promise.all(promises);
   })
   .then(function(tags_c) {
-    res.render('user/event_groups', {
-      title_: 'Upcoming outdoor and adventure events all over India',
-      tags: tags_c //tags with counts of respective events
+    db.City.findAll()
+    .success(function(cities) {
+      db.Tag.findAll()
+      .success(function(tags) {
+        res.render('user/event_groups', {
+          title_: 'Upcoming outdoor and adventure events all over India',
+          tags_c: tags_c, //tags with counts of respective events
+          tags: tags,
+          cities: cities,
+          activity: req.param('activity'),
+          loc: req.param('location')
+        })
+      })
     })
   })
 }
@@ -400,10 +444,20 @@ exports.grouped_by_activity_chosen_loc = function(req, res) {
   .then(function(tags_c) {
     db.City.findOne({where: {id: req.param('location')}})
     .then(function(city) {
-      res.render('user/event_groups', {
-        title_: 'All upcoming outdoor and adventure events in ' + city.city_name,
-        tags: tags_c, //tags with counts of respective events
-        city: city
+      db.City.findAll()
+      .success(function(cities) {
+        db.Tag.findAll()
+        .success(function(tags) {
+          res.render('user/event_groups', {
+            title_: 'All upcoming outdoor and adventure events in ' + city.city_name,
+            tags_c: tags_c, //tags with counts of respective events
+            city: city,
+            tags: tags,
+            cities: cities,
+            activity: req.param('activity'),
+            loc: req.param('location')
+          })
+        })
       })
     })
   })
@@ -411,6 +465,7 @@ exports.grouped_by_activity_chosen_loc = function(req, res) {
 
 // Chosen activity, all locations, group by location
 exports.grouped_by_location_chosen_tag = function(req, res) {
+  console.log('chosen activity, all locations grouped')
   db.City.findAll()
   .then(function(cities) {
     var promises = []
@@ -437,10 +492,21 @@ exports.grouped_by_location_chosen_tag = function(req, res) {
   .then(function(cities_c) {
     db.Tag.findOne({where: {id: req.param('activity')}})
     .then(function(tag) {
-      res.render('user/event_groups', {
-        title_: 'Upcoming ' + tag.tag_name + ' events all over India',
-        cities: cities_c,
-        tag: tag
+      db.City.findAll()
+      .success(function(cities) {
+        db.Tag.findAll()
+        .success(function(tags) {
+          console.log(JSON.stringify(cities_c))
+          res.render('user/event_groups', {
+            title_: 'Upcoming ' + tag.tag_name + ' events all over India',
+            cities_c: cities_c,
+            tag: tag,
+            tags: tags,
+            cities: cities,
+            activity: req.param('activity'),
+            loc: req.param('location')
+          })
+        })
       })
     })
   })

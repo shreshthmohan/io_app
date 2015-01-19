@@ -4,7 +4,7 @@ block nav_element_list
   li
     a(href='/app/home') Home
   li(class="active")
-    a(href='/app/events/upcoming') Events
+    a(href='/app/events/upcoming/grouped') Events
   li
     a(href='/app/gear') Gear 
   li(class="social-icon")
@@ -18,21 +18,22 @@ block nav_element_list
 
 
 block content
+  include event_filter_bar
   .heading.text-center.border-gray
-    - if(tags)
+    - if(tags_c)
         h1.md All Events 
           - if(city)
               | in #{city.city_name}
           - else
               | all over India
-    - else if(cities)
+    - else if(cities_c)
         h1.md All #{tag.tag_name} events all over India
   .category-list
-    - if(tags)
-        each tag in tags
+    - if(tags_c)
+        each tag in tags_c
           - if(tag.event_count > 0)
               .col-md-4
-                a(href=city ? "/app/events/upcoming?activity=" + tag.id + "&location=" + city.id : "/app/events/upcoming?activity=" + tag.id + "&location=0", title=city ? "All upcoming " + tag.tag_name  + " events in " + city.city_name : "All upcoming " + tag.tag_name  + " events all over India")
+                a(href=city ? "/app/events/upcoming?activity=" + tag.id + "&location=" + city.id : "/app/events/upcoming/grouped?activity=" + tag.id + "&location=0", title=city ? "All upcoming " + tag.tag_name  + " events in " + city.city_name : "All upcoming " + tag.tag_name  + " events all over India")
                   .category-el
                     .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                       .info-text.col-xs-12
@@ -45,8 +46,8 @@ block content
                           - if(city)
                             |  IN #{city.city_name}
                       .info-overlay
-    - if(cities)
-        each city in cities
+    - if(cities_c)
+        each city in cities_c
           -if(city.event_count > 0)
               .col-md-4
                 a(href="/app/events/upcoming?activity=" + tag.id + "&location=" + city.id, title="All upcoming " + tag.tag_name + " events in " + city.city_name)

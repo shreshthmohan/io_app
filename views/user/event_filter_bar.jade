@@ -20,7 +20,7 @@
         - else 
             option(value=0) All
         each city in cities
-          - if(loc== city.id)
+          - if(loc == city.id)
               option(value=city.id selected="selected") #{city.city_name}
           - else
               option(value=city.id) #{city.city_name}
@@ -29,11 +29,17 @@
       .input-group
         .input-group-addon
           span.fa.fa-calendar
-        input(class="form-control" type="text" name="start_date" placeholder="from" id="from")
+        - if(start_date == null || start_date=='')
+          input(class="form-control" type="text" name="start_date" placeholder="from" id="from")
+        - else
+          input(class="form-control" type="text" value=start_date name="start_date" placeholder="from" id="from")
     .form-group
       label.sr-only(for="to") To
       .input-group
         .input-group-addon
           span.fa.fa-calendar
-        input(class="form-control" type="text" name="end_date" placeholder="to" id="to")
+        - if(end_date == null || end_date =='')
+          input(class="form-control" type="text" name="end_date" placeholder="to" id="to")
+        - else
+          input(class="form-control" value=end_date type="text" name="end_date" placeholder="to" id="to")
     button(type="submit" class="btn btn-warning ") Go! 
