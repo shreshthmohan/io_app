@@ -450,22 +450,10 @@ exports.grouped_by_location_chosen_tag = function(req, res) {
 // Experimental stuff                                //
 ///////////////////////////////////////////////////////
 
-//exports.events_grouped = function(req, res) {
-//  db.EventTag.count({where: {TagId: 1}})
-//  .success(function(tag_count) {
-//    console.log(JSON.stringify(tag_count))
-//    res.render('user/events_groups', {
-//      tag_count: tag_count}
-//    )
-//  })
-//}
-
 // exp: eager loading tags
-
 exports.exp = function(req, res) {
   db.Event.findAll({ include: [ db.City, db.EventTag ]})
   .success(function(races) {
-    console.log(races)
     res.render('user/events_exp', {
       races: races 
     })

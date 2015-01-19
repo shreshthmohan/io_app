@@ -18,26 +18,51 @@ block nav_element_list
 
 block content
   include gear_filter_bar
-  .heading
-    h1= title_
+  .heading.text-center
+    h1.md= title_
   .category-list
     - if(retailers)
         each retailer in retailers
-          .category-el
-            each tag in retailer.GearTags
-              li.tag
-                | #{tag.Tag.tag_name}
-            a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.retailer_name_slug + "/" retailer.id)
-              h2 #{retailer.retailer_name}
-            .city
-              span.fa.fa-map-marker.helper
-              | #{retailer.City.city_name}
+          .col-md-4
+            .category-el.b-l-4.clearfix
+              .info-media.clearfix
+                .info-box.col-xs-8
+                  .info-box-sub
+                    a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.retailer_name_slug + "/" + retailer.id)
+                      h2.sm #{retailer.retailer_name}
+                    .city
+                      span.fa.fa-map-marker.helper
+                      | #{retailer.City.city_name}
+                .img-pre.col-xs-4.clearfix
+                  - if(retailer.img_url_square)
+                      a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.retailer_name_slug + "/" + retailer.id)
+                        img.right.b-l-1(src=retailer.img_url_square alt=retailer.retailer_name height="100px")
+                  - else
+                      a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.retailer_name_slug + "/" + retailer.id)
+                        img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=retailer.retailer_name height="100px")
+              .tags.clearfix
+                each tag in retailer.GearTags
+                  li.tag
+                    | #{tag.Tag.tag_name}
     - if(gear_tags)
         each gear_tag in gear_tags
-          .category-el
-            li.tag
-              | #{tag.tag_name}
-            a(href="/app/gear/" + gear_tag.Retailer.City.city_name + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
-              h2 #{gear_tag.Retailer.retailer_name}
-            .city
-              | #{gear_tag.Retailer.City.city_name}
+          .col-md-4
+            .category-el.b-l-4.clearfix
+              .info-media.clearfix
+                .infobox.col-xs-8
+                  .info-box-sub
+                    a(href="/app/gear/" + gear_tag.Retailer.City.city_name + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
+                      h2.sm #{gear_tag.Retailer.retailer_name}
+                    .city
+                      span.fa.fa-map-marker.helper
+                      | #{gear_tag.Retailer.City.city_name}
+                .img-pre.col-xs-4.clearfix
+                  - if(gear_tag.Retailer.img_url_square)
+                      a(href="/app/gear/" + gear_tag.Retailer.City.city_name + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
+                        img.right.b-l-1(src=gear_tag.Retailer.img_url_square alt=gear_tag.Retailer.retailer_name height="100px")
+                  - else
+                      a(href="/app/gear/" + gear_tag.Retailer.City.city_name + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
+                        img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=gear_tag.Retailer.retailer_name height="100px")
+              .tags.clearfix
+                li.tag
+                  | #{tag.tag_name}

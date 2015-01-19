@@ -16,6 +16,7 @@ all_loc_all_tags = function(req, res ) {
   db.Retailer.findAll({
     attributes: [
       'id',
+      'img_url_square',
       'retailer_name_slug',
       'retailer_name'],
     include: [
@@ -46,6 +47,7 @@ chosen_loc_all_tags = function(req, res) {
   db.Retailer.findAll({
     attributes: [
       'id',
+      'img_url_square',
       'retailer_name_slug',
       'retailer_name'],
     include: [
@@ -81,7 +83,6 @@ all_loc_chosen_tag = function(req, res) {
     where: {id: req.param('activity')}
   })
   .success(function(tag) {
-    console.log('all loc chosen tag, tag found')
     db.GearTag.findAll({
       where: ["TagId = " + tag.id],
       include: [
@@ -89,6 +90,7 @@ all_loc_chosen_tag = function(req, res) {
           model: db.Retailer,
           attributes: [
             'id',
+            'img_url_square',
             'retailer_name_slug',
             'retailer_name'
           ],
@@ -125,13 +127,14 @@ chosen_loc_chosen_tag = function(req, res) {
       include: [{
           model: db.Retailer,
           where: ["CityId = " + req.param('location')],
-          include: [db.City]
-        }],
-      attributes: [
-        'id',
-        'retailer_name_slug',
-        'retailer_name'
-      ]
+          include: [db.City],
+          attributes: [
+            'id',
+            'img_url_square',
+            'retailer_name_slug',
+            'retailer_name'
+          ]
+        }]
     })
     .success(function(gear_tags) {
       db.City.find({where: {id: req.param('location')}})
@@ -192,6 +195,7 @@ exports.individual = function(req, res) {
     attributes: [
       'id',
       'retailer_name',
+      'img_url_square',
       'retailer_name_slug',
       'website_url',
       'location_url',

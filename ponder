@@ -154,3 +154,6 @@ SELECT `Events`.*, `City`.`id` AS `City.id`, `City`.`city_name` AS `City.city_na
     6. Suggestions:
          tag links to all say running events in location(in search results for chosen tag chosen location)
          and so on
+
+37. Rich search results on Google (rich snippets)
+    https://support.google.com/webmasters/topic/4598337?hl=en&ref_topic=3309300
