@@ -154,15 +154,32 @@ DONEs:
 TODOs:
 
     1. Suggestions:
-         tag links to all say running events in location(in search results for chosen tag chosen location)
+         tag links to all say running events in location (in search results for chosen tag chosen location)
          and so on
     2. Empty results: #1 will take care of this to some extent.
     3. User forms for submitting data. Take cues from Zomato.
-    4. Comment system.
+    4. Comment system and/or review system.
     5. SEO:
          1. meta tags
          2. rich snippets
+         3. sitemap
     6. Embedded maps in individual entities.
+   * 7. More categories. (first finish up existing categories or add new ones first? And which ones?)
+         OK, add groups ... wait ... first finish up "events" completely (and do others on similar lines),
+         more the number of categories more the distraction. And leave learn for later?
+         I am (almost) done with events (individual event page: embed map, add description/comments, past events) Though showing past events 
+         makes sense only if we have photos and reports for the events (may be this can be done in the meta.)
+    8. Failsafe: background color/gradient for home-search for image failing to load.
+    9. category-group elements: 0-85/90 instead of 65? text-shadow? top-bottom border white 15% opaque?
+    10. Think about photos (it'd be much better if we had them, for enagement)
+    11. titles for each element that appear on hover.
+    12. Populate data.
+    13. To fit featured in page (and keep it on the top, we can add a 12-wide div before all the other category grouped lists)
+        when more categories are added.
+    14. Pass active-tab in res.render call
 
-37. Rich search results on Google (rich snippets)
-    https://support.google.com/webmasters/topic/4598337?hl=en&ref_topic=3309300
+37. SEO
+    Rich snippets: https://support.google.com/webmasters/topic/4598337?hl=en&ref_topic=3309300
+    Sitemap: https://support.google.com/webmasters/answer/156184?hl=en
+
+38. Images: figure out how to attribute.
