@@ -23,16 +23,22 @@ exports.index = function(req, res) {
     var tag
     tags.forEach(function(t) {
       promises.push(
-        db.EventTag.count({
-          where: {TagId: t.id},
-          include: [{
-            model: db.Event,
-            where: ['start_date > NOW()']
-          }]
+        Promise.all([
+          db.EventTag.count({
+            where: {TagId: t.id},
+            include: [{
+              model: db.Event,
+              where: ['start_date > NOW()']
+            }]
+          }),
+          db.GearTag.count({
+            where: {TagId: t.id}
           })
-        .then(function(event_count) {
+        ])
+        .spread(function(event_count, retailer_count) {
           tag = t.toJSON();
           tag.event_count = event_count;
+          tag.retailer_count = retailer_count;
           return tag
         })
       )

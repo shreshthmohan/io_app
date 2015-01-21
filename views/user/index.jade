@@ -98,17 +98,17 @@ block content
       .col-md-3.home-gear
         .home-category-head.text-center.border-gray Gear
         each tag in tags
-          - if(tag.event_count > 0)
+          - if(tag.retailer_count > 0)
               .col-md-12
                 a(href="todo")
                   .category-el
-                    .info.clearfix
+                    .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                       .info-text.col-xs-12
                         h2.sm.uppercase
-                          | Dummy #{tag.id}
+                          | #{tag.tag_name}
                         span.number.uppercase
-                          | #{tag.event_count} retailer
-                          - if(tag.event_count >1)
+                          | #{tag.retailer_count} STORE
+                          - if(tag.retailer_count > 1)
                             | S
                        .info-overlay
       .col-md-3.home-groups

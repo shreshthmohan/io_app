@@ -23,6 +23,73 @@ var Promise = require('bluebird');
 //16.  1        1   1     1   : q#13 and where start ... and <= ...
 // that makes 4 kinds of queries for upcoming events
 
+// Default search interval (when user misses out date(s))
+var int_dur = "12 month";
+
+// Searching all locations and all tags
+exports.upcoming = function(req, res) {
+  var tag  = req.param('activity');
+  var loc  = req.param('location');
+  var from = req.param('start_date');
+  var to   = req.param('end_date');
+  if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
+    if((from == '' || from == null) && (to == '' || to == null)) {
+      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+    }
+    else if((from == '' || from == null)) {
+      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+    else if((to == '' || to == null)) {
+      up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
+    }
+    else {
+      up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+  }
+  else if (loc == 0) { // All locations and a chosen activity
+    if((from == '' || from == null) && (to == '' || to == null)) {
+      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+    }
+    else if((from == '' || from == null)) {
+      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+    else if((to == '' || to == null)) {
+      up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
+    }
+    else {
+      up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+  }
+  else if (tag == 0) { // All activities for a chosen location
+    if((from == '' || from == null) && (to == '' || to == null)) {
+      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+    }
+    else if((from == '' || from == null)) {
+      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+    else if((to == '' || to == null)) {
+      up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
+    }
+    else {
+      up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+  }
+  else {
+    if((from == '' || from == null) && (to == '' || to == null)) { // Chosen location and chosen activity
+      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+    }
+    else if((from == '' || from == null)) {
+      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+    else if((to == '' || to == null)) {
+      up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
+    }
+    else {
+      up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+    }
+  }
+}
+
 // location: all; tag: all
 var up_all_loc_all_tag = function(req, res, where) {
   db.Event.findAll({
@@ -222,85 +289,21 @@ up_both_loc_tag_chosen = function(req, res, where) {
 //i.e. we have used just two views to take care of 4 (location, tag)
 //possiblities
 
-// Default search interval (when user misses out date(s))
-var int_dur = "12 month";
+/////////////////////////////////////////////////////////////////////////
+// Events grouped by either by activity or location (dates diregarded) //
+/////////////////////////////////////////////////////////////////////////
 
-// Searching all locations and all tags
-exports.upcoming = function(req, res) {
-  var tag  = req.param('activity');
-  var loc  = req.param('location');
-  var from = req.param('start_date');
-  var to   = req.param('end_date');
-  if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
-    if((from == '' || from == null) && (to == '' || to == null)) {
-      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
-    }
-    else if((from == '' || from == null)) {
-      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-    else if((to == '' || to == null)) {
-      up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
-    }
-    else {
-      up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-  }
-  else if (loc == 0) { // All locations and a chosen activity
-    if((from == '' || from == null) && (to == '' || to == null)) {
-      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
-    }
-    else if((from == '' || from == null)) {
-      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-    else if((to == '' || to == null)) {
-      up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
-    }
-    else {
-      up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-  }
-  else if (tag == 0) { // All activities for a chosen location
-    if((from == '' || from == null) && (to == '' || to == null)) {
-      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
-    }
-    else if((from == '' || from == null)) {
-      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-    else if((to == '' || to == null)) {
-      up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
-    }
-    else {
-      up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-  }
-  else {
-    if((from == '' || from == null) && (to == '' || to == null)) { // Chosen location and chosen activity
-      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
-    }
-    else if((from == '' || from == null)) {
-      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-    else if((to == '' || to == null)) {
-      up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
-    }
-    else {
-      up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-  }
-}
-
-// Events grouped by either by activity or location (dates diregarded)
 exports.upcoming_grouped = function(req, res) {
   var tag  = req.param('activity');
   var loc  = req.param('location');
   if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
-    exports.grouped_by_activity(req, res) 
+    grouped_by_activity(req, res) 
   }
   else if (loc == 0) { // All locations and a chosen activity
-    exports.grouped_by_location_chosen_tag(req, res)
+    grouped_by_location_chosen_tag(req, res)
   }
   else if (tag == 0) { // All activities for a chosen location
-    exports.grouped_by_activity_chosen_loc(req, res)
+    grouped_by_activity_chosen_loc(req, res)
   }
   else {
     if((from == '' || from == null) && (to == '' || to == null)) { // Chosen location and chosen activity
@@ -317,47 +320,6 @@ exports.upcoming_grouped = function(req, res) {
     }
   }
 }
-
-// Individual events
-exports.individual = function(req, res) {
-  db.Event.find({
-    where: {id: req.param('event_id')},
-    include: [ 
-      db.City,
-      db.Email,
-      db.SocialLink,
-      db.PhoneNumber,
-      {
-        model: db.EventTag,
-        include: [db.Tag]},
-      {
-        model: db.EventSubtag,
-        include: [db.Subtag]}
-      ],
-    attributes: [
-      'id',
-      'event_name',
-      'event_name_slug',
-      'img_url_square',
-      'event_url',
-      'organiser_name',
-      'organiser_url',
-      'location_url',
-      'address_field',
-      'comments',
-      [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'),
-       'start_date_f'],
-      [Sequelize.fn('date_format', Sequelize.col('end_date'), '%e %M %Y'), 'end_date_f']],
-    })
-  .success(function(race) {
-     res.render('user/individual_event', {
-       title_: race.event_name + ' in ' + race.City.city_name,
-       race: race}) 
-  }) 
-}
-
-// TODO: past events 
-
 
 // Events grouped
 // All activities, all locations: events grouped by activity
@@ -372,7 +334,7 @@ exports.individual = function(req, res) {
 // Will land up here when people search for all locations with all tags
 // All activities, all locations: events grouped by activity
 // List of tags with number of events associated with each tag
-exports.grouped_by_activity = function(req, res) {
+var grouped_by_activity = function(req, res) {
   db.Tag.findAll()
   .then(function(tags) {
     var promises = [] // array to be filled with function calls
@@ -403,7 +365,7 @@ exports.grouped_by_activity = function(req, res) {
         res.render('user/event_groups', {
           title_: 'Upcoming outdoor and adventure events all over India',
           tags_c: tags_c, //tags with counts of respective events
-          tags: tags,
+          tags: tags, // TODO: waste, tags_c is same as tags except additional count
           cities: cities,
           activity: req.param('activity'),
           loc: req.param('location')
@@ -416,7 +378,7 @@ exports.grouped_by_activity = function(req, res) {
 // as tags_c. The original array of objects in no more. Only the modified object exists
 
 // All activities, chosen locations
-exports.grouped_by_activity_chosen_loc = function(req, res) {
+var grouped_by_activity_chosen_loc = function(req, res) {
   db.Tag.findAll()
   .then(function(tags) {
     var promises = [] // array to be filled with function calls
@@ -464,8 +426,7 @@ exports.grouped_by_activity_chosen_loc = function(req, res) {
 }
 
 // Chosen activity, all locations, group by location
-exports.grouped_by_location_chosen_tag = function(req, res) {
-  console.log('chosen activity, all locations grouped')
+var grouped_by_location_chosen_tag = function(req, res) {
   db.City.findAll()
   .then(function(cities) {
     var promises = []
@@ -496,13 +457,12 @@ exports.grouped_by_location_chosen_tag = function(req, res) {
       .success(function(cities) {
         db.Tag.findAll()
         .success(function(tags) {
-          console.log(JSON.stringify(cities_c))
           res.render('user/event_groups', {
             title_: 'Upcoming ' + tag.tag_name + ' events all over India',
             cities_c: cities_c,
             tag: tag,
             tags: tags,
-            cities: cities,
+            cities: cities, // TODO: this is redundant, inefficient!
             activity: req.param('activity'),
             loc: req.param('location')
           })
@@ -511,6 +471,48 @@ exports.grouped_by_location_chosen_tag = function(req, res) {
     })
   })
 }
+
+// Individual events
+exports.individual = function(req, res) {
+  db.Event.find({
+    where: {id: req.param('event_id')},
+    include: [ 
+      db.City,
+      db.Email,
+      db.SocialLink,
+      db.PhoneNumber,
+      {
+        model: db.EventTag,
+        include: [db.Tag]},
+      {
+        model: db.EventSubtag,
+        include: [db.Subtag]}
+      ],
+    attributes: [
+      'id',
+      'event_name',
+      'event_name_slug',
+      'img_url_square',
+      'event_url',
+      'organiser_name',
+      'organiser_url',
+      'location_url',
+      'address_field',
+      'comments',
+      [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'),
+       'start_date_f'],
+      [Sequelize.fn('date_format', Sequelize.col('end_date'), '%e %M %Y'), 'end_date_f']],
+    })
+  .success(function(race) {
+     res.render('user/individual_event', {
+       title_: race.event_name + ' in ' + race.City.city_name,
+       race: race}) 
+  }) 
+}
+
+// TODO: past events 
+
+
 
 ///////////////////////////////////////////////////////
 // Experimental stuff                                //

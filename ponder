@@ -177,6 +177,8 @@ TODOs:
     13. To fit featured in page (and keep it on the top, we can add a 12-wide div before all the other category grouped lists)
         when more categories are added.
     14. Pass active-tab in res.render call
+    15. Ranking/order by of entities and entity clusters.
+    16. Add images to tags for each category
 
 37. SEO
     Rich snippets: https://support.google.com/webmasters/topic/4598337?hl=en&ref_topic=3309300

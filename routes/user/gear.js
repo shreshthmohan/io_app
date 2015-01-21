@@ -4,6 +4,28 @@ var sequelize = db.sequelize; // just to avoid the confusion
 
 // Note: tag and activity have been used interchangeably
 
+// Routing for list of gear retailers
+exports.all = function(req, res) {
+  var tag = req.param('activity');
+  var loc = req.param('location');
+  // All locations and all activities
+  if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { 
+    all_loc_all_tags(req, res )
+  }
+  // All locations and a chosen activity
+  else if (loc == 0) {
+    all_loc_chosen_tag(req, res)
+  }
+  // All activities for a chosen location
+  else if (tag == 0) {
+    chosen_loc_all_tags(req, res)
+  }
+  // Chosen activities for a chosen location
+  else {
+    chosen_loc_chosen_tag(req, res)
+  }
+}
+
 // 4 possibilities
 // location : all, tag: all
 // location : chosen, tag: all
@@ -157,26 +179,142 @@ chosen_loc_chosen_tag = function(req, res) {
   })
 }
 
-// Routing for list of gear retailers
-exports.all = function(req, res) {
-  var tag = req.param('activity');
-  var loc = req.param('location');
-  // All locations and all activities
-  if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { 
-    all_loc_all_tags(req, res )
+////////////////////////////////////////////
+// Retailers grouped by activity/location //
+////////////////////////////////////////////
+
+exports.all_grouped = function(req, res) {
+  var tag  = req.param('activity');
+  var loc  = req.param('location');
+  if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
+    grouped_by_activity(req, res) 
   }
-  // All locations and a chosen activity
-  else if (loc == 0) {
-    all_loc_chosen_tag(req, res)
+  else if (loc == 0) { // All locations and a chosen activity
+    grouped_by_location_chosen_tag(req, res)
   }
-  // All activities for a chosen location
-  else if (tag == 0) {
-    chosen_loc_all_tags(req, res)
+  else if (tag == 0) { // All activities for a chosen location
+    grouped_by_activity_chosen_loc(req, res)
   }
-  // Chosen activities for a chosen location
   else {
+    // not grouped
     chosen_loc_chosen_tag(req, res)
   }
+}
+
+// All activities, all tags (Grouped by activity)
+var grouped_by_activity = function(req, res) {
+  db.Tag.findAll()
+  .then(function(tags) {
+    var promises = []
+    var tag
+    tags.forEach(function(t) {
+      promises.push(
+        db.GearTag.count({
+          where: {TagId: t.id}
+        })
+        .then(function(retailer_count) {
+          tag = t.toJSON();
+          tag.retailer_count = retailer_count;
+          return tag;
+        })
+      )
+    })
+    return Promise.all(promises);
+  })
+  .then(function(tags_c) {
+    db.City.findAll()
+    .then(function(cities) {
+      res.render('user/gear_groups', {
+        title_: 'All outdoor, adventure stores and retailers across India',
+        tags_c: tags_c,
+        cities: cities,
+        activity: req.param('activity'),
+        loc: req.param('location')
+      })
+    })
+  })
+}
+
+// All activites, chosen location; grouped by activity
+var grouped_by_activity_chosen_loc = function(req, res) {
+  db.Tag.findAll()
+  .then(function(tags) {
+    var promises = []
+    var tag
+    tags.forEach(function(t) {
+      promises.push(
+        db.Retailer.count({
+          include: [{
+            model: db.GearTag,
+            where: {TagId: t.id}
+          }],
+          where: {CityId: req.param('location')}
+        })
+        .then(function(retailer_count) {
+          tag = t.toJSON();
+          tag.retailer_count = retailer_count;
+          return tag
+        })
+      )
+    })
+    return Promise.all(promises);
+  })
+  .then(function(tags_c) {
+    db.City.findOne({where: {id: req.param('location')}})
+    .then(function(city) {
+      db.City.findAll()
+      .then(function(cities) {
+        res.render('user/gear_groups', {
+          title_: 'All outdoor, adventure stores and retailers in ' + city.city_name,
+          tags_c: tags_c,
+          city: city,
+          cities: cities,
+          activity: req.param('activity'),
+          loc: req.param('location')
+        })
+      })
+    })
+  })
+}
+
+var grouped_by_location_chosen_tag = function(req, res) {
+  db.City.findAll()
+  .then(function(cities) {
+    var promises = []
+    var city
+    cities.forEach(function(c) {
+      promises.push(
+        db.Retailer.count({
+          where: {CityId: c.id},
+          include: [{
+            model: db.GearTag,
+            where: {TagId: req.param('activity')}
+          }]
+        })
+        .then(function(retailer_count) {
+          city = c.toJSON();
+          city.retailer_count = retailer_count;
+          return city
+        })
+      )
+    })
+    return Promise.all(promises)
+  })
+  .then(function(cities_c) {
+    db.Tag.findOne({where: {id: req.param('activity')}})
+    .then(function(tag) {
+      db.Tag.findAll(function(tags) {
+        res.render('user/gear_groups', {
+        title_: 'All stores and retailers with ' + tag.tag_name + ' gear',
+        cities_c: cities_c,
+        tags: tags,
+        tag: tag,
+        activity: req.param('activity'),
+        loc: req.param('location')
+        })
+      })
+    })
+  })
 }
 
 // Individual retailers
