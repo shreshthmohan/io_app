@@ -89,16 +89,22 @@ h2 {
 //
 @navbar-height: 35px;
 
-
+.shadow(@shadowargs) {
+  -webkit-box-shadow: @shadowargs;
+  -moz-box-shadow: @shadowargs;
+  box-shadow: @shadowargs;
+}
 
 
 // Navbar 
 
+.navbar-fixed-top {
+  border-width: 0 0 0px;
+}
+
 .navbar-default {
   // shadow
-  -webkit-box-shadow: 0px 0px 8px 2px #ddd;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow:    0px 0px 8px 2px #ddd;  /* Firefox 3.5 - 3.6 */
-  box-shadow:         0px 0px 8px 2px #ddd;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  .shadow(0px 2px 4px 0px rgba(0, 0, 0, .15));
   .navbar-nav {
     > li {
       text-align: center;
@@ -166,7 +172,8 @@ body {
   margin-top: 50px; // To bring jumbotron container below navbar
   font-size: 105%; // To control datepicker size
   min-height: 2000px;
-  background-color: @gray-lighter;
+  //background-color: @gray-lighter;
+  background-color: @gray-light90;
 }
 
 // Home radio form 
@@ -247,19 +254,16 @@ li.social-icon {
   margin-bottom: 20px;
   text-align: center;
   // shadow
-  -webkit-box-shadow: 0px 8px 6px 2px #ddd;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow:    0px 8px 6px 2px #ddd;  /* Firefox 3.5 - 3.6 */
-  box-shadow:         0px 8px 6px 2px #ddd;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  .shadow(0px 2px 4px 0px rgba(0, 0, 0, .15));
   background-color: white; 
-  //border: 1px solid; 
-  //border-color: darken(@gray-lighter, 5%) darken(@gray-lighter, 12%) darken(@gray-lighter, 20%); 
+  border-top: 1px solid @gray-light90; 
   h1 {
     //font-weight: bold;
     color: lighten(@navbar-default-link-active-color, 10%);
   }
   @media (min-width: @grid-float-breakpoint) {
     position: fixed;
-    top: 36px;
+    top: @navbar-height;
     padding: 0px;
     left: 0;
     right: 0;
@@ -286,9 +290,7 @@ li.social-icon {
   list-style: none;
   //padding: 1px 0px 10px 15px;
   // shadow
-  -webkit-box-shadow: 0px 8px 6px 2px #ddd;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow:    0px 8px 6px 2px #ddd;  /* Firefox 3.5 - 3.6 */
-  box-shadow:         0px 8px 6px 2px #ddd;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  .shadow(0px 2px 4px 0px rgba(0, 0, 0, .15));
   font-size: 115%;
   background-color: white;
   margin-bottom: 20px;
@@ -383,9 +385,7 @@ ul {
 .heading {
   background: white;
   // shadow
-  -webkit-box-shadow: 0px 8px 6px 2px #ddd;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-  -moz-box-shadow:    0px 8px 6px 2px #ddd;  /* Firefox 3.5 - 3.6 */
-  box-shadow:         0px 8px 6px 2px #ddd;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+  .shadow(0px 2px 4px 0px rgba(0, 0, 0, .15));
   padding: 1px 0px 5px 20px;
   margin-bottom: 15px;
   color: gray;
@@ -510,13 +510,14 @@ h1.md {
 .home-hr {
   margin-top: 10px;
   margin-bottom: 10px;
-  border-top: 1px solid @gray-light70;
+  border-top: 1px solid @gray-light80;
 }
 
 .explore-head {
-  margin: 0px 10px 0px 10px;
+  margin: 0px 10px 10px 10px;
   background: white;
   font-size: 18px;
+  .shadow(0px 2px 4px 0px rgba(0, 0, 0, .15));
 }
 
 .home-category-head {
@@ -524,14 +525,15 @@ h1.md {
   color: @io-yellow;
   background: white;
   font-size: 16px;
+  .shadow(0px 2px 4px 0px rgba(0, 0, 0, .15));
 }
 .home-events, .home-gear, .home-groups {
   border-right: 1px solid @gray-light85;
 }
 
-.border-gray {
-  border: 1px solid @gray-light80;
-}
+//.border-gray {
+//  border: 1px solid @gray-light80;
+//}
 
 //////////////////
 // Social Links //

@@ -1,21 +1,5 @@
 extends ../layout
 
-block nav_element_list
-  li
-    a(href='/app/home') Home
-  li(class="active")
-    a(href='/app/events/upcoming/grouped') Events
-  li
-    a(href='/app/gear') Gear 
-  li(class="social-icon")
-    a(href='TODO')
-      i(class="fa fa-twitter")
-      span(class="hide-for-small TODO")  
-  li(class="social-icon")
-    a(href='TODO')
-      i(class="fa fa-facebook")
-      span(class="hide-for-small TODO") 
-
 block content
   .entity.col-md-6
     - if(race.event_url) 

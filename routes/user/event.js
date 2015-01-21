@@ -125,6 +125,7 @@ var up_all_loc_all_tag = function(req, res, where) {
       db.Tag.findAll()
       .success(function(tags) {
         res.render('user/events', {
+          active_tab: 'events',
           title_: 'All Upcoming Events and Races',
           races: races,
           cities: cities,
@@ -172,6 +173,7 @@ up_all_loc_chosen_tag = function(req, res, where) {
         db.Tag.findAll()
         .success(function(tags) {
           res.render('user/events', {
+            active_tab: 'events',
             title_: 'All Upcoming ' + tag.tag_name + ' events',
             tag: tag, // chosen tag
             event_tags: event_tags,
@@ -218,6 +220,7 @@ up_chosen_loc_all_tag = function(req, res, where) {
         db.Tag.findAll()
         .success(function(tags) {
           res.render('user/events', {
+            active_tab: 'events',
             title_: 'All Upcoming Events and Races in ' + city.city_name,
             races: races,
             cities: cities,
@@ -268,6 +271,7 @@ up_both_loc_tag_chosen = function(req, res, where) {
           db.Tag.findAll()
           .success(function(tags) {
             res.render('user/events', {
+              active_tab: 'events',
               title_: 'Upcoming ' + tag.tag_name + ' events in ' + city.city_name,
               tag: tag,
               event_tags: event_tags,
@@ -361,6 +365,7 @@ var grouped_by_activity = function(req, res) {
     db.City.findAll()
     .success(function(cities) {
       res.render('user/event_groups', {
+        active_tab: 'events',
         title_: 'Upcoming outdoor and adventure events all over India',
         tags: tags_c, //tags with counts of respective events
         cities: cities,
@@ -408,6 +413,7 @@ var grouped_by_activity_chosen_loc = function(req, res) {
         db.Tag.findAll()
         .success(function(tags) {
           res.render('user/event_groups', {
+            active_tab: 'events',
             title_: 'All upcoming outdoor and adventure events in ' + city.city_name,
             tags: tags_c, //tags with counts of respective events
             group_mode: 'all_tag_cho_loc',
@@ -455,6 +461,7 @@ var grouped_by_location_chosen_tag = function(req, res) {
         db.Tag.findAll()
         .success(function(tags) {
           res.render('user/event_groups', {
+            active_tab: 'events',
             title_: 'Upcoming ' + tag.tag_name + ' events all over India',
             group_mode: 'cho_tag_all_loc',
             cities: cities_c,
@@ -502,6 +509,7 @@ exports.individual = function(req, res) {
     })
   .success(function(race) {
      res.render('user/individual_event', {
+       active_tab: 'events',
        title_: race.event_name + ' in ' + race.City.city_name,
        race: race}) 
   }) 

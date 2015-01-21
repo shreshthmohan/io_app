@@ -9,4 +9,29 @@ div(class="navbar navbar-default navbar-fixed-top" role="navigation")
       a(class="navbar-brand" href="/app/home") India Outside
     div(class="navbar-collapse collapse")
       ul(class="nav navbar-nav")
-        block nav_element_list
+        - if(active_tab == 'home')
+          li.active
+            a(href='/app/home') Home
+        - else
+          li
+            a(href='/app/home') Home
+        - if(active_tab == 'events')
+          li.active
+            a(href='/app/events/upcoming/grouped') Events
+        - else
+          li
+            a(href='/app/events/upcoming/grouped') Events
+        - if(active_tab == 'gear')
+          li.active
+            a(href='/app/gear/grouped') Gear 
+        - else
+          li
+            a(href='/app/gear/grouped') Gear 
+        li(class="social-icon")
+          a(href='TODO')
+            i(class="fa fa-twitter")
+            span(class="hide-for-small")  
+        li(class="social-icon")
+          a(href='TODO')
+            i(class="fa fa-facebook")
+            span(class="hide-for-small") 

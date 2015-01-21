@@ -1,21 +1,5 @@
 extends ../layout
 
-block nav_element_list
-  li
-    a(href='/app/home') Home
-  li
-    a(href='/app/events/upcoming/grouped') Events
-  li(class="active")
-    a(href='/app/gear') Gear 
-  li(class="social-icon")
-    a(href='TODO')
-      i(class="fa fa-twitter")
-      span(class="hide-for-small")  
-  li(class="social-icon")
-    a(href='TODO')
-      i(class="fa fa-facebook")
-      span(class="hide-for-small") 
-
 block content
   include gear_filter_bar
   .filter-margin

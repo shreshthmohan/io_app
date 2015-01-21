@@ -55,6 +55,7 @@ all_loc_all_tags = function(req, res ) {
       db.Tag.findAll()
       .success(function(tags) {
         res.render('user/gear', {
+          active_tab: 'gear',
           title_: 'All Gear Retailers',
           retailers: retailers,
           cities: cities,
@@ -89,6 +90,7 @@ chosen_loc_all_tags = function(req, res) {
         db.Tag.findAll()
         .success(function(tags) {
           res.render('user/gear', {
+            active_tab: 'gear',
             title_: 'All Gear Retailers in ' + city.city_name,
             retailers: retailers,
             cities: cities,
@@ -127,6 +129,7 @@ all_loc_chosen_tag = function(req, res) {
         db.Tag.findAll()
         .success(function(tags) {
           res.render('user/gear', {
+            active_tab: 'gear',
             title_: 'All ' + tag.tag_name + ' Gear Retailers',
             tag: tag, // chosen tag
             gear_tags: gear_tags, // these contain retailers to be displayed
@@ -167,6 +170,7 @@ chosen_loc_chosen_tag = function(req, res) {
           db.Tag.findAll()
           .success(function(tags) {
             res.render('user/gear', {
+              active_tab: 'gear',
               title_: 'All ' + tag.tag_name + ' Gear Retailers in ' + city.city_name,
               tag: tag,
               gear_tags: gear_tags,
@@ -226,6 +230,7 @@ var grouped_by_activity = function(req, res) {
     db.City.findAll()
     .then(function(cities) {
       res.render('user/gear_groups', {
+        active_tab: 'gear',
         title_: 'All outdoor, adventure stores and retailers across India',
         tags: tags_c,
         group_mode: 'all_tag_all_loc',
@@ -266,8 +271,8 @@ var grouped_by_activity_chosen_loc = function(req, res) {
     .then(function(city) {
       db.City.findAll()
       .then(function(cities) {
-        console.log('rendering grouped stores, for chosen location')
         res.render('user/gear_groups', {
+          active_tab: 'gear',
           title_: 'All outdoor, adventure stores and retailers in ' + city.city_name,
           group_mode: 'all_tag_cho_loc',
           tags: tags_c,
@@ -310,8 +315,8 @@ var grouped_by_location_chosen_tag = function(req, res) {
     .then(function(tag) {
       db.Tag.findAll()
       .then(function(tags) {
-        console.log('rendering grouped stores, for chosen activity')
         res.render('user/gear_groups', {
+          active_tab: 'gear',
           title_: 'All stores and retailers with ' + tag.tag_name + ' gear',
           group_mode: 'cho_tag_all_loc',
           cities: cities_c,
@@ -350,6 +355,7 @@ exports.individual = function(req, res) {
   })
   .success(function(retailer) {
      res.render('user/individual_retailer', {
+       active_tab: 'gear',
        title_: retailer.retailer_name + ' in ' + retailer.City.city_name,
        retailer: retailer}) 
   }) 

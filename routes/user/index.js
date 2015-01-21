@@ -49,6 +49,7 @@ exports.index = function(req, res) {
     db.City.findAll()
     .then(function(cities) {
       res.render('user/index', {
+        active_tab: 'home',
         title_: 'Adventure Outdoors India - Running, Cycling, Trekking, Surfing, Kayaking, Rafting & More ',
         cities: cities,
         tags: tags_c
