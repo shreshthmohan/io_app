@@ -299,10 +299,10 @@ exports.upcoming_grouped = function(req, res) {
   if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
     grouped_by_activity(req, res) 
   }
-  else if (loc == 0) { // All locations and a chosen activity
+  else if (loc == 0 || loc == null) { // All locations and a chosen activity
     grouped_by_location_chosen_tag(req, res)
   }
-  else if (tag == 0) { // All activities for a chosen location
+  else if (tag == 0 || tag == null) { // All activities for a chosen location
     grouped_by_activity_chosen_loc(req, res)
   }
   else {
@@ -360,16 +360,13 @@ var grouped_by_activity = function(req, res) {
   .then(function(tags_c) {
     db.City.findAll()
     .success(function(cities) {
-      db.Tag.findAll()
-      .success(function(tags) {
-        res.render('user/event_groups', {
-          title_: 'Upcoming outdoor and adventure events all over India',
-          tags_c: tags_c, //tags with counts of respective events
-          tags: tags, // TODO: waste, tags_c is same as tags except additional count
-          cities: cities,
-          activity: req.param('activity'),
-          loc: req.param('location')
-        })
+      res.render('user/event_groups', {
+        title_: 'Upcoming outdoor and adventure events all over India',
+        tags: tags_c, //tags with counts of respective events
+        cities: cities,
+        group_mode: 'all_tag_all_loc',
+        activity: req.param('activity'),
+        loc: req.param('location')
       })
     })
   })
@@ -412,9 +409,9 @@ var grouped_by_activity_chosen_loc = function(req, res) {
         .success(function(tags) {
           res.render('user/event_groups', {
             title_: 'All upcoming outdoor and adventure events in ' + city.city_name,
-            tags_c: tags_c, //tags with counts of respective events
+            tags: tags_c, //tags with counts of respective events
+            group_mode: 'all_tag_cho_loc',
             city: city,
-            tags: tags,
             cities: cities,
             activity: req.param('activity'),
             loc: req.param('location')
@@ -459,10 +456,10 @@ var grouped_by_location_chosen_tag = function(req, res) {
         .success(function(tags) {
           res.render('user/event_groups', {
             title_: 'Upcoming ' + tag.tag_name + ' events all over India',
-            cities_c: cities_c,
+            group_mode: 'cho_tag_all_loc',
+            cities: cities_c,
             tag: tag,
             tags: tags,
-            cities: cities, // TODO: this is redundant, inefficient!
             activity: req.param('activity'),
             loc: req.param('location')
           })

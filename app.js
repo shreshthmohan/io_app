@@ -297,6 +297,7 @@ app.get('/app/events/:city_name_slug/:event_name_slug/:event_id', race.individua
 /////////////////
 
 app.get('/app/gear', gear.all);
+app.get('/app/gear/grouped', gear.all_grouped);
 
 app.get('/app/gear/:city_name_slug/:retailer_name_slug/:retailer_id', gear.individual)
 

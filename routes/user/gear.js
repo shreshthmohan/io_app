@@ -1,6 +1,7 @@
 var db = require('../../models');
 var Sequelize = db.Sequelize;
 var sequelize = db.sequelize; // just to avoid the confusion
+var Promise = require('bluebird');
 
 // Note: tag and activity have been used interchangeably
 
@@ -189,10 +190,10 @@ exports.all_grouped = function(req, res) {
   if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
     grouped_by_activity(req, res) 
   }
-  else if (loc == 0) { // All locations and a chosen activity
+  else if (loc == 0 || loc == null) { // All locations and a chosen activity
     grouped_by_location_chosen_tag(req, res)
   }
-  else if (tag == 0) { // All activities for a chosen location
+  else if (tag == 0 || tag == null) { // All activities for a chosen location
     grouped_by_activity_chosen_loc(req, res)
   }
   else {
@@ -226,7 +227,8 @@ var grouped_by_activity = function(req, res) {
     .then(function(cities) {
       res.render('user/gear_groups', {
         title_: 'All outdoor, adventure stores and retailers across India',
-        tags_c: tags_c,
+        tags: tags_c,
+        group_mode: 'all_tag_all_loc',
         cities: cities,
         activity: req.param('activity'),
         loc: req.param('location')
@@ -260,13 +262,15 @@ var grouped_by_activity_chosen_loc = function(req, res) {
     return Promise.all(promises);
   })
   .then(function(tags_c) {
-    db.City.findOne({where: {id: req.param('location')}})
+    db.City.find({where: {id: req.param('location')}})
     .then(function(city) {
       db.City.findAll()
       .then(function(cities) {
+        console.log('rendering grouped stores, for chosen location')
         res.render('user/gear_groups', {
           title_: 'All outdoor, adventure stores and retailers in ' + city.city_name,
-          tags_c: tags_c,
+          group_mode: 'all_tag_cho_loc',
+          tags: tags_c,
           city: city,
           cities: cities,
           activity: req.param('activity'),
@@ -280,6 +284,7 @@ var grouped_by_activity_chosen_loc = function(req, res) {
 var grouped_by_location_chosen_tag = function(req, res) {
   db.City.findAll()
   .then(function(cities) {
+    console.log(JSON.stringify(cities))
     var promises = []
     var city
     cities.forEach(function(c) {
@@ -303,14 +308,17 @@ var grouped_by_location_chosen_tag = function(req, res) {
   .then(function(cities_c) {
     db.Tag.findOne({where: {id: req.param('activity')}})
     .then(function(tag) {
-      db.Tag.findAll(function(tags) {
+      db.Tag.findAll()
+      .then(function(tags) {
+        console.log('rendering grouped stores, for chosen activity')
         res.render('user/gear_groups', {
-        title_: 'All stores and retailers with ' + tag.tag_name + ' gear',
-        cities_c: cities_c,
-        tags: tags,
-        tag: tag,
-        activity: req.param('activity'),
-        loc: req.param('location')
+          title_: 'All stores and retailers with ' + tag.tag_name + ' gear',
+          group_mode: 'cho_tag_all_loc',
+          cities: cities_c,
+          tags: tags,
+          tag: tag,
+          activity: req.param('activity'),
+          loc: req.param('location')
         })
       })
     })

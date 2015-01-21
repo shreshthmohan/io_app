@@ -100,7 +100,7 @@ block content
         each tag in tags
           - if(tag.retailer_count > 0)
               .col-md-12
-                a(href="todo")
+                a(href="/app/gear/grouped?activity=" + tag.id)
                   .category-el
                     .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                       .info-text.col-xs-12
