@@ -1,0 +1,104 @@
+extends layout
+
+block content
+  form(action="/app/admin/groups/" + group.id + "/modify_name", method="post")
+    h1 #{group.group_name}
+    input(type="text", name="new_group_name" placeholder="New group name")
+    input(type="submit")
+  //-
+  //-
+  //- Main 'modify' section starts
+  form(action="/app/admin/groups/" + group.id, method="post")
+    if (group.group_url)
+      a(href=group.group_url id="group_url"  class="data" target="_blank") Website
+      div(id="change_group_url" class="edit") edit
+    else
+      | No web URL; add one:
+      input(type="text", name="group_url")
+    br
+    if (group.img_url_square)
+      img(src=group.img_url_square id="img_url_square")
+      div(id="change_img_url_square" class="edit") edit
+    else
+      | No image URL; add(square, 160x160?): 
+      input(type="text", name="img_url_square")
+    br
+    | Comments: 
+    if (group.comments)
+      div(id="comments" class="data") #{group.comments}
+      div(id="change_comments" class="edit") edit
+    else
+      | none exists; add:
+      input(type="text", name="comments", id="comments")
+    br
+    input(type="submit")
+    br
+  //- Main 'modify' section ends
+  //-
+  //- Social Links start
+  | Social Links:
+  ul
+    each link in group.SocialLinks
+      li
+        | #{link.link}
+        div(class="destroy")
+          a(href="/app/admin/groups/" + group.id + "/destroy_slink/" + link.id) x
+          //- TODO use "cross" instead of an 'x'
+  form(action="/app/admin/groups/" + group.id + "/add_slink", method="post")
+    | Add a social link: 
+    input(type="text", name="social_link")
+    input(type="submit")
+  //- Social Links end
+  //-
+  //-
+  //- Phone numbers start
+  form(action="/app/admin/groups/" + group.id + "/add_phone", method="post")
+    | Add a phone number: 
+    input(type="text", name="phone_number")
+    input(type="submit")
+    ul
+      each number in group.PhoneNumbers
+        li
+          | #{number.number}
+          div(class="destroy")
+            a(href="/app/admin/groups/" + group.id + "/destroy_number/" + number.id) x
+  //- TODO: add mobile-compatible phone numbers
+  //- Phone numbers end
+  //-
+  //- Emails start
+  form(action="/app/admin/groups/" + group.id + "/add_email", method="post")
+    | Add an email: 
+    input(type="text", name="email")
+    input(type="submit")
+    ul
+      each email in group.Emails 
+        li
+          | #{email.email}
+          div(class="destroy")
+            a(href="/app/admin/groups/" + group.id + "/destroy_email/" + email.id) x
+  //- Emails end
+  //-
+  //- Tags start
+  | Tags associated with this group:
+  ul 
+    each tag in GroupTags
+      li
+        | #{tag.Tag.tag_name}
+        div(class="destroy")
+          a(href="/app/admin/groups/" + group.id + "/dissociate_tag/" + tag.id) x
+  form(action="/app/admin/groups/" + group.id + "/choose_tag", method="post")
+    | Associate an activity tag with this group: 
+    select(name="tag_id", id="tag_id")
+      each tag in tags
+        option(value=tag.id) #{tag.tag_name}
+    input(type="submit")
+    br
+  form(action="/app/admin/groups/" + group.id + "/add_tag", method="post")
+    | Add a new tag
+    input(type="text", name="new_tag")
+    input(type="submit")
+  //- Tags end 
+  //-
+  //-
+  script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
+  script(src='/js/group.js')

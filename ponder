@@ -151,6 +151,8 @@ DONEs:
     4. Page titles and headers (admin titles remain) DONE
     5. Make things easy for admin to edit: DONE
          Provide link to admin page for individual entity in user view iff user is admin
+    14. Pass active-tab in res.render call DONE
+
 TODOs:
 
     1. Suggestions:
@@ -169,6 +171,7 @@ TODOs:
          more the number of categories more the distraction. And leave learn for later?
          I am (almost) done with events (individual event page: embed map, add description/comments, past events) Though showing past events 
          makes sense only if we have photos and reports for the events (may be this can be done in the meta.)
+           ** add public/js/group.js
     8. Failsafe: background color/gradient for home-search for image failing to load.
     9. category-group elements: 0-85/90 instead of 65? text-shadow? top-bottom border white 15% opaque?
     10. Think about photos (it'd be much better if we had them, for enagement)
@@ -176,12 +179,11 @@ TODOs:
     12. Populate data.
     13. To fit featured in page (and keep it on the top, we can add a 12-wide div before all the other category grouped lists)
         when more categories are added.
-    14. Pass active-tab in res.render call
     15. Ranking/order by of entities and entity clusters.
     16. Add images to tags for each category
     17. Pass a param for active navbar tab
     18. Show gear retailer clusters on home by city?
-    19. Cross-browser testing
+    19. Cross-browser testing esp. IE
     20. About Us (story)
 
 37. SEO

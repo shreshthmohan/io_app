@@ -5,6 +5,7 @@ var admin_routes   = require('./routes/admin');
 var admin_city     = require('./routes/admin/city');
 var admin_retailer = require('./routes/admin/retailer');
 var admin_race     = require('./routes/admin/event');
+var admin_group    = require('./routes/admin/group');
 
 var routes   = require('./routes/user');
 var race     = require('./routes/user/event');
@@ -263,6 +264,51 @@ app.get('/app/admin/events/:event_id/dissociate_tag/:tag_id', admin_race.dissoci
 
 // Dissociate subtag associated with an event
 app.get('/app/admin/events/:event_id/dissociate_subtag/:subtag_id', admin_race.dissociate_subtag);
+
+// Group routes
+// Create group
+app.get('/app/admin/groups/create_group', admin_group.create_form);
+app.post('/app/admin/groups/create_group', admin_group.create);
+
+// List of links to groups by city
+app.get('/app/admin/groups', admin_group.cities);
+
+// List all groups in a city
+// Whether or not to take care of uppercase, if yes, how?
+// it's taken care of by default
+app.get('/app/admin/groups/city/:city_id', admin_city.group_list);
+
+// Individual group in specified city
+app.get('/app/admin/groups/:group_id', admin_group.individual);
+
+// modify gear_group
+// should ideally be PUT, checking if POST will do the job
+// Yes, it will do the 'job', but it won't be true REST API
+// TODO make REST
+app.post('/app/admin/groups/:group_id', admin_group.modify);
+app.post('/app/admin/groups/:group_id/modify_name', admin_group.modify_name);
+app.post('/app/admin/groups/:group_id/add_tag', admin_group.add_tag);
+app.post('/app/admin/groups/:group_id/choose_tag', admin_group.choose_tag);
+
+app.post('/app/admin/groups/:group_id/add_slink', admin_group.add_slink);
+app.post('/app/admin/groups/:group_id/add_phone', admin_group.add_phone);
+app.post('/app/admin/groups/:group_id/add_email', admin_group.add_email);
+
+// Destroy social link associated with a group
+app.get('/app/admin/groups/:group_id/destroy_slink/:slink_id', admin_group.destroy_slink);
+
+// Destroy phone number associated with a group
+app.get('/app/admin/groups/:group_id/destroy_number/:number', admin_group.destroy_number);
+
+// Destroy email associated with a group
+app.get('/app/admin/groups/:group_id/destroy_email/:email_id', admin_group.destroy_email);
+
+// Dissociate tag associated with a group
+// It effectively will destroy entry in GearTags table while retaining
+// corresponding entry in Tags table
+// TODO fix routes, using names is useless. Use id instead.
+app.get('/app/admin/groups/:group_id/dissociate_tag/:tag_id', admin_group.dissociate_tag);
+
 
 //////////////////////
 // Admin routes end //

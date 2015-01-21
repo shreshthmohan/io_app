@@ -18,6 +18,7 @@ exports.create = function(req, res) {
   .success(function(city) {
      db.Retailer.create({
        retailer_name:    req.param('retailer_name'),
+       retailer_name_slug: slugify(req.param('retailer_name'))
        website_url:      req.param('website_url'),
        address_field:    req.param('address_field'),
        location_url:     req.param('location_url'),
@@ -99,7 +100,7 @@ exports.individual = function(req, res) {
                   db.Email.findAll({where: {RetailerId: retailer.id}})
                   .success(function(mails) {
                     res.render('admin/retailer', {
-                      title: retailer.retailer_name + ' in TODO',
+                      title: retailer.retailer_name + ' in ' + retailer.City.city_name,
                       retailer: retailer,
                       social_links: slink,
                       brands: brands,

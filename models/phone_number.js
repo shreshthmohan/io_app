@@ -9,6 +9,10 @@ module.exports = function(sequelize, DataTypes) {
       // ^ will add FK to PhoneNumbers table
       PhoneNumber.belongsTo(models.Event, {foreignKeyConstraint: true});
       // ^ will add FK to PhoneNumbers table
+      PhoneNumber.belongsTo(models.Group, {foreignKeyConstraint: true});
+      // ^ will add FK to PhoneNumbers table
+      PhoneNumber.belongsTo(models.School, {foreignKeyConstraint: true});
+      // ^ will add FK to PhoneNumbers table
     }    
   });
 

@@ -505,7 +505,7 @@ exports.individual = function(req, res) {
       'comments',
       [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'),
        'start_date_f'],
-      [Sequelize.fn('date_format', Sequelize.col('end_date'), '%e %M %Y'), 'end_date_f']],
+      [Sequelize.fn('date_format', Sequelize.col('end_date'), '%e %M %Y'), 'end_date_f']]
     })
   .success(function(race) {
      res.render('user/individual_event', {

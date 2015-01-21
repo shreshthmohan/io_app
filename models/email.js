@@ -11,6 +11,10 @@ module.exports = function(sequelize, DataTypes) {
       // ^ will add FK to Emails table
       Email.belongsTo(models.Event, {foreignKeyConstraint: true});
       // ^ will add FK to Emails table
+      Email.belongsTo(models.Group, {foreignKeyConstraint: true});
+      // ^ will add FK to Emails table
+      Email.belongsTo(models.School, {foreignKeyConstraint: true});
+      // ^ will add FK to Emails table
     }    
   });
 
