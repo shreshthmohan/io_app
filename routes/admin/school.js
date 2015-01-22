@@ -12,15 +12,22 @@ exports.create_form = function(req, res) {
   });
 };
 
+exports.cities = function(req, res) {
+  db.City.findAll().success(function(cities) {
+    res.render('admin/schools',
+    {title: 'List of schools by city',
+     cities: cities});
+  })
+}
 
 // Create new school 
 exports.create = function(req, res) {
   db.City.find({ where: {id: req.param('city_id')}})
   .success(function(city) {
      db.School.create({
-       school_name:       req.param('school_name'),
-       school_name_slug:  slugify(req.param('school_name')),
-       website_url:        req.param('website_url'),
+       school_name:      req.param('school_name'),
+       school_name_slug: slugify(req.param('school_name')),
+       website_url:      req.param('website_url'),
        img_url_square:   req.param('img_url_square'),
        address_field:    req.param('address_field'),
        location_url:     req.param('location_url'),
@@ -45,7 +52,7 @@ exports.modify = function(req, res) {
       address_field:    req.param('address_field'),
       location_url:     req.param('location_url'),
       comments:         req.param('comments')
-    ).success(function(school) {
+    }).success(function(school) {
        res.redirect('/app/admin/schools/' + school.id)
      })
   })
@@ -70,7 +77,7 @@ exports.individual = function(req, res) {
     include: [
       db.City,
       db.Email,
-      db.PhoneNUmber,
+      db.PhoneNumber,
       db.SocialLink,
       {
         model: db.SchoolTag,

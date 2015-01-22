@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p All schools of #{city.city_name}  
+
+  ul
+  each school in schools
+    li
+       a(href="/app/admin/schools/" + school.id) #{school.school_name}

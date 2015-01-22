@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1= title
+  p All groups in #{city.city_name}  
+
+  ul
+  each group in groups 
+    li
+       a(href="/app/admin/groups/" + group.id) #{group.group_name}

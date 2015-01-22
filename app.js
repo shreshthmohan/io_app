@@ -6,6 +6,7 @@ var admin_city     = require('./routes/admin/city');
 var admin_retailer = require('./routes/admin/retailer');
 var admin_race     = require('./routes/admin/event');
 var admin_group    = require('./routes/admin/group');
+var admin_school   = require('./routes/admin/school');
 
 var routes   = require('./routes/user');
 var race     = require('./routes/user/event');
@@ -309,6 +310,50 @@ app.get('/app/admin/groups/:group_id/destroy_email/:email_id', admin_group.destr
 // TODO fix routes, using names is useless. Use id instead.
 app.get('/app/admin/groups/:group_id/dissociate_tag/:tag_id', admin_group.dissociate_tag);
 
+
+// School routes
+// Create school
+app.get('/app/admin/schools/create_school', admin_school.create_form);
+app.post('/app/admin/schools/create_school', admin_school.create);
+
+// List of links to schools by city
+app.get('/app/admin/schools', admin_school.cities);
+
+// List all schools in a city
+// Whether or not to take care of uppercase, if yes, how?
+// it's taken care of by default
+app.get('/app/admin/schools/city/:city_id', admin_city.school_list);
+
+// Individual school in specified city
+app.get('/app/admin/schools/:school_id', admin_school.individual);
+
+// modify gear_school
+// should ideally be PUT, checking if POST will do the job
+// Yes, it will do the 'job', but it won't be true REST API
+// TODO make REST
+app.post('/app/admin/schools/:school_id', admin_school.modify);
+app.post('/app/admin/schools/:school_id/modify_name', admin_school.modify_name);
+app.post('/app/admin/schools/:school_id/add_tag', admin_school.add_tag);
+app.post('/app/admin/schools/:school_id/choose_tag', admin_school.choose_tag);
+
+app.post('/app/admin/schools/:school_id/add_slink', admin_school.add_slink);
+app.post('/app/admin/schools/:school_id/add_phone', admin_school.add_phone);
+app.post('/app/admin/schools/:school_id/add_email', admin_school.add_email);
+
+// Destroy social link associated with a school
+app.get('/app/admin/schools/:school_id/destroy_slink/:slink_id', admin_school.destroy_slink);
+
+// Destroy phone number associated with a school
+app.get('/app/admin/schools/:school_id/destroy_number/:number', admin_school.destroy_number);
+
+// Destroy email associated with a school
+app.get('/app/admin/schools/:school_id/destroy_email/:email_id', admin_school.destroy_email);
+
+// Dissociate tag associated with a school
+// It effectively will destroy entry in GearTags table while retaining
+// corresponding entry in Tags table
+// TODO fix routes, using names is useless. Use id instead.
+app.get('/app/admin/schools/:school_id/dissociate_tag/:tag_id', admin_school.dissociate_tag);
 
 //////////////////////
 // Admin routes end //

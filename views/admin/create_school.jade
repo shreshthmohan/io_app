@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  h1= title
+  p Create new school by adding relevant info
+
+  h2 Creating new school
+  form(action="create_school", method="post")
+    label(for="school_name") School Name 
+    input(type="text", name="school_name", id="school_name")
+    br
+    label(for="website_url") Website URL
+    input(type="text", name="website_url", id="website_url")     
+    br
+    label(for="address_field") address_field
+    input(type="text", name="address_field", id="address_field")   
+    br
+    label(for="city_id") City 
+    //- TODO Add an option: "none" and place a rule that selected option can't
+    //- be none when submitting
+    //- TODO what to do if the school's online?
+    //- TODO Also what if the school's both online and offline?
+    select(name="city_id", id="city_name")  
+      each city in cities
+        option(value=city.id) #{city.city_name}
+      //- option(value='null') None
+    br
+    label(for="location_url") Location URL
+    input(type="text", name="location_url", id="location_url")    
+    br
+    label(for="img_url_square") image URL (square, 160x160?)
+    input(type="text", name="img_url_square", id="img_url_square")    
+    br
+    label(for="comments") comments
+    input(type="text", name="comments", id="comments")        
+    br
+    input(type="submit")
+

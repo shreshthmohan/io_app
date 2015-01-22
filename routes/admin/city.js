@@ -1,10 +1,13 @@
 var db = require('../../models');
 var Sequelize = require('sequelize');
+var sequelize = db.sequelize; // just to avoid the confusion
+var slugify = require('./slugify');
 
 exports.create = function(req, res) {
   if(req.param('city_name')) {
     db.City.create({
       city_name: req.param('city_name'),
+      city_name_slug: slugify(req.param('city_name')),
       image_url: req.param('image_url')
     })
     .success(function(city) {
@@ -32,7 +35,6 @@ exports.retailer_list = function(req, res) {
       where: {CityId: req.param('city_id')}
     })
     .success(function(retailers) {
-      console.log(JSON.stringify(retailers))
       res.render('admin/city_retailers', {
         title: 'All gear retailers of ' + city.city_name,
         city: city,
@@ -57,6 +59,39 @@ exports.event_list = function(req, res) {
   })
 };
 
+// List of groups in given city
+exports.group_list = function(req, res) {
+  db.City.find({where: {id: req.param('city_id')}})
+  .then(function(city) {
+    db.Group.findAll({
+      where: {CityId: req.param('city_id')}
+    })
+    .success(function(groups) {
+      res.render('admin/city_groups', {
+        title: 'All groups of ' + city.city_name,
+        city: city,
+        groups: groups
+      }) 
+    })
+  })
+};
+
+// List of schools in given city
+exports.school_list = function(req, res) {
+  db.City.find({where: {id: req.param('city_id')}})
+  .then(function(city) {
+    db.School.findAll({
+      where: {CityId: req.param('city_id')}
+    })
+    .success(function(schools) {
+      res.render('admin/city_schools', {
+        title: 'All schools of ' + city.city_name,
+        city: city,
+        schools: schools
+      }) 
+    })
+  })
+};
 // Individual City
 exports.individual = function(req, res) {
   db.City.findOne({where: {id: req.param('city_id')}})

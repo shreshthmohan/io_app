@@ -12,6 +12,13 @@ exports.create_form = function(req, res) {
   });
 };
 
+exports.cities = function(req, res) {
+  db.City.findAll().success(function(cities) {
+    res.render('admin/groups',
+    {title: 'List of groups by city',
+     cities: cities});
+  })
+}
 
 // Create new group 
 exports.create = function(req, res) {
@@ -41,7 +48,7 @@ exports.modify = function(req, res) {
       group_url:        req.param('website_url'),
       img_url_square:   req.param('img_url_square'),
       comments:         req.param('comments')
-    ).success(function(group) {
+    }).success(function(group) {
        res.redirect('/app/admin/groups/' + group.id)
      })
   })
@@ -66,7 +73,7 @@ exports.individual = function(req, res) {
     include: [
       db.City,
       db.Email,
-      db.PhoneNUmber,
+      db.PhoneNumber,
       db.SocialLink,
       {
         model: db.GroupTag,

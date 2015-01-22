@@ -18,7 +18,7 @@ exports.create = function(req, res) {
   .success(function(city) {
      db.Retailer.create({
        retailer_name:    req.param('retailer_name'),
-       retailer_name_slug: slugify(req.param('retailer_name'))
+       retailer_name_slug: slugify(req.param('retailer_name')),
        website_url:      req.param('website_url'),
        address_field:    req.param('address_field'),
        location_url:     req.param('location_url'),

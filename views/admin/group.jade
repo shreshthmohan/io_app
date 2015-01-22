@@ -81,7 +81,7 @@ block content
   //- Tags start
   | Tags associated with this group:
   ul 
-    each tag in GroupTags
+    each tag in group.GroupTags
       li
         | #{tag.Tag.tag_name}
         div(class="destroy")
