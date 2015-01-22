@@ -2,61 +2,62 @@ extends ../layout
 
 block content
   .home-search.border-gray
-    h1.text-shadow-2.white Look for Adventure!
-    form(class="home-radio")
-      input(id="gear" type="radio" name="search" value="gear")
-      label(for="gear" class="home-radio-label") Gear
-      input(id="events" type="radio" name="search" value="events" checked="checked")
-      label(for="events" class="home-radio-label") Events 
-    div(class="gear")
-      h2.white.text-shadow-1  Get equipped.
-      form.search.form-inline(action="/app/gear")
-        .form-group
-          label.sr-only(for="activity_gear") Activity
-          select(class="form-control" required type="text" name="activity" id="activity_gear")
-            option(value='' selected="selected" disabled="disabled") Choose activity
-            option(value=0) All
-            each tag in tags
-              option(value=tag.id) #{tag.tag_name}
-        |  gear in
-        .form-group
-          label.sr-only(for="store_location") Activity
-          select(class="form-control" required type="text" name="location" id="store_location")
-            option(value='' selected="selected" disabled="disabled") Choose location
-            option(value=0) All locations
-            each city in cities
-              option(value=city.id) #{city.city_name}
-        button(type="submit" class="btn btn-warning ") Go!
-    div(class="events")
-      h2.white.text-shadow-1 Upcoming Races and Events.
-      form.search.form-inline(action="/app/events/upcoming")
-        .form-group
-          label.sr-only(for='event_activity') Activity
-          select(class="form-control" required type="text" name="activity" id="event_activity")
-            option(value='' selected="selected" disabled="disabled") Choose activity
-            option(value=0) All
-            each tag in tags
-              option(value=tag.id) #{tag.tag_name}
-        .form-group
-          label.sr-only(for='event_location') Location
-          select(class="form-control" type="text" name="location" id="event_location" required)
-            option(value='' selected="selected" disabled="disabled") Choose location 
-            option(value=0) All
-            each city in cities
-              option(value=city.id) #{city.city_name}
-        .form-group
-          label.sr-only(for="from") From
-          .input-group
-            .input-group-addon
-              span.fa.fa-calendar
-            input(class="form-control" type="text" name="start_date" placeholder="from" id="from")
-        .form-group
-          label.sr-only(for="to") To
-          .input-group
-            .input-group-addon
-              span.fa.fa-calendar
-            input(class="form-control" type="text" name="end_date" placeholder="to" id="to")
-        button(type="submit" class="btn btn-warning ") Go! 
+    .home-search-sub
+      h1.text-shadow-2.white Look for Adventure!
+      form(class="home-radio")
+        input(id="gear" type="radio" name="search" value="gear")
+        label(for="gear" class="home-radio-label") Gear
+        input(id="events" type="radio" name="search" value="events" checked="checked")
+        label(for="events" class="home-radio-label") Events 
+      div(class="gear")
+        h2.white.text-shadow-1  Get equipped.
+        form.search.form-inline(action="/app/gear")
+          .form-group
+            label.sr-only(for="activity_gear") Activity
+            select(class="form-control" required type="text" name="activity" id="activity_gear")
+              option(value='' selected="selected" disabled="disabled") Choose activity
+              option(value=0) All
+              each tag in tags
+                option(value=tag.id) #{tag.tag_name}
+          |  gear in
+          .form-group
+            label.sr-only(for="store_location") Activity
+            select(class="form-control" required type="text" name="location" id="store_location")
+              option(value='' selected="selected" disabled="disabled") Choose location
+              option(value=0) All locations
+              each city in cities
+                option(value=city.id) #{city.city_name}
+          button(type="submit" class="btn btn-warning ") Go!
+      div(class="events")
+        h2.white.text-shadow-1 Upcoming Races and Events.
+        form.search.form-inline(action="/app/events/upcoming")
+          .form-group
+            label.sr-only(for='event_activity') Activity
+            select(class="form-control" required type="text" name="activity" id="event_activity")
+              option(value='' selected="selected" disabled="disabled") Choose activity
+              option(value=0) All
+              each tag in tags
+                option(value=tag.id) #{tag.tag_name}
+          .form-group
+            label.sr-only(for='event_location') Location
+            select(class="form-control" type="text" name="location" id="event_location" required)
+              option(value='' selected="selected" disabled="disabled") Choose location 
+              option(value=0) All
+              each city in cities
+                option(value=city.id) #{city.city_name}
+          .form-group
+            label.sr-only(for="from") From
+            .input-group
+              .input-group-addon
+                span.fa.fa-calendar
+              input(class="form-control" type="text" name="start_date" placeholder="from" id="from")
+          .form-group
+            label.sr-only(for="to") To
+            .input-group
+              .input-group-addon
+                span.fa.fa-calendar
+              input(class="form-control" type="text" name="end_date" placeholder="to" id="to")
+          button(type="submit" class="btn btn-warning ") Go! 
   hr.home-hr
   .home-explore
     .row
