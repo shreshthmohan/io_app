@@ -1,12 +1,43 @@
-// To enable editing of Event Name
+// For individual city (city.jade)
 $(function() {
-  $('#change_event_name').click(function() {
-    $('#event_name').after('<input type="text" name="event_name_new" value="' + $('#event_name').text() + '"></input>');
-    $('#event_name').detach();
-    $('#change_event_name').detach();
+  $('#change_city_name').click(function() {
+    $('#city_name').after('<input type="text" name="new_city_name" value="'+ $('#city_name').text() + '"></input>');
+    $('#city_name').detach();
+    $('#change_city_name').detach();
   });
 });
 
+// For tag (tag.jade)
+// Enable editing of tag name
+$(function() {
+  $('#change_tag_name').click(function() {
+    $('#tag_name').after('<input type="text" name="new_tag_name" value="'+ $('#tag_name').text() + '"></input>');
+    $('#tag_name').detach();
+    $('#change_tag_name').detach();
+  });
+});
+
+// For individual city (city.jade)
+// For tag (tag.jade)
+$(function() {
+  $('#change_image_url').click(function() {
+    $('#image_url').after('<input type="text" name="new_image_url" value="'+ $('#image_url').text() + '"></input>');
+    $('#image_url').detach();
+    $('#change_image_url').detach();
+  });
+});
+
+// For individual group (group.jade)
+// To enable editing of group URL
+$(function() {
+  $('#change_group_url').click(function() {
+    $('#group_url').after("<input type='text' name='group_url' value='"+ $('#group_url').attr("href") + "'></input>");
+    $('#group_url').detach();
+    $('#change_group_url').detach();
+  });
+});
+
+// For individual event (event.jade)
 // To enable editing of Event URL
 $(function() {
   $('#change_event_url').click(function() {
@@ -16,15 +47,7 @@ $(function() {
   });
 });
 
-// To enable editing of Social Event URL
-$(function() {
-  $('#change_event_url_social').click(function() {
-    $('#event_url_social').after("<input type='text' name='event_url_social' value='"+ $('#event_url_social').attr("href") + "'></input>");
-    $('#event_url_social').detach();
-    $('#change_event_url_social').detach();
-  });
-});
-
+// For individual event (event.jade)
 // To enable editing of Organiser name
 $(function() {
   $('#change_organiser_name').click(function() {
@@ -34,6 +57,7 @@ $(function() {
   });
 });
 
+// For individual event (event.jade)
 // To enable editing of Organiser URL
 $(function() {
   $('#change_organiser_url').click(function() {
@@ -43,6 +67,9 @@ $(function() {
   });
 });
 
+// For individual event (event.jade)
+// For individual retailer (retailer.jade)
+// For individual school (school.jade)
 // To enable editing of address field
 $(function() {
   $('#change_address').click(function() {
@@ -52,6 +79,9 @@ $(function() {
   });
 });
 
+// For individual event (event.jade)
+// For individual retailer (retailer.jade)
+// For individual school (school.jade)
 // To enable editing of location URL
 $(function() {
   $('#change_location_url').click(function() {
@@ -61,6 +91,9 @@ $(function() {
   });
 });
 
+// For individual school (school.jade)
+// For individual retailer (retailer.jade)
+// For individual event (event.jade)
 // To enable editing of square image URL
 $(function() {
   $('#change_img_url_square').click(function() {
@@ -70,6 +103,7 @@ $(function() {
   });
 });
 
+// For individual event (event.jade)
 // To enable editing of start date
 $(function() {
   $('#change_start_date').click(function() {
@@ -79,6 +113,7 @@ $(function() {
   });
 });
 
+// For individual event (event.jade)
 // To enable editing of end date
 $(function() {
   $('#change_end_date').click(function() {
@@ -88,42 +123,9 @@ $(function() {
   });
 });
 
-// To enable editing of primary phone 
-$(function() {
-  $('#change_phone_primary').click(function() {
-    $('#phone_primary').after("<input type='text' name='phone_primary' value='" + $('#phone_primary').text() + "'></input>");
-    $('#phone_primary').detach();
-    $('#change_phone_primary').detach();
-  });
-});
-
-// To enable editing of secondary phone 
-$(function() {
-  $('#change_phone_secondary').click(function() {
-    $('#phone_secondary').after("<input type='text' name='phone_secondary' value='" + $('#phone_secondary').text() + "'></input>");
-    $('#phone_secondary').detach();
-    $('#change_phone_secondary').detach();
-  });
-});
-
-// To enable editing of tertiary phone 
-$(function() {
-  $('#change_phone_tertiary').click(function() {
-    $('#phone_tertiary').after("<input type='text' name='phone_tertiary' value='" + $('#phone_tertiary').text() + "'></input>");
-    $('#phone_tertiary').detach();
-    $('#change_phone_tertiary').detach();
-  });
-});
-
-// To enable editing of event email
-$(function() {
-  $('#change_email').click(function() {
-    $('#email').after("<input type='text' name='email' value='" + $('#email').text() + "'></input>");
-    $('#email').detach();
-    $('#change_email').detach();
-  });
-});
-
+// For individual retailer (retailer.jade)
+// For individual event (event.jade)
+// For individual school (school.jade)
 // To enable editing of comments 
 $(function() {
   $('#change_comments').click(function() {
@@ -133,3 +135,13 @@ $(function() {
   });
 });
 //TODO: Reminder about using " and '
+
+// For individual retailer(retailer.jade)
+// To enable editing of website URL
+$(function() {
+  $('#change_website_url').click(function() {
+    $('#website_url').after("<input type='text' name='website_url' value='"+ $('#website_url').attr("href") + "'></input>");
+    $('#website_url').detach();
+    $('#change_website_url').detach();
+  });
+});
