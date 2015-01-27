@@ -543,6 +543,43 @@ h1.md {
   border-right: 1px solid @gray-light85;
 }
 
+
+//
+li.tab {
+  float: left;
+  background: white;
+  list-style: none;
+  border-top: 3px solid @gray-light80;
+  border-bottom: 1px solid @gray-light80;
+  border-left: 1px solid @gray-light80;
+  border-right: 1px solid @gray-light80;
+  color: @gray-light70;
+  font-size: 16px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+li.tab.active {
+  color: black;
+  border-top: 3px solid @io-yellow;
+  border-bottom: 1px solid white;
+  border-left: 1px solid @gray-light80;
+  border-right: 1px solid @gray-light80;
+}
+
+.tab-content {
+  display: none;
+  background: white;
+  border-bottom: 1px solid @gray-light80;
+  border-left: 1px solid @gray-light80;
+  border-right: 1px solid @gray-light80;
+}
+
+.tab-content.active {
+  display: block;
+}
+
 //.border-gray {
 //  border: 1px solid @gray-light80;
 //}

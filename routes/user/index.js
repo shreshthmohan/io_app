@@ -33,12 +33,20 @@ exports.index = function(req, res) {
           }),
           db.GearTag.count({
             where: {TagId: t.id}
+          }),
+          db.GroupTag.count({
+            where: {TagId: t.id}
+          }),
+          db.SchoolTag.count({
+            where: {TagId: t.id}
           })
         ])
-        .spread(function(event_count, retailer_count) {
+        .spread(function(event_count, retailer_count, group_count, school_count) {
           tag = t.toJSON();
           tag.event_count = event_count;
           tag.retailer_count = retailer_count;
+          tag.group_count = group_count;
+          tag.school_count = school_count;
           return tag
         })
       )
