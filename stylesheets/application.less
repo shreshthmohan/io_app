@@ -526,15 +526,18 @@ h1.md {
 }
 
 .explore-head {
-  margin: 0px 10px 10px 10px;
+  margin: 0px 10px 15px 10px;
+  padding: 5px;
   background: white;
   font-size: 18px;
   .shadow(0px 2px 4px 0px rgba(0, 0, 0, .15));
 }
 
 .home-category-head {
-  margin: 10px;
-  color: @io-yellow;
+  margin: 0px 10px 10px 0px;
+  padding: 5px;
+  //color: @io-yellow;
+  border-top: 3px solid @io-yellow;
   background: white;
   font-size: 16px;
   .shadow(0px 2px 4px 0px rgba(0, 0, 0, .15));
@@ -545,12 +548,18 @@ h1.md {
 
 
 //
+
+.home-category-tabs, .tab-content-container {
+  .shadow(0px 2px 4px 0px rgba(0, 0, 0, .15));
+}
+
 li.tab {
   float: left;
-  background: white;
+  padding: 5px;
+  background: @gray-light90;
   list-style: none;
   border-top: 3px solid @gray-light80;
-  border-bottom: 1px solid @gray-light80;
+  //border-bottom: 1px solid @gray-light80;
   border-left: 1px solid @gray-light80;
   border-right: 1px solid @gray-light80;
   color: @gray-light70;
@@ -560,24 +569,45 @@ li.tab {
   }
 }
 
+
 li.tab.active {
+  .shadow(0px -3px 4px 1px rgba(0, 0, 0, .1));
+  z-index: 2;
   color: black;
+  background: white;
   border-top: 3px solid @io-yellow;
-  border-bottom: 1px solid white;
-  border-left: 1px solid @gray-light80;
-  border-right: 1px solid @gray-light80;
+  //border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+.sub-tab {
+  padding: 5px;
+  margin: 10px;
+  background: @gray-lighter;
+  .shadow(0px 2px 4px 0px rgba(0, 0, 0, .15));
+  font-size: 14px;
+  color: darken(@io-yellow, 15%);
+}
+
+.tab-content-container {
 }
 
 .tab-content {
-  display: none;
   background: white;
-  border-bottom: 1px solid @gray-light80;
-  border-left: 1px solid @gray-light80;
-  border-right: 1px solid @gray-light80;
 }
 
-.tab-content.active {
+.tab-content-container {
+  display: none;
+  background: white;
+  //border-bottom: 1px solid @gray-light80;
+  //border-left: 1px solid @gray-light80;
+  //border-right: 1px solid @gray-light80;
+}
+
+.tab-content-container.active {
   display: block;
+  z-index: 2;
 }
 
 //.border-gray {

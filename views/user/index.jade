@@ -64,89 +64,154 @@ block content
       .explore-head.text-center.border-gray
         | Don't want to search? It's okay, you can explore too!
     .row
-      .col-md-7.home-category-tabs
-        .row
-          ul
-            li.tab#event-tab.col-xs-3.text-center.active
-              | Events
-            li.tab#gear-tab.col-xs-3.text-center
-              | Gear
-            li.tab#group-tab.col-xs-3.text-center
-              | Groups
-            li.tab#learn-tab.col-xs-3.text-center
-              | Learn
-        .row
-          .col-xs-6.tab-content.events-explore.active
-            each tag in tags
-              - if(tag.event_count > 0)
-                  .col-md-12
-                    a(href="/app/events/upcoming/grouped?activity=" + tag.id + "&location=0", title="All upcoming " + tag.tag_name  + " events all over India")
-                      .category-el
-                        .info.clearfix(style="background-image: url(" + tag.image_url + ");")
-                          .info-text.col-xs-12
-                            h2.sm.uppercase
-                              | #{tag.tag_name}
-                            span.number.uppercase
-                              | #{tag.event_count} EVENT
-                              - if(tag.event_count >1)
-                                | S
-                           .info-overlay
-          .col-xs-6.tab-content.gear-explore
-            each tag in tags
-              - if(tag.retailer_count > 0)
-                  .col-md-12
-                    a(href="/app/gear/grouped?activity=" + tag.id)
-                      .category-el
-                        .info.clearfix(style="background-image: url(" + tag.image_url + ");")
-                          .info-text.col-xs-12
-                            h2.sm.uppercase
-                              | #{tag.tag_name}
-                            span.number.uppercase
-                              | #{tag.retailer_count} STORE
-                              - if(tag.retailer_count > 1)
-                                | S
-                           .info-overlay
-          .col-xs-6.tab-content.group-explore
-            each tag in tags
-              - if(tag.group_count > 0)
-                  .col-md-12
-                    a(href="/app/groups/grouped?activity=" + tag.id + "&location=0", title="All " + tag.tag_name  + " groups across India")
-                      .category-el
-                        .info.clearfix(style="background-image: url(" + tag.image_url + ");")
-                          .info-text.col-xs-12
-                            h2.sm.uppercase
-                              | #{tag.tag_name}
-                            span.number.uppercase
-                              | #{tag.group_count} GROUP
-                              - if(tag.group_count >1)
-                                | S
-                           .info-overlay
-          .col-xs-6.tab-content.learn-explore
-            each tag in tags
-              - if(tag.school_count > 0)
-                  .col-md-12
-                    a(href="/app/schools/grouped?activity=" + tag.id + "&location=0", title="All " + tag.tag_name  + " schools across India")
-                      .category-el
-                        .info.clearfix(style="background-image: url(" + tag.image_url + ");")
-                          .info-text.col-xs-12
-                            h2.sm.uppercase
-                              | #{tag.tag_name}
-                            span.number.uppercase
-                              | #{tag.school_count} OUTDOOR SCHOOL
-                              - if(tag.school_count >1)
-                                | S
-                           .info-overlay
-      col-md-5.home-featured
-        | some shit
-    .row
-      .col-md-3.home-events
-        .home-category-head.text-center.border-gray Events
-      .col-md-3.home-gear
-        .home-category-head.text-center.border-gray Gear
-      .col-md-3.home-groups
-        .home-category-head.text-center.border-gray Groups
-      .col-md-3.home-featured
-        .home-category-head.text-center.border-gray Featured
+      .col-xs-12
+        .col-md-4.home-featured
+          .row
+            .home-category-head.text-center.border-gray Featured
+        .col-md-8.home-category-tabs
+          .row
+            ul
+              li.tab#event-tab.col-xs-3.text-center.active
+                | Events
+              li.tab#gear-tab.col-xs-3.text-center
+                | Gear
+              li.tab#group-tab.col-xs-3.text-center
+                | Groups
+              li.tab#learn-tab.col-xs-3.text-center
+                | Learn
+          .row
+            .tab-content-container.events-explore.active
+              .col-xs-6.tab-content
+                .text-center.sub-tab By Activity
+                each tag in tags
+                  - if(tag.event_count > 0)
+                      .col-md-12
+                        a(href="/app/events/upcoming/grouped?activity=" + tag.id + "&location=0", title="All upcoming " + tag.tag_name  + " events all over India")
+                          .category-el
+                            .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                              .info-text.col-xs-12
+                                h2.sm.uppercase
+                                  | #{tag.tag_name}
+                                span.number.uppercase
+                                  | #{tag.event_count} EVENT
+                                  - if(tag.event_count >1)
+                                    | S
+                               .info-overlay
+              .col-xs-6.tab-content
+                .text-center.sub-tab By Location
+                each city in cities
+                  - if(city.event_count > 0)
+                      .col-md-12
+                        a(href="/app/events/upcoming/grouped?location=" + city.id, title="All upcoming events in " + city.city_name)
+                          .category-el
+                            .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                              .info-text.col-xs-12
+                                h2.sm.uppercase
+                                  | #{city.city_name}
+                                span.number.uppercase
+                                  | #{city.event_count} EVENT
+                                  - if(city.event_count >1)
+                                    | S
+                              .info-overlay
+            .tab-content-container.gear-explore
+              .col-xs-6.tab-content
+                .text-center.sub-tab By Activity
+                each tag in tags
+                  - if(tag.retailer_count > 0)
+                      .col-md-12
+                        a(href="/app/gear/grouped?activity=" + tag.id)
+                          .category-el
+                            .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                              .info-text.col-xs-12
+                                h2.sm.uppercase
+                                  | #{tag.tag_name}
+                                span.number.uppercase
+                                  | #{tag.retailer_count} STORE
+                                  - if(tag.retailer_count > 1)
+                                    | S
+                               .info-overlay
+              .col-xs-6.tab-content
+                .text-center.sub-tab By Location
+                each city in cities
+                  - if(city.retailer_count > 0)
+                      .col-md-12
+                        a(href="/app/gear/grouped?location=" + city.id)
+                          .category-el
+                            .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                              .info-text.col-xs-12
+                                h2.sm.uppercase
+                                  | #{city.city_name}
+                                span.number.uppercase
+                                  | #{city.retailer_count} STORE
+                                  - if(city.retailer_count >1)
+                                    | S
+                              .info-overlay
+            .tab-content-container.group-explore
+              .col-xs-6.tab-content
+                .text-center.sub-tab By Activity
+                each tag in tags
+                  - if(tag.group_count > 0)
+                      .col-md-12
+                        a(href="/app/groups/grouped?activity=" + tag.id + "&location=0", title="All " + tag.tag_name  + " groups across India")
+                          .category-el
+                            .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                              .info-text.col-xs-12
+                                h2.sm.uppercase
+                                  | #{tag.tag_name}
+                                span.number.uppercase
+                                  | #{tag.group_count} GROUP
+                                  - if(tag.group_count >1)
+                                    | S
+                               .info-overlay
+              .col-xs-6.tab-content
+                .text-center.sub-tab By Location
+                each city in cities
+                  - if(city.group_count > 0)
+                      .col-md-12
+                        a(href="/app/groups/grouped?activity=0&location=" + city.id, title="All outdoor groups in " + city.city_name)
+                          .category-el
+                            .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                              .info-text.col-xs-12
+                                h2.sm.uppercase
+                                  | #{city.city_name}
+                                span.number.uppercase
+                                  | #{city.group_count} GROUP
+                                  - if(city.group_count >1)
+                                    | S
+                               .info-overlay
+            .tab-content-container.learn-explore
+              .col-xs-6.tab-content
+                .text-center.sub-tab By Activity
+                each tag in tags
+                  - if(tag.school_count > 0)
+                      .col-md-12
+                        a(href="/app/schools/grouped?activity=" + tag.id + "&location=0", title="To learn " + tag.tag_name  + " across India")
+                          .category-el
+                            .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                              .info-text.col-xs-12
+                                h2.sm.uppercase
+                                  | #{tag.tag_name}
+                                span.number.uppercase
+                                  | #{tag.school_count} OUTDOOR SCHOOL
+                                  - if(tag.school_count >1)
+                                    | S
+                               .info-overlay
+              .col-xs-6.tab-content
+                .text-center.sub-tab By Location
+                each city in cities 
+                  - if(city.school_count > 0)
+                      .col-md-12
+                        a(href="/app/schools/grouped?location=" + city.id, title="To learn an outdoor sport in " + city.city_name)
+                          .category-el
+                            .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                              .info-text.col-xs-12
+                                h2.sm.uppercase
+                                  | #{city.city_name}
+                                span.number.uppercase
+                                  | #{city.school_count} OUTDOOR SCHOOL
+                                  - if(city.school_count >1)
+                                    | S
+                               .info-overlay
 
 block extrajs
   script(src="/js/home.js")

@@ -1,4 +1,6 @@
 var db = require('../../models');
+var Sequelize = db.Sequelize;
+var sequelize = db.sequelize; // just to avoid the confusion
 var Promise = require('bluebird');
 
 /*
@@ -16,6 +18,7 @@ exports.index = function(req, res) {
   })
 }
 */
+
 exports.index = function(req, res) {
   db.Tag.findAll()
   .then(function(tags) {
@@ -56,10 +59,43 @@ exports.index = function(req, res) {
   .then(function(tags_c) {
     db.City.findAll()
     .then(function(cities) {
+      var promises = []
+      var city
+      cities.forEach(function(c) {
+        promises.push(
+          Promise.all([
+            db.Event.count({
+              where: Sequelize.and(
+                {CityId: c.id},
+                {start_date: {gt: new Date()}})
+            }),
+            db.Retailer.count({
+              where: {CityId: c.id}
+            }),
+            db.Group.count({
+              where: {CityId: c.id}
+            }),
+            db.School.count({
+              where: {CityId: c.id}
+            })
+          ])
+          .spread(function(event_count, retailer_count, group_count, school_count) {
+            city = c.toJSON();
+            city.event_count    = event_count;
+            city.retailer_count = retailer_count;
+            city.group_count    = group_count;
+            city.school_count   = school_count;
+            return city
+          })
+        )
+      })
+      return Promise.all(promises)
+    })
+    .then(function(cities_c) {
       res.render('user/index', {
         active_tab: 'home',
         title_: 'Adventure Outdoors India - Running, Cycling, Trekking, Surfing, Kayaking, Rafting & More ',
-        cities: cities,
+        cities: cities_c,
         tags: tags_c
       })
     })
