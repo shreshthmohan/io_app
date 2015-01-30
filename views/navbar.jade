@@ -27,6 +27,18 @@ div(class="navbar navbar-default navbar-fixed-top" role="navigation")
         - else
           li
             a(href='/app/gear/grouped') Gear 
+        - if(active_tab == 'Groups')
+          li.active
+            a(href='/app/groups/grouped') Groups
+        - else
+          li
+            a(href='/app/groups/grouped') Groups
+        - if(active_tab == 'Schools')
+          li.active
+            a(href='/app/schools/grouped') Learn
+        - else
+          li
+            a(href='/app/schools/grouped') Learn
         li(class="social-icon")
           a(href='TODO')
             i(class="fa fa-twitter")

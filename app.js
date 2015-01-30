@@ -11,6 +11,8 @@ var admin_school   = require('./routes/admin/school');
 var routes   = require('./routes/user');
 var race     = require('./routes/user/event');
 var gear     = require('./routes/user/gear');
+var group    = require('./routes/user/group');
+var school   = require('./routes/user/school');
 var user     = require('./routes/user/user')
 
 var http     = require('http');
@@ -391,6 +393,28 @@ app.get('/app/gear', gear.all);
 app.get('/app/gear/grouped', gear.all_grouped);
 
 app.get('/app/gear/:city_name_slug/:retailer_name_slug/:retailer_id', gear.individual)
+
+//////////////////
+// Group routes //
+//////////////////
+
+app.get('/app/groups', group.all);
+app.get('/app/groups/grouped', group.all_grouped);
+
+app.get('/app/groups/:city_name_slug/:group_name_slug/:group_id', group.individual)
+
+///////////////////
+// School routes //
+///////////////////
+
+app.get('/app/schools', school.all);
+app.get('/app/schools/grouped', school.all_grouped);
+
+app.get('/app/schools/:city_name_slug/:school_name_slug/:school_id', school.individual)
+
+/////////////////////
+// User Routes end // 
+/////////////////////
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')))

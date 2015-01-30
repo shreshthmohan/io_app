@@ -154,6 +154,7 @@ DONEs:
     14. Pass active-tab in res.render call DONE
     ... Merged multiple modify js files to modify.js DONE
     17. Pass a param for active navbar tab DONE
+    18. Show gear retailer clusters on home by city? DONE
 
 TODOs:
 
@@ -176,13 +177,12 @@ TODOs:
     8. Failsafe: background color/gradient for home-search for image failing to load.
     9. category-group elements: 0-85/90 instead of 65? text-shadow? top-bottom border white 15% opaque?
     10. Think about photos (it'd be much better if we had them, for engagement)
-    11. titles for each element that appear on hover.
+    11. Titles for each element that appear on hover.
     12. Populate data.
     13. To fit featured in page (and keep it on the top, we can add a 12-wide div before all the other category grouped lists)
         when more categories are added. Experiment on what Chhabra suggested.
     15. Ranking/order by of entities and entity clusters.
     16. Add images to tags for each category
-    18. Show gear retailer clusters on home by city?
     19. Cross-browser testing esp. IE
     20. About Us (story)
 
