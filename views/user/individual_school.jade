@@ -1,0 +1,64 @@
+extends ../layout
+
+block content
+  .entity.col-md-6
+    - if(school.website_url) 
+        a(href=school.website_url target='_blank')
+          h1 #{school.school_name}
+    - else
+        h1 #{school.school_name}
+    span.location
+      - if(school.location_url)
+          a(href=school.location_url)
+            span.fa.fa-map-marker
+      - else
+          span.fa.fa-map-marker
+      h3 #{school.City.city_name}
+    - if(school.address_field)
+        span.address
+          | #{school.address_field}
+    - if(school.Emails != '')
+        ul.emails
+          each mail in school.Emails
+            li.email
+              span.fa.fa-envelope.helper
+              a(href="mailto:" + mail.email)
+                | #{mail.email}
+    - if(school.PhoneNumbers != '')
+        ul.numbers
+          each number in school.PhoneNumbers
+            li.number
+              span.fa.fa-phone-square.helper
+              | #{number.number}
+    .slinks
+      each slink in school.SocialLinks
+        li.social-link
+          - if(slink.link.indexOf('facebook.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-facebook-square
+          - else if(slink.link.indexOf('twitter.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-twitter-square
+          - else if(slink.link.indexOf('plus.google.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-google-plus-square
+          - else if(slink.link.indexOf('instagram.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-instagram
+          - else if(slink.link.indexOf('flickr.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-flickr
+          - else if(slink.link.indexOf('youtube.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-youtube
+          - else
+              a(href=slink.link)
+                 span.fa.fa-external-link
+    .tags           
+      each school_tag in school.SchoolTags
+        li.tag
+          span
+            | #{school_tag.Tag.tag_name}
+    - if(admin)
+        | Dear Admin, if you see something wrong or missing with this school you can modify it 
+        a(href="/app/admin/schools/" + school.id, target="_blank") here

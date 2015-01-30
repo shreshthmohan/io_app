@@ -1,0 +1,57 @@
+extends ../layout
+
+block content
+  .entity.col-md-6
+    - if(group.group_url) 
+        a(href=group.group_url target='_blank')
+          h1 #{group.group_name}
+    - else
+        h1 #{group.group_name}
+    span.location
+      span.fa.fa-map-marker
+      h3 #{group.City.city_name}
+    - if(group.Emails != '')
+        ul.emails
+          each mail in group.Emails
+            li.email
+              span.fa.fa-envelope.helper
+              a(href="mailto:" + mail.email)
+                | #{mail.email}
+    - if(group.PhoneNumbers != '')
+        ul.numbers
+          each number in group.PhoneNumbers
+            li.number
+              span.fa.fa-phone-square.helper
+              | #{number.number}
+    .slinks
+      each slink in group.SocialLinks
+        li.social-link
+          - if(slink.link.indexOf('facebook.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-facebook-square
+          - else if(slink.link.indexOf('twitter.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-twitter-square
+          - else if(slink.link.indexOf('plus.google.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-google-plus-square
+          - else if(slink.link.indexOf('instagram.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-instagram
+          - else if(slink.link.indexOf('flickr.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-flickr
+          - else if(slink.link.indexOf('youtube.com') > -1)
+              a(href=slink.link)
+                span.fa.fa-youtube
+          - else
+              a(href=slink.link)
+                 span.fa.fa-external-link
+    .tags           
+      each group_tag in group.GroupTags
+        li.tag
+          span
+            | #{group_tag.Tag.tag_name}
+    - if(admin)
+        | Dear Admin, if you see something wrong or missing with this group you can modify it 
+        a(href="/app/admin/groups/" + group.id, target="_blank") here

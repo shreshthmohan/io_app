@@ -1,0 +1,49 @@
+extends ../layout
+
+block content
+  include group_filter_bar
+  .filter-margin
+  .heading.text-center.border-gray
+    - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
+        h1.md All Active Outdoor Groups 
+          - if(city)
+              | in #{city.city_name}
+          -else
+              | across India
+    - else if (group_mode == 'cho_tag_all_loc')
+        h1.md All #{tag.tag_name} Groups across India
+    - else
+        h1.md ERROR!
+  .category-list
+    - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
+        each tag in tags
+          - if(tag.group_count > 0)
+              .col-md-4
+                a(href=city ? "/app/groups?activity=" + tag.id + "&location=" + city.id : "/app/groups/grouped?activity=" + tag.id + "&location=0", title=city ? "All " + tag.tag_name + " groups in " + city.city_name : "All " + tag.tag_name + " groups across India")
+                  .category-el
+                    .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                      .info-text.col-xs-12
+                        h2.sm.uppercase
+                          | #{tag.tag_name}
+                        span.number.uppercase
+                          | #{tag.group_count} GROUP
+                          - if(tag.group_count > 1)
+                            | S
+                          - if(city)
+                            |  IN #{city.city_name}
+                      .info-overlay
+    - else
+        each city in cities
+          -if(city.group_count > 0)
+              .col-md-4
+                a(href="/app/groups?activity=" + tag.id + "&location=" + city.id, title="All " + tag.tag_name + " groups " + city.city_name)
+                  .category-el
+                    .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                      .info-text.col-xs-12
+                        h2.sm.uppercase
+                          | #{city.city_name}
+                        span.number.uppercase
+                          | #{city.group_count} #{tag.tag_name} GROUP
+                          - if(city.group_count > 1)
+                            | S
+                      .info-overlay

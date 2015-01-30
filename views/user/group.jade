@@ -1,0 +1,53 @@
+extends ../layout
+
+block content
+  include group_filter_bar
+  .filter-margin
+  .heading.text-center
+    h1.md= title_
+  .category-list
+    - if(groups)
+        each group in groups
+          .col-md-4
+            .category-el.b-l-4.clearfix
+              .info-media.clearfix
+                .info-box.col-xs-8
+                  .info-box-sub
+                    a(href="/app/groups/" + group.City.city_name + "/" + group.group_name_slug + "/" + group.id)
+                      h2.sm #{group.group_name}
+                    .city
+                      span.fa.fa-map-marker.helper
+                      | #{group.City.city_name}
+                .img-pre.col-xs-4.clearfix
+                  - if(group.img_url_square)
+                      a(href="/app/groups/" + group.City.city_name + "/" + group.group_name_slug + "/" + group.id)
+                        img.right.b-l-1(src=group.img_url_square alt=group.group_name height="100px")
+                  - else
+                      a(href="/app/groups/" + group.City.city_name + "/" + group.group_name_slug + "/" + group.id)
+                        img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=group.group_name height="100px")
+              .tags.clearfix
+                each tag in group.GroupTags
+                  li.tag
+                    | #{tag.Tag.tag_name}
+    - if(group_tags)
+        each group_tag in group_tags
+          .col-md-4
+            .category-el.b-l-4.clearfix
+              .info-media.clearfix
+                .infobox.col-xs-8
+                  .info-box-sub
+                    a(href="/app/groups/" + group_tag.Group.City.city_name + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                      h2.sm #{group_tag.Group.group_name}
+                    .city
+                      span.fa.fa-map-marker.helper
+                      | #{group_tag.Group.City.city_name}
+                .img-pre.col-xs-4.clearfix
+                  - if(group_tag.Group.img_url_square)
+                      a(href="/app/groups/" + group_tag.Group.City.city_name + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                        img.right.b-l-1(src=group_tag.Group.img_url_square alt=group_tag.Group.group_name height="100px")
+                  - else
+                      a(href="/app/groups/" + group_tag.Group.City.city_name + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                        img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=group_tag.Group.group_name height="100px")
+              .tags.clearfix
+                li.tag
+                  | #{tag.tag_name}
