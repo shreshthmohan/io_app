@@ -12,11 +12,11 @@ exports.all = function(req, res) {
     all_loc_all_tags(req, res )
   }
   // All locations and a chosen activity
-  else if (loc == 0) {
+  else if ((loc == 0) || (loc == null)) {
     all_loc_chosen_tag(req, res)
   }
   // All activities for a chosen location
-  else if (tag == 0) {
+  else if ((tag == 0) || (tag == null)) {
     chosen_loc_all_tags(req, res)
   }
   // Chosen activities for a chosen location
@@ -34,7 +34,7 @@ exports.all = function(req, res) {
 // All locations all tags
 // But isn't this relatively useless?
 all_loc_all_tags = function(req, res ) {
-  db.Schools.findAll({
+  db.School.findAll({
     attributes: [
       'id',
       'img_url_square',
@@ -52,7 +52,7 @@ all_loc_all_tags = function(req, res ) {
     .success(function(cities) {
       db.Tag.findAll()
       .success(function(tags) {
-        res.render('user/schools', {
+        res.render('user/school', {
           active_tab: 'schools',
           title_: 'All Active Outdoor Schools',
           schools: schools,
@@ -66,7 +66,7 @@ all_loc_all_tags = function(req, res ) {
 
 // Chosen location all tags
 chosen_loc_all_tags = function(req, res) {
-  db.Schools.findAll({
+  db.School.findAll({
     attributes: [
       'id',
       'img_url_square',
@@ -87,7 +87,7 @@ chosen_loc_all_tags = function(req, res) {
       .success(function(cities) {
         db.Tag.findAll()
         .success(function(tags) {
-          res.render('user/schools', {
+          res.render('user/school', {
             active_tab: 'schools',
             title_: 'All Outdoor Schools in ' + city.city_name,
             schools: schools,
@@ -110,7 +110,7 @@ all_loc_chosen_tag = function(req, res) {
       where: ["TagId = " + tag.id],
       include: [
         {
-          model: db.Schools,
+          model: db.School,
           attributes: [
             'id',
             'img_url_square',
@@ -126,7 +126,7 @@ all_loc_chosen_tag = function(req, res) {
       .success(function(cities) {
         db.Tag.findAll()
         .success(function(tags) {
-          res.render('user/schools', {
+          res.render('user/school', {
             active_tab: 'schools',
             title_: 'Learn ' + tag.tag_name + ' in India',
             tag: tag, // chosen tag
@@ -149,7 +149,7 @@ chosen_loc_chosen_tag = function(req, res) {
     db.SchoolTag.findAll({
       where: ['TagId= ' + tag.id],
       include: [{
-          model: db.Schools,
+          model: db.School,
           where: ["CityId = " + req.param('location')],
           include: [db.City],
           attributes: [
@@ -167,7 +167,7 @@ chosen_loc_chosen_tag = function(req, res) {
         .success(function(cities) {
           db.Tag.findAll()
           .success(function(tags) {
-            res.render('user/schools', {
+            res.render('user/school', {
               active_tab: 'schools',
               title_: 'Learn ' + tag.tag_name + ' in ' + city.city_name,
               tag: tag,
@@ -231,7 +231,7 @@ var grouped_by_activity = function(req, res) {
         active_tab: 'schools',
         title_: 'All Outdoor Schools across India',
         tags: tags_c,
-        school_mode: 'all_tag_all_loc',
+        group_mode: 'all_tag_all_loc',
         cities: cities,
         activity: req.param('activity'),
         loc: req.param('location')
@@ -272,7 +272,7 @@ var grouped_by_activity_chosen_loc = function(req, res) {
         res.render('user/school_groups', {
           active_tab: 'schools',
           title_: 'Learn Outdoor Sport in ' + city.city_name,
-          school_mode: 'all_tag_cho_loc',
+          group_mode: 'all_tag_cho_loc',
           tags: tags_c,
           city: city,
           cities: cities,
@@ -316,7 +316,7 @@ var grouped_by_location_chosen_tag = function(req, res) {
         res.render('user/school_groups', {
           active_tab: 'schools',
           title_: 'Learn ' + tag.tag_name + ' in India',
-          school_mode: 'cho_tag_all_loc',
+          group_mode: 'cho_tag_all_loc',
           cities: cities_c,
           tags: tags,
           tag: tag,

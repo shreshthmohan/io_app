@@ -9,19 +9,19 @@ exports.all = function(req, res) {
   var loc = req.param('location');
   // All locations and all activities
   if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { 
-    all_loc_all_tags(req, res )
+    group_all_loc_all_tags(req, res )
   }
   // All locations and a chosen activity
   else if (loc == 0) {
-    all_loc_chosen_tag(req, res)
+    group_all_loc_chosen_tag(req, res)
   }
   // All activities for a chosen location
   else if (tag == 0) {
-    chosen_loc_all_tags(req, res)
+    group_chosen_loc_all_tags(req, res)
   }
   // Chosen activities for a chosen location
   else {
-    chosen_loc_chosen_tag(req, res)
+    group_chosen_loc_chosen_tag(req, res)
   }
 }
 
@@ -33,8 +33,8 @@ exports.all = function(req, res) {
 
 // All locations all tags
 // But isn't this relatively useless?
-all_loc_all_tags = function(req, res ) {
-  db.Groups.findAll({
+var group_all_loc_all_tags = function(req, res ) {
+  db.Group.findAll({
     attributes: [
       'id',
       'img_url_square',
@@ -52,7 +52,7 @@ all_loc_all_tags = function(req, res ) {
     .success(function(cities) {
       db.Tag.findAll()
       .success(function(tags) {
-        res.render('user/groups', {
+        res.render('user/group', {
           active_tab: 'groups',
           title_: 'All Active Outdoor Groups',
           groups: groups,
@@ -65,8 +65,8 @@ all_loc_all_tags = function(req, res ) {
 }
 
 // Chosen location all tags
-chosen_loc_all_tags = function(req, res) {
-  db.Groups.findAll({
+var group_chosen_loc_all_tags = function(req, res) {
+  db.Group.findAll({
     attributes: [
       'id',
       'img_url_square',
@@ -87,7 +87,7 @@ chosen_loc_all_tags = function(req, res) {
       .success(function(cities) {
         db.Tag.findAll()
         .success(function(tags) {
-          res.render('user/groups', {
+          res.render('user/group', {
             active_tab: 'groups',
             title_: 'All Outdoor Groups in ' + city.city_name,
             groups: groups,
@@ -101,7 +101,7 @@ chosen_loc_all_tags = function(req, res) {
 }
 
 // All locations chosen tag
-all_loc_chosen_tag = function(req, res) {
+var group_all_loc_chosen_tag = function(req, res) {
   db.Tag.find({
     where: {id: req.param('activity')}
   })
@@ -110,7 +110,7 @@ all_loc_chosen_tag = function(req, res) {
       where: ["TagId = " + tag.id],
       include: [
         {
-          model: db.Groups,
+          model: db.Group,
           attributes: [
             'id',
             'img_url_square',
@@ -126,7 +126,7 @@ all_loc_chosen_tag = function(req, res) {
       .success(function(cities) {
         db.Tag.findAll()
         .success(function(tags) {
-          res.render('user/groups', {
+          res.render('user/group', {
             active_tab: 'groups',
             title_: 'All ' + tag.tag_name + ' Groups',
             tag: tag, // chosen tag
@@ -141,7 +141,7 @@ all_loc_chosen_tag = function(req, res) {
 }
 
 // Chosen location chosen tag
-chosen_loc_chosen_tag = function(req, res) {
+var group_chosen_loc_chosen_tag = function(req, res) {
   db.Tag.find({
     where: {id: req.param('activity')}
   })
@@ -149,7 +149,7 @@ chosen_loc_chosen_tag = function(req, res) {
     db.GroupTag.findAll({
       where: ['TagId= ' + tag.id],
       include: [{
-          model: db.Groups,
+          model: db.Group,
           where: ["CityId = " + req.param('location')],
           include: [db.City],
           attributes: [
@@ -167,7 +167,7 @@ chosen_loc_chosen_tag = function(req, res) {
         .success(function(cities) {
           db.Tag.findAll()
           .success(function(tags) {
-            res.render('user/groups', {
+            res.render('user/group', {
               active_tab: 'groups',
               title_: 'All ' + tag.tag_name + ' Groups in ' + city.city_name,
               tag: tag,
@@ -190,22 +190,22 @@ exports.all_grouped = function(req, res) {
   var tag  = req.param('activity');
   var loc  = req.param('location');
   if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
-    grouped_by_activity(req, res) 
+    group_grouped_by_activity(req, res) 
   }
   else if (loc == 0 || loc == null) { // All locations and a chosen activity
-    grouped_by_location_chosen_tag(req, res)
+    group_grouped_by_location_chosen_tag(req, res)
   }
   else if (tag == 0 || tag == null) { // All activities for a chosen location
-    grouped_by_activity_chosen_loc(req, res)
+    group_grouped_by_activity_chosen_loc(req, res)
   }
   else {
     // not grouped
-    chosen_loc_chosen_tag(req, res)
+    group_chosen_loc_chosen_tag(req, res)
   }
 }
 
 // All activities, all tags (Grouped by activity)
-var grouped_by_activity = function(req, res) {
+var group_grouped_by_activity = function(req, res) {
   db.Tag.findAll()
   .then(function(tags) {
     var promises = []
@@ -241,7 +241,7 @@ var grouped_by_activity = function(req, res) {
 }
 
 // All activites, chosen location; grouped by activity
-var grouped_by_activity_chosen_loc = function(req, res) {
+var group_grouped_by_activity_chosen_loc = function(req, res) {
   db.Tag.findAll()
   .then(function(tags) {
     var promises = []
@@ -284,7 +284,7 @@ var grouped_by_activity_chosen_loc = function(req, res) {
   })
 }
 
-var grouped_by_location_chosen_tag = function(req, res) {
+var group_grouped_by_location_chosen_tag = function(req, res) {
   db.City.findAll()
   .then(function(cities) {
     console.log(JSON.stringify(cities))
