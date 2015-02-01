@@ -17,6 +17,9 @@ block content
     - if(retailer.address_field)
         span.address
           | #{retailer.address_field}
+    - if(retailer.comments)
+        span.description
+          | #{retailer.comments}
     - if(retailer.Emails != '')
         ul.emails
           each mail in retailer.Emails

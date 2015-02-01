@@ -15,8 +15,11 @@ block content
           span.fa.fa-map-marker
       h3 #{school.City.city_name}
     - if(school.address_field)
-        span.address
+        p.address
           | #{school.address_field}
+    - if(school.comments)
+        p.description
+          | #{school.comments}
     - if(school.Emails != '')
         ul.emails
           each mail in school.Emails
@@ -35,22 +38,22 @@ block content
         li.social-link
           - if(slink.link.indexOf('facebook.com') > -1)
               a(href=slink.link)
-                span.fa.fa-facebook-square
+                span.fa.fa-facebook-square.color-fb
           - else if(slink.link.indexOf('twitter.com') > -1)
               a(href=slink.link)
-                span.fa.fa-twitter-square
+                span.fa.fa-twitter-square.color-tw
           - else if(slink.link.indexOf('plus.google.com') > -1)
               a(href=slink.link)
-                span.fa.fa-google-plus-square
+                span.fa.fa-google-plus-square.color-gp
           - else if(slink.link.indexOf('instagram.com') > -1)
               a(href=slink.link)
-                span.fa.fa-instagram
+                span.fa.fa-instagram.color-in
           - else if(slink.link.indexOf('flickr.com') > -1)
               a(href=slink.link)
-                span.fa.fa-flickr
+                span.fa.fa-flickr.color-flb
           - else if(slink.link.indexOf('youtube.com') > -1)
               a(href=slink.link)
-                span.fa.fa-youtube
+                span.fa.fa-youtube.color-yt
           - else
               a(href=slink.link)
                  span.fa.fa-external-link

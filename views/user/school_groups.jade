@@ -14,36 +14,37 @@ block content
         h1.md To learn #{tag.tag_name} across India
     - else
         h1.md ERROR!
-  .category-list
-    - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
-        each tag in tags
-          - if(tag.school_count > 0)
-              .col-md-4
-                a(href=city ? "/app/schools?activity=" + tag.id + "&location=" + city.id : "/app/schools/grouped?activity=" + tag.id + "&location=0", title=city ? "Learn " + tag.tag_name + " in " + city.city_name : "Learn " + tag.tag_name + " anywhere in India")
-                  .category-el
-                    .info.clearfix(style="background-image: url(" + tag.image_url + ");")
-                      .info-text.col-xs-12
-                        h2.sm.uppercase
-                          | #{tag.tag_name}
-                        span.number.uppercase
-                          | #{tag.school_count} SCHOOL
-                          - if(tag.school_count > 1)
-                            | S
-                          - if(city)
-                            |  IN #{city.city_name}
-                      .info-overlay
-    - else
-        each city in cities
-          -if(city.school_count > 0)
-              .col-md-4
-                a(href="/app/schools?activity=" + tag.id + "&location=" + city.id, title="All " + tag.tag_name + " schools " + city.city_name)
-                  .category-el
-                    .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                      .info-text.col-xs-12
-                        h2.sm.uppercase
-                          | #{city.city_name}
-                        span.number.uppercase
-                          | #{city.school_count} #{tag.tag_name} SCHOOL
-                          - if(city.school_count > 1)
-                            | S
-                      .info-overlay
+  .row
+    .category-list
+      - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
+          each tag in tags
+            - if(tag.school_count > 0)
+                .col-md-4
+                  a(href=city ? "/app/schools?activity=" + tag.id + "&location=" + city.id : "/app/schools/grouped?activity=" + tag.id + "&location=0", title=city ? "Learn " + tag.tag_name + " in " + city.city_name : "Learn " + tag.tag_name + " anywhere in India")
+                    .category-el
+                      .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                        .info-text.col-xs-12
+                          h2.sm.uppercase
+                            | #{tag.tag_name}
+                          span.number.uppercase
+                            | #{tag.school_count} SCHOOL
+                            - if(tag.school_count > 1)
+                              | S
+                            - if(city)
+                              |  IN #{city.city_name}
+                        .info-overlay
+      - else
+          each city in cities
+            -if(city.school_count > 0)
+                .col-md-4
+                  a(href="/app/schools?activity=" + tag.id + "&location=" + city.id, title="All " + tag.tag_name + " schools " + city.city_name)
+                    .category-el
+                      .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                        .info-text.col-xs-12
+                          h2.sm.uppercase
+                            | #{city.city_name}
+                          span.number.uppercase
+                            | #{city.school_count} #{tag.tag_name} SCHOOL
+                            - if(city.school_count > 1)
+                              | S
+                        .info-overlay

@@ -12,36 +12,37 @@ block content
               | all over India
     - else if (group_mode == 'cho_tag_all_loc')
         h1.md All #{tag.tag_name} events all over India
-  .category-list
-    - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
-        each tag in tags
-          - if(tag.event_count > 0)
-              .col-md-4
-                a(href=city ? "/app/events/upcoming?activity=" + tag.id + "&location=" + city.id : "/app/events/upcoming/grouped?activity=" + tag.id + "&location=0", title=city ? "All upcoming " + tag.tag_name  + " events in " + city.city_name : "All upcoming " + tag.tag_name  + " events all over India")
-                  .category-el
-                    .info.clearfix(style="background-image: url(" + tag.image_url + ");")
-                      .info-text.col-xs-12
-                        h2.sm.uppercase
-                          | #{tag.tag_name}
-                        span.number.uppercase
-                          | #{tag.event_count} EVENT
-                          - if(tag.event_count >1)
-                            | S
-                          - if(city)
-                            |  IN #{city.city_name}
-                      .info-overlay
-    - else
-        each city in cities
-          -if(city.event_count > 0)
-              .col-md-4
-                a(href="/app/events/upcoming?activity=" + tag.id + "&location=" + city.id, title="All upcoming " + tag.tag_name + " events in " + city.city_name)
-                  .category-el
-                    .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                      .info-text.col-xs-12
-                        h2.sm.uppercase
-                          | #{city.city_name}
-                        span.number.uppercase
-                          | #{city.event_count} #{tag.tag_name} EVENT
-                          - if(city.event_count >1)
-                            | S
-                      .info-overlay
+  .row
+    .category-list
+      - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
+          each tag in tags
+            - if(tag.event_count > 0)
+                .col-md-4
+                  a(href=city ? "/app/events/upcoming?activity=" + tag.id + "&location=" + city.id : "/app/events/upcoming/grouped?activity=" + tag.id + "&location=0", title=city ? "All upcoming " + tag.tag_name  + " events in " + city.city_name : "All upcoming " + tag.tag_name  + " events all over India")
+                    .category-el
+                      .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                        .info-text.col-xs-12
+                          h2.sm.uppercase
+                            | #{tag.tag_name}
+                          span.number.uppercase
+                            | #{tag.event_count} EVENT
+                            - if(tag.event_count >1)
+                              | S
+                            - if(city)
+                              |  IN #{city.city_name}
+                        .info-overlay
+      - else
+          each city in cities
+            -if(city.event_count > 0)
+                .col-md-4
+                  a(href="/app/events/upcoming?activity=" + tag.id + "&location=" + city.id, title="All upcoming " + tag.tag_name + " events in " + city.city_name)
+                    .category-el
+                      .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                        .info-text.col-xs-12
+                          h2.sm.uppercase
+                            | #{city.city_name}
+                          span.number.uppercase
+                            | #{city.event_count} #{tag.tag_name} EVENT
+                            - if(city.event_count >1)
+                              | S
+                        .info-overlay

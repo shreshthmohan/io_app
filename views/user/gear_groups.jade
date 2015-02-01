@@ -14,36 +14,37 @@ block content
         h1.md All #{tag.tag_name} Gear Retailers and Stores across India
     - else
         h1.md ERROR!
-  .category-list
-    - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
-        each tag in tags
-          - if(tag.retailer_count > 0)
-              .col-md-4
-                a(href=city ? "/app/gear?activity=" + tag.id + "&location=" + city.id : "/app/gear/grouped?activity=" + tag.id + "&location=0", title=city ? "All " + tag.tag_name + " gear stores and retailers in " + city.city_name : "All " + tag.tag_name + " gear stores and retailers across India")
-                  .category-el
-                    .info.clearfix(style="background-image: url(" + tag.image_url + ");")
-                      .info-text.col-xs-12
-                        h2.sm.uppercase
-                          | #{tag.tag_name}
-                        span.number.uppercase
-                          | #{tag.retailer_count} STORE
-                          - if(tag.retailer_count > 1)
-                            | S
-                          - if(city)
-                            |  IN #{city.city_name}
-                      .info-overlay
-    - else
-        each city in cities
-          -if(city.retailer_count > 0)
-              .col-md-4
-                a(href="/app/gear?activity=" + tag.id + "&location=" + city.id, title="All " + tag.tag_name + " gear stores and retailers in " + city.city_name)
-                  .category-el
-                    .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                      .info-text.col-xs-12
-                        h2.sm.uppercase
-                          | #{city.city_name}
-                        span.number.uppercase
-                          | #{city.retailer_count} #{tag.tag_name} STORE
-                          - if(city.retailer_count > 1)
-                            | S
-                      .info-overlay
+  .row
+    .category-list
+      - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
+          each tag in tags
+            - if(tag.retailer_count > 0)
+                .col-md-4
+                  a(href=city ? "/app/gear?activity=" + tag.id + "&location=" + city.id : "/app/gear/grouped?activity=" + tag.id + "&location=0", title=city ? "All " + tag.tag_name + " gear stores and retailers in " + city.city_name : "All " + tag.tag_name + " gear stores and retailers across India")
+                    .category-el
+                      .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                        .info-text.col-xs-12
+                          h2.sm.uppercase
+                            | #{tag.tag_name}
+                          span.number.uppercase
+                            | #{tag.retailer_count} STORE
+                            - if(tag.retailer_count > 1)
+                              | S
+                            - if(city)
+                              |  IN #{city.city_name}
+                        .info-overlay
+      - else
+          each city in cities
+            -if(city.retailer_count > 0)
+                .col-md-4
+                  a(href="/app/gear?activity=" + tag.id + "&location=" + city.id, title="All " + tag.tag_name + " gear stores and retailers in " + city.city_name)
+                    .category-el
+                      .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                        .info-text.col-xs-12
+                          h2.sm.uppercase
+                            | #{city.city_name}
+                          span.number.uppercase
+                            | #{city.retailer_count} #{tag.tag_name} STORE
+                            - if(city.retailer_count > 1)
+                              | S
+                        .info-overlay

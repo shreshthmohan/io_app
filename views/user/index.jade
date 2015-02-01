@@ -81,11 +81,17 @@ block content
                 | Learn
           .row
             .tab-content-container.events-explore.active
-              .col-xs-6.tab-content
-                .text-center.sub-tab By Activity
+              .text-center
+                | Show Events by
+              form.home-explore-radio.text-center
+                input(id="event-activity" type="radio" name="choose-event" value="activity" checked="checked")
+                label(for="event-activity" class="home-explore-radio-label") Activity
+                input(id="event-location" type="radio" name="choose-event" value="location")
+                label(for="event-location" class="home-explore-radio-label") Location
+              .col-xs-12.tab-content.event-activity
                 each tag in tags
                   - if(tag.event_count > 0)
-                      .col-md-12
+                      .col-md-6
                         a(href="/app/events/upcoming/grouped?activity=" + tag.id + "&location=0", title="All upcoming " + tag.tag_name  + " events all over India")
                           .category-el
                             .info.clearfix(style="background-image: url(" + tag.image_url + ");")
@@ -97,11 +103,10 @@ block content
                                   - if(tag.event_count >1)
                                     | S
                                .info-overlay
-              .col-xs-6.tab-content
-                .text-center.sub-tab By Location
+              .col-xs-12.tab-content.event-location
                 each city in cities
                   - if(city.event_count > 0)
-                      .col-md-12
+                      .col-md-6
                         a(href="/app/events/upcoming/grouped?location=" + city.id, title="All upcoming events in " + city.city_name)
                           .category-el
                             .info.clearfix(style="background-image: url(" + city.image_url + ");")
@@ -114,11 +119,17 @@ block content
                                     | S
                               .info-overlay
             .tab-content-container.gear-explore
-              .col-xs-6.tab-content
-                .text-center.sub-tab By Activity
+              .text-center
+                | Show Gear by
+              form.home-explore-radio.text-center
+                input(id="gear-activity" type="radio" name="choose-gear" value="activity")
+                label(for="gear-activity" class="home-explore-radio-label") Activity
+                input(id="gear-location" type="radio" name="choose-gear" value="location" checked="checked")
+                label(for="gear-location" class="home-explore-radio-label") Location
+              .col-xs-12.tab-content.gear-activity
                 each tag in tags
                   - if(tag.retailer_count > 0)
-                      .col-md-12
+                      .col-md-6
                         a(href="/app/gear/grouped?activity=" + tag.id)
                           .category-el
                             .info.clearfix(style="background-image: url(" + tag.image_url + ");")
@@ -130,11 +141,10 @@ block content
                                   - if(tag.retailer_count > 1)
                                     | S
                                .info-overlay
-              .col-xs-6.tab-content
-                .text-center.sub-tab By Location
+              .col-xs-12.tab-content.gear-location
                 each city in cities
                   - if(city.retailer_count > 0)
-                      .col-md-12
+                      .col-md-6
                         a(href="/app/gear/grouped?location=" + city.id)
                           .category-el
                             .info.clearfix(style="background-image: url(" + city.image_url + ");")
@@ -147,11 +157,17 @@ block content
                                     | S
                               .info-overlay
             .tab-content-container.group-explore
-              .col-xs-6.tab-content
-                .text-center.sub-tab By Activity
+              .text-center
+                | Show Groups by
+              form.home-explore-radio.text-center
+                input(id="group-activity" type="radio" name="choose-group" value="activity")
+                label(for="group-activity" class="home-explore-radio-label") Activity
+                input(id="group-location" type="radio" name="choose-group" value="location" checked="checked")
+                label(for="group-location" class="home-explore-radio-label") Location
+              .col-xs-12.tab-content.group-activity
                 each tag in tags
                   - if(tag.group_count > 0)
-                      .col-md-12
+                      .col-md-6
                         a(href="/app/groups/grouped?activity=" + tag.id + "&location=0", title="All " + tag.tag_name  + " groups across India")
                           .category-el
                             .info.clearfix(style="background-image: url(" + tag.image_url + ");")
@@ -163,11 +179,10 @@ block content
                                   - if(tag.group_count >1)
                                     | S
                                .info-overlay
-              .col-xs-6.tab-content
-                .text-center.sub-tab By Location
+              .col-xs-12.tab-content.group-location
                 each city in cities
                   - if(city.group_count > 0)
-                      .col-md-12
+                      .col-md-6
                         a(href="/app/groups/grouped?activity=0&location=" + city.id, title="All outdoor groups in " + city.city_name)
                           .category-el
                             .info.clearfix(style="background-image: url(" + city.image_url + ");")
@@ -180,11 +195,17 @@ block content
                                     | S
                                .info-overlay
             .tab-content-container.learn-explore
-              .col-xs-6.tab-content
-                .text-center.sub-tab By Activity
+              .text-center
+                | Show Outdoor Schools by
+              form.home-explore-radio.text-center
+                input(id="school-activity" type="radio" name="choose-school" value="activity")
+                label(for="school-activity" class="home-explore-radio-label") Activity
+                input(id="school-location" type="radio" name="choose-school" value="location" checked="checked")
+                label(for="school-location" class="home-explore-radio-label") Location
+              .col-xs-12.tab-content.school-activity
                 each tag in tags
                   - if(tag.school_count > 0)
-                      .col-md-12
+                      .col-md-6
                         a(href="/app/schools/grouped?activity=" + tag.id + "&location=0", title="To learn " + tag.tag_name  + " across India")
                           .category-el
                             .info.clearfix(style="background-image: url(" + tag.image_url + ");")
@@ -196,11 +217,10 @@ block content
                                   - if(tag.school_count >1)
                                     | S
                                .info-overlay
-              .col-xs-6.tab-content
-                .text-center.sub-tab By Location
+              .col-xs-12.tab-content.school-location
                 each city in cities 
                   - if(city.school_count > 0)
-                      .col-md-12
+                      .col-md-6
                         a(href="/app/schools/grouped?location=" + city.id, title="To learn an outdoor sport in " + city.city_name)
                           .category-el
                             .info.clearfix(style="background-image: url(" + city.image_url + ");")

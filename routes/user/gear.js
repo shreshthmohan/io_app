@@ -353,6 +353,7 @@ exports.individual = function(req, res) {
       'comments']
   })
   .success(function(retailer) {
+     console.log(JSON.stringify(retailer))
      res.render('user/individual_retailer', {
        active_tab: 'gear',
        title_: retailer.retailer_name + ' in ' + retailer.City.city_name,
