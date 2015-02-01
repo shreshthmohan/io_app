@@ -27,7 +27,7 @@ exports.create = function(req, res) {
      db.Group.create({
        group_name:       req.param('group_name'),
        group_name_slug:  slugify(req.param('group_name')),
-       group_url:        req.param('website_url'),
+       group_url:        req.param('group_url'),
        img_url_square:   req.param('img_url_square'),
        comments:         req.param('comments')
      }).success(function(group){
@@ -45,7 +45,7 @@ exports.modify = function(req, res) {
   })
   .success(function(group) {
     group.updateAttributes({
-      group_url:        req.param('website_url'),
+      group_url:        req.param('group_url'),
       img_url_square:   req.param('img_url_square'),
       comments:         req.param('comments')
     }).success(function(group) {
