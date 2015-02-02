@@ -101,7 +101,7 @@ block content
   ul 
     each tag in school.SchoolTags
       li
-        | #{tag.tag_name}
+        | #{tag.Tag.tag_name}
         div(class="destroy")
           a(href="/app/admin/schools/" + school.id + "/dissociate_tag/" + tag.id) x
   form(action="/app/admin/schools/" + school.id + "/choose_tag", method="post")

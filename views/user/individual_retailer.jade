@@ -1,69 +1,71 @@
 extends ../layout
 
 block content
-  .entity.col-md-6
+  .entity.col-md-8.std-shadow
     - if(retailer.website_url) 
         a(href=retailer.website_url target='_blank')
-          h1 #{retailer.retailer_name}
+          h1.lg.inline #{retailer.retailer_name}
+          span.fa.fa-external-link.margin-l-5.fs-16
     - else
-        h1 #{retailer.retailer_name}
+        h1.lg #{retailer.retailer_name}
     span.location
-      - if(retailer.location_url)
-          a(href=retailer.location_url)
-            span.fa.fa-map-marker
-      - else
-          span.fa.fa-map-marker
-      h3 #{retailer.City.city_name}
+      span.fa.fa-map-marker.w-20.fs-16.gray
+      h2.md.inline #{retailer.City.city_name}
     - if(retailer.address_field)
-        span.address
+        span.address.inline-block
+          i.fa.fa-building.w-20.gray
           | #{retailer.address_field}
     - if(retailer.comments)
-        span.description
+        span.description.inline-block
+          i.fa.fa-bars.w-20.gray 
           | #{retailer.comments}
     - if(retailer.Emails != '')
         ul.emails
           each mail in retailer.Emails
             li.email
-              span.fa.fa-envelope.helper
+              span.fa.fa-envelope.w-20.gray
               a(href="mailto:" + mail.email)
                 | #{mail.email}
     - if(retailer.PhoneNumbers != '')
         ul.numbers
           each number in retailer.PhoneNumbers
             li.number
-              span.fa.fa-phone-square.helper
+              span.fa.fa-phone-square.w-20.gray
               | #{number.number}
-    .slinks
+    .slinks.clearfix.margin-b-5
       each slink in retailer.SocialLinks
         li.social-link
           - if(slink.link.indexOf('facebook.com') > -1)
-              a(href=slink.link)
-                span.fa.fa-facebook-square
+              a(href=slink.link target="_blank") 
+                span.fa.fa-facebook-square.color-fb
           - else if(slink.link.indexOf('twitter.com') > -1)
-              a(href=slink.link)
-                span.fa.fa-twitter-square
+              a(href=slink.link target="_blank") 
+                span.fa.fa-twitter-square.color-tw
           - else if(slink.link.indexOf('plus.google.com') > -1)
-              a(href=slink.link)
-                span.fa.fa-google-plus-square
+              a(href=slink.link target="_blank")
+                span.fa.fa-google-plus-square.color-gp
           - else if(slink.link.indexOf('instagram.com') > -1)
-              a(href=slink.link)
-                span.fa.fa-instagram
+              a(href=slink.link target="_blank")
+                span.fa.fa-instagram.color-in
           - else if(slink.link.indexOf('flickr.com') > -1)
-              a(href=slink.link)
-                span.fa.fa-flickr
+              a(href=slink.link target="_blank")
+                span.fa.fa-flickr.color-flb
           - else if(slink.link.indexOf('youtube.com') > -1)
-              a(href=slink.link)
-                span.fa.fa-youtube
+              a(href=slink.link target="_blank")
+                span.fa.fa-youtube.color-yt
           - else
-              a(href=slink.link)
+              a(href=slink.link target="_blank")
                  span.fa.fa-external-link
     //-.brands
     //-  each gear_brand in retailer.GearBrands
-    .tags           
+    .tag-container.clearfix
       each gear_tag in retailer.GearTags
         li.tag
           span
             | #{gear_tag.Tag.tag_name}
+    - if(retailer.location_url)
+      .map-embed.margin-t-10
+        iframe(src=retailer.location_url width="100%" height="300" frameborder="0" style="border:0")
     - if(admin)
         | Dear Admin, if you see something wrong or missing with this retailer you can modify it 
-        a(href="/app/admin/gear/" + retailer.id, target="_blank") here
+        a(href="/app/admin/gear/retailer/" + retailer.id, target="_blank") here

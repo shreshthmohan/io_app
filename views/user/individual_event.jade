@@ -1,78 +1,85 @@
 extends ../layout
 
 block content
-  .entity.col-md-6
+  .entity.col-md-8.std-shadow
     - if(race.event_url) 
         a(href=race.event_url target='_blank')
-          h1 #{race.event_name}
+          h1.lg.inline #{race.event_name}
+          span.fa.fa-external-link.margin-l-5.fs-16
     - else
-        h1 #{race.event_name}
-    span.dates
-      span.fa.fa-calendar.helper
+        h1.lg #{race.event_name}
+    span.dates.fs-14
+      span.fa.fa-calendar.w-20.gray
       | #{race.dataValues.start_date_f}
       - if(race.dataValues.end_date_f)
         - if(race.dataValues.start_date_f != race.dataValues.end_date_f)
             |   -  #{race.dataValues.end_date_f}
+    span.location
+      span.fa.fa-map-marker.fs-16.gray.w-20
+      h2.md.inline #{race.City.city_name}
     - if(race.organiser_name)
         span.organiser
-          span.helper by
+          span.gray.fs-14.margin-r-5 by
           - if(race.organiser_url)
               a(href=race.organiser_url target='_blank')
-                h3 #{race.organiser_name}
+                h3.md #{race.organiser_name}
           - else
-              h3 #{race.organiser_name}
-    span.location
-      - if(race.location_url)
-          a(href=race.location_url)
-            span.fa.fa-map-marker
-      - else
-          span.fa.fa-map-marker
-      h3 #{race.City.city_name}
+              h3.md #{race.organiser_name}
+    - if(race.comments)
+        span.description.inline-block
+          i.fa.fa-bars.w-20.gray 
+          | #{race.comments}
     - if(race.Emails != '')
         ul.emails
           each mail in race.Emails
             li.email
-              span.fa.fa-envelope.helper
-              a(href="mailto:" + mail.email)
+              span.fa.fa-envelope.gray.w-20
+              a(href="mailto:" + mail.email target="_blank")
                 | #{mail.email}
     - if(race.PhoneNumbers != '')
         ul.numbers
           each number in race.PhoneNumbers
             li.number
-              span.fa.fa-phone-square.helper
+              span.fa.fa-phone-square.gray.w-20
               | #{number.number}
-    each slink in race.SocialLinks
-      li.social-link
-        - if(slink.link.indexOf('facebook.com') > -1)
-            a(href=slink.link)
-              span.fa.fa-facebook-square.color-fb
-        - else if(slink.link.indexOf('twitter.com') > -1)
-            a(href=slink.link)
-              span.fa.fa-twitter-square.color-tw
-        - else if(slink.link.indexOf('plus.google.com') > -1)
-            a(href=slink.link)
-              span.fa.fa-google-plus-square.color-gp
-        - else if(slink.link.indexOf('instagram.com') > -1)
-            a(href=slink.link)
-              span.fa.fa-instagram.color-in
-        - else if(slink.link.indexOf('flickr.com') > -1)
-            a(href=slink.link)
-              span.fa.fa-flickr.color-flb
-        - else if(slink.link.indexOf('youtube.com') > -1)
-            a(href=slink.link)
-              span.fa.fa-youtube.color-yt
-        - else
-            a(href=slink.link)
-               span.fa.fa-external-link
-    each event_tag in race.EventTags
-      li.tag
-        span
-          | #{event_tag.Tag.tag_name}
-    each event_subtag in race.EventSubtags
-      li.subtag
-        span
-          | #{event_subtag.Subtag.subtag_name}
+    .slinks.clearfix.margin-b-5
+      each slink in race.SocialLinks
+        li.social-link
+          - if(slink.link.indexOf('facebook.com') > -1)
+              a(href=slink.link target="_blank")
+                span.fa.fa-facebook-square.color-fb
+          - else if(slink.link.indexOf('twitter.com') > -1)
+              a(href=slink.link target="_blank")
+                span.fa.fa-twitter-square.color-tw
+          - else if(slink.link.indexOf('plus.google.com') > -1)
+              a(href=slink.link target="_blank")
+                span.fa.fa-google-plus-square.color-gp
+          - else if(slink.link.indexOf('instagram.com') > -1)
+              a(href=slink.link target="_blank")
+                span.fa.fa-instagram.color-in
+          - else if(slink.link.indexOf('flickr.com') > -1)
+              a(href=slink.link target="_blank")
+                span.fa.fa-flickr.color-flb
+          - else if(slink.link.indexOf('youtube.com') > -1)
+              a(href=slink.link target="_blank")
+                span.fa.fa-youtube.color-yt
+          - else
+              a(href=slink.link target="_blank")
+                 span.fa.fa-external-link
+    .tag-container.clearfix
+      each event_tag in race.EventTags
+        li.tag
+          span
+            | #{event_tag.Tag.tag_name}
+      each event_subtag in race.EventSubtags
+        li.subtag
+          span
+            | #{event_subtag.Subtag.subtag_name}
+    - if(race.location_url)
+      .map-embed.margin-t-10
+        iframe(src=race.location_url width="100%" height="300" frameborder="0" style="border:0")
     - if(admin)
+      .admin_link
         | Dear Admin, if you see something wrong or missing with this event you can modify it 
         a(href="/app/admin/events/" + race.id, target="_blank") here
       
