@@ -29,7 +29,7 @@ block content
                       - else
                           a(href="/app/events/" + race.City.city_name + "/" + race.event_name_slug + "/" + race.id)
                             img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=race.event_name height="100px")
-                  .tags.clearfix
+                  .tags.clearfix.border-top-gray
                     each tag in race.EventTags
                       li.tag
                         | #{tag.Tag.tag_name}
@@ -58,7 +58,7 @@ block content
                       - else
                           a(href="/app/events/" + event_tag.Event.City.city_name + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
                             img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=event_tag.Event.event_name height="100px")
-                  .tags.clearfix
+                  .tags.clearfix.border-top-gray
                     li.tag
                       | #{tag.tag_name}
                     each subtag in event_tag.Event.EventSubtags

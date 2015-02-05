@@ -27,7 +27,7 @@ block content
                       - else
                           a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.retailer_name_slug + "/" + retailer.id)
                             img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=retailer.retailer_name height="100px")
-                  .tags.clearfix
+                  .tags.clearfix.border-top-gray
                     each tag in retailer.GearTags
                       li.tag
                         | #{tag.Tag.tag_name}
@@ -50,7 +50,7 @@ block content
                       - else
                           a(href="/app/gear/" + gear_tag.Retailer.City.city_name + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
                             img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=gear_tag.Retailer.retailer_name height="100px")
-                  .tags.clearfix
+                  .tags.clearfix.border-top-gray
                     li.tag
                       | #{tag.tag_name}
         - else
@@ -64,7 +64,7 @@ block content
       //-  a(href="todo")
       //-    .category-el
       //-      .info.clearfix
-      //-        .info-text.col-xs-12
+      //-        .info-text.margin-top-90.col-xs-12
       //-          span.number.uppercase.fs-12.bob.padding-tb-5
       //-            | Stores Online
       //-        .info-overlay
@@ -73,7 +73,7 @@ block content
           a(href="/app/gear/grouped?location=" + city.id title="All stores in " + city.city_name + " by activity")
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                .info-text.col-xs-12
+                .info-text.margin-top-90.col-xs-12
                   span.number.uppercase.fs-12.bob.padding-tb-5
                     | Stores in #{city.city_name}
                 .info-overlay
@@ -81,7 +81,7 @@ block content
           a(href="/app/gear/grouped?activity=" + tag.id title="All " + tag.tag_name + " stores by location")
             .category-el
               .info.clearfix(style="background-image: url(" + tag.image_url + ");")
-                .info-text.col-xs-12
+                .info-text.margin-top-90.col-xs-12
                   span.number.uppercase.fs-12.bob.padding-tb-5
                     | All #{tag.tag_name} Stores
                 .info-overlay
@@ -89,7 +89,7 @@ block content
           a(href="/app/events/upcoming/grouped?location=" + city.id title="All Outdoor Events in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                .info-text.col-xs-12
+                .info-text.margin-top-90.col-xs-12
                   span.number.uppercase.fs-12.bob.padding-tb-5
                     | Events in #{city.city_name}
                 .info-overlay
@@ -97,7 +97,7 @@ block content
           a(href="todo" title="All Outdoor schools in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                .info-text.col-xs-12
+                .info-text.margin-top-90.col-xs-12
                   span.number.uppercase.fs-12.bob.padding-tb-5
                     | Outdoor schools in #{city.city_name}
                 .info-overlay
@@ -105,7 +105,7 @@ block content
           a(href="/app/groups/grouped?location=" + city.id title="All Active Outdoor groups in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                .info-text.col-xs-12
+                .info-text.margin-top-90.col-xs-12
                   span.number.uppercase.fs-12.bob.padding-tb-5
                     | Groups in #{city.city_name}
                 .info-overlay
@@ -114,7 +114,7 @@ block content
           a(href="/app/gear/grouped" title="All Gear Stores and Retailers by Activity")
             .category-el
               .info.clearfix
-                .info-text.col-xs-12
+                .info-text.margin-top-90.col-xs-12
                   span.number.uppercase.fs-12.bob.padding-tb-5
                     | All Stores by Activity
                 .info-overlay
@@ -122,7 +122,7 @@ block content
           a(href="/app/gear/grouped#by-location" title="All Gear Stores and Retailers by Location")
             .category-el
               .info.clearfix
-                .info-text.col-xs-12
+                .info-text.margin-top-90.col-xs-12
                   span.number.uppercase.fs-12.bob.padding-tb-5
                     | All Stores by Location
                 .info-overlay

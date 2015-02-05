@@ -377,6 +377,9 @@ a {
     float: left;
     padding: 2px 5px;
     color: white;
+    &:hover {
+      background: @io-yellow;
+    }
   }
   ul.emails, ul.numbers {
     li {
@@ -438,13 +441,17 @@ ul {
 .info-text {
   margin-top: 80px;
   z-index: 2;
-
+  text-shadow: 0 0 1px rgba(0, 0, 0, 1)
 }
+
+.margin-top-90 {
+  margin-top: 90px !important;
+}
+
 
 .tags {
   background: @gray-light95;
   padding: 5px;
-  //border-top: 1px solid @gray-light80;
   // TODO should not be needed as all events must have at least one associated
   // tag.
   height: 30px;
@@ -464,6 +471,9 @@ li.tag, li.subtag {
   background-color: @gray-light70;
   margin-right: 5px;
   color: white;
+  &:hover {
+    background: @io-yellow;
+  }
 }
 
 .img-pre {
@@ -491,6 +501,10 @@ li.tag, li.subtag {
 }
 .padding-l-0 {
   padding-left: 0px;
+}
+
+.border-top-gray { 
+  border-top: 1px solid @gray-light80;
 }
 
 .margin-lr-10 {
@@ -617,10 +631,10 @@ h1.lg {
 //TODO change .65 to a higher value of say .9-1
 .info-overlay{
   background:rgba(0,0,0,.3);
-  background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(0,0,0,0)),color-stop(1%,rgba(0,0,0,0)),color-stop(100%,rgba(0,0,0,.65)));
-  background:-webkit-linear-gradient(top,rgba(0,0,0,0)0,rgba(0,0,0,0)1%,rgba(0,0,0,.65)100%);
-  background:linear-gradient(to bottom,rgba(0,0,0,0)0,rgba(0,0,0,0)1%,rgba(0,0,0,.65)100%);
-  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000', GradientType=0);
+  background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,rgba(0,0,0,0)),color-stop(1%,rgba(0,0,0,0)),color-stop(100%,rgba(0,0,0,.90)));
+  background:-webkit-linear-gradient(top,rgba(0,0,0,0)0,rgba(0,0,0,0)1%,rgba(0,0,0,.90)100%);
+  background:linear-gradient(to bottom,rgba(0,0,0,0)0,rgba(0,0,0,0)1%,rgba(0,0,0,.90)100%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#a6000000', GradientType=0); //TODO
   width:100%;
   height:100%;
   position:relative

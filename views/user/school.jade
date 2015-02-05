@@ -25,7 +25,7 @@ block content
                   - else
                       a(href="/app/schools/" + school.City.city_name + "/" + school.school_name_slug + "/" + school.id)
                         img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=school.school_name height="100px")
-              .tags.clearfix
+              .tags.clearfix.border-top-gray
                 each tag in school.SchoolTags
                   li.tag
                     | #{tag.Tag.tag_name}
@@ -48,6 +48,6 @@ block content
                   - else
                       a(href="/app/schools/" + school_tag.School.City.city_name + "/" + school_tag.School.school_name_slug + "/" + school_tag.School.id)
                         img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=school_tag.School.school_name height="100px")
-              .tags.clearfix
+              .tags.clearfix.border-top-gray
                 li.tag
                   | #{tag.tag_name}
