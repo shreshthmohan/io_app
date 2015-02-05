@@ -3,7 +3,7 @@ extends ../layout
 block content
   include gear_filter_bar
   .filter-margin
-  .heading.text-center.border-gray
+  .heading.text-center
     - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
         h1.md All Outdoor Gear Retailers and Stores 
           - if(city)
@@ -15,6 +15,9 @@ block content
     - else
         h1.md ERROR!
   .row
+    - if(group_mode == 'all_tag_all_loc')
+      .sub-heading.text-center
+        | By Activity
     .category-list
       - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
           each tag in tags
@@ -45,6 +48,26 @@ block content
                             | #{city.city_name}
                           span.number.uppercase
                             | #{city.retailer_count} #{tag.tag_name} STORE
+                            - if(city.retailer_count > 1)
+                              | S
+                        .info-overlay
+  - if(group_mode == 'all_tag_all_loc')
+    span.anchor#by-location
+    .row
+        .sub-heading.text-center
+          | By Location
+        .category-list
+          each city in cities
+            -if(city.retailer_count > 0)
+                .col-md-4
+                  a(href="/app/gear/grouped?location=" + city.id, title="All gear stores and retailers in " + city.city_name)
+                    .category-el
+                      .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                        .info-text.col-xs-12
+                          h2.sm.uppercase
+                            | #{city.city_name}
+                          span.number.uppercase
+                            | #{city.retailer_count} STORE
                             - if(city.retailer_count > 1)
                               | S
                         .info-overlay

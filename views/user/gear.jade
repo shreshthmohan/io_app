@@ -4,13 +4,13 @@ block content
   include gear_filter_bar
   .filter-margin
   .row
-    .col-md-8
+    .col-md-12
       .heading.text-center
-        h1.md= title_
+        h1.sm= title_
       .category-list.row
         - if((retailers) && (retailers != '')) 
             each retailer in retailers
-              .col-md-6
+              .col-md-4
                 .category-el.b-l-4.clearfix
                   .info-media.clearfix
                     .info-box.col-xs-8
@@ -33,7 +33,7 @@ block content
                         | #{tag.Tag.tag_name}
         - else if((gear_tags) && (gear_tags != ''))
             each gear_tag in gear_tags
-              .col-md-6
+              .col-md-4
                 .category-el.b-l-4.clearfix
                   .info-media.clearfix
                     .infobox.col-xs-8
@@ -54,7 +54,75 @@ block content
                     li.tag
                       | #{tag.tag_name}
         - else
-          p.alert.alert-warning.text-center.br-0.std-shadow.fs-16
-              | Oops! We did not find anything. Sorry.
-    .col-md-4
-      .home-category-head.text-center.border-gray Featured
+          .col-md-12
+            p.alert.alert-warning.text-center.br-0.std-shadow.fs-16
+                | Oops! We did not find anything. Sorry.
+  .row
+    .sub-heading.text-center Suggestions
+    .suggestion-container
+      //-.col-md-4
+      //-  a(href="todo")
+      //-    .category-el
+      //-      .info.clearfix
+      //-        .info-text.col-xs-12
+      //-          span.number.uppercase.fs-12.bob.padding-tb-5
+      //-            | Stores Online
+      //-        .info-overlay
+      - if(mode == "cho_tag_cho_loc")
+        .col-md-4
+          a(href="/app/gear/grouped?location=" + city.id title="All stores in " + city.city_name + " by activity")
+            .category-el
+              .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                .info-text.col-xs-12
+                  span.number.uppercase.fs-12.bob.padding-tb-5
+                    | Stores in #{city.city_name}
+                .info-overlay
+        .col-md-4
+          a(href="/app/gear/grouped?activity=" + tag.id title="All " + tag.tag_name + " stores by location")
+            .category-el
+              .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                .info-text.col-xs-12
+                  span.number.uppercase.fs-12.bob.padding-tb-5
+                    | All #{tag.tag_name} Stores
+                .info-overlay
+        .col-md-4
+          a(href="/app/events/upcoming/grouped?location=" + city.id title="All Outdoor Events in " + city.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                .info-text.col-xs-12
+                  span.number.uppercase.fs-12.bob.padding-tb-5
+                    | Events in #{city.city_name}
+                .info-overlay
+        .col-md-4
+          a(href="todo" title="All Outdoor schools in " + city.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                .info-text.col-xs-12
+                  span.number.uppercase.fs-12.bob.padding-tb-5
+                    | Outdoor schools in #{city.city_name}
+                .info-overlay
+        .col-md-4
+          a(href="/app/groups/grouped?location=" + city.id title="All Active Outdoor groups in " + city.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                .info-text.col-xs-12
+                  span.number.uppercase.fs-12.bob.padding-tb-5
+                    | Groups in #{city.city_name}
+                .info-overlay
+      - if((mode == "all_tag_all_loc") || (mode == "cho_tag_all_loc") || (mode == "all_tag_cho_loc"))
+        .col-md-4
+          a(href="/app/gear/grouped" title="All Gear Stores and Retailers by Activity")
+            .category-el
+              .info.clearfix
+                .info-text.col-xs-12
+                  span.number.uppercase.fs-12.bob.padding-tb-5
+                    | All Stores by Activity
+                .info-overlay
+        .col-md-4
+          a(href="/app/gear/grouped#by-location" title="All Gear Stores and Retailers by Location")
+            .category-el
+              .info.clearfix
+                .info-text.col-xs-12
+                  span.number.uppercase.fs-12.bob.padding-tb-5
+                    | All Stores by Location
+                .info-overlay

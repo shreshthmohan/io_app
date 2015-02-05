@@ -56,7 +56,8 @@ var gear_all_loc_all_tags = function(req, res ) {
       .success(function(tags) {
         res.render('user/gear', {
           active_tab: 'gear',
-          title_: 'All Gear Retailers',
+          title_: 'All Gear Retailers across India',
+          mode: 'all_tag_all_loc',
           retailers: retailers,
           cities: cities,
           tags: tags
@@ -92,7 +93,9 @@ var gear_chosen_loc_all_tags = function(req, res) {
           res.render('user/gear', {
             active_tab: 'gear',
             title_: 'All Gear Retailers in ' + city.city_name,
+            city: city,
             retailers: retailers,
+            mode: 'all_tag_cho_loc',
             cities: cities,
             tags: tags
           })
@@ -131,6 +134,7 @@ var gear_all_loc_chosen_tag = function(req, res) {
           res.render('user/gear', {
             active_tab: 'gear',
             title_: 'All ' + tag.tag_name + ' Gear Retailers',
+            mode: 'cho_tag_all_loc',
             tag: tag, // chosen tag
             gear_tags: gear_tags, // these contain retailers to be displayed
             cities: cities,
@@ -172,7 +176,9 @@ var gear_chosen_loc_chosen_tag = function(req, res) {
             res.render('user/gear', {
               active_tab: 'gear',
               title_: 'All ' + tag.tag_name + ' Gear Retailers in ' + city.city_name,
+              mode: 'cho_tag_cho_loc',
               tag: tag,
+              city: city,
               gear_tags: gear_tags,
               cities: cities,
               tags: tags
@@ -229,12 +235,29 @@ var gear_grouped_by_activity = function(req, res) {
   .then(function(tags_c) {
     db.City.findAll()
     .then(function(cities) {
+      var promises = []
+      var city
+      cities.forEach(function(c) {
+        promises.push(
+          db.Retailer.count({
+            where: {CityId: c.id}
+          })
+          .then(function(retailer_count) {
+            city = c.toJSON();
+            city.retailer_count = retailer_count;
+            return city;
+          })
+        )
+      })
+      return Promise.all(promises)
+    })
+    .then(function(cities_c) {
       res.render('user/gear_groups', {
         active_tab: 'gear',
         title_: 'All outdoor, adventure stores and retailers across India',
         tags: tags_c,
         group_mode: 'all_tag_all_loc',
-        cities: cities,
+        cities: cities_c,
         activity: req.param('activity'),
         loc: req.param('location')
       })

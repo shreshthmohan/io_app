@@ -5,61 +5,62 @@ block content
   .filter-margin
   .heading.text-center
     h1.md= title_
-  .category-list
-      - if(races)
-          each race in races
-            div.col-md-4
-              .category-el.b-l-4.clearfix
-                .info-media.clearfix
-                  .col-xs-8.info-box
-                    .info-box-sub
-                      a(href="/app/events/" + race.City.city_name + "/" + race.event_name_slug + "/" + race.id)
-                        h2.sm #{race.event_name}
-                      .city
-                        span.fa.fa-map-marker.helper
-                        | #{race.City.city_name}
-                      span.fa.fa-calendar.date.helper
-                      span.date_value
-                        | #{race.dataValues.start_date_f}
-                  .col-xs-4.img-pre.clearfix
-                    - if(race.img_url_square)
+  .row
+    .category-list
+        - if(races)
+            each race in races
+              div.col-md-4
+                .category-el.b-l-4.clearfix
+                  .info-media.clearfix
+                    .col-xs-8.info-box
+                      .info-box-sub
                         a(href="/app/events/" + race.City.city_name + "/" + race.event_name_slug + "/" + race.id)
-                          img.right.b-l-1(src=race.img_url_square alt=race.event_name height="100px")
-                    - else
-                        a(href="/app/events/" + race.City.city_name + "/" + race.event_name_slug + "/" + race.id)
-                          img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=race.event_name height="100px")
-                .tags.clearfix
-                  each tag in race.EventTags
+                          h2.sm #{race.event_name}
+                        .city
+                          span.fa.fa-map-marker.helper
+                          | #{race.City.city_name}
+                        span.fa.fa-calendar.date.helper
+                        span.date_value
+                          | #{race.dataValues.start_date_f}
+                    .col-xs-4.img-pre.clearfix
+                      - if(race.img_url_square)
+                          a(href="/app/events/" + race.City.city_name + "/" + race.event_name_slug + "/" + race.id)
+                            img.right.b-l-1(src=race.img_url_square alt=race.event_name height="100px")
+                      - else
+                          a(href="/app/events/" + race.City.city_name + "/" + race.event_name_slug + "/" + race.id)
+                            img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=race.event_name height="100px")
+                  .tags.clearfix
+                    each tag in race.EventTags
+                      li.tag
+                        | #{tag.Tag.tag_name}
+                    each subtag in race.EventSubtags
+                      li.subtag
+                        | #{subtag.Subtag.subtag_name}
+        - if(event_tags)
+            each event_tag in event_tags
+              div.col-md-4
+                .category-el.b-l-4.clearfix
+                  .info-media.clearfix
+                    .col-xs-8.info-box
+                      .info-box-sub
+                        a(href="/app/events/" + event_tag.Event.City.city_name + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
+                          h2.sm #{event_tag.Event.event_name}
+                        .city
+                          span.fa.fa-map-marker.helper
+                          | #{event_tag.Event.City.city_name}
+                        span.fa.fa-calendar.date.helper
+                        span.date_value
+                          | #{event_tag.Event.dataValues.start_date_f}
+                    .col-xs-4.img-pre.clearfix
+                      - if(event_tag.Event.img_url_square)
+                          a(href="/app/events/" + event_tag.Event.City.city_name + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
+                            img.right.b-l-1(src=event_tag.Event.img_url_square alt=event_tag.Event.event_name height="100px")
+                      - else
+                          a(href="/app/events/" + event_tag.Event.City.city_name + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
+                            img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=event_tag.Event.event_name height="100px")
+                  .tags.clearfix
                     li.tag
-                      | #{tag.Tag.tag_name}
-                  each subtag in race.EventSubtags
-                    li.subtag
-                      | #{subtag.Subtag.subtag_name}
-      - if(event_tags)
-          each event_tag in event_tags
-            div.col-md-4
-              .category-el.b-l-4.clearfix
-                .info-media.clearfix
-                  .col-xs-8.info-box
-                    .info-box-sub
-                      a(href="/app/events/" + event_tag.Event.City.city_name + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
-                        h2.sm #{event_tag.Event.event_name}
-                      .city
-                        span.fa.fa-map-marker.helper
-                        | #{event_tag.Event.City.city_name}
-                      span.fa.fa-calendar.date.helper
-                      span.date_value
-                        | #{event_tag.Event.dataValues.start_date_f}
-                  .col-xs-4.img-pre.clearfix
-                    - if(event_tag.Event.img_url_square)
-                        a(href="/app/events/" + event_tag.Event.City.city_name + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
-                          img.right.b-l-1(src=event_tag.Event.img_url_square alt=event_tag.Event.event_name height="100px")
-                    - else
-                        a(href="/app/events/" + event_tag.Event.City.city_name + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
-                          img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=event_tag.Event.event_name height="100px")
-                .tags.clearfix
-                  li.tag
-                    | #{tag.tag_name}
-                  each subtag in event_tag.Event.EventSubtags
-                    li.subtag
-                      | #{subtag.Subtag.subtag_name}
+                      | #{tag.tag_name}
+                    each subtag in event_tag.Event.EventSubtags
+                      li.subtag
+                        | #{subtag.Subtag.subtag_name}

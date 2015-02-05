@@ -175,7 +175,7 @@ h2 {
 body {
   margin-top: 50px; // To bring jumbotron container below navbar
   font-size: 105%; // To control datepicker size
-  min-height: 2000px;
+  min-height: 700px;
   //background-color: @gray-lighter;
   background-color: @gray-light90;
 }
@@ -399,9 +399,33 @@ ul {
   background: white;
   // shadow
   .shadow(0px 2px 4px 0px rgba(0, 0, 0, .15));
-  padding: 1px 0px 5px 20px;
+  padding: 1px 10px 5px 10px;
   margin: 0px 0px 15px 0px;
   color: gray;
+}
+
+.sub-heading {
+  background: white;
+  // shadow
+  .shadow(0px 2px 4px 0px rgba(0, 0, 0, .15));
+  padding: 5px;
+  margin: 0px 10px 15px 10px;
+  color: darken(@io-yellow, 15%);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+//@anchor-comp: @navbar-height + 42px + 10px;
+
+.anchor {
+  display: block;
+  height: 45px;
+  margin-top: -45px;
+  visibility: hidden;
+  @media (min-width: @grid-float-breakpoint) {
+    height: 87px;
+    margin-top: -87px;
+  }
 }
 
 .info {
@@ -462,6 +486,13 @@ li.tag, li.subtag {
   border-left: 1px solid @gray-light80;
 }
 
+.padding-r-0 {
+  padding-right: 0px;
+}
+.padding-l-0 {
+  padding-left: 0px;
+}
+
 .margin-lr-10 {
   margin-right: 10px;
   margin-left:  10px;
@@ -519,7 +550,7 @@ li.tag, li.subtag {
   color: @gray-light30;
 }
 
-@h2-sm-font-size: 15px;
+@h2-sm-font-size: 16px;
 @h2-sm-margin-top: 7px;
 @h2-sm-margin-bottom: 5px;
 
@@ -565,6 +596,10 @@ h1.lg {
 
 .inline-block {
   display: inline-block;
+}
+
+.block {
+  display: block;
 }
 
 .text-shadow-2 {
@@ -705,17 +740,39 @@ li.tab.active {
   font-size: 14px;
 }
 
+.helper {
+  width: 15px;
+}
+
 .home-explore-radio-label {
   margin: 0px 15px 10px 5px;
   font-size: 16px;
   font-weight: normal;
   color: darken(@io-yellow, 15%);
 }
+ 
+.cat-list-hr {
+  margin-top: 0px;
+  margin-bottom: 20px;
+  border-top: 1px solid @gray-light80;
+}
 
+.indi-hr {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-top: 1px solid @gray-light80;
+}
 
-//.border-gray {
-//  border: 1px solid @gray-light80;
-//}
+// Border of beauty
+.bob {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.padding-tb-5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 
 //////////////////
 // Social Links //
