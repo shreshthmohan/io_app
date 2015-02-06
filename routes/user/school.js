@@ -57,6 +57,8 @@ all_loc_all_tags = function(req, res ) {
           title_: 'All Active Outdoor Schools',
           schools: schools,
           cities: cities,
+          loc: req.param('location'),
+          activity: req.param('activity'),
           tags: tags
         })
       })
@@ -92,6 +94,8 @@ chosen_loc_all_tags = function(req, res) {
             title_: 'All Outdoor Schools in ' + city.city_name,
             schools: schools,
             cities: cities,
+            loc: req.param('location'),
+            activity: req.param('activity'),
             tags: tags
           })
         })
@@ -132,6 +136,8 @@ all_loc_chosen_tag = function(req, res) {
             tag: tag, // chosen tag
             school_tags: school_tags, // these contain schools to be displayed
             cities: cities,
+            loc: req.param('location'),
+            activity: req.param('activity'),
             tags: tags // all tags for filter bar
           })
         })
@@ -173,6 +179,8 @@ chosen_loc_chosen_tag = function(req, res) {
               tag: tag,
               school_tags: school_tags,
               cities: cities,
+              loc: req.param('location'),
+              activity: req.param('activity'),
               tags: tags
             })
           })

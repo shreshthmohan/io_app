@@ -139,12 +139,13 @@ block content
                           .category-el
                             .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                               .info-text.col-xs-12
-                                h2.sm.uppercase
-                                  | #{tag.tag_name}
-                                span.number.uppercase
-                                  | #{tag.event_count} EVENT
-                                  - if(tag.event_count >1)
-                                    | S
+                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                  span.block.fs-16.padding-b-5
+                                    | #{tag.tag_name}
+                                  span.number.uppercase.block.fs-12
+                                    | #{tag.event_count} EVENT
+                                    - if(tag.event_count >1)
+                                      | S
                                .info-overlay
               .col-xs-12.tab-content.event-location
                 each city in cities
@@ -154,12 +155,13 @@ block content
                           .category-el
                             .info.clearfix(style="background-image: url(" + city.image_url + ");")
                               .info-text.col-xs-12
-                                h2.sm.uppercase
-                                  | #{city.city_name}
-                                span.number.uppercase
-                                  | #{city.event_count} EVENT
-                                  - if(city.event_count >1)
-                                    | S
+                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                  span.block.fs-16.padding-b-5
+                                    | #{city.city_name}
+                                  span.number.uppercase.block.fs-12
+                                    | #{city.event_count} EVENT
+                                    - if(city.event_count >1)
+                                      | S
                               .info-overlay
             .tab-content-container.gear-explore
               .text-center.radio-helper
@@ -177,12 +179,13 @@ block content
                           .category-el
                             .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                               .info-text.col-xs-12
-                                h2.sm.uppercase
-                                  | #{tag.tag_name}
-                                span.number.uppercase
-                                  | #{tag.retailer_count} STORE
-                                  - if(tag.retailer_count > 1)
-                                    | S
+                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                  span.block.fs-16.padding-b-5
+                                    | #{tag.tag_name}
+                                  span.number.uppercase.block.fs-12
+                                    | #{tag.retailer_count} STORE
+                                    - if(tag.retailer_count > 1)
+                                      | S
                                .info-overlay
               .col-xs-12.tab-content.gear-location
                 each city in cities
@@ -192,12 +195,13 @@ block content
                           .category-el
                             .info.clearfix(style="background-image: url(" + city.image_url + ");")
                               .info-text.col-xs-12
-                                h2.sm.uppercase
-                                  | #{city.city_name}
-                                span.number.uppercase
-                                  | #{city.retailer_count} STORE
-                                  - if(city.retailer_count >1)
-                                    | S
+                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                  span.block.fs-16.padding-b-5
+                                    | #{city.city_name}
+                                  span.number.uppercase.block.fs-12
+                                    | #{city.retailer_count} STORE
+                                    - if(city.retailer_count >1)
+                                      | S
                               .info-overlay
             .tab-content-container.group-explore
               .text-center.radio-helper
@@ -215,12 +219,13 @@ block content
                           .category-el
                             .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                               .info-text.col-xs-12
-                                h2.sm.uppercase
-                                  | #{tag.tag_name}
-                                span.number.uppercase
-                                  | #{tag.group_count} GROUP
-                                  - if(tag.group_count >1)
-                                    | S
+                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                  span.block.fs-16.padding-b-5
+                                    | #{tag.tag_name}
+                                  span.number.uppercase.block.fs-12
+                                    | #{tag.group_count} GROUP
+                                    - if(tag.group_count >1)
+                                      | S
                                .info-overlay
               .col-xs-12.tab-content.group-location
                 each city in cities
@@ -230,12 +235,13 @@ block content
                           .category-el
                             .info.clearfix(style="background-image: url(" + city.image_url + ");")
                               .info-text.col-xs-12
-                                h2.sm.uppercase
-                                  | #{city.city_name}
-                                span.number.uppercase
-                                  | #{city.group_count} GROUP
-                                  - if(city.group_count >1)
-                                    | S
+                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                  span.block.fs-16.padding-b-5
+                                    | #{city.city_name}
+                                  span.number.uppercase.block.fs-12
+                                    | #{city.group_count} GROUP
+                                    - if(city.group_count >1)
+                                      | S
                                .info-overlay
             .tab-content-container.learn-explore
               .text-center.radio-helper
@@ -253,12 +259,13 @@ block content
                           .category-el
                             .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                               .info-text.col-xs-12
-                                h2.sm.uppercase
-                                  | #{tag.tag_name}
-                                span.number.uppercase
-                                  | #{tag.school_count} OUTDOOR SCHOOL
-                                  - if(tag.school_count >1)
-                                    | S
+                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                  span.block.fs-16.padding-b-5
+                                    | #{tag.tag_name}
+                                  span.number.uppercase.block.fs-12
+                                    | #{tag.school_count} OUTDOOR SCHOOL
+                                    - if(tag.school_count >1)
+                                      | S
                                .info-overlay
               .col-xs-12.tab-content.school-location
                 each city in cities 
@@ -268,12 +275,13 @@ block content
                           .category-el
                             .info.clearfix(style="background-image: url(" + city.image_url + ");")
                               .info-text.col-xs-12
-                                h2.sm.uppercase
-                                  | #{city.city_name}
-                                span.number.uppercase
-                                  | #{city.school_count} OUTDOOR SCHOOL
-                                  - if(city.school_count >1)
-                                    | S
+                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                  span.block.fs-16.padding-b-5
+                                    | #{city.city_name}
+                                  span.number.uppercase.block.fs-12
+                                    | #{city.school_count} OUTDOOR SCHOOL
+                                    - if(city.school_count >1)
+                                      | S
                                .info-overlay
 
 block extrajs

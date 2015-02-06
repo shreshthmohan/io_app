@@ -59,6 +59,8 @@ var gear_all_loc_all_tags = function(req, res ) {
           title_: 'All Gear Retailers across India',
           mode: 'all_tag_all_loc',
           retailers: retailers,
+          loc: req.param('location'),
+          activity: req.param('activity'),
           cities: cities,
           tags: tags
         })
@@ -96,6 +98,8 @@ var gear_chosen_loc_all_tags = function(req, res) {
             city: city,
             retailers: retailers,
             mode: 'all_tag_cho_loc',
+            loc: req.param('location'),
+            activity: req.param('activity'),
             cities: cities,
             tags: tags
           })
@@ -138,6 +142,8 @@ var gear_all_loc_chosen_tag = function(req, res) {
             tag: tag, // chosen tag
             gear_tags: gear_tags, // these contain retailers to be displayed
             cities: cities,
+            loc: req.param('location'),
+            activity: req.param('activity'),
             tags: tags // all tags for filter bar
           })
         })
@@ -180,6 +186,8 @@ var gear_chosen_loc_chosen_tag = function(req, res) {
               tag: tag,
               city: city,
               gear_tags: gear_tags,
+              loc: req.param('location'),
+              activity: req.param('activity'),
               cities: cities,
               tags: tags
             })
