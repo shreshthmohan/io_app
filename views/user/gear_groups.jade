@@ -27,14 +27,15 @@ block content
                     .category-el
                       .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                         .info-text.col-xs-12
-                          h2.sm.uppercase
-                            | #{tag.tag_name}
-                          span.number.uppercase
-                            | #{tag.retailer_count} STORE
-                            - if(tag.retailer_count > 1)
-                              | S
-                            - if(city)
-                              |  IN #{city.city_name}
+                          h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                            span.block.fs-16.padding-b-5
+                              | #{tag.tag_name}
+                            span.number.uppercase.block.fs-12
+                              | #{tag.retailer_count} STORE
+                              - if(tag.retailer_count > 1)
+                                | S
+                              - if(city)
+                                |  IN #{city.city_name}
                         .info-overlay
       - else
           each city in cities
@@ -44,12 +45,13 @@ block content
                     .category-el
                       .info.clearfix(style="background-image: url(" + city.image_url + ");")
                         .info-text.col-xs-12
-                          h2.sm.uppercase
-                            | #{city.city_name}
-                          span.number.uppercase
-                            | #{city.retailer_count} #{tag.tag_name} STORE
-                            - if(city.retailer_count > 1)
-                              | S
+                          h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                            span.block.fs-16.padding-b-5
+                              | #{city.city_name}
+                            span.number.uppercase.block.fs-12
+                              | #{city.retailer_count} #{tag.tag_name} STORE
+                              - if(city.retailer_count > 1)
+                                | S
                         .info-overlay
   - if(group_mode == 'all_tag_all_loc')
     span.anchor#by-location
@@ -64,10 +66,11 @@ block content
                     .category-el
                       .info.clearfix(style="background-image: url(" + city.image_url + ");")
                         .info-text.col-xs-12
-                          h2.sm.uppercase
-                            | #{city.city_name}
-                          span.number.uppercase
-                            | #{city.retailer_count} STORE
-                            - if(city.retailer_count > 1)
-                              | S
+                          h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                            span.block.fs-16.padding-b-5
+                              | #{city.city_name}
+                            span.number.uppercase.block.fs-12
+                              | #{city.retailer_count} STORE
+                              - if(city.retailer_count > 1)
+                                | S
                         .info-overlay
