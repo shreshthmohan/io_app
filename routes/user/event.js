@@ -301,7 +301,7 @@ exports.upcoming_grouped = function(req, res) {
   var tag  = req.param('activity');
   var loc  = req.param('location');
   if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
-    grouped_by_activity(req, res) 
+    grouped(req, res) 
   }
   else if (loc == 0 || loc == null) { // All locations and a chosen activity
     grouped_by_location_chosen_tag(req, res)
@@ -338,7 +338,7 @@ exports.upcoming_grouped = function(req, res) {
 // Will land up here when people search for all locations with all tags
 // All activities, all locations: events grouped by activity
 // List of tags with number of events associated with each tag
-var grouped_by_activity = function(req, res) {
+var grouped = function(req, res) {
   db.Tag.findAll()
   .then(function(tags) {
     var promises = [] // array to be filled with function calls
@@ -363,12 +363,31 @@ var grouped_by_activity = function(req, res) {
   })
   .then(function(tags_c) {
     db.City.findAll()
-    .success(function(cities) {
+    .then(function(cities) {
+      var promises = []
+      var city
+      cities.forEach(function(c) {
+        promises.push(
+          db.Event.count({
+            where: Sequelize.and(
+              {CityId: c.id},
+              {start_date: {gte: new Date()}})
+          })
+          .then(function(event_count) {
+            city = c.toJSON();
+            city.event_count = event_count;
+            return city;
+          })
+        )
+      })
+      return Promise.all(promises)
+    })
+    .success(function(cities_c) {
       res.render('user/event_groups', {
         active_tab: 'events',
         title_: 'Upcoming outdoor and adventure events all over India',
         tags: tags_c, //tags with counts of respective events
-        cities: cities,
+        cities: cities_c,
         group_mode: 'all_tag_all_loc',
         activity: req.param('activity'),
         loc: req.param('location')

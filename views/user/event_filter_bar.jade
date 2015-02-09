@@ -4,9 +4,9 @@
       label.sr-only(for='event_activity') Activity
       select(class="form-control" type="text" name="activity" id="event_activity")
         - if(activity == null || activity == '' || activity == 0)
-            option(value=0 selected="selected") All
+            option(value=0 selected="selected") All Activities
         - else 
-            option(value=0) All
+            option(value=0) All Activities
         each tag in tags 
           - if(activity == tag.id)
               option(value=tag.id selected="selected") #{tag.tag_name}

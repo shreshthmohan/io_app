@@ -17,9 +17,9 @@
       label.sr-only(for="store_location") Activity
       select(class="form-control" required type="text" name="location" id="store_location")
         - if(loc == null || loc == '' || loc == 0)
-            option(value=0 selected="selected") All
+            option(value=0 selected="selected") All Locations
         - else 
-            option(value=0) All
+            option(value=0) All Locations
         each city in cities
           - if(loc== city.id)
               option(value=city.id selected="selected") #{city.city_name}

@@ -198,7 +198,7 @@ exports.all_grouped = function(req, res) {
   var tag  = req.param('activity');
   var loc  = req.param('location');
   if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
-    group_grouped_by_activity(req, res) 
+    group_grouped(req, res) 
   }
   else if (loc == 0 || loc == null) { // All locations and a chosen activity
     group_grouped_by_location_chosen_tag(req, res)
@@ -213,7 +213,7 @@ exports.all_grouped = function(req, res) {
 }
 
 // All activities, all tags (Grouped by activity)
-var group_grouped_by_activity = function(req, res) {
+var group_grouped = function(req, res) {
   db.Tag.findAll()
   .then(function(tags) {
     var promises = []
@@ -235,12 +235,29 @@ var group_grouped_by_activity = function(req, res) {
   .then(function(tags_c) {
     db.City.findAll()
     .then(function(cities) {
+      var promises = []
+      var city
+      cities.forEach(function(c) {
+        promises.push(
+          db.Group.count({
+            where: {CityId: c.id}
+          })
+          .then(function(group_count) {
+            city = c.toJSON();
+            city.group_count = group_count;
+            return city;
+          })
+        )
+      })
+      return Promise.all(promises)
+    })
+    .then(function(cities_c) {
       res.render('user/group_groups', {
         active_tab: 'groups',
         title_: 'All Active Outdoor Groups across India',
         tags: tags_c,
         group_mode: 'all_tag_all_loc',
-        cities: cities,
+        cities: cities_c,
         activity: req.param('activity'),
         loc: req.param('location')
       })

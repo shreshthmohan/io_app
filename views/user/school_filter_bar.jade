@@ -12,7 +12,7 @@
               option(value=tag.id selected="selected") #{tag.tag_name}
           - else
               option(value=tag.id) #{tag.tag_name}
-    | outdoor schools in
+    span.filter-helper outdoor schools in
     .form-group
       label.sr-only(for="store_location") Activity
       select(class="form-control" required type="text" name="location" id="store_location")

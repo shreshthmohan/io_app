@@ -206,7 +206,7 @@ exports.all_grouped = function(req, res) {
   var tag  = req.param('activity');
   var loc  = req.param('location');
   if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
-    gear_grouped_by_activity(req, res) 
+    gear_grouped (req, res) 
   }
   else if (loc == 0 || loc == null) { // All locations and a chosen activity
     gear_grouped_by_location_chosen_tag(req, res)
@@ -220,8 +220,8 @@ exports.all_grouped = function(req, res) {
   }
 }
 
-// All activities, all tags (Grouped by activity)
-var gear_grouped_by_activity = function(req, res) {
+// All activities, all tags (Grouped both by activity and location)
+var gear_grouped = function(req, res) {
   db.Tag.findAll()
   .then(function(tags) {
     var promises = []
