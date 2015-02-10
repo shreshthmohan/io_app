@@ -57,6 +57,7 @@ var group_all_loc_all_tags = function(req, res ) {
           title_: 'All Active Outdoor Groups',
           groups: groups,
           cities: cities,
+          mode: 'all_tag_all_loc',
           loc: req.param('location'),
           activity: req.param('activity'),
           tags: tags
@@ -92,8 +93,10 @@ var group_chosen_loc_all_tags = function(req, res) {
           res.render('user/group', {
             active_tab: 'groups',
             title_: 'All Outdoor Groups in ' + city.city_name,
+            mode: 'all_tag_cho_loc',
             groups: groups,
             cities: cities,
+            city: city,
             loc: req.param('location'),
             activity: req.param('activity'),
             tags: tags
@@ -136,6 +139,7 @@ var group_all_loc_chosen_tag = function(req, res) {
             tag: tag, // chosen tag
             group_tags: group_tags, // these contain groups to be displayed
             cities: cities,
+            mode: 'cho_tag_all_loc',
             loc: req.param('location'),
             activity: req.param('activity'),
             tags: tags // all tags for filter bar
@@ -179,6 +183,8 @@ var group_chosen_loc_chosen_tag = function(req, res) {
               tag: tag,
               group_tags: group_tags,
               cities: cities,
+              city: city,
+              mode: 'cho_tag_cho_loc',
               loc: req.param('location'),
               activity: req.param('activity'),
               tags: tags

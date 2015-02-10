@@ -19,7 +19,7 @@ block content
       .sub-heading.text-center
         | By Activity
     .category-list
-      - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
+      - if((group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc') && (tags != ''))
           each tag in tags
             - if(tag.school_count > 0)
                 .col-md-4

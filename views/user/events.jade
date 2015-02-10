@@ -7,7 +7,7 @@ block content
     h1.md= title_
   .row
     .category-list
-        - if(races)
+        - if((races) && (races != ''))
             each race in races
               div.col-md-4
                 .category-el.b-l-4.clearfix
@@ -28,7 +28,7 @@ block content
                             img.right.b-l-1(src=race.img_url_square alt=race.event_name height="100px")
                       - else
                           a(href="/app/events/" + race.City.city_name + "/" + race.event_name_slug + "/" + race.id)
-                            img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=race.event_name height="100px")
+                            i.fa.fa-flag.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
                     each tag in race.EventTags
                       li.tag
@@ -36,7 +36,7 @@ block content
                     each subtag in race.EventSubtags
                       li.subtag
                         | #{subtag.Subtag.subtag_name}
-        - if(event_tags)
+        - else if((event_tags) && (event_tags != ''))
             each event_tag in event_tags
               div.col-md-4
                 .category-el.b-l-4.clearfix
@@ -57,10 +57,98 @@ block content
                             img.right.b-l-1(src=event_tag.Event.img_url_square alt=event_tag.Event.event_name height="100px")
                       - else
                           a(href="/app/events/" + event_tag.Event.City.city_name + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
-                            img.right.b-l-1(src="http://www.alluserpics.com/data/media/29/00857.jpg" alt=event_tag.Event.event_name height="100px")
+                            i.fa.fa-flag.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
                     li.tag
                       | #{tag.tag_name}
                     each subtag in event_tag.Event.EventSubtags
                       li.subtag
                         | #{subtag.Subtag.subtag_name}
+        - else
+          .col-md-12
+            p.alert.alert-warning.text-center.br-0.std-shadow.fs-16
+                | Oops! We did not find anything. Sorry.
+  .row
+    .sub-heading.text-center Suggestions
+    .suggestion-container
+      //-.col-md-4
+      //-  a(href="todo")
+      //-    .category-el
+      //-      .info.clearfix
+      //-        .info-text.col-xs-12
+      //-          span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+      //-            | Stores Online
+      //-        .info-overlay
+      - if((mode == "cho_tag_cho_loc") || (mode == "all_tag_cho_loc"))
+        - if(mode == "cho_tag_cho_loc")
+          .col-md-4
+            a(href="/app/events/upcoming/grouped?activity=" + tag.id title="All " + tag.tag_name + " events and races by location")
+              .category-el
+                .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                  .right
+                    i.fa.fa-flag.helper-icon
+                  .info-text.col-xs-12
+                    span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                      | All #{tag.tag_name} events
+                  .info-overlay
+        .col-md-4
+          a(href="/app/events/upcoming/grouped?location=" + city.id title="All events and races in " + city.city_name + " by activity")
+            .category-el
+              .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                .right
+                  i.fa.fa-flag.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | Events in #{city.city_name}
+                .info-overlay
+        .col-md-4
+          a(href="/app/gear/grouped?location=" + city.id title="All Outdoor gear stores and retailers in " + city.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                .right
+                  i.fa.fa-gear.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | Stores in #{city.city_name}
+                .info-overlay
+        .col-md-4
+          a(href="/app/schools/grouped?location=" + city.id, title="All Outdoor schools in " + city.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                .right
+                  i.fa.fa-building-o.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | Outdoor schools in #{city.city_name}
+                .info-overlay
+        .col-md-4
+          a(href="/app/groups/grouped?location=" + city.id title="All Active Outdoor groups in " + city.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                .right
+                  i.fa.fa-group.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | Groups in #{city.city_name}
+                .info-overlay
+      - if((mode == "all_tag_all_loc") || (mode == "cho_tag_all_loc") || (mode == "all_tag_cho_loc"))
+        .col-md-4
+          a(href="/app/events/upcoming/grouped" title="All Events and Races by Activity")
+            .category-el
+              .info.clearfix
+                .right
+                  i.fa.fa-flag.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | All Events by Activity
+                .info-overlay
+        .col-md-4
+          a(href="/app/events/upcoming/grouped#by-location" title="All Events and Races by Location")
+            .category-el
+              .info.clearfix
+                .right
+                  i.fa.fa-flag.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | All Events by Location
+                .info-overlay

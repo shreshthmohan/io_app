@@ -5,8 +5,8 @@ block content
   .filter-margin
   .heading.text-center
     h1.md= title_
-  .category-list
-    - if(groups)
+  .category-list.row
+    - if((groups) && (groups != ''))
         each group in groups
           .col-md-4
             .category-el.b-l-4.clearfix
@@ -29,7 +29,7 @@ block content
                 each tag in group.GroupTags
                   li.tag
                     | #{tag.Tag.tag_name}
-    - if(group_tags)
+    - else if((group_tags) && (group_tags != ''))
         each group_tag in group_tags
           .col-md-4
             .category-el.b-l-4.clearfix
@@ -51,3 +51,91 @@ block content
               .tags.clearfix
                 li.tag
                   | #{tag.tag_name}
+    - else
+      .col-md-12
+        p.alert.alert-warning.text-center.br-0.std-shadow.fs-16
+            | Oops! We did not find anything. Sorry.
+  .row
+    .sub-heading.text-center Suggestions
+    .suggestion-container
+      //-.col-md-4
+      //-  a(href="todo")
+      //-    .category-el
+      //-      .info.clearfix
+      //-        .info-text.col-xs-12
+      //-          span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+      //-            | Stores Online
+      //-        .info-overlay
+      - if((mode == "cho_tag_cho_loc") || (mode == "all_tag_cho_loc"))
+        - if(mode == "cho_tag_cho_loc")
+          .col-md-4
+            a(href="/app/groups/grouped?activity=" + tag.id title="All Active Outdoor " + tag.tag_name + " groups by location")
+              .category-el
+                .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                  .right
+                    i.fa.fa-group.helper-icon
+                  .info-text.col-xs-12
+                    span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                      | All #{tag.tag_name} Groups
+                  .info-overlay
+        .col-md-4
+          a(href="/app/groups/grouped?location=" + city.id title="All Active Outdoor Groups in " + city.city_name + " by Activity")
+            .category-el
+              .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                .right
+                  i.fa.fa-group.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | Groups in #{city.city_name}
+                .info-overlay
+        .col-md-4
+          a(href="/app/events/upcoming/grouped?location=" + city.id title="All Outdoor Events in " + city.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                .right
+                  i.fa.fa-flag-checkered.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | Events in #{city.city_name}
+                .info-overlay
+        .col-md-4
+          a(href="todo" title="All Outdoor schools in " + city.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                .right
+                  i.fa.fa-building-o.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | Outdoor schools in #{city.city_name}
+                .info-overlay
+        .col-md-4
+          a(href="/app/gear/grouped?location=" + city.id title="All Outdoor Gear Stores and Retailers in " + city.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                .right
+                  i.fa.fa-gear.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | Stores in #{city.city_name}
+                .info-overlay
+      - if((mode == "all_tag_all_loc") || (mode == "cho_tag_all_loc") || (mode == "all_tag_cho_loc"))
+        .col-md-4
+          a(href="/app/grooups/grouped" title="All Active Outdoor Groups by Activity")
+            .category-el
+              .info.clearfix
+                .right
+                  i.fa.fa-group.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | All Grousp by Activity
+                .info-overlay
+        .col-md-4
+          a(href="/app/groups/grouped#by-location" title="All Active Outdoor Groups by Location")
+            .category-el
+              .info.clearfix
+                .right
+                  i.fa.fa-group.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | All Groups by Location
+                .info-overlay
