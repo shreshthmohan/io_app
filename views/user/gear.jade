@@ -64,49 +64,60 @@ block content
       //-  a(href="todo")
       //-    .category-el
       //-      .info.clearfix
-      //-        .info-text.margin-top-90.col-xs-12
-      //-          span.number.uppercase.fs-12.bob.padding-tb-5
+      //-        .info-text.col-xs-12
+      //-          span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
       //-            | Stores Online
       //-        .info-overlay
-      - if(mode == "cho_tag_cho_loc")
+      - if((mode == "cho_tag_cho_loc") || (mode == "all_tag_cho_loc"))
+        - if(mode == "cho_tag_cho_loc")
+          .col-md-4
+            a(href="/app/gear/grouped?activity=" + tag.id title="All " + tag.tag_name + " stores by location")
+              .category-el
+                .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                  .right
+                    i.fa.fa-gear.helper-icon
+                  .info-text.col-xs-12
+                    span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                      | All #{tag.tag_name} Stores
+                  .info-overlay
         .col-md-4
           a(href="/app/gear/grouped?location=" + city.id title="All stores in " + city.city_name + " by activity")
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                .info-text.margin-top-90.col-xs-12
-                  span.number.uppercase.fs-12.bob.padding-tb-5
+                .right
+                  i.fa.fa-gear.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                     | Stores in #{city.city_name}
-                .info-overlay
-        .col-md-4
-          a(href="/app/gear/grouped?activity=" + tag.id title="All " + tag.tag_name + " stores by location")
-            .category-el
-              .info.clearfix(style="background-image: url(" + tag.image_url + ");")
-                .info-text.margin-top-90.col-xs-12
-                  span.number.uppercase.fs-12.bob.padding-tb-5
-                    | All #{tag.tag_name} Stores
                 .info-overlay
         .col-md-4
           a(href="/app/events/upcoming/grouped?location=" + city.id title="All Outdoor Events in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                .info-text.margin-top-90.col-xs-12
-                  span.number.uppercase.fs-12.bob.padding-tb-5
+                .right
+                  i.fa.fa-flag-checkered.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                     | Events in #{city.city_name}
                 .info-overlay
         .col-md-4
           a(href="todo" title="All Outdoor schools in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                .info-text.margin-top-90.col-xs-12
-                  span.number.uppercase.fs-12.bob.padding-tb-5
+                .right
+                  i.fa.fa-building-o.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                     | Outdoor schools in #{city.city_name}
                 .info-overlay
         .col-md-4
           a(href="/app/groups/grouped?location=" + city.id title="All Active Outdoor groups in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                .info-text.margin-top-90.col-xs-12
-                  span.number.uppercase.fs-12.bob.padding-tb-5
+                .right
+                  i.fa.fa-group.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                     | Groups in #{city.city_name}
                 .info-overlay
       - if((mode == "all_tag_all_loc") || (mode == "cho_tag_all_loc") || (mode == "all_tag_cho_loc"))
@@ -114,15 +125,19 @@ block content
           a(href="/app/gear/grouped" title="All Gear Stores and Retailers by Activity")
             .category-el
               .info.clearfix
-                .info-text.margin-top-90.col-xs-12
-                  span.number.uppercase.fs-12.bob.padding-tb-5
+                .right
+                  i.fa.fa-gear.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                     | All Stores by Activity
                 .info-overlay
         .col-md-4
           a(href="/app/gear/grouped#by-location" title="All Gear Stores and Retailers by Location")
             .category-el
               .info.clearfix
-                .info-text.margin-top-90.col-xs-12
-                  span.number.uppercase.fs-12.bob.padding-tb-5
+                .right
+                  i.fa.fa-gear.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                     | All Stores by Location
                 .info-overlay

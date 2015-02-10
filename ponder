@@ -155,6 +155,7 @@ DONEs:
     ... Merged multiple modify js files to modify.js DONE
     17. Pass a param for active navbar tab DONE
     18. Show gear retailer clusters on home by city? DONE
+    * BOB finish up for all views DONE
 
 TODOs:
 
@@ -175,7 +176,6 @@ TODOs:
          more the number of categories more the distraction. And leave learn for later?
          I am (almost) done with events (individual event page: embed map, add description/comments, past events) Though showing past events 
          makes sense only if we have photos and reports for the events (may be this can be done in the meta.)
-    * BOB finish up for all views
     8. Failsafe: background color/gradient for home-search for image failing to load.
     9. category-group elements: 0-85/90 instead of 65? text-shadow? top-bottom border white 15% opaque?
     10. Think about photos (it'd be much better if we had them, for engagement)
