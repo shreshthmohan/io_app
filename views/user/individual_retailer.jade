@@ -84,6 +84,26 @@ block content
                 | Stores in #{retailer.City.city_name}
             .info-overlay
     .col-md-4
+      a(href="/app/gear/grouped" title="All Gear Stores and Retailers by Activity")
+        .category-el
+          .info.clearfix
+            .right
+              i.fa.fa-gear.helper-icon
+            .info-text.margin-top-90.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | All Stores by Activity
+            .info-overlay
+    .col-md-4
+      a(href="/app/gear/grouped#by-location" title="All Gear Stores and Retailers by Location")
+        .category-el
+          .info.clearfix
+            .right
+              i.fa.fa-gear.helper-icon
+            .info-text.margin-top-90.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | All Stores by Location
+            .info-overlay
+    .col-md-4
       a(href="/app/events/upcoming/grouped?location=" + retailer.City.id , title="All outdoor events in " + retailer.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
@@ -113,24 +133,4 @@ block content
             .info-text.col-xs-12
               span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                 | Groups in #{retailer.City.city_name}
-            .info-overlay
-    .col-md-4
-      a(href="/app/gear/grouped" title="All Gear Stores and Retailers by Activity")
-        .category-el
-          .info.clearfix
-            .right
-              i.fa.fa-gear.helper-icon
-            .info-text.margin-top-90.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | All Stores by Activity
-            .info-overlay
-    .col-md-4
-      a(href="/app/gear/grouped#by-location" title="All Gear Stores and Retailers by Location")
-        .category-el
-          .info.clearfix
-            .right
-              i.fa.fa-gear.helper-icon
-            .info-text.margin-top-90.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | All Stores by Location
             .info-overlay

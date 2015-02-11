@@ -1,85 +1,149 @@
 extends ../layout
 
 block content
-  .entity.col-md-8.std-shadow
-    - if(race.event_url) 
-        a(href=race.event_url target='_blank')
-          h1.lg.inline #{race.event_name}
-          span.fa.fa-external-link.margin-l-5.fs-16
-    - else
-        h1.lg #{race.event_name}
-    span.dates.fs-14
-      span.fa.fa-calendar.w-20.gray
-      | #{race.dataValues.start_date_f}
-      - if(race.dataValues.end_date_f)
-        - if(race.dataValues.start_date_f != race.dataValues.end_date_f)
-            |   -  #{race.dataValues.end_date_f}
-    span.location
-      span.fa.fa-map-marker.fs-16.gray.w-20
-      h2.md.inline #{race.City.city_name}
-    - if(race.organiser_name)
-        span.organiser
-          span.gray.fs-14.margin-r-5 by
-          - if(race.organiser_url)
-              a(href=race.organiser_url target='_blank')
+  .row
+    .entity.col-md-8.std-shadow.col-md-offset-2
+      - if(race.event_url) 
+          a(href=race.event_url target='_blank')
+            h1.lg.inline #{race.event_name}
+            span.fa.fa-external-link.margin-l-5.fs-16
+      - else
+          h1.lg #{race.event_name}
+      span.dates.fs-14
+        span.fa.fa-calendar.w-20.gray
+        | #{race.dataValues.start_date_f}
+        - if(race.dataValues.end_date_f)
+          - if(race.dataValues.start_date_f != race.dataValues.end_date_f)
+              |   -  #{race.dataValues.end_date_f}
+      span.location
+        span.fa.fa-map-marker.fs-16.gray.w-20
+        h2.md.inline #{race.City.city_name}
+      - if(race.organiser_name)
+          span.organiser
+            span.gray.fs-14.margin-r-5 by
+            - if(race.organiser_url)
+                a(href=race.organiser_url target='_blank')
+                  h3.md #{race.organiser_name}
+            - else
                 h3.md #{race.organiser_name}
-          - else
-              h3.md #{race.organiser_name}
-    - if(race.comments)
-        span.description.inline-block
-          i.fa.fa-bars.w-20.gray 
-          | #{race.comments}
-    - if(race.Emails != '')
-        ul.emails
-          each mail in race.Emails
-            li.email
-              span.fa.fa-envelope.gray.w-20
-              a(href="mailto:" + mail.email target="_blank")
-                | #{mail.email}
-    - if(race.PhoneNumbers != '')
-        ul.numbers
-          each number in race.PhoneNumbers
-            li.number
-              span.fa.fa-phone-square.gray.w-20
-              | #{number.number}
-    .slinks.clearfix.margin-b-5
-      each slink in race.SocialLinks
-        li.social-link
-          - if(slink.link.indexOf('facebook.com') > -1)
-              a(href=slink.link target="_blank")
-                span.fa.fa-facebook-official.color-fb
-          - else if(slink.link.indexOf('twitter.com') > -1)
-              a(href=slink.link target="_blank")
-                span.fa.fa-twitter-square.color-tw
-          - else if(slink.link.indexOf('plus.google.com') > -1)
-              a(href=slink.link target="_blank")
-                span.fa.fa-google-plus-square.color-gp
-          - else if(slink.link.indexOf('instagram.com') > -1)
-              a(href=slink.link target="_blank")
-                span.fa.fa-instagram.color-in
-          - else if(slink.link.indexOf('flickr.com') > -1)
-              a(href=slink.link target="_blank")
-                span.fa.fa-flickr.color-flb
-          - else if(slink.link.indexOf('youtube.com') > -1)
-              a(href=slink.link target="_blank")
-                span.fa.fa-youtube.color-yt
-          - else
-              a(href=slink.link target="_blank")
-                 span.fa.fa-external-link-square
-    .tag-container.clearfix
-      each event_tag in race.EventTags
-        li.tag
-          span
-            | #{event_tag.Tag.tag_name}
-      each event_subtag in race.EventSubtags
-        li.subtag
-          span
-            | #{event_subtag.Subtag.subtag_name}
-    - if(race.location_url)
-      .map-embed.margin-t-10
-        iframe(src=race.location_url width="100%" height="300" frameborder="0" style="border:0")
-    - if(admin)
-      .admin_link
-        | Dear Admin, if you see something wrong or missing with this event you can modify it 
-        a(href="/app/admin/events/" + race.id, target="_blank") here
-      
+      - if(race.comments)
+          span.description.inline-block
+            i.fa.fa-bars.w-20.gray 
+            | #{race.comments}
+      - if(race.Emails != '')
+          ul.emails
+            each mail in race.Emails
+              li.email
+                span.fa.fa-envelope.gray.w-20
+                a(href="mailto:" + mail.email target="_blank")
+                  | #{mail.email}
+      - if(race.PhoneNumbers != '')
+          ul.numbers
+            each number in race.PhoneNumbers
+              li.number
+                span.fa.fa-phone-square.gray.w-20
+                | #{number.number}
+      .slinks.clearfix.margin-b-5
+        each slink in race.SocialLinks
+          li.social-link
+            - if(slink.link.indexOf('facebook.com') > -1)
+                a(href=slink.link target="_blank")
+                  span.fa.fa-facebook-official.color-fb
+            - else if(slink.link.indexOf('twitter.com') > -1)
+                a(href=slink.link target="_blank")
+                  span.fa.fa-twitter-square.color-tw
+            - else if(slink.link.indexOf('plus.google.com') > -1)
+                a(href=slink.link target="_blank")
+                  span.fa.fa-google-plus-square.color-gp
+            - else if(slink.link.indexOf('instagram.com') > -1)
+                a(href=slink.link target="_blank")
+                  span.fa.fa-instagram.color-in
+            - else if(slink.link.indexOf('flickr.com') > -1)
+                a(href=slink.link target="_blank")
+                  span.fa.fa-flickr.color-flb
+            - else if(slink.link.indexOf('youtube.com') > -1)
+                a(href=slink.link target="_blank")
+                  span.fa.fa-youtube.color-yt
+            - else
+                a(href=slink.link target="_blank")
+                   span.fa.fa-external-link-square
+      .tag-container.clearfix
+        each event_tag in race.EventTags
+          li.tag
+            span
+              | #{event_tag.Tag.tag_name}
+        each event_subtag in race.EventSubtags
+          li.subtag
+            span
+              | #{event_subtag.Subtag.subtag_name}
+      - if(race.location_url)
+        .map-embed.margin-t-10
+          iframe(src=race.location_url width="100%" height="300" frameborder="0" style="border:0")
+      - if(admin)
+        .admin_link
+          | Dear Admin, if you see something wrong or missing with this event you can modify it 
+          a(href="/app/admin/events/" + race.id, target="_blank") here
+        
+  hr.indi-hr
+  .row
+    .sub-heading.text-center Suggestions
+    .col-md-4
+      a(href="/app/events/upcoming/grouped?location=" + race.City.id , title="All outdoor events in " + race.City.city_name)
+        .category-el
+          .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
+            .right
+              i.fa.fa-flag-checkered.helper-icon
+            .info-text.margin-top-90.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | Events in #{race.City.city_name}
+            .info-overlay
+    .col-md-4
+      a(href="/app/events/upcoming/grouped" title="All Outdoor Events and Races by Activity")
+        .category-el
+          .info.clearfix
+            .right
+              i.fa.fa-flag-checkered.helper-icon
+            .info-text.margin-top-90.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | All Events by Activity
+            .info-overlay
+    .col-md-4
+      a(href="/app/events/upcoming/grouped#by-location" title="All Outdoor Events and Races by Activity")
+        .category-el
+          .info.clearfix
+            .right
+              i.fa.fa-flag-checkered.helper-icon
+            .info-text.margin-top-90.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | All Events by Location
+            .info-overlay
+    .col-md-4
+      a(href="/app/gear/grouped?location=" + race.City.id , title="All outdoor events and races in " + race.City.city_name)
+        .category-el
+          .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
+            .right
+              i.fa.fa-gear.helper-icon
+            .info-text.margin-top-90.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | Stores in #{race.City.city_name}
+            .info-overlay
+    .col-md-4
+      a(href="/app/schools/grouped?location=" + race.City.id , title="All outdoor schools in " + race.City.city_name)
+        .category-el
+          .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
+            .right
+              i.fa.fa-building-o.helper-icon
+            .info-text.margin-top-90.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | Learn in #{race.City.city_name}
+            .info-overlay
+    .col-md-4
+      a(href="/app/groups/grouped?location=" + race.City.id title="All Active Outdoor groups in " + race.City.city_name)
+        .category-el
+          .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
+            .right
+              i.fa.fa-group.helper-icon
+            .info-text.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | Groups in #{race.City.city_name}
+            .info-overlay
