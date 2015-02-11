@@ -40,7 +40,8 @@ exports.create = function(req, res) {
 // Display a single event in city
 exports.individual = function(req, res) {
   db.Event.find(
-    {where: {id: req.param('event_id')}
+    {where: {id: req.param('event_id')},
+     include: [db.City]
     }
   )
   .success(function(race) {
@@ -58,16 +59,20 @@ exports.individual = function(req, res) {
               .success(function(subtags) {
                 sequelize.query('select EventSubtags.id as id, Subtags.subtag_name as subtag_name from EventSubtags inner join Subtags on EventSubtags.SubtagId = Subtags.id where EventSubtags.EventId = :eventId', null, { raw: true }, {eventId: race.id})
                 .success(function(linked_subtags) {
-                  res.render('admin/event', {
-                    title: race.event_name + ' in TODO',
-                    race: race,
-                    social_links: slink,
-                    tags: tags,
-                    numbers: numbers,
-                    mails: mails,
-                    linked_tags: linked_tags,
-                    subtags: subtags,
-                    linked_subtags: linked_subtags
+                  db.City.findAll()
+                  .then(function(cities) {
+                    res.render('admin/event', {
+                      title: race.event_name + ' in ' + race.City.city_name,
+                      race: race,
+                      social_links: slink,
+                      tags: tags,
+                      numbers: numbers,
+                      mails: mails,
+                      cities: cities,
+                      linked_tags: linked_tags,
+                      subtags: subtags,
+                      linked_subtags: linked_subtags
+                    })
                   })
                 })
               })
@@ -92,6 +97,19 @@ exports.modify_name = function(req, res) {
     })
   })
 } 
+
+exports.modify_city = function(req, res) {
+  db.Event.find({where: {id: req.param('event_id')}})
+  .then(function(race) {
+    db.City.find({where: {id: req.param('city_id')}})
+    .then(function(city) {
+      race.setCity(city)
+      .then(function() {
+        res.redirect('/app/admin/events/' + race.id)
+      })
+    })
+  })
+}
 
 
 // Modify, rather update, event with missing fields

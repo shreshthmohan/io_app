@@ -33,6 +33,16 @@ block content
     br
     input(type="submit")
     br
+  .city
+    | Original city: #{group.City.city_name}
+  form(action="/app/admin/groups/" + group.id + "/modify_city", method="post")
+    label(for="city_id") New City
+    select(name="city_id", id="city_name")  
+      each city in cities
+        option(value=city.id) #{city.city_name}
+    br
+    input(type="submit")
+    br
   //- Main 'modify' section ends
   //-
   //- Social Links start

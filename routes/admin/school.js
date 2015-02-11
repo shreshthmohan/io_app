@@ -71,6 +71,19 @@ exports.modify_name = function(req, res) {
   })
 }
 
+exports.modify_city = function(req, res) {
+  db.School.find({where: {id: req.param('school_id')}})
+  .then(function(school) {
+    db.City.find({where: {id: req.param('city_id')}})
+    .then(function(city) {
+      school.setCity(city)
+      .then(function() {
+        res.redirect('/app/admin/schools/' + school.id)
+      })
+    })
+  })
+}
+
 exports.individual = function(req, res) {
   db.School.find({
     where: {id: req.param('school_id')},

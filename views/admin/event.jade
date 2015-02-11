@@ -62,6 +62,16 @@ block content
     br
     input(type="submit")
 
+  .city
+    | Original city: #{race.City.city_name}
+  form(action="/app/admin/events/" + race.id + "/modify_city", method="post")
+    label(for="city_id") New City
+    select(name="city_id", id="city_name")  
+      each city in cities
+        option(value=city.id) #{city.city_name}
+    br
+    input(type="submit")
+    br
   form(action="/app/admin/events/" + race.id + "/modify_start_date", method="post")
     | Start date 
     if(race.start_date)

@@ -67,6 +67,19 @@ exports.modify_name = function(req, res) {
   })
 }
 
+exports.modify_city = function(req, res) {
+  db.Group.find({where: {id: req.param('group_id')}})
+  .then(function(group) {
+    db.City.find({where: {id: req.param('city_id')}})
+    .then(function(city) {
+      group.setCity(city)
+      .then(function() {
+        res.redirect('/app/admin/groups/' + group.id)
+      })
+    })
+  })
+}
+
 exports.individual = function(req, res) {
   db.Group.find({
     where: {id: req.param('group_id')},

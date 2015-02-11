@@ -160,6 +160,7 @@ app.get('/app/admin/gear/retailer/:retailer_id', admin_retailer.individual);
 // TODO make REST
 app.post('/app/admin/gear/retailer/:retailer_id', admin_retailer.modify);
 app.post('/app/admin/gear/retailer/:retailer_id/modify_name', admin_retailer.modify_name);
+app.post('/app/admin/gear/retailer/:retailer_id/modify_city', admin_retailer.modify_city);
 app.post('/app/admin/gear/retailer/:retailer_id/add_brand', admin_retailer.add_brand);
 app.post('/app/admin/gear/retailer/:retailer_id/choose_brand', admin_retailer.choose_brand);
 app.post('/app/admin/gear/retailer/:retailer_id/add_tag', admin_retailer.add_tag);
@@ -234,6 +235,8 @@ app.get('/app/admin/events/:event_id', admin_race.individual);
 
 app.post('/app/admin/events/:event_id/modify_name', admin_race.modify_name);
 
+app.post('/app/admin/events/:event_id/modify_city', admin_race.modify_city);
+
 app.post('/app/admin/events/:event_id', admin_race.modify);
 
 app.post('/app/admin/events/:event_id/add_tag', admin_race.add_tag);
@@ -290,6 +293,7 @@ app.get('/app/admin/groups/:group_id', admin_group.individual);
 // TODO make REST
 app.post('/app/admin/groups/:group_id', admin_group.modify);
 app.post('/app/admin/groups/:group_id/modify_name', admin_group.modify_name);
+app.post('/app/admin/groups/:group_id/modify_city', admin_group.modify_city);
 app.post('/app/admin/groups/:group_id/add_tag', admin_group.add_tag);
 app.post('/app/admin/groups/:group_id/choose_tag', admin_group.choose_tag);
 
@@ -335,6 +339,7 @@ app.get('/app/admin/schools/:school_id', admin_school.individual);
 // TODO make REST
 app.post('/app/admin/schools/:school_id', admin_school.modify);
 app.post('/app/admin/schools/:school_id/modify_name', admin_school.modify_name);
+app.post('/app/admin/schools/:school_id/modify_city', admin_school.modify_city);
 app.post('/app/admin/schools/:school_id/add_tag', admin_school.add_tag);
 app.post('/app/admin/schools/:school_id/choose_tag', admin_school.choose_tag);
 

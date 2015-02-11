@@ -63,6 +63,19 @@ exports.modify_name = function(req, res) {
   })
 }
 
+exports.modify_city = function(req, res) {
+  db.Retialer.find({where: {id: req.param('retailer_id')}})
+  .then(function(retialer) {
+    db.City.find({where: {id: req.param('city_id')}})
+    .then(function(city) {
+      retailer.setCity(city)
+      .then(function() {
+        res.redirect('/app/admin/gear/retailer/' + retailer.id)
+      })
+    })
+  })
+}
+
 exports.cities = function(req, res) {
   db.City.findAll().success(function(cities) {
     res.render('admin/gear',
@@ -99,16 +112,20 @@ exports.individual = function(req, res) {
                 .success(function(numbers) {
                   db.Email.findAll({where: {RetailerId: retailer.id}})
                   .success(function(mails) {
-                    res.render('admin/retailer', {
-                      title: retailer.retailer_name + ' in ' + retailer.City.city_name,
-                      retailer: retailer,
-                      social_links: slink,
-                      brands: brands,
-                      linked_brands: linked_brands,
-                      numbers: numbers,
-                      tags: tags,
-                      mails: mails,
-                      linked_tags: linked_tags
+                    db.City.findAll()
+                    .then(function(cities) {
+                      res.render('admin/retailer', {
+                        title: retailer.retailer_name + ' in ' + retailer.City.city_name,
+                        retailer: retailer,
+                        social_links: slink,
+                        brands: brands,
+                        linked_brands: linked_brands,
+                        numbers: numbers,
+                        tags: tags,
+                        cities: cities,
+                        mails: mails,
+                        linked_tags: linked_tags
+                      })
                     })
                   })
                 })
