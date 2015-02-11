@@ -37,7 +37,7 @@ block content
         li.social-link
           - if(slink.link.indexOf('facebook.com') > -1)
               a(href=slink.link target="_blank") 
-                span.fa.fa-facebook-square.color-fb
+                span.fa.fa-facebook-official.color-fb
           - else if(slink.link.indexOf('twitter.com') > -1)
               a(href=slink.link target="_blank") 
                 span.fa.fa-twitter-square.color-tw
@@ -55,7 +55,7 @@ block content
                 span.fa.fa-youtube.color-yt
           - else
               a(href=slink.link target="_blank")
-                 span.fa.fa-external-link
+                 span.fa.fa-external-link-square
     .tag-container.clearfix           
       each school_tag in school.SchoolTags
         li.tag

@@ -38,7 +38,7 @@ block content
           li.social-link
             - if(slink.link.indexOf('facebook.com') > -1)
                 a(href=slink.link target="_blank") 
-                  span.fa.fa-facebook-square.color-fb
+                  span.fa.fa-facebook-official.color-fb
             - else if(slink.link.indexOf('twitter.com') > -1)
                 a(href=slink.link target="_blank") 
                   span.fa.fa-twitter-square.color-tw
@@ -56,7 +56,7 @@ block content
                   span.fa.fa-youtube.color-yt
             - else
                 a(href=slink.link target="_blank")
-                   span.fa.fa-external-link
+                   span.fa.fa-external-link-square
       //-.brands
       //-  each gear_brand in retailer.GearBrands
       .tag-container.clearfix
@@ -77,16 +77,20 @@ block content
       a(href="/app/gear/grouped?location=" + retailer.City.id , title="All outdoor gear stores and retailers in " + retailer.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
+            .right
+              i.fa.fa-gear.helper-icon
             .info-text.margin-top-90.col-xs-12
-              span.number.uppercase.fs-12.bob.padding-tb-5
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                 | Stores in #{retailer.City.city_name}
             .info-overlay
     .col-md-4
       a(href="/app/events/upcoming/grouped?location=" + retailer.City.id , title="All outdoor events in " + retailer.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
+            .right
+              i.fa.fa-flag-checkered.helper-icon
             .info-text.margin-top-90.col-xs-12
-              span.number.uppercase.fs-12.bob.padding-tb-5
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                 | Events in #{retailer.City.city_name}
             .info-overlay
 
@@ -94,23 +98,39 @@ block content
       a(href="/app/schools/grouped?location=" + retailer.City.id , title="All outdoor schools in " + retailer.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
+            .right
+              i.fa.fa-building-o.helper-icon
             .info-text.margin-top-90.col-xs-12
-              span.number.uppercase.fs-12.bob.padding-tb-5
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                 | Learn in #{retailer.City.city_name}
+            .info-overlay
+    .col-md-4
+      a(href="/app/groups/grouped?location=" + retailer.City.id title="All Active Outdoor groups in " + retailer.City.city_name)
+        .category-el
+          .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
+            .right
+              i.fa.fa-group.helper-icon
+            .info-text.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | Groups in #{retailer.City.city_name}
             .info-overlay
     .col-md-4
       a(href="/app/gear/grouped" title="All Gear Stores and Retailers by Activity")
         .category-el
           .info.clearfix
+            .right
+              i.fa.fa-gear.helper-icon
             .info-text.margin-top-90.col-xs-12
-              span.number.uppercase.fs-12.bob.padding-tb-5
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                 | All Stores by Activity
             .info-overlay
     .col-md-4
       a(href="/app/gear/grouped#by-location" title="All Gear Stores and Retailers by Location")
         .category-el
           .info.clearfix
+            .right
+              i.fa.fa-gear.helper-icon
             .info-text.margin-top-90.col-xs-12
-              span.number.uppercase.fs-12.bob.padding-tb-5
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                 | All Stores by Location
             .info-overlay
