@@ -16,21 +16,6 @@ html(lang='en')
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
     script(src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js")
     script(src="/js/bootstrap.js")
-    script
-      | $(function() {
-      |   $( "#from" ).datepicker({
-      |     dateFormat: "dd-mm-yy",
-      |     onClose: function(selectedDate) {
-      |       $("#to").datepicker("option", "minDate", selectedDate); 
-      |     }
-      |   });
-      |   $( "#to" ).datepicker({
-      |     dateFormat: "dd-mm-yy",
-      |     onClose: function(selectedDate) {
-      |       $("#from").datepicker("option", "maxDate", selectedDate); 
-      |     }
-      |   });
-      | });
     script(src="/js/ie10-viewport-bug-workaround.js")
     script(src="/js/ie-emulation-modes-warning.js")
     block extrajs

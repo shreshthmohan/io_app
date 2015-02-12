@@ -98,6 +98,7 @@ var up_all_loc_all_tag = function(req, res, where) {
       'event_name',
       'event_name_slug',
       'img_url_square',
+      'start_date',
       [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
       // There is some issue with sequelize when using fn, it seems values are not directly available,
       // for instance in this case (remember for loop) race.start_date_ed appears empty in jade output, whereas 
@@ -115,6 +116,7 @@ var up_all_loc_all_tag = function(req, res, where) {
     where: [where],
     // workaround for limit bug in sequelize:
     // where: ['start_date >= NOW() limit 10'],
+    order: 'start_date ASC',
     raw: true
     //limit: 10
     // There's also a bug in sequelize related to limit
@@ -149,6 +151,7 @@ up_all_loc_chosen_tag = function(req, res, where) {
   .success(function(tag) {
     db.EventTag.findAll({
       where: ['TagId = ' + tag.id],
+      order: 'start_date ASC',
       include: [
         {
          model: db.Event,
@@ -200,8 +203,10 @@ up_chosen_loc_all_tag = function(req, res, where) {
       'event_name',
       'event_name_slug',
       'img_url_square',
+      'start_date',
       [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
     where: ["CityId = " + req.param('location') + " and " + where],
+    order: 'start_date ASC',
     include: [
       db.City, 
       {
@@ -227,6 +232,7 @@ up_chosen_loc_all_tag = function(req, res, where) {
             races: races,
             cities: cities,
             tags: tags,
+            city: city,
             mode: 'all_tag_cho_loc',
             loc: req.param('location'),
             activity: req.param('activity'),
@@ -247,6 +253,7 @@ up_both_loc_tag_chosen = function(req, res, where) {
   .success(function(tag) {
     db.EventTag.findAll({
       where: ['TagId = ' + tag.id],
+      order: 'start_date ASC',
       include: [
         {
          model: db.Event,
