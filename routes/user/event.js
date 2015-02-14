@@ -25,67 +25,50 @@ var Promise = require('bluebird');
 
 // Default search interval (when user misses out date(s))
 var int_dur = "12 month";
+var int_dur_cho = "1 month";
+
+// New logic for searching by date:
+// Only 1 input date to be input by users, making it easier for them.
+// If when is chosen +/- 3 int_dur
+// handle the case where when - start_date < int_dur
+// range now to when +/- 1 month
 
 // Searching all locations and all tags
 exports.upcoming = function(req, res) {
   var tag  = req.param('activity');
   var loc  = req.param('location');
-  var from = req.param('start_date');
-  var to   = req.param('end_date');
+  var when   = req.param('date');
   if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
-    if((from == '' || from == null) && (to == '' || to == null)) {
+    if((when == '' || when == null)) {
       up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
     }
-    else if((from == '' || from == null)) {
-      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-    else if((to == '' || to == null)) {
-      up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
-    }
     else {
-      up_all_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur_cho + " and start_date >= STR_TO_DATE('" + when + "', '%d-%m-%Y') - interval " + int_dur_cho)
     }
   }
   else if (loc == 0) { // All locations and a chosen activity
-    if((from == '' || from == null) && (to == '' || to == null)) {
+    if((when == '' || when == null)) {
       up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
     }
-    else if((from == '' || from == null)) {
-      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-    else if((to == '' || to == null)) {
-      up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
-    }
     else {
-      up_all_loc_chosen_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur_cho + " and start_date >= STR_TO_DATE('" + when + "', '%d-%m-%Y') - interval " + int_dur_cho)
     }
   }
   else if (tag == 0) { // All activities for a chosen location
-    if((from == '' || from == null) && (to == '' || to == null)) {
+    if((when == '' || when == null)) {
       up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
     }
-    else if((from == '' || from == null)) {
-      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-    else if((to == '' || to == null)) {
-      up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
-    }
     else {
-      up_chosen_loc_all_tag(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur_cho + " and start_date >= STR_TO_DATE('" + when + "', '%d-%m-%Y') - interval " + int_dur_cho)
     }
   }
   else {
-    if((from == '' || from == null) && (to == '' || to == null)) { // Chosen location and chosen activity
+    if((when == '' || when == null)) {
       up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
     }
-    else if((from == '' || from == null)) {
-      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
-    }
-    else if((to == '' || to == null)) {
-      up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + from + "', '%d-%m-%Y') + interval " + int_dur)
-    }
     else {
-      up_both_loc_tag_chosen(req, res, "start_date >= STR_TO_DATE('" + from + "', '%d-%m-%Y') and start_date <= STR_TO_DATE('" + to + "', '%d-%m-%Y')")
+      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur)
+      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur_cho + " and start_date >= STR_TO_DATE('" + when + "', '%d-%m-%Y') - interval " + int_dur_cho)
     }
   }
 }
@@ -135,8 +118,7 @@ var up_all_loc_all_tag = function(req, res, where) {
           mode: 'all_tag_all_loc',
           loc: req.param('location'),
           activity: req.param('activity'),
-          start_date: req.param('start_date'),
-          end_date: req.param('end_date')
+          date: req.param('date')
         })
       })
     })
@@ -186,8 +168,7 @@ up_all_loc_chosen_tag = function(req, res, where) {
             mode: 'cho_tag_all_loc',
             loc: req.param('location'),
             activity: req.param('activity'),
-            start_date: req.param('start_date'),
-            end_date: req.param('end_date')
+            date: req.param('date')
           })
         })
       })
@@ -236,8 +217,7 @@ up_chosen_loc_all_tag = function(req, res, where) {
             mode: 'all_tag_cho_loc',
             loc: req.param('location'),
             activity: req.param('activity'),
-            start_date: req.param('start_date'),
-            end_date: req.param('end_date')
+            date: req.param('date')
           })
         })
       })
@@ -291,8 +271,7 @@ up_both_loc_tag_chosen = function(req, res, where) {
               mode: 'cho_tag_cho_loc',
               loc: req.param('location'),
               activity: req.param('activity'),
-              start_date: req.param('start_date'),
-              end_date: req.param('end_date')
+              date: req.param('date')
             })
           })
         })
