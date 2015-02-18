@@ -597,6 +597,10 @@ li.tag, li.subtag {
   margin-top: 15px;
 }
 
+.full {
+  width: 100%;
+}
+
 .br-0 {
   border-radius: 0px;
 }
@@ -625,8 +629,34 @@ li.tag, li.subtag {
   font-weight:bold;
 }
 
+.normal {
+  font-weight: normal;
+}
+
 .gray {
   color: @gray-light30;
+}
+
+#event-form {
+  z-index: 1050;
+  background-color: white;
+  position: absolute;
+  top: 50px;
+  display: none;
+  padding: 20px;
+}
+
+.lightbox-overlay {
+  z-index: 1049;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
 }
 
 @h2-sm-font-size: 16px;

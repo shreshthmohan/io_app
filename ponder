@@ -155,41 +155,44 @@ DONEs:
     ... Merged multiple modify js files to modify.js DONE
     17. Pass a param for active navbar tab DONE
     18. Show gear retailer clusters on home by city? DONE
-    * BOB finish up for all views DONE
+    x. BOB finish up for all views DONE
+    1. Suggestions:
+         tag links to all say running events in location (in search results for chosen tag chosen location)
+         and so on
+    6. Embedded maps in individual entities. DONE
+    7. More categories. (first finish up existing categories or add new ones first? And which ones?)
+         OK, add groups ... wait ... first finish up "events" completely (and do others on similar lines),
+         more the number of categories more the distraction. And leave learn for later?
+         I am (almost) done with events (individual event page: embed map, add description/comments, past events) Though showing past events 
+         makes sense only if we have photos and reports for the events (may be this can be done in the meta.)
+    15. Ranking/order by of entities and entity clusters.
+    9. category-group elements: 0-85/90 instead of 65? text-shadow? top-bottom border white 15% opaque?
 
 TODOs:
 
-    *1. Suggestions:
-         tag links to all say running events in location (in search results for chosen tag chosen location)
-         and so on
-         TODO: Finish up for all views
-    2. Empty results: #1 will take care of this to some extent.
+    2. Empty results: #1 will take care of this to some extent. TODO: Audit
+       Grouped views! Add suggestions?
     3. User forms for submitting data. Take cues from Zomato.
+       1. E-mail (is form to email possible? Yes, via nodemailer)
+       2. Form data to DB? And add a new field to measure maturity of data, first user's input: 1, admin's: 5
     4. Comment system and/or review system.
     5. SEO:
          1. meta tags
          2. rich snippets
          3. sitemap
-    6. Embedded maps in individual entities.
-    * 7. More categories. (first finish up existing categories or add new ones first? And which ones?)
-         OK, add groups ... wait ... first finish up "events" completely (and do others on similar lines),
-         more the number of categories more the distraction. And leave learn for later?
-         I am (almost) done with events (individual event page: embed map, add description/comments, past events) Though showing past events 
-         makes sense only if we have photos and reports for the events (may be this can be done in the meta.)
     8. Failsafe: background color/gradient for home-search for image failing to load.
-    9. category-group elements: 0-85/90 instead of 65? text-shadow? top-bottom border white 15% opaque?
-    10. Think about photos (it'd be much better if we had them, for engagement)
+    10. Think about photos (it'd be much better if we had them, for engagement) partially DONE
+        Using images captured by a friend. TODO edit more of my images and host them!
     11. Titles for each element that appear on hover.
     12. Populate data. Fix and/or remove old data.
     13. To fit featured in page (and keep it on the top, we can add a 12-wide div before all the other category grouped lists)
-        when more categories are added. Experiment on what Chhabra suggested.
-    15. Ranking/order by of entities and entity clusters.
+        when more categories are added. LATER
     16. Add images to tags for each category
     19. Cross-browser testing esp. IE
     20. About Us (story)
+    21. Images: figure out how to attribute.
 
 37. SEO
     Rich snippets: https://support.google.com/webmasters/topic/4598337?hl=en&ref_topic=3309300
     Sitemap: https://support.google.com/webmasters/answer/156184?hl=en
 
-38. Images: figure out how to attribute.

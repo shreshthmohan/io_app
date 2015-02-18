@@ -2,6 +2,35 @@ var db = require('../../models');
 var Sequelize = db.Sequelize;
 var sequelize = db.sequelize; // just to avoid the confusion
 var Promise = require('bluebird');
+var nodemailer = require('nodemailer');
+var mg = require('nodemailer-mailgun-transport');
+
+var auth = {
+  auth: {
+    api_key: process.env.MG_API_KEY,
+    domain: process.env.MG_DOMAIN
+  }
+}
+
+var transporter = nodemailer.createTransport(mg(auth));
+
+exports.user_submission = function(req, res) {
+  var mail_options = {
+    from: 'user@example.com', //TODO
+    to: 'sremog@gmail.com',
+    subject: 'New event ' + req.param('event_name'),
+    text: 'Body: \n Dates: ' + req.param('dates') + '\nLocation: ' + req.param('location') //TODO
+  }
+  transporter.sendMail(mail_options, function(error, info) {
+    if(error) {
+      console.log(error);
+    }
+    else {
+      console.log('Message sent: ' + JSON.stringify(info));
+    }
+  })
+}
+
 
 //16 posibilities
 //     location tag start end 

@@ -67,7 +67,31 @@ block content
         - else
           .col-md-12
             p.alert.alert-warning.text-center.br-0.std-shadow.fs-16
-                | Oops! We did not find anything. Sorry.
+                | Oops! We did not find anything. Sorry. 
+                a#res-event Tip us
+                |  about events or races we don't know about!
+  .lightbox-overlay
+  #event-form.col-md-4.col-md-offset-4
+    form.fs-12(action="/app/events/user_submission" method="post")
+      label.block.fs-12.normal(for="event_name") Name of the event/race *
+      input.full.padding-lr-5(type="text", name="event_name", id="event_name" required)
+      br
+      label.block.fs-12.normal.margin-t-10(for="dates") Dates *
+      input.full.padding-lr-5(type="text", name="dates", id="dates" placeholder="When does it start? When does it end?" required)
+      br
+      label.block.fs-12.normal.margin-t-10(for="location") Location/City *
+      input.full.padding-lr-5(type="text", name="location", id="location" placeholder="Where is gonna be held?" required)
+      br
+      label.block.fs-12.normal.margin-t-10(for="event_url") Website Link
+      input.full.padding-lr-5(type="text", name="event_url", id="event_url")
+      br
+      label.block.fs-12.normal.margin-t-10(for="location_url") Google Maps Link
+      input.full.padding-lr-5(type="text", name="location_url", id="location_url")
+      br
+      label.block.fs-12.normal.margin-t-10(for="description" ) Description
+      textarea.full.padding-lr-5(type="text", name="comments", id="description", placeholder="Any additional information, like organiser, sponsors, relevant links, emails, phone numbers and other details" style="height: 6em;")
+      br
+      input(type="submit")
   .row
     .sub-heading.text-center Suggestions
     .suggestion-container
@@ -154,3 +178,14 @@ block content
                 .info-overlay
 block extrajs
   script(src="/js/datepicker-home.js")
+  script
+    | $(document).ready(function() {
+    |   $('#res-event').click(function() {
+    |     $('#event-form').show();
+    |     $('.lightbox-overlay').show();
+    |   });
+    |   $('.lightbox-overlay').click(function() {
+    |     $('#event-form').hide();
+    |     $(this).hide();
+    |   });
+    | });
