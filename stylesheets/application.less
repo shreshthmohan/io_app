@@ -585,6 +585,10 @@ li.tag, li.subtag {
   margin-bottom: 5px;
 }
 
+.margin-b-10 {
+  margin-bottom: 10px;
+}
+
 .margin-t-5 {
   margin-top: 5px;
 }
@@ -607,6 +611,10 @@ li.tag, li.subtag {
 
 .fs-16 {
   font-size: 16px !important;
+}
+
+.fs-18 {
+  font-size: 18px !important;
 }
 
 .fs-24 {
@@ -637,16 +645,21 @@ li.tag, li.subtag {
   color: @gray-light30;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 #event-form {
   z-index: 1050;
   background-color: white;
   position: absolute;
   top: 50px;
   display: none;
-  padding: 20px;
+  padding: 0px;
+  left: 0;
 }
 
-.lightbox-overlay {
+.dialog-screen {
   z-index: 1049;
   background-color: rgba(0, 0, 0, 0.8);
   display: none;
@@ -657,6 +670,19 @@ li.tag, li.subtag {
   right: 0;
   height: 100%;
   width: 100%;
+}
+
+.dialog-body {
+  padding: 20px;
+}
+
+.dialog-close {
+  padding: 7px 15px 7px 15px;
+}
+
+.dialog-head-container {
+  background-color: @gray-light80;
+  border-bottom: 1px solid @gray-light70;
 }
 
 @h2-sm-font-size: 16px;

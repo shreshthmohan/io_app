@@ -7,26 +7,29 @@ var mg = require('nodemailer-mailgun-transport');
 
 var auth = {
   auth: {
-    api_key: process.env.MG_API_KEY,
-    domain: process.env.MG_DOMAIN
+    domain: process.env.MG_DOMAIN,
+    api_key: process.env.MG_API_KEY
   }
 }
 
 var transporter = nodemailer.createTransport(mg(auth));
 
 exports.user_submission = function(req, res) {
+  var email = req.param('email') ? req.param('email') : 'anon@email.com';
   var mail_options = {
-    from: 'user@example.com', //TODO
+    from: email,
     to: 'sremog@gmail.com',
     subject: 'New event ' + req.param('event_name'),
-    text: 'Body: \n Dates: ' + req.param('dates') + '\nLocation: ' + req.param('location') //TODO
+    text: 'Name of event: ' + req.param('event_name') + '\n Dates: ' + req.param('dates') + '\nLocation: ' + req.param('location') + '\nWebsite URL: ' + req.param('event_url') + '\nMaps link: ' + req.param('location_url') + '\nDescription: ' + req.param('description') 
   }
   transporter.sendMail(mail_options, function(error, info) {
     if(error) {
-      console.log(error);
+      console.log('Error occurred: ' + JSON.stringify(error));
+      res.redirect('/app/events/upcoming/grouped')
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
+      res.redirect('/app/events/upcoming/grouped')
     }
   })
 }
