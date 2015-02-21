@@ -173,8 +173,8 @@ TODOs:
     2. Empty results: #1 will take care of this to some extent. TODO: Audit
        Grouped views! Add suggestions?
     3. User forms for submitting data. Take cues from Zomato.
-       1. E-mail (is form to email possible? Yes, via nodemailer)
-       2. Form data to DB? And add a new field to measure maturity of data, first user's input: 1, admin's: 5
+       1. E-mail (is form to email possible? Yes, via nodemailer) DONE for Events; other's remain
+       2. Form data to DB? And add a new field to measure maturity of data, first user's input: 1, admin's: 5 Maybe change to this later when the site is more mature?
     4. Comment system and/or review system.
     5. SEO:
          1. meta tags
