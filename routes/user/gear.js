@@ -2,7 +2,29 @@ var db = require('../../models');
 var Sequelize = db.Sequelize;
 var sequelize = db.sequelize; // just to avoid the confusion
 var Promise = require('bluebird');
+var mail_transport = require('./index').transporter;
 
+// User form to email
+exports.user_submission = function(req, res) {
+  var email = req.param('email') ? req.param('email') : 'anon@email.com';
+  var mail_options = {
+    from: email,
+    to: 'sremog@gmail.com',
+    subject: 'New store ' + req.param('retailer_name'),
+    text: 'Name of retailer: ' + req.param('retailer_name') + '\nLocation: ' + req.param('location') + '\nAddress: ' + req.param('address_field') + '\nWebsite URL: ' + req.param('website_url') + '\nMaps link: ' + req.param('location_url') + '\nDescription: ' + req.param('description') 
+  }
+  mail_transport.sendMail(mail_options, function(error, info) {
+    if(error) {
+      console.log('Error occurred: ' + JSON.stringify(error));
+      res.redirect('/app/gear/grouped')
+      // TODO: fix redirection
+    }
+    else {
+      console.log('Message sent: ' + JSON.stringify(info));
+      res.redirect('/app/gear/grouped')
+    }
+  })
+}
 // Note: tag and activity have been used interchangeably
 
 // Routing for list of gear retailers

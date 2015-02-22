@@ -68,10 +68,10 @@ block content
           .col-md-12
             p.alert.alert-warning.text-center.br-0.std-shadow.fs-16
                 | Oops! We did not find anything. Sorry. 
-                a#res-event.pointer Tip us
+                a#user-res.pointer Tip us
                 |  about events or races we don't know of!
   .dialog-screen
-  .dialog-container.col-md-4.col-md-offset-4#event-form
+  .dialog-container.col-md-4.col-md-offset-4#user-form
     .dialog-head-container.clearfix.text-center
       span.dialog-head.fs-16.uppercase.inline-block.padding-tb-10
         | We don't know, please tell us.
@@ -95,7 +95,7 @@ block content
           input.full.padding-lr-5(type="text", name="location_url", id="location_url")
           br
           label.block.fs-12.normal.margin-t-10(for="description" ) Description
-          textarea.full.padding-lr-5(type="text", name="description", id="description", placeholder="Any additional information, like organiser, sponsors, relevant links, emails, phone numbers and other details" style="height: 6em;")
+          textarea.full.padding-lr-5(type="text", name="description", id="description", placeholder="Any additional information, like organiser, sponsors, relevant links, emails, phone numbers and other details" style="height: 5em;")
           br
           label.block.fs-12.normal.margin-t-10(for="email") Your E-mail
           input.full.padding-lr-5.margin-b-10(type="text", name="email", id="email" placeholder="Optional")
@@ -187,18 +187,4 @@ block content
                 .info-overlay
 block extrajs
   script(src="/js/datepicker-home.js")
-  script
-    | $(document).ready(function() {
-    |   $('#res-event').click(function() {
-    |     $('#event-form').show();
-    |     $('.dialog-screen').show();
-    |   });
-    |   $('.dialog-screen').click(function() {
-    |     $('#event-form').hide();
-    |     $(this).hide();
-    |   });
-    |   $('.dialog-close').click(function() {
-    |     $('#event-form').hide();
-    |     $('.dialog-screen').hide();
-    |   })
-    | });
+  script(src="/js/user_form.js")

@@ -54,7 +54,37 @@ block content
     - else
       .col-md-12
         p.alert.alert-warning.text-center.br-0.std-shadow.fs-16
-            | Oops! We did not find anything. Sorry.
+            | Oops! We did not find anything. Sorry. 
+            a#user-res.pointer Tip us
+            |  where to learn some new moves!
+  .dialog-screen
+  .dialog-container.col-md-4.col-md-offset-4#user-form
+    .dialog-head-container.clearfix.text-center
+      span.dialog-head.fs-16.uppercase.inline-block.padding-tb-10
+        | We don't know, please tell us.
+      span.dialog-close.right.fs-18.pointer
+        i.fa.fa-times
+    .dialog-body
+        form.fs-12(action="/app/schools/user_submission" method="post")
+          label.block.fs-12.normal(for="school_name") Name of the outdoor school/coach *
+          input.full.padding-lr-5(type="text", name="school_name", id="school_name" required)
+          br
+          label.block.fs-12.normal.margin-t-10(for="location") Location/City *
+          input.full.padding-lr-5(type="text", name="location", id="location" required)
+          br
+          label.block.fs-12.normal.margin-t-10(for="web_url") Website Link
+          input.full.padding-lr-5(type="text", name="web_url", id="web_url")
+          br
+          label.block.fs-12.normal.margin-t-10(for="location_url") Google Maps Link
+          input.full.padding-lr-5(type="text", name="location_url", id="location_url")
+          br
+          label.block.fs-12.normal.margin-t-10(for="description" ) Description
+          textarea.full.padding-lr-5(type="text", name="description", id="description", placeholder="Any additional information, like servies offered, relevant links, emails, phone numbers and other details" style="height: 5em;")
+          br
+          label.block.fs-12.normal.margin-t-10(for="email") Your E-mail
+          input.full.padding-lr-5.margin-b-10(type="text", name="email", id="email" placeholder="Optional")
+          br
+          input(type="submit")
   .row
     .sub-heading.text-center Suggestions
     .suggestion-container
@@ -139,3 +169,5 @@ block content
                   span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                     | Outdoor Schools by Location
                 .info-overlay
+block extrajs
+  script(src="/js/user_form.js")

@@ -2,18 +2,9 @@ var db = require('../../models');
 var Sequelize = db.Sequelize;
 var sequelize = db.sequelize; // just to avoid the confusion
 var Promise = require('bluebird');
-var nodemailer = require('nodemailer');
-var mg = require('nodemailer-mailgun-transport');
+var mail_transport = require('./index').transporter;
 
-var auth = {
-  auth: {
-    domain: process.env.MG_DOMAIN,
-    api_key: process.env.MG_API_KEY
-  }
-}
-
-var transporter = nodemailer.createTransport(mg(auth));
-
+// User form to email
 exports.user_submission = function(req, res) {
   var email = req.param('email') ? req.param('email') : 'anon@email.com';
   var mail_options = {
@@ -22,7 +13,7 @@ exports.user_submission = function(req, res) {
     subject: 'New event ' + req.param('event_name'),
     text: 'Name of event: ' + req.param('event_name') + '\n Dates: ' + req.param('dates') + '\nLocation: ' + req.param('location') + '\nWebsite URL: ' + req.param('event_url') + '\nMaps link: ' + req.param('location_url') + '\nDescription: ' + req.param('description') 
   }
-  transporter.sendMail(mail_options, function(error, info) {
+  mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
       res.redirect('/app/events/upcoming/grouped')

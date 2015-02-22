@@ -397,6 +397,7 @@ app.get('/app/events/:city_name_slug/:event_name_slug/:event_id', race.individua
 
 app.get('/app/gear', gear.all);
 app.get('/app/gear/grouped', gear.all_grouped);
+app.post('/app/gear/user_submission', gear.user_submission);
 
 app.get('/app/gear/:city_name_slug/:retailer_name_slug/:retailer_id', gear.individual)
 
@@ -406,6 +407,7 @@ app.get('/app/gear/:city_name_slug/:retailer_name_slug/:retailer_id', gear.indiv
 
 app.get('/app/groups', group.all);
 app.get('/app/groups/grouped', group.all_grouped);
+app.post('/app/groups/user_submission', group.user_submission);
 
 app.get('/app/groups/:city_name_slug/:group_name_slug/:group_id', group.individual)
 
@@ -415,6 +417,7 @@ app.get('/app/groups/:city_name_slug/:group_name_slug/:group_id', group.individu
 
 app.get('/app/schools', school.all);
 app.get('/app/schools/grouped', school.all_grouped);
+app.post('/app/schools/user_submission', school.user_submission);
 
 app.get('/app/schools/:city_name_slug/:school_name_slug/:school_id', school.individual)
 

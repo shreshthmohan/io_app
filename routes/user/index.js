@@ -3,21 +3,18 @@ var Sequelize = db.Sequelize;
 var sequelize = db.sequelize; // just to avoid the confusion
 var Promise = require('bluebird');
 
-/*
-exports.index = function(req, res) {
-  db.City.findAll()
-  .success(function(cities) {
-    db.Tag.findAll()
-    .success(function(tags) {
-      res.render('user/index', {
-        title: 'India Outside',
-        cities: cities,
-        tags: tags
-      })
-    })
-  })
+// 'Mail by user' bunch
+var nodemailer = require('nodemailer');
+var mg = require('nodemailer-mailgun-transport');
+
+var auth = {
+  auth: {
+    domain: process.env.MG_DOMAIN,
+    api_key: process.env.MG_API_KEY
+  }
 }
-*/
+
+exports.transporter = nodemailer.createTransport(mg(auth));
 
 exports.index = function(req, res) {
   db.Tag.findAll()

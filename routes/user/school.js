@@ -2,6 +2,28 @@ var db = require('../../models');
 var Sequelize = db.Sequelize;
 var sequelize = db.sequelize; // just to avoid the confusion
 var Promise = require('bluebird');
+var mail_transport = require('./index').transporter;
+
+// User form to email
+exports.user_submission = function(req, res) {
+  var email = req.param('email') ? req.param('email') : 'anon@email.com';
+  var mail_options = {
+    from: email,
+    to: 'sremog@gmail.com',
+    subject: 'New school ' + req.param('school_name'),
+    text: 'Name of school: ' + req.param('school_name') + '\nLocation: ' + req.param('location') + '\nWebsite URL: ' + req.param('web_url') + '\nMaps link: ' + req.param('location_url') + '\nDescription: ' + req.param('description') 
+  }
+  mail_transport.sendMail(mail_options, function(error, info) {
+    if(error) {
+      console.log('Error occurred: ' + JSON.stringify(error));
+      res.redirect('/app/schools/grouped')
+    }
+    else {
+      console.log('Message sent: ' + JSON.stringify(info));
+      res.redirect('/app/schools/grouped')
+    }
+  })
+}
 
 // Routing for list of schools
 exports.all = function(req, res) {

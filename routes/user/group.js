@@ -2,7 +2,29 @@ var db = require('../../models');
 var Sequelize = db.Sequelize;
 var sequelize = db.sequelize; // just to avoid the confusion
 var Promise = require('bluebird');
+var mail_transport = require('./index').transporter;
 
+// User form to email
+exports.user_submission = function(req, res) {
+  var email = req.param('email') ? req.param('email') : 'anon@email.com';
+  var mail_options = {
+    from: email,
+    to: 'sremog@gmail.com',
+    subject: 'New group ' + req.param('group_name'),
+    text: 'Name of group: ' + req.param('group_name') + '\nLocation: ' + req.param('location') + '\nWebsite URL: ' + req.param('group_url') + '\nDescription: ' + req.param('description') 
+  }
+  mail_transport.sendMail(mail_options, function(error, info) {
+    if(error) {
+      console.log('Error occurred: ' + JSON.stringify(error));
+      res.redirect('/app/groups/grouped')
+      // TODO: fix redirection
+    }
+    else {
+      console.log('Message sent: ' + JSON.stringify(info));
+      res.redirect('/app/groups/grouped')
+    }
+  })
+}
 // Routing for list of groups
 exports.all = function(req, res) {
   var tag = req.param('activity');
