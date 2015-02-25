@@ -19,8 +19,10 @@
 @flickr-pink: #ff0084;
 @instagram-blue: #2a5b83;
 @gplus-red: #d73d32;
+@behance-blue: #007DFF;
 @zomato-red: #cb202d;
 @ubuntu-orange: #dd4814;
+@linkedin-blue: #0177b5;
 
 @navbar-bg: white;
 
@@ -30,6 +32,8 @@
 
 @navbar-link-under: @io-yellow;
 
+@gray-light10: lighten(@gray-base, 10%);
+@gray-light20: lighten(@gray-base, 20%);
 @gray-light30: lighten(@gray-base, 30%);
 @gray-light40: lighten(@gray-base, 40%);
 @gray-light50: lighten(@gray-base, 50%);
@@ -178,7 +182,6 @@ body {
   margin-top: 50px; // To bring jumbotron container below navbar
   font-size: 105%; // To control datepicker size
   background-color: @gray-light90;
-  min-height: 2000px;
 }
 
 // Home radio form 
@@ -217,24 +220,11 @@ body {
   margin-right: 2.5px;
 }
 
-// Jumbotron
-.jumbotron {
-  border-radius: 0px; 
-  padding: (@jumbotron-padding / 2) (@jumbotron-padding / 3);
-  .container & {
-    border-radius: 0px; 
-  }
-  @media screen and (min-width: @screen-sm-min) {
-    padding: 15px 0px;
-  }
-}
-
 .home-search {
   text-align: center;
-  background: white;
+  background-color: gray;
   padding: 15px;
   background-image: url(https://scontent-b-mad.xx.fbcdn.net/hphotos-xpa1/t31.0-8/s2048x2048/1618347_10202485300026090_2042932833_o.jpg);
-  //background-image: url(https://c1.staticflickr.com/9/8674/16129555478_d94abcc1d0_h.jpg);
   background-size: cover;
   background-position: center;
   font-size: 14px;
@@ -580,6 +570,9 @@ li.tag, li.subtag {
   width: 20px;
 }
 
+.w-15 {
+  width: 15px;
+}
 .margin-b-5 {
   margin-bottom: 5px;
 }
@@ -618,6 +611,10 @@ li.tag, li.subtag {
 
 .fs-24 {
   font-size: 24px !important;
+}
+
+.fs-20 {
+  font-size: 20px !important;
 }
 
 .fs-14 {
@@ -746,6 +743,10 @@ h1.lg {
 
 .white {
   color: white;
+}
+
+.white-bg {
+  background-color: white;
 }
 
 //TODO change .65 to a higher value of say .9-1
@@ -916,12 +917,19 @@ li.tab.active {
 }
 
 .f-bullet {
-  background: black;
-  color: white;
-  padding: 5px 10px;
-  margin: 5px 5px 5px 0px;
-  list-style: none;
   float: left;
+  list-style: none;
+  > a {
+    text-decoration: none;
+    color: white;
+    background: @gray-light10;
+    color: white;
+    padding: 5px 10px;
+    margin: 5px 5px 5px 0px;
+    &:hover {
+      background: black;
+    }
+  }
 }
 
 .footer-bg {
@@ -934,6 +942,9 @@ li.tab.active {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.padding-10 {
+  padding: 10px;
+}
 
 .padding-lr-10 {
   padding-left: 10px;
@@ -963,3 +974,15 @@ li.tab.active {
 .color-flp {color: @flickr-pink;}
 .color-in {color: @instagram-blue;}
 .color-gp {color: @gplus-red;}
+.color-be {color: @behance-blue;}
+.color-li {color: @linkedin-blue;}
+
+.hover-color-fb    {&:hover{color: @facebook-blue;}}
+.hover-color-tw    {&:hover{color: @twitter-blue;}}
+.hover-color-yt    {&:hover{color: @youtube-red;}}
+.hover-color-flb   {&:hover{color: @flickr-blue;}}
+.hover-color-flp   {&:hover{color: @flickr-pink;}}
+.hover-color-in    {&:hover{color: @instagram-blue;}}
+.hover-color-gp    {&:hover{color: @gplus-red;}}
+.hover-color-be    {&:hover{color: @behance-blue;}}
+.hover-color-li    {&:hover{color: @linkedin-blue;}}

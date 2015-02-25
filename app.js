@@ -366,11 +366,14 @@ app.get('/app/admin/schools/:school_id/dissociate_tag/:tag_id', admin_school.dis
 // Admin routes end //
 //////////////////////
 
-
 app.get('/app/home', routes.index);
 
-
-
+app.get('/app/about',
+  function(req, res) {
+    res.render('user/about', {
+      title_: 'About'
+    }  
+)});
 
 //////////////////
 // Event routes //
