@@ -9,7 +9,7 @@ exports.user_submission = function(req, res) {
   var email = req.param('email') ? req.param('email') : 'anon@email.com';
   var mail_options = {
     from: email,
-    to: 'sremog@gmail.com',
+    to: 'team@indiaoutside.org',
     subject: 'New store ' + req.param('retailer_name'),
     text: 'Name of retailer: ' + req.param('retailer_name') + '\nLocation: ' + req.param('location') + '\nAddress: ' + req.param('address_field') + '\nWebsite URL: ' + req.param('website_url') + '\nMaps link: ' + req.param('location_url') + '\nDescription: ' + req.param('description') 
   }
@@ -25,6 +25,49 @@ exports.user_submission = function(req, res) {
     }
   })
 }
+
+// User form to report error in stored information
+exports.user_error = function(req, res) {
+  var email = req.param('email_error') ? req.param('email_error') : 'anon@email.com';
+  var mail_options = {
+    from: email,
+    to: 'team@indiaoutside.org',
+    subject: 'Error with retailer_id = ' + req.param('retailer_id'),
+    text: 'Errata list: ' + req.param('errata_list') + '\nError description: ' + req.param('error_description')
+  }
+  mail_transport.sendMail(mail_options, function(error, info) {
+    if(error) {
+      console.log('Error occurred: ' + JSON.stringify(error));
+      res.redirect('/app/gear/' + req.param('retailer_city') + '/' + req.param('retailer_name') + '/' + req.param('retailer_id'))
+    }
+    else {
+      console.log('Message sent: ' + JSON.stringify(info));
+      res.redirect('/app/gear/' + req.param('retailer_city') + '/' + req.param('retailer_name') + '/' + req.param('retailer_id'))
+    }
+  })
+}
+
+// User form to provide additional information about retailer
+exports.user_info = function(req, res) {
+  var email = req.param('email_info') ? req.param('email_info') : 'anon@email.com';
+  var mail_options = {
+    from: email,
+    to: 'team@indiaoutside.org',
+    subject: 'Missing info about retailer_id = ' + req.param('retailer_id'),
+    text: 'Missing list: ' + req.param('missing_list') + '\nError description: ' + req.param('missing_description')
+  }
+  mail_transport.sendMail(mail_options, function(error, info) {
+    if(error) {
+      console.log('Error occurred: ' + JSON.stringify(error));
+      res.redirect('/app/gear/' + req.param('retailer_city') + '/' + req.param('retailer_name') + '/' + req.param('retailer_id'))
+    }
+    else {
+      console.log('Message sent: ' + JSON.stringify(info));
+      res.redirect('/app/gear/' + req.param('retailer_city') + '/' + req.param('retailer_name') + '/' + req.param('retailer_id'))
+    }
+  })
+}
+
 // Note: tag and activity have been used interchangeably
 
 // Routing for list of gear retailers

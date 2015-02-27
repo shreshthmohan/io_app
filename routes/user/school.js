@@ -9,7 +9,7 @@ exports.user_submission = function(req, res) {
   var email = req.param('email') ? req.param('email') : 'anon@email.com';
   var mail_options = {
     from: email,
-    to: 'sremog@gmail.com',
+    to: 'team@indiaoutside.org',
     subject: 'New school ' + req.param('school_name'),
     text: 'Name of school: ' + req.param('school_name') + '\nLocation: ' + req.param('location') + '\nWebsite URL: ' + req.param('web_url') + '\nMaps link: ' + req.param('location_url') + '\nDescription: ' + req.param('description') 
   }
@@ -25,6 +25,47 @@ exports.user_submission = function(req, res) {
   })
 }
 
+// User form to report error in stored information
+exports.user_error = function(req, res) {
+  var email = req.param('email_error') ? req.param('email_error') : 'anon@email.com';
+  var mail_options = {
+    from: email,
+    to: 'team@indiaoutside.org',
+    subject: 'Error with school_id = ' + req.param('school_id'),
+    text: 'Errata list: ' + req.param('errata_list') + '\nError description: ' + req.param('error_description')
+  }
+  mail_transport.sendMail(mail_options, function(error, info) {
+    if(error) {
+      console.log('Error occurred: ' + JSON.stringify(error));
+      res.redirect('/app/schools/' + req.param('school_city') + '/' + req.param('school_name') + '/' + req.param('school_id'))
+    }
+    else {
+      console.log('Message sent: ' + JSON.stringify(info));
+      res.redirect('/app/schools/' + req.param('school_city') + '/' + req.param('school_name') + '/' + req.param('school_id'))
+    }
+  })
+}
+
+// User form to provide additional information about school
+exports.user_info = function(req, res) {
+  var email = req.param('email_info') ? req.param('email_info') : 'anon@email.com';
+  var mail_options = {
+    from: email,
+    to: 'team@indiaoutside.org',
+    subject: 'Missing info about school_id = ' + req.param('school_id'),
+    text: 'Missing list: ' + req.param('missing_list') + '\nError description: ' + req.param('missing_description')
+  }
+  mail_transport.sendMail(mail_options, function(error, info) {
+    if(error) {
+      console.log('Error occurred: ' + JSON.stringify(error));
+      res.redirect('/app/schools/' + req.param('school_city') + '/' + req.param('school_name') + '/' + req.param('school_id'))
+    }
+    else {
+      console.log('Message sent: ' + JSON.stringify(info));
+      res.redirect('/app/schools/' + req.param('school_city') + '/' + req.param('school_name') + '/' + req.param('school_id'))
+    }
+  })
+}
 // Routing for list of schools
 exports.all = function(req, res) {
   var tag = req.param('activity');

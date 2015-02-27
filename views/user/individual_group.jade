@@ -1,57 +1,107 @@
 extends ../layout
 
 block content
-  .entity.col-md-6
-    - if(group.group_url) 
-        a(href=group.group_url target='_blank')
-          h1 #{group.group_name}
-    - else
-        h1 #{group.group_name}
-    span.location
-      span.fa.fa-map-marker
-      h3 #{group.City.city_name}
-    - if(group.Emails != '')
-        ul.emails
-          each mail in group.Emails
-            li.email
-              span.fa.fa-envelope.helper
-              a(href="mailto:" + mail.email)
-                | #{mail.email}
-    - if(group.PhoneNumbers != '')
-        ul.numbers
-          each number in group.PhoneNumbers
-            li.number
-              span.fa.fa-phone-square.helper
-              | #{number.number}
-    .slinks
-      each slink in group.SocialLinks
-        li.social-link
-          - if(slink.link.indexOf('facebook.com') > -1)
-              a(href=slink.link)
-                span.fa.fa-facebook-square
-          - else if(slink.link.indexOf('twitter.com') > -1)
-              a(href=slink.link)
-                span.fa.fa-twitter-square
-          - else if(slink.link.indexOf('plus.google.com') > -1)
-              a(href=slink.link)
-                span.fa.fa-google-plus-square
-          - else if(slink.link.indexOf('instagram.com') > -1)
-              a(href=slink.link)
-                span.fa.fa-instagram
-          - else if(slink.link.indexOf('flickr.com') > -1)
-              a(href=slink.link)
-                span.fa.fa-flickr
-          - else if(slink.link.indexOf('youtube.com') > -1)
-              a(href=slink.link)
-                span.fa.fa-youtube
-          - else
-              a(href=slink.link)
-                 span.fa.fa-external-link
-    .tags           
-      each group_tag in group.GroupTags
-        li.tag
-          span
-            | #{group_tag.Tag.tag_name}
-    - if(admin)
-        | Dear Admin, if you see something wrong or missing with this group you can modify it 
-        a(href="/app/admin/groups/" + group.id, target="_blank") here
+  .row
+    .entity.col-md-8.std-shadow.col-md-offset-2
+      - if(group.group_url) 
+          a(href=group.group_url target='_blank')
+            h1.lg.inline #{group.group_name}
+            span.fa.fa-external-link.margin-l-5.fs-16
+      - else
+          h1.lg #{group.group_name}
+      span.location
+        span.fa.fa-map-marker.w-20.fs-16.gray
+        h2.md.inline #{group.City.city_name}
+      - if(group.comments)
+          span.description.block
+            i.fa.fa-bars.w-20.gray 
+            | #{group.comments}
+      - if(group.Emails != '')
+          ul.emails
+            each mail in group.Emails
+              li.email
+                span.fa.fa-envelope.w-20.gray
+                a(href="mailto:" + mail.email)
+                  | #{mail.email}
+      - if(group.PhoneNumbers != '')
+          ul.numbers
+            each number in group.PhoneNumbers
+              li.number
+                span.fa.fa-phone-square.w-20.gray
+                | #{number.number}
+      .slinks.clearfix.margin-b-5
+        each slink in group.SocialLinks
+          li.social-link
+            - if(slink.link.indexOf('facebook.com') > -1)
+                a(href=slink.link)
+                  span.fa.fa-facebook-square.color-fb
+            - else if(slink.link.indexOf('twitter.com') > -1)
+                a(href=slink.link)
+                  span.fa.fa-twitter-square.color-tw
+            - else if(slink.link.indexOf('plus.google.com') > -1)
+                a(href=slink.link)
+                  span.fa.fa-google-plus-square.color-gp
+            - else if(slink.link.indexOf('instagram.com') > -1)
+                a(href=slink.link)
+                  span.fa.fa-instagram.color-in
+            - else if(slink.link.indexOf('flickr.com') > -1)
+                a(href=slink.link)
+                  span.fa.fa-flickr.color-flb
+            - else if(slink.link.indexOf('youtube.com') > -1)
+                a(href=slink.link)
+                  span.fa.fa-youtube.color-yt
+            - else
+                a(href=slink.link)
+                   span.fa.fa-external-link-square
+      .tags           
+        each group_tag in group.GroupTags
+          li.tag
+            span
+              | #{group_tag.Tag.tag_name}
+      .user-res.fs-12
+        a#user-error.pointer(title="Report wrong or outdated information") Report error
+        |  or 
+        a#user-info.pointer(title="Add missing information") missing info
+        |  about this outdoor group.
+      - if(admin)
+          | Dear Admin, if you see something wrong or missing with this group you can modify it 
+          a(href="/app/admin/groups/" + group.id, target="_blank") here
+  .dialog-screen
+  .dialog-container.col-md-4.col-md-offset-4#user-form-error
+    .dialog-head-container.clearfix.text-center
+      span.dialog-head.fs-16.uppercase.inline-block.padding-tb-10
+        | please tell us what's wrong.
+      span.dialog-close.right.fs-18.pointer
+        i.fa.fa-times
+    .dialog-body
+        form.fs-12(action="/app/groups/user_error?group_id=" + group.id + "&group_name=" + group.group_name + "&group_city=" + group.City.city_name method="post")
+          label.block.fs-12.normal(for="errata_list") What's wrong? *
+          input.full.padding-lr-5(type="text", name="errata_list", id="errata_list" required placeholder="Separate each item by a comma.")
+          br
+          label.block.fs-12.normal.margin-t-10(for="error_description") Please describe what's wrong *
+          textarea.full.padding-lr-5(type="text", name="error_description", id="error_description" placeholder="Please provide correct details with links/references if possible." required style="height: 6em;")
+          br
+          label.block.fs-12.normal.margin-t-10(for="email_error") Your E-mail
+          input.full.padding-lr-5.margin-b-10(type="text", name="email_error", id="email_error" placeholder="Optional")
+          br
+          input(type="submit")
+  .dialog-container.col-md-4.col-md-offset-4#user-form-info
+    .dialog-head-container.clearfix.text-center
+      span.dialog-head.fs-16.uppercase.inline-block.padding-tb-10
+        | Something missing?
+      span.dialog-close.right.fs-18.pointer
+        i.fa.fa-times
+    .dialog-body
+        form.fs-12(action="/app/groups/user_info?group_id=" + group.id + "&group_name=" + group.group_name + "&group_city=" + group.City.city_name method="post")
+          label.block.fs-12.normal(for="missing_list") What's missing? *
+          input.full.padding-lr-5(type="text", name="missing_list", id="missing_list" required placeholder="Separate each item by a comma.")
+          br
+          label.block.fs-12.normal.margin-t-10(for="missing_description") Please describe what's missing *
+          textarea.full.padding-lr-5(type="text", name="missing_description", id="missing_description" placeholder="Please provide details of missing infomation with links/references if possible." required style="height: 6em;")
+          br
+          label.block.fs-12.normal.margin-t-10(for="email_info") Your E-mail
+          input.full.padding-lr-5.margin-b-10(type="text", name="email_info", id="email_info" placeholder="Optional")
+          br
+          input(type="submit")
+block extrajs
+  script(src="/js/user_form.js")
