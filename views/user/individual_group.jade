@@ -66,6 +66,69 @@ block content
       - if(admin)
           | Dear Admin, if you see something wrong or missing with this group you can modify it 
           a(href="/app/admin/groups/" + group.id, target="_blank") here
+  hr.indi-hr
+  .row
+    .sub-heading.text-center Suggestions
+    .col-md-4
+      a(href="/app/groups/grouped?location=" + group.City.id title="All Active Outdoor groups in " + group.City.city_name)
+        .category-el
+          .info.clearfix(style="background-image: url(" + group.City.image_url + ");")
+            .right
+              i.fa.fa-group.helper-icon
+            .info-text.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | Groups in #{group.City.city_name}
+            .info-overlay
+    .col-md-4
+      a(href="/app/groups/grouped" title="All Outdoor Groups by Activity")
+        .category-el
+          .info.clearfix
+            .right
+              i.fa.fa-group.helper-icon
+            .info-text.margin-top-90.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | All Groups by Activity
+            .info-overlay
+    .col-md-4
+      a(href="/app/groups/grouped#by-location" title="All Outdoor Groups by Location")
+        .category-el
+          .info.clearfix
+            .right
+              i.fa.fa-group.helper-icon
+            .info-text.margin-top-90.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | All Groups by Location
+            .info-overlay
+    .col-md-4
+      a(href="/app/events/upcoming/grouped?location=" + group.City.id , title="All outdoor events in " + group.City.city_name)
+        .category-el
+          .info.clearfix(style="background-image: url(" + group.City.image_url + ");")
+            .right
+              i.fa.fa-flag-checkered.helper-icon
+            .info-text.margin-top-90.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | Events in #{group.City.city_name}
+            .info-overlay
+    .col-md-4
+      a(href="/app/gear/grouped?location=" + group.City.id , title="All outdoor gear stores and retailers in " + group.City.city_name)
+        .category-el
+          .info.clearfix(style="background-image: url(" + group.City.image_url + ");")
+            .right
+              i.fa.fa-gear.helper-icon
+            .info-text.margin-top-90.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | Stores in #{group.City.city_name}
+            .info-overlay
+    .col-md-4
+      a(href="/app/schools/grouped?location=" + group.City.id , title="All outdoor schools in " + group.City.city_name)
+        .category-el
+          .info.clearfix(style="background-image: url(" + group.City.image_url + ");")
+            .right
+              i.fa.fa-building-o.helper-icon
+            .info-text.margin-top-90.col-xs-12
+              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                | Learn in #{group.City.city_name}
+            .info-overlay
   .dialog-screen
   .dialog-container.col-md-4.col-md-offset-4#user-form-error
     .dialog-head-container.clearfix.text-center
