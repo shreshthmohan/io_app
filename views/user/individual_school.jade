@@ -74,9 +74,8 @@ block content
         .admin_link
           | Dear Admin, if you see something wrong or missing with this school you can modify it 
           a(href="/app/admin/schools/" + school.id, target="_blank") here
-  hr.indi-hr
   .row
-    .sub-heading.text-center Suggestions
+    .sub-heading.text-center.margin-tb-10 Suggestions
     .col-md-4
       a(href="/app/schools/grouped?location=" + school.City.id , title="All outdoor schools in " + school.City.city_name)
         .category-el

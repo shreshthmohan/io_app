@@ -66,9 +66,8 @@ block content
       - if(admin)
           | Dear Admin, if you see something wrong or missing with this group you can modify it 
           a(href="/app/admin/groups/" + group.id, target="_blank") here
-  hr.indi-hr
   .row
-    .sub-heading.text-center Suggestions
+    .sub-heading.text-center.margin-tb-10 Suggestions
     .col-md-4
       a(href="/app/groups/grouped?location=" + group.City.id title="All Active Outdoor groups in " + group.City.city_name)
         .category-el

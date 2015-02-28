@@ -75,9 +75,8 @@ block content
       - if(admin)
           | Dear Admin, if you see something wrong or missing with this retailer you can modify it 
           a(href="/app/admin/gear/retailer/" + retailer.id, target="_blank") here
-  hr.indi-hr
   .row
-    .sub-heading.text-center Suggestions
+    .sub-heading.text-center.margin-tb-10 Suggestions
     .col-md-4
       a(href="/app/gear/grouped?location=" + retailer.City.id , title="All outdoor gear stores and retailers in " + retailer.City.city_name)
         .category-el

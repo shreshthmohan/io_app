@@ -171,6 +171,7 @@ DONEs:
        1. E-mail (is form to email possible? Yes, via nodemailer) DONE
     8. Failsafe: background color/gradient for home-search for image failing to load.
     20. About Us (story)
+    26. Suggestions in groups!
 
 TODOs:
 
@@ -179,7 +180,8 @@ TODOs:
     *#3. User forms for submitting data. Take cues from Zomato.
        2. Form data to DB? And add a new field to measure maturity of data, first user's input: 1, admin's: 5 Maybe change to this later when the site is more mature?
        3. User forms on individual pages
-         TODO: testing 
+         TODO: testing: initially use this email system before adding new entities
+         Add user and admin links for the entity
     4. Comment system and/or review system.
     #5. SEO:
          1. meta tags
@@ -188,7 +190,7 @@ TODOs:
     10. Think about photos (it'd be much better if we had them, for engagement) partially DONE
         Using images captured by a friend. TODO edit more of my images and host them!
     11. Titles for each element that appear on hover.
-    #12. Populate data. Fix and/or remove old data.
+    ##12. Populate data. Fix and/or remove old data.
     13. To fit featured in page (and keep it on the top, we can add a 12-wide div before all the other category grouped lists)
         when more categories are added. LATER
     16. Add images to tags for each category
@@ -198,7 +200,7 @@ TODOs:
     #23. Dedicated pages for each City/Location and Activity.
     24. Markdown compatible comments/description for entities.
     25. Mobile-compatible phone numbers
-    #26. Suggestions in groups!
+    26. Setup 404 page
 
 37. SEO
     Rich snippets: https://support.google.com/webmasters/topic/4598337?hl=en&ref_topic=3309300

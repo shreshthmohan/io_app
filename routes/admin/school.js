@@ -103,10 +103,14 @@ exports.individual = function(req, res) {
                      // but works; Alternative is raw query. TODO
     )
     .then(function(tags) {
-      res.render('admin/school', {
-        title: school.school_name + ' in ' + school.City.city_name,
-        school: school,
-        tags: tags
+      db.City.findAll()
+      .then(function(cities) {
+        res.render('admin/school', {
+          title: school.school_name + ' in ' + school.City.city_name,
+          school: school,
+          tags: tags,
+          cities: cities
+        })
       })
     })
   })
