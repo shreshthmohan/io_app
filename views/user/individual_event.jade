@@ -45,28 +45,7 @@ block content
                 | #{number.number}
       .slinks.clearfix.margin-b-5
         each slink in race.SocialLinks
-          li.social-link
-            - if(slink.link.indexOf('facebook.com') > -1)
-                a(href=slink.link target="_blank")
-                  span.fa.fa-facebook-official.color-fb
-            - else if(slink.link.indexOf('twitter.com') > -1)
-                a(href=slink.link target="_blank")
-                  span.fa.fa-twitter-square.color-tw
-            - else if(slink.link.indexOf('plus.google.com') > -1)
-                a(href=slink.link target="_blank")
-                  span.fa.fa-google-plus-square.color-gp
-            - else if(slink.link.indexOf('instagram.com') > -1)
-                a(href=slink.link target="_blank")
-                  span.fa.fa-instagram.color-in
-            - else if(slink.link.indexOf('flickr.com') > -1)
-                a(href=slink.link target="_blank")
-                  span.fa.fa-flickr.color-flb
-            - else if(slink.link.indexOf('youtube.com') > -1)
-                a(href=slink.link target="_blank")
-                  span.fa.fa-youtube.color-yt
-            - else
-                a(href=slink.link target="_blank")
-                   span.fa.fa-external-link-square
+          include social_link_template
       .tag-container.clearfix
         each event_tag in race.EventTags
           li.tag
@@ -122,7 +101,7 @@ block content
                 | All Events by Location
             .info-overlay
     .col-md-4
-      a(href="/app/events/grouped?location=" + race.City.id , title="All outdoor events and races in " + race.City.city_name)
+      a(href="/app/gear/grouped?location=" + race.City.id , title="All outdoor gear stores and retailers in " + race.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
             .right

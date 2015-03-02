@@ -35,28 +35,7 @@ block content
                 | #{number.number}
       .slinks.clearfix.margin-b-5
         each slink in retailer.SocialLinks
-          li.social-link
-            - if(slink.link.indexOf('facebook.com') > -1)
-                a(href=slink.link target="_blank") 
-                  span.fa.fa-facebook-official.color-fb
-            - else if(slink.link.indexOf('twitter.com') > -1)
-                a(href=slink.link target="_blank") 
-                  span.fa.fa-twitter-square.color-tw
-            - else if(slink.link.indexOf('plus.google.com') > -1)
-                a(href=slink.link target="_blank")
-                  span.fa.fa-google-plus-square.color-gp
-            - else if(slink.link.indexOf('instagram.com') > -1)
-                a(href=slink.link target="_blank")
-                  span.fa.fa-instagram.color-in
-            - else if(slink.link.indexOf('flickr.com') > -1)
-                a(href=slink.link target="_blank")
-                  span.fa.fa-flickr.color-flb
-            - else if(slink.link.indexOf('youtube.com') > -1)
-                a(href=slink.link target="_blank")
-                  span.fa.fa-youtube.color-yt
-            - else
-                a(href=slink.link target="_blank")
-                   span.fa.fa-external-link-square
+          include social_link_template
       //-.brands
       //-  each gear_brand in retailer.GearBrands
       .tag-container.clearfix
