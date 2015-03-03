@@ -26,7 +26,7 @@ block content
                             img.right.b-l-1(src=retailer.img_url_square alt=retailer.retailer_name height="100px")
                       - else
                           a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.retailer_name_slug + "/" + retailer.id)
-                            i.fa.fa-group.right.b-l-1.img-alt
+                            i.fa.fa-gear.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
                     each tag in retailer.GearTags
                       li.tag
@@ -49,7 +49,7 @@ block content
                             img.right.b-l-1(src=gear_tag.Retailer.img_url_square alt=gear_tag.Retailer.retailer_name height="100px")
                       - else
                           a(href="/app/gear/" + gear_tag.Retailer.City.city_name + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
-                            i.fa.fa-group.right.b-l-1.img-alt
+                            i.fa.fa-gear.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
                     li.tag
                       | #{tag.tag_name}

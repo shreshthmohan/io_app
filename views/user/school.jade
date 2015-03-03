@@ -24,7 +24,7 @@ block content
                         img.right.b-l-1(src=school.img_url_square alt=school.school_name height="100px")
                   - else
                       a(href="/app/schools/" + school.City.city_name + "/" + school.school_name_slug + "/" + school.id)
-                        i.fa.fa-group.right.b-l-1.img-alt
+                        i.fa.fa-building.right.b-l-1.img-alt
               .tags.clearfix.border-top-gray
                 each tag in school.SchoolTags
                   li.tag
@@ -47,7 +47,7 @@ block content
                         img.right.b-l-1(src=school_tag.School.img_url_square alt=school_tag.School.school_name height="100px")
                   - else
                       a(href="/app/schools/" + school_tag.School.City.city_name + "/" + school_tag.School.school_name_slug + "/" + school_tag.School.id)
-                        i.fa.fa-group.right.b-l-1.img-alt
+                        i.fa.fa-building.right.b-l-1.img-alt
               .tags.clearfix.border-top-gray
                 li.tag
                   | #{tag.tag_name}
