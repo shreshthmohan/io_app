@@ -6,10 +6,10 @@ module.exports = function(sequelize, DataTypes) {
   },
   {
     associate: function(models) {
-      Tag.hasMany(models.EventTag, {foreignKeyConstraint: true});
-      Tag.hasMany(models.GearTag, {foreignKeyConstraint: true});
-      Tag.hasMany(models.GroupTag, {foreignKeyConstraint: true});
-      Tag.hasMany(models.SchoolTag, {foreignKeyConstraint: true});
+      Tag.hasMany(models.EventTag, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
+      Tag.hasMany(models.GearTag, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
+      Tag.hasMany(models.GroupTag, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
+      Tag.hasMany(models.SchoolTag, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
     }
   });
   return Tag;

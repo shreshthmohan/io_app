@@ -116,7 +116,8 @@ exports.modify_name = function(req, res) {
   db.City.find({where: {id: req.param('city_id')}})
   .then(function(city) {
     city.updateAttributes({
-      city_name: req.param('new_city_name')
+      city_name: req.param('new_city_name'),
+      city_name_slug: slugify(req.param('new_city_name'))
     })
     .then(function(new_city) {
       res.redirect('/app/admin/city/' + new_city.id)

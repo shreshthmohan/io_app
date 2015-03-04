@@ -1,5 +1,8 @@
 // General help
 
+0. New database creation:
+   CREATE DATABASE `io_app_imported` DEFAULT CHARACTER SET utf8
+
 1. Since sequelize does not support mysql DATE, we need to manually change it
    in the db schema. Here's how:
      "alter table Events modify column start_date date;"
@@ -16,6 +19,9 @@
     Lesson: was having trouble with importing csv due to comma in field data values.
     Google Drive encloses feild data in " when exporting values taht contain , so to make things work properly use the following instead:
     load data local infile '/tmp/events.csv' into table Events fields terminated by ',' optionally enclosed by '"' lines terminated by '\n' ignore 1 rows;
+
+2a. Export data from MySQL to csv:
+    select * from Users into outfile '/tmp/users.csv' fields enclosed by '"' terminated by ',' lines terminated by '\n';
 
 3. For using MySQL functions with sequelize (example: to format dates like 'date_format()')
      http://stackoverflow.com/a/25278150/1773808

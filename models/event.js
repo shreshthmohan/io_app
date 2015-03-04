@@ -24,15 +24,15 @@ module.exports = function(sequelize, DataTypes) {
     associate: function(models) { //create associations/foreign key constraint
       Event.belongsTo(models.City, {foreignKeyConstraint: true});
       // ^ will add FK to Events table
-      Event.hasMany(models.EventTag, {foreignKeyConstraint: true});
+      Event.hasMany(models.EventTag, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to EventTag table
-      Event.hasMany(models.EventSubtag, {foreignKeyConstraint: true});
+      Event.hasMany(models.EventSubtag, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to EventSubtag table
-      Event.hasMany(models.SocialLink, {foreignKeyConstraint: true});
+      Event.hasMany(models.SocialLink, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to SocialLinks table
-      Event.hasMany(models.Email, {foreignKeyConstraint: true});
+      Event.hasMany(models.Email, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to Emails  table
-      Event.hasMany(models.PhoneNumber, {foreignKeyConstraint: true});
+      Event.hasMany(models.PhoneNumber, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to PhoneNumbers table
     }
   });

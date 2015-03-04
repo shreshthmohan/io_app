@@ -7,10 +7,10 @@ module.exports = function(sequelize, DataTypes) {
   },
   {
     associate: function(models) {
-      City.hasMany(models.Retailer, {foreignKeyConstraint: true});
-      City.hasMany(models.Event, {foreignKeyConstraint: true});
-      City.hasMany(models.Group, {foreignKeyConstraint: true});
-      City.hasMany(models.School, {foreignKeyConstraint: true});
+      City.hasMany(models.Retailer, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
+      City.hasMany(models.Event, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
+      City.hasMany(models.Group, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
+      City.hasMany(models.School, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
     }
     
   });

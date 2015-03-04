@@ -11,17 +11,17 @@ module.exports = function(sequelize, DataTypes) {
   },
   {
     associate: function(models) { //create associations/foreign key constraint
-      Retailer.hasMany(models.GearTag, {foreignKeyConstraint: true});
+      Retailer.hasMany(models.GearTag, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to GearTags table
-      Retailer.hasMany(models.GearBrand, {foreignKeyConstraint: true});
+      Retailer.hasMany(models.GearBrand, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to GearBrand table
       Retailer.belongsTo(models.City, {foreignKeyConstraint: true});
       // ^ will add FK to Retailers table
-      Retailer.hasMany(models.SocialLink, {foreignKeyConstraint: true});
+      Retailer.hasMany(models.SocialLink, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to SocialLinks table
-      Retailer.hasMany(models.Email, {foreignKeyConstraint: true});
+      Retailer.hasMany(models.Email, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to Emails  table
-      Retailer.hasMany(models.PhoneNumber, {foreignKeyConstraint: true});
+      Retailer.hasMany(models.PhoneNumber, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to PhoneNumbers table
     }
   });

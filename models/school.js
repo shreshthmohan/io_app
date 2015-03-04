@@ -11,15 +11,15 @@ module.exports = function(sequelize, DataTypes) {
   },
   {
     associate: function(models) { //create associations/foreign key constraint
-      School.hasMany(models.SchoolTag, {foreignKeyConstraint: true});
+      School.hasMany(models.SchoolTag, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to GearTags table
       School.belongsTo(models.City, {foreignKeyConstraint: true});
       // ^ will add FK to Schools table
-      School.hasMany(models.SocialLink, {foreignKeyConstraint: true});
+      School.hasMany(models.SocialLink, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to SocialLinks table
-      School.hasMany(models.Email, {foreignKeyConstraint: true});
+      School.hasMany(models.Email, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to Emails  table
-      School.hasMany(models.PhoneNumber, {foreignKeyConstraint: true});
+      School.hasMany(models.PhoneNumber, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to PhoneNumbers table
     }
   });

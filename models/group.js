@@ -8,15 +8,15 @@ module.exports = function(sequelize, DataTypes) {
   },
   {
     associate: function(models) {
-      Group.hasMany(models.GroupTag, {foreignKeyConstraint: true});
+      Group.hasMany(models.GroupTag, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to GroupTags table
       Group.belongsTo(models.City, {foreignKeyConstraint: true});
       // ^ will add FK to Groups table
-      Group.hasMany(models.SocialLink, {foreignKeyConstraint: true});
+      Group.hasMany(models.SocialLink, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to SocialLinks table
-      Group.hasMany(models.Email, {foreignKeyConstraint: true});
+      Group.hasMany(models.Email, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to Emails  table
-      Group.hasMany(models.PhoneNumber, {foreignKeyConstraint: true});
+      Group.hasMany(models.PhoneNumber, {foreignKeyConstraint: true, onDelete: 'CASCADE'});
       // ^ will add FK to PhoneNumbers table
     }
   });
