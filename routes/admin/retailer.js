@@ -64,8 +64,8 @@ exports.modify_name = function(req, res) {
 }
 
 exports.modify_city = function(req, res) {
-  db.Retialer.find({where: {id: req.param('retailer_id')}})
-  .then(function(retialer) {
+  db.Retailer.find({where: {id: req.param('retailer_id')}})
+  .then(function(retailer) {
     db.City.find({where: {id: req.param('city_id')}})
     .then(function(city) {
       retailer.setCity(city)

@@ -99,10 +99,14 @@ exports.individual = function(req, res) {
                      // but works; Alternative is raw query. TODO
     )
     .then(function(tags) {
-      res.render('admin/group', {
-        title: group.group_name + ' in ' + group.City.city_name,
-        group: group,
-        tags: tags
+      db.City.findAll()
+      .then(function(cities) {
+        res.render('admin/group', {
+          title: group.group_name + ' in ' + group.City.city_name,
+          group: group,
+          tags: tags,
+          cities: cities
+        })
       })
     })
   })

@@ -263,7 +263,7 @@ exports.destroy_email = function(req, res) {
 };
 
 exports.dissociate_tag = function(req, res) {
-  db.SchoolTag.find({where: {TagId: req.param('tag_id')}})
+  db.SchoolTag.find({where: {id: req.param('tag_id')}})
   .success(function(tag) {
     tag.destroy().success(function() {
       res.redirect('/app/admin/schools/' + req.param('school_id'));
