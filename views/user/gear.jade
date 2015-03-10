@@ -15,17 +15,17 @@ block content
                   .info-media.clearfix
                     .info-box.col-xs-8
                       .info-box-sub
-                        a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.retailer_name_slug + "/" + retailer.id)
+                        a(href="/app/gear/" + retailer.City.city_name_slug + "/" + retailer.retailer_name_slug + "/" + retailer.id)
                           h2.sm #{retailer.retailer_name}
                         .city
                           span.fa.fa-map-marker.helper
                           | #{retailer.City.city_name}
                     .img-pre.col-xs-4.clearfix
                       - if(retailer.img_url_square)
-                          a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.retailer_name_slug + "/" + retailer.id)
+                          a(href="/app/gear/" + retailer.City.city_name_slug + "/" + retailer.retailer_name_slug + "/" + retailer.id)
                             img.right.b-l-1(src=retailer.img_url_square alt=retailer.retailer_name height="100px")
                       - else
-                          a(href="/app/gear/" + retailer.City.city_name + "/" + retailer.retailer_name_slug + "/" + retailer.id)
+                          a(href="/app/gear/" + retailer.City.city_name_slug + "/" + retailer.retailer_name_slug + "/" + retailer.id)
                             i.fa.fa-gear.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
                     each tag in retailer.GearTags
@@ -38,17 +38,17 @@ block content
                   .info-media.clearfix
                     .infobox.col-xs-8
                       .info-box-sub
-                        a(href="/app/gear/" + gear_tag.Retailer.City.city_name + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
+                        a(href="/app/gear/" + gear_tag.Retailer.City.city_name_slug + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
                           h2.sm #{gear_tag.Retailer.retailer_name}
                         .city
                           span.fa.fa-map-marker.helper
                           | #{gear_tag.Retailer.City.city_name}
                     .img-pre.col-xs-4.clearfix
                       - if(gear_tag.Retailer.img_url_square)
-                          a(href="/app/gear/" + gear_tag.Retailer.City.city_name + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
+                          a(href="/app/gear/" + gear_tag.Retailer.City.city_name_slug + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
                             img.right.b-l-1(src=gear_tag.Retailer.img_url_square alt=gear_tag.Retailer.retailer_name height="100px")
                       - else
-                          a(href="/app/gear/" + gear_tag.Retailer.City.city_name + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
+                          a(href="/app/gear/" + gear_tag.Retailer.City.city_name_slug + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
                             i.fa.fa-gear.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
                     li.tag

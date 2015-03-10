@@ -34,7 +34,7 @@ block content
           ul.emails
             each mail in race.Emails
               li.email
-                span.fa.fa-envelope.gray.w-20
+                span.fa.fa-envelope-square.gray.w-20
                 a(href="mailto:" + mail.email target="_blank")
                   | #{mail.email}
       - if(race.PhoneNumbers != '')

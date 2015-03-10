@@ -24,8 +24,8 @@ block content
           ul.emails
             each mail in school.Emails
               li.email
-                span.fa.fa-envelope.w-20.gray
-                a(href="mailto:" + mail.email)
+                span.fa.fa-envelope-square.w-20.gray
+                a(href="mailto:" + mail.email target="_blank")
                   | #{mail.email}
       - if(school.PhoneNumbers != '')
           ul.numbers

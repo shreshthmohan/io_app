@@ -13,17 +13,17 @@ block content
               .info-media.clearfix
                 .info-box.col-xs-8
                   .info-box-sub
-                    a(href="/app/groups/" + group.City.city_name + "/" + group.group_name_slug + "/" + group.id)
+                    a(href="/app/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
                       h2.sm #{group.group_name}
                     .city
                       span.fa.fa-map-marker.helper
                       | #{group.City.city_name}
                 .img-pre.col-xs-4.clearfix
                   - if(group.img_url_square)
-                      a(href="/app/groups/" + group.City.city_name + "/" + group.group_name_slug + "/" + group.id)
+                      a(href="/app/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
                         img.right.b-l-1(src=group.img_url_square alt=group.group_name height="100px")
                   - else
-                      a(href="/app/groups/" + group.City.city_name + "/" + group.group_name_slug + "/" + group.id)
+                      a(href="/app/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
                         i.fa.fa-group.right.b-l-1.img-alt
               .tags.clearfix
                 each tag in group.GroupTags
@@ -36,17 +36,17 @@ block content
               .info-media.clearfix
                 .infobox.col-xs-8
                   .info-box-sub
-                    a(href="/app/groups/" + group_tag.Group.City.city_name + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                    a(href="/app/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
                       h2.sm #{group_tag.Group.group_name}
                     .city
                       span.fa.fa-map-marker.helper
                       | #{group_tag.Group.City.city_name}
                 .img-pre.col-xs-4.clearfix
                   - if(group_tag.Group.img_url_square)
-                      a(href="/app/groups/" + group_tag.Group.City.city_name + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                      a(href="/app/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
                         img.right.b-l-1(src=group_tag.Group.img_url_square alt=group_tag.Group.group_name height="100px")
                   - else
-                      a(href="/app/groups/" + group_tag.Group.City.city_name + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                      a(href="/app/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
                         i.fa.fa-group.right.b-l-1.img-alt
               .tags.clearfix
                 li.tag

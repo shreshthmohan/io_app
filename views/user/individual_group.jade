@@ -20,8 +20,8 @@ block content
           ul.emails
             each mail in group.Emails
               li.email
-                span.fa.fa-envelope.w-20.gray
-                a(href="mailto:" + mail.email)
+                span.fa.fa-envelope-square.w-20.gray
+                a(href="mailto:" + mail.email target="_blank")
                   | #{mail.email}
       - if(group.PhoneNumbers != '')
           ul.numbers
