@@ -9,7 +9,7 @@
      "alter table Events modify column end_date date;"
    TODO script.
 
-2. Import stuff from csv in to db:
+2. Import stuff from csv in to db table :
      Place csv in /tmp directory for ease
      run mysql -u root -p --local-infile
      http://www.mysqltutorial.org/import-csv-file-mysql-table/
@@ -20,10 +20,15 @@
     Google Drive encloses feild data in " when exporting values taht contain , so to make things work properly use the following instead:
     load data local infile '/tmp/events.csv' into table Events fields terminated by ',' optionally enclosed by '"' lines terminated by '\n' ignore 1 rows;
 
-2a. Export data from MySQL to csv:
+2a. Export table data from MySQL to csv:
     select * from Users into outfile '/tmp/users.csv' fields enclosed by '"' terminated by ',' lines terminated by '\n';
 
 2b. When using exported csv from Google Sheets take care of date format: default is yyyy-mm-dd
+
+2c. Export whole db schema and data to an sql file:
+    mysqldump -u root -p --databases database_name > file_name.sql
+2d. Import database to MySQL:
+    mysql -u username -p database_name < file_name.sql
 
 3. For using MySQL functions with sequelize (example: to format dates like 'date_format()')
      http://stackoverflow.com/a/25278150/1773808
@@ -41,3 +46,6 @@
       }
     }
     // still need to add directives for static files
+
+5. MySQL update data in existing field
+   UPDATE tutorials_tbl SET tutorial_title='Learning JAVA' WHERE tutorial_id=3;
