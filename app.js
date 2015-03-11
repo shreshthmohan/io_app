@@ -120,9 +120,9 @@ app.get('/log_out', user.log_out);
 app.get('/', function(req, res) {res.redirect('/app/home')})
 
 // Checking if user is authenticated for every route except sign-in/up
-app.all('/app/*', auth_middleware.ensure_auth);
+app.all('/app/admin*', auth_middleware.ensure_auth);
 // Adding a boolean 'admin' to res.locals
-app.all('/app/*', auth_middleware.add_admin_bool);
+app.all('/app/admin*', auth_middleware.add_admin_bool);
 
 ////////////////////////
 // Admin routes start //
