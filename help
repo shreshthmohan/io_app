@@ -49,3 +49,12 @@
 
 5. MySQL update data in existing field
    UPDATE tutorials_tbl SET tutorial_title='Learning JAVA' WHERE tutorial_id=3;
+
+6. Git branching and merging
+   http://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+   create new branch(and switch to it):
+   git checkout -b new_branch
+   delete a branch:
+   git branch -d branch_name
+   swtich branches:
+   git checkout branch_name
