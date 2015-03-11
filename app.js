@@ -32,7 +32,7 @@ var lessParserOptions = {}
 var lessCompilerOptions = {}
 
 // To change env
-//app.settings.env = 'production'
+app.settings.env = 'production';
 
 app.use(lessMiddleware(
   __dirname + '/stylesheets' 
@@ -122,7 +122,7 @@ app.get('/', function(req, res) {res.redirect('/app/home')})
 // Checking if user is authenticated for every route except sign-in/up
 app.all('/app/admin*', auth_middleware.ensure_auth);
 // Adding a boolean 'admin' to res.locals
-app.all('/app/admin*', auth_middleware.add_admin_bool);
+app.all('/app/*', auth_middleware.add_admin_bool);
 
 ////////////////////////
 // Admin routes start //

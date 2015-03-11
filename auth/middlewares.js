@@ -23,13 +23,15 @@ exports.ensure_admin = function(req, res, next) {
 // Not exactly auth middleware
 // To make extra links avaialable to admin in some user views
 exports.add_admin_bool = function(req, res, next) {
-  if(req.user.type == 'admin') {
-    res.locals.admin = true
-    console.log('added admin = true to res.locals')
-  }
-  else {
-    res.locals.admin = false
-    console.log('added admin = false to res.locals')
+  if(req.isAuthenticated()) {
+    if(req.user.type == 'admin') {
+      res.locals.admin = true
+      console.log('added admin = true to res.locals')
+    }
+    else {
+      res.locals.admin = false
+      console.log('added admin = false to res.locals')
+    }
   }
   next()
 }
