@@ -259,7 +259,7 @@ exports.destroy_email = function(req, res) {
 };
 
 exports.dissociate_tag = function(req, res) {
-  db.GroupTag.find({where: {TagId: req.param('tag_id')}})
+  db.GroupTag.find({where: {id: req.param('tag_id')}})
   .success(function(tag) {
     tag.destroy().success(function() {
       res.redirect('/app/admin/groups/' + req.param('group_id'));

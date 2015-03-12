@@ -344,7 +344,7 @@ exports.destroy_email = function(req, res) {
 };
 
 exports.dissociate_tag = function(req, res) {
-  db.GearTag.find({where: {TagId: req.param('tag_id')}})
+  db.GearTag.find({where: {id: req.param('tag_id')}})
   .success(function(tag) {
     tag.destroy().success(function() {
       res.redirect('/app/admin/gear/retailer/' + req.param('retailer_id'));
@@ -353,7 +353,7 @@ exports.dissociate_tag = function(req, res) {
 };
 
 exports.dissociate_brand = function(req, res) {
-  db.GearBrand.find({where: {BrandId: req.param('brand_id')}})
+  db.GearBrand.find({where: {id: req.param('brand_id')}})
   .success(function(brand) {
     brand.destroy().success(function() {
       res.redirect('/app/admin/gear/retailer/' + req.param('retailer_id'));

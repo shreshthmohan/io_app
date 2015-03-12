@@ -117,7 +117,8 @@ app.post('/sign_in', passport.authenticate(
 app.get('/log_out', user.log_out);
 
 // Redirect users from root to home
-app.get('/', function(req, res) {res.redirect('/app/home')})
+//app.get('/', function(req, res) {res.redirect('/app/home')})
+app.get('/', routes.index);
 
 // Checking if user is authenticated for every route except sign-in/up
 app.all('/app/admin*', auth_middleware.ensure_auth);
@@ -366,7 +367,7 @@ app.get('/app/admin/schools/:school_id/dissociate_tag/:tag_id', admin_school.dis
 // Admin routes end //
 //////////////////////
 
-app.get('/app/home', routes.index);
+//app.get('/app/home', routes.index);
 
 app.get('/app/about',
   function(req, res) {

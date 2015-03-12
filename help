@@ -37,6 +37,15 @@
     upstream io_app {
       server localhost:8080; 
     }
+
+    # request to indiaoutside.org lands on the IP address of our
+    # EC2 instance. This sectin handles redirection to www subdomain
+    server {
+      listen 80;
+      
+      server_name indiaoutside.org;
+      return      301 http://www.indiaoutside.org$request_uri;
+    }
     
     server {
       listen 80;
@@ -44,8 +53,17 @@
       location / {
         proxy_pass http://io_app;
       }
+      # redirect URLs with trailing / to those without 
+      rewrite ^/(.*)/$ /$1 permanent;
     }
     // still need to add directives for static files
+
+4a. stop — fast shutdown
+    quit — graceful shutdown
+    reload — reloading the configuration file
+    reopen — reopening the log files
+    Example:
+    sudo nginx -s reload
 
 5. MySQL update data in existing field
    UPDATE tutorials_tbl SET tutorial_title='Learning JAVA' WHERE tutorial_id=3;
@@ -58,3 +76,8 @@
    git branch -d branch_name
    swtich branches:
    git checkout branch_name
+
+
+7. non-www domain is called root sub-domain
+   Fixed root domain redirection by adding A name record in DNS zone file pointing to IP address of ec2 instance.
+   
