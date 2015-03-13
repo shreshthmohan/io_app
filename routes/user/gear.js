@@ -16,12 +16,12 @@ exports.user_submission = function(req, res) {
   mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
-      res.redirect('/app/gear/grouped')
+      res.redirect('/gear/grouped')
       // TODO: fix redirection
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
-      res.redirect('/app/gear/grouped')
+      res.redirect('/gear/grouped')
     }
   })
 }
@@ -38,11 +38,11 @@ exports.user_error = function(req, res) {
   mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
-      res.redirect('/app/gear/' + req.param('retailer_city') + '/' + req.param('retailer_name') + '/' + req.param('retailer_id'))
+      res.redirect('/gear/' + req.param('retailer_city') + '/' + req.param('retailer_name') + '/' + req.param('retailer_id'))
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
-      res.redirect('/app/gear/' + req.param('retailer_city') + '/' + req.param('retailer_name') + '/' + req.param('retailer_id'))
+      res.redirect('/gear/' + req.param('retailer_city') + '/' + req.param('retailer_name') + '/' + req.param('retailer_id'))
     }
   })
 }
@@ -59,11 +59,11 @@ exports.user_info = function(req, res) {
   mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
-      res.redirect('/app/gear/' + req.param('retailer_city') + '/' + req.param('retailer_name') + '/' + req.param('retailer_id'))
+      res.redirect('/gear/' + req.param('retailer_city') + '/' + req.param('retailer_name') + '/' + req.param('retailer_id'))
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
-      res.redirect('/app/gear/' + req.param('retailer_city') + '/' + req.param('retailer_name') + '/' + req.param('retailer_id'))
+      res.redirect('/gear/' + req.param('retailer_city') + '/' + req.param('retailer_name') + '/' + req.param('retailer_id'))
     }
   })
 }

@@ -14,7 +14,7 @@ block content
                   .info-media.clearfix
                     .col-xs-8.info-box
                       .info-box-sub
-                        a(href="/app/events/" + race.City.city_name_slug + "/" + race.event_name_slug + "/" + race.id)
+                        a(href="/events/" + race.City.city_name_slug + "/" + race.event_name_slug + "/" + race.id)
                           h2.sm #{race.event_name}
                         .city
                           span.fa.fa-map-marker.helper
@@ -24,10 +24,10 @@ block content
                           | #{race.dataValues.start_date_f}
                     .col-xs-4.img-pre.clearfix
                       - if(race.img_url_square)
-                          a(href="/app/events/" + race.City.city_name_slug + "/" + race.event_name_slug + "/" + race.id)
+                          a(href="/events/" + race.City.city_name_slug + "/" + race.event_name_slug + "/" + race.id)
                             img.right.b-l-1(src=race.img_url_square alt=race.event_name height="100px")
                       - else
-                          a(href="/app/events/" + race.City.city_name_slug + "/" + race.event_name_slug + "/" + race.id)
+                          a(href="/events/" + race.City.city_name_slug + "/" + race.event_name_slug + "/" + race.id)
                             i.fa.fa-flag.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
                     each tag in race.EventTags
@@ -43,7 +43,7 @@ block content
                   .info-media.clearfix
                     .col-xs-8.info-box
                       .info-box-sub
-                        a(href="/app/events/" + event_tag.Event.City.city_name_slug + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
+                        a(href="/events/" + event_tag.Event.City.city_name_slug + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
                           h2.sm #{event_tag.Event.event_name}
                         .city
                           span.fa.fa-map-marker.helper
@@ -53,10 +53,10 @@ block content
                           | #{event_tag.Event.dataValues.start_date_f}
                     .col-xs-4.img-pre.clearfix
                       - if(event_tag.Event.img_url_square)
-                          a(href="/app/events/" + event_tag.Event.City.city_name_slug + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
+                          a(href="/events/" + event_tag.Event.City.city_name_slug + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
                             img.right.b-l-1(src=event_tag.Event.img_url_square alt=event_tag.Event.event_name height="100px")
                       - else
-                          a(href="/app/events/" + event_tag.Event.City.city_name_slug + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
+                          a(href="/events/" + event_tag.Event.City.city_name_slug + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
                             i.fa.fa-flag.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
                     li.tag
@@ -78,7 +78,7 @@ block content
       span.dialog-close.right.fs-18.pointer
         i.fa.fa-times
     .dialog-body
-        form.fs-12(action="/app/events/user_submission" method="post")
+        form.fs-12(action="/events/user_submission" method="post")
           label.block.fs-12.normal(for="event_name") Name of the event/race *
           input.full.padding-lr-5(type="text", name="event_name", id="event_name" required)
           br
@@ -115,7 +115,7 @@ block content
       - if((mode == "cho_tag_cho_loc") || (mode == "all_tag_cho_loc"))
         - if(mode == "cho_tag_cho_loc")
           .col-md-4
-            a(href="/app/events/upcoming/grouped?activity=" + tag.id title="All " + tag.tag_name + " events and races by location")
+            a(href="/events/upcoming/grouped?activity=" + tag.id title="All " + tag.tag_name + " events and races by location")
               .category-el
                 .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                   .right
@@ -125,7 +125,7 @@ block content
                       | All #{tag.tag_name} events
                   .info-overlay
         .col-md-4
-          a(href="/app/events/upcoming/grouped?location=" + city.id title="All events and races in " + city.city_name + " by activity")
+          a(href="/events/upcoming/grouped?location=" + city.id title="All events and races in " + city.city_name + " by activity")
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -135,7 +135,7 @@ block content
                     | Events in #{city.city_name}
                 .info-overlay
         .col-md-4
-          a(href="/app/gear/grouped?location=" + city.id title="All Outdoor gear stores and retailers in " + city.city_name)
+          a(href="/gear/grouped?location=" + city.id title="All Outdoor gear stores and retailers in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -145,7 +145,7 @@ block content
                     | Stores in #{city.city_name}
                 .info-overlay
         .col-md-4
-          a(href="/app/schools/grouped?location=" + city.id, title="All Outdoor schools in " + city.city_name)
+          a(href="/schools/grouped?location=" + city.id, title="All Outdoor schools in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -155,7 +155,7 @@ block content
                     | Learn in #{city.city_name}
                 .info-overlay
         .col-md-4
-          a(href="/app/groups/grouped?location=" + city.id title="All Active Outdoor groups in " + city.city_name)
+          a(href="/groups/grouped?location=" + city.id title="All Active Outdoor groups in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -166,7 +166,7 @@ block content
                 .info-overlay
       - if((mode == "all_tag_all_loc") || (mode == "cho_tag_all_loc") || (mode == "all_tag_cho_loc"))
         .col-md-4
-          a(href="/app/events/upcoming/grouped" title="All Events and Races by Activity")
+          a(href="/events/upcoming/grouped" title="All Events and Races by Activity")
             .category-el
               .info.clearfix
                 .right
@@ -176,7 +176,7 @@ block content
                     | All Events by Activity
                 .info-overlay
         .col-md-4
-          a(href="/app/events/upcoming/grouped#by-location" title="All Events and Races by Location")
+          a(href="/events/upcoming/grouped#by-location" title="All Events and Races by Location")
             .category-el
               .info.clearfix
                 .right

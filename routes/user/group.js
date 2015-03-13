@@ -16,12 +16,12 @@ exports.user_submission = function(req, res) {
   mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
-      res.redirect('/app/groups/grouped')
+      res.redirect('/groups/grouped')
       // TODO: fix redirection
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
-      res.redirect('/app/groups/grouped')
+      res.redirect('/groups/grouped')
     }
   })
 }
@@ -38,11 +38,11 @@ exports.user_error = function(req, res) {
   mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
-      res.redirect('/app/groups/' + req.param('group_city') + '/' + req.param('group_name') + '/' + req.param('group_id'))
+      res.redirect('/groups/' + req.param('group_city') + '/' + req.param('group_name') + '/' + req.param('group_id'))
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
-      res.redirect('/app/groups/' + req.param('group_city') + '/' + req.param('group_name') + '/' + req.param('group_id'))
+      res.redirect('/groups/' + req.param('group_city') + '/' + req.param('group_name') + '/' + req.param('group_id'))
     }
   })
 }
@@ -59,11 +59,11 @@ exports.user_info = function(req, res) {
   mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
-      res.redirect('/app/groups/' + req.param('group_city') + '/' + req.param('group_name') + '/' + req.param('group_id'))
+      res.redirect('/groups/' + req.param('group_city') + '/' + req.param('group_name') + '/' + req.param('group_id'))
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
-      res.redirect('/app/groups/' + req.param('group_city') + '/' + req.param('group_name') + '/' + req.param('group_id'))
+      res.redirect('/groups/' + req.param('group_city') + '/' + req.param('group_name') + '/' + req.param('group_id'))
     }
   })
 }

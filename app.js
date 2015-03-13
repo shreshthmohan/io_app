@@ -369,7 +369,7 @@ app.get('/app/admin/schools/:school_id/dissociate_tag/:tag_id', admin_school.dis
 
 //app.get('/app/home', routes.index);
 
-app.get('/app/about',
+app.get('/about',
   function(req, res) {
     res.render('user/about', {
       title_: 'About'
@@ -381,19 +381,19 @@ app.get('/app/about',
 //////////////////
 
 // All upcoming events
-app.get('/app/events/upcoming', race.upcoming); // from home search bar
-app.get('/app/events/upcoming/grouped', race.upcoming_grouped); // from home explore
-app.post('/app/events/user_submission', race.user_submission);
-app.post('/app/events/user_error', race.user_error);
-app.post('/app/events/user_info', race.user_info);
+app.get('/events/upcoming', race.upcoming); // from home search bar
+app.get('/events/upcoming/grouped', race.upcoming_grouped); // from home explore
+app.post('/events/user_submission', race.user_submission);
+app.post('/events/user_error', race.user_error);
+app.post('/events/user_info', race.user_info);
 
 // All events
-app.get('/app/events', function(req, res) {res.redirect('/app/events/upcoming')});
-// TODO: better URLs: /app/events/upcoming/running/bengaluru/1/2
+app.get('/events', function(req, res) {res.redirect('/events/upcoming')});
+// TODO: better URLs: /events/upcoming/running/bengaluru/1/2
 
 // Individual event
-app.get('/app/events/:city_name_slug/:event_name_slug/:event_id', race.individual)
-// TODO: works fine even in someone tries to access /app/events/:some-text/:some-random-text/:event_id
+app.get('/events/:city_name_slug/:event_name_slug/:event_id', race.individual)
+// TODO: works fine even in someone tries to access /events/:some-text/:some-random-text/:event_id
 // Need to figure out how to display correct name in URL bar. Some kind of redirection
 // Yes, redirection. Find out how much more resources this will use
 
@@ -401,37 +401,37 @@ app.get('/app/events/:city_name_slug/:event_name_slug/:event_id', race.individua
 // Gear routes //
 /////////////////
 
-app.get('/app/gear', gear.all);
-app.get('/app/gear/grouped', gear.all_grouped);
-app.post('/app/gear/user_submission', gear.user_submission);
-app.post('/app/gear/user_error', gear.user_error);
-app.post('/app/gear/user_info', gear.user_info);
+app.get('/gear', gear.all);
+app.get('/gear/grouped', gear.all_grouped);
+app.post('/gear/user_submission', gear.user_submission);
+app.post('/gear/user_error', gear.user_error);
+app.post('/gear/user_info', gear.user_info);
 
-app.get('/app/gear/:city_name_slug/:retailer_name_slug/:retailer_id', gear.individual)
+app.get('/gear/:city_name_slug/:retailer_name_slug/:retailer_id', gear.individual)
 
 //////////////////
 // Group routes //
 //////////////////
 
-app.get('/app/groups', group.all);
-app.get('/app/groups/grouped', group.all_grouped);
-app.post('/app/groups/user_submission', group.user_submission);
-app.post('/app/groups/user_error', group.user_error);
-app.post('/app/groups/user_info', group.user_info);
+app.get('/groups', group.all);
+app.get('/groups/grouped', group.all_grouped);
+app.post('/groups/user_submission', group.user_submission);
+app.post('/groups/user_error', group.user_error);
+app.post('/groups/user_info', group.user_info);
 
-app.get('/app/groups/:city_name_slug/:group_name_slug/:group_id', group.individual)
+app.get('/groups/:city_name_slug/:group_name_slug/:group_id', group.individual)
 
 ///////////////////
 // School routes //
 ///////////////////
 
-app.get('/app/schools', school.all);
-app.get('/app/schools/grouped', school.all_grouped);
-app.post('/app/schools/user_submission', school.user_submission);
-app.post('/app/schools/user_error', school.user_error);
-app.post('/app/schools/user_info', school.user_info);
+app.get('/schools', school.all);
+app.get('/schools/grouped', school.all_grouped);
+app.post('/schools/user_submission', school.user_submission);
+app.post('/schools/user_error', school.user_error);
+app.post('/schools/user_info', school.user_info);
 
-app.get('/app/schools/:city_name_slug/:school_name_slug/:school_id', school.individual)
+app.get('/schools/:city_name_slug/:school_name_slug/:school_id', school.individual)
 
 /////////////////////
 // User Routes end // 

@@ -71,7 +71,7 @@ block content
   .row
     .sub-heading.text-center.margin-tb-10 Suggestions
     .col-md-4
-      a(href="/app/events/upcoming/grouped?location=" + race.City.id , title="All outdoor events in " + race.City.city_name)
+      a(href="/events/upcoming/grouped?location=" + race.City.id , title="All outdoor events in " + race.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
             .right
@@ -81,7 +81,7 @@ block content
                 | Events in #{race.City.city_name}
             .info-overlay
     .col-md-4
-      a(href="/app/events/upcoming/grouped" title="All Outdoor Events and Races by Activity")
+      a(href="/events/upcoming/grouped" title="All Outdoor Events and Races by Activity")
         .category-el
           .info.clearfix
             .right
@@ -91,7 +91,7 @@ block content
                 | All Events by Activity
             .info-overlay
     .col-md-4
-      a(href="/app/events/upcoming/grouped#by-location" title="All Outdoor Events and Races by Location")
+      a(href="/events/upcoming/grouped#by-location" title="All Outdoor Events and Races by Location")
         .category-el
           .info.clearfix
             .right
@@ -101,7 +101,7 @@ block content
                 | All Events by Location
             .info-overlay
     .col-md-4
-      a(href="/app/gear/grouped?location=" + race.City.id , title="All outdoor gear stores and retailers in " + race.City.city_name)
+      a(href="/gear/grouped?location=" + race.City.id , title="All outdoor gear stores and retailers in " + race.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
             .right
@@ -111,7 +111,7 @@ block content
                 | Stores in #{race.City.city_name}
             .info-overlay
     .col-md-4
-      a(href="/app/schools/grouped?location=" + race.City.id , title="All outdoor schools in " + race.City.city_name)
+      a(href="/schools/grouped?location=" + race.City.id , title="All outdoor schools in " + race.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
             .right
@@ -121,7 +121,7 @@ block content
                 | Learn in #{race.City.city_name}
             .info-overlay
     .col-md-4
-      a(href="/app/groups/grouped?location=" + race.City.id title="All Active Outdoor groups in " + race.City.city_name)
+      a(href="/groups/grouped?location=" + race.City.id title="All Active Outdoor groups in " + race.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
             .right
@@ -138,7 +138,7 @@ block content
       span.dialog-close.right.fs-18.pointer
         i.fa.fa-times
     .dialog-body
-        form.fs-12(action="/app/events/user_error?event_id=" + race.id + "&event_name=" + race.event_name + "&event_city=" + race.City.city_name method="post")
+        form.fs-12(action="/events/user_error?event_id=" + race.id + "&event_name=" + race.event_name + "&event_city=" + race.City.city_name method="post")
           label.block.fs-12.normal(for="errata_list") What's wrong? *
           input.full.padding-lr-5(type="text", name="errata_list", id="errata_list" required placeholder="Separate each item by a comma.")
           br
@@ -156,7 +156,7 @@ block content
       span.dialog-close.right.fs-18.pointer
         i.fa.fa-times
     .dialog-body
-        form.fs-12(action="/app/events/user_info?event_id=" + race.id + "&event_name=" + race.event_name + "&event_city=" + race.City.city_name method="post")
+        form.fs-12(action="/events/user_info?event_id=" + race.id + "&event_name=" + race.event_name + "&event_city=" + race.City.city_name method="post")
           label.block.fs-12.normal(for="missing_list") What's missing? *
           input.full.padding-lr-5(type="text", name="missing_list", id="missing_list" required placeholder="Separate each item by a comma.")
           br

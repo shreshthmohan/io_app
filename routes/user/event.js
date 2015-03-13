@@ -16,11 +16,11 @@ exports.user_submission = function(req, res) {
   mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
-      res.redirect('/app/events/upcoming/grouped')
+      res.redirect('/events/upcoming/grouped')
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
-      res.redirect('/app/events/upcoming/grouped')
+      res.redirect('/events/upcoming/grouped')
     }
   })
 }
@@ -37,11 +37,11 @@ exports.user_error = function(req, res) {
   mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
-      res.redirect('/app/events/' + req.param('event_city') + '/' + req.param('event_name') + '/' + req.param('event_id'))
+      res.redirect('/events/' + req.param('event_city') + '/' + req.param('event_name') + '/' + req.param('event_id'))
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
-      res.redirect('/app/events/' + req.param('event_city') + '/' + req.param('event_name') + '/' + req.param('event_id'))
+      res.redirect('/events/' + req.param('event_city') + '/' + req.param('event_name') + '/' + req.param('event_id'))
     }
   })
 }
@@ -58,11 +58,11 @@ exports.user_info = function(req, res) {
   mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
-      res.redirect('/app/events/' + req.param('event_city') + '/' + req.param('event_name') + '/' + req.param('event_id'))
+      res.redirect('/events/' + req.param('event_city') + '/' + req.param('event_name') + '/' + req.param('event_id'))
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
-      res.redirect('/app/events/' + req.param('event_city') + '/' + req.param('event_name') + '/' + req.param('event_id'))
+      res.redirect('/events/' + req.param('event_city') + '/' + req.param('event_name') + '/' + req.param('event_id'))
     }
   })
 }

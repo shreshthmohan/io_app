@@ -21,7 +21,7 @@ block content
           each tag in tags
             - if(tag.event_count > 0)
                 .col-md-4
-                  a(href=city ? "/app/events/upcoming?activity=" + tag.id + "&location=" + city.id : "/app/events/upcoming/grouped?activity=" + tag.id + "&location=0", title=city ? "All upcoming " + tag.tag_name  + " events in " + city.city_name : "All upcoming " + tag.tag_name  + " events across India")
+                  a(href=city ? "/events/upcoming?activity=" + tag.id + "&location=" + city.id : "/events/upcoming/grouped?activity=" + tag.id + "&location=0", title=city ? "All upcoming " + tag.tag_name  + " events in " + city.city_name : "All upcoming " + tag.tag_name  + " events across India")
                     .category-el
                       .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                         .info-text.col-xs-12
@@ -39,7 +39,7 @@ block content
           each city in cities
             -if(city.event_count > 0)
                 .col-md-4
-                  a(href="/app/events/upcoming?activity=" + tag.id + "&location=" + city.id, title="All upcoming " + tag.tag_name + " events in " + city.city_name)
+                  a(href="/events/upcoming?activity=" + tag.id + "&location=" + city.id, title="All upcoming " + tag.tag_name + " events in " + city.city_name)
                     .category-el
                       .info.clearfix(style="background-image: url(" + city.image_url + ");")
                         .info-text.col-xs-12
@@ -60,7 +60,7 @@ block content
           each city in cities
             -if(city.event_count > 0)
                 .col-md-4
-                  a(href="/app/events/upcoming/grouped?location=" + city.id, title="All events and races in " + city.city_name)
+                  a(href="/events/upcoming/grouped?location=" + city.id, title="All events and races in " + city.city_name)
                     .category-el
                       .info.clearfix(style="background-image: url(" + city.image_url + ");")
                         .info-text.col-xs-12

@@ -23,7 +23,7 @@ block content
           each tag in tags
             - if(tag.retailer_count > 0)
                 .col-md-4
-                  a(href=city ? "/app/gear?activity=" + tag.id + "&location=" + city.id : "/app/gear/grouped?activity=" + tag.id + "&location=0", title=city ? "All " + tag.tag_name + " gear stores and retailers in " + city.city_name : "All " + tag.tag_name + " gear stores and retailers across India")
+                  a(href=city ? "/gear?activity=" + tag.id + "&location=" + city.id : "/gear/grouped?activity=" + tag.id + "&location=0", title=city ? "All " + tag.tag_name + " gear stores and retailers in " + city.city_name : "All " + tag.tag_name + " gear stores and retailers across India")
                     .category-el
                       .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                         .info-text.col-xs-12
@@ -41,7 +41,7 @@ block content
           each city in cities
             -if(city.retailer_count > 0)
                 .col-md-4
-                  a(href="/app/gear?activity=" + tag.id + "&location=" + city.id, title="All " + tag.tag_name + " gear stores and retailers in " + city.city_name)
+                  a(href="/gear?activity=" + tag.id + "&location=" + city.id, title="All " + tag.tag_name + " gear stores and retailers in " + city.city_name)
                     .category-el
                       .info.clearfix(style="background-image: url(" + city.image_url + ");")
                         .info-text.col-xs-12
@@ -62,7 +62,7 @@ block content
           each city in cities
             -if(city.retailer_count > 0)
                 .col-md-4
-                  a(href="/app/gear/grouped?location=" + city.id, title="All gear stores and retailers in " + city.city_name)
+                  a(href="/gear/grouped?location=" + city.id, title="All gear stores and retailers in " + city.city_name)
                     .category-el
                       .info.clearfix(style="background-image: url(" + city.image_url + ");")
                         .info-text.col-xs-12

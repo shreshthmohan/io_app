@@ -15,17 +15,17 @@ block content
                   .info-media.clearfix
                     .info-box.col-xs-8
                       .info-box-sub
-                        a(href="/app/gear/" + retailer.City.city_name_slug + "/" + retailer.retailer_name_slug + "/" + retailer.id)
+                        a(href="/gear/" + retailer.City.city_name_slug + "/" + retailer.retailer_name_slug + "/" + retailer.id)
                           h2.sm #{retailer.retailer_name}
                         .city
                           span.fa.fa-map-marker.helper
                           | #{retailer.City.city_name}
                     .img-pre.col-xs-4.clearfix
                       - if(retailer.img_url_square)
-                          a(href="/app/gear/" + retailer.City.city_name_slug + "/" + retailer.retailer_name_slug + "/" + retailer.id)
+                          a(href="/gear/" + retailer.City.city_name_slug + "/" + retailer.retailer_name_slug + "/" + retailer.id)
                             img.right.b-l-1(src=retailer.img_url_square alt=retailer.retailer_name height="100px")
                       - else
-                          a(href="/app/gear/" + retailer.City.city_name_slug + "/" + retailer.retailer_name_slug + "/" + retailer.id)
+                          a(href="/gear/" + retailer.City.city_name_slug + "/" + retailer.retailer_name_slug + "/" + retailer.id)
                             i.fa.fa-gear.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
                     each tag in retailer.GearTags
@@ -38,17 +38,17 @@ block content
                   .info-media.clearfix
                     .infobox.col-xs-8
                       .info-box-sub
-                        a(href="/app/gear/" + gear_tag.Retailer.City.city_name_slug + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
+                        a(href="/gear/" + gear_tag.Retailer.City.city_name_slug + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
                           h2.sm #{gear_tag.Retailer.retailer_name}
                         .city
                           span.fa.fa-map-marker.helper
                           | #{gear_tag.Retailer.City.city_name}
                     .img-pre.col-xs-4.clearfix
                       - if(gear_tag.Retailer.img_url_square)
-                          a(href="/app/gear/" + gear_tag.Retailer.City.city_name_slug + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
+                          a(href="/gear/" + gear_tag.Retailer.City.city_name_slug + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
                             img.right.b-l-1(src=gear_tag.Retailer.img_url_square alt=gear_tag.Retailer.retailer_name height="100px")
                       - else
-                          a(href="/app/gear/" + gear_tag.Retailer.City.city_name_slug + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
+                          a(href="/gear/" + gear_tag.Retailer.City.city_name_slug + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
                             i.fa.fa-gear.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
                     li.tag
@@ -67,7 +67,7 @@ block content
       span.dialog-close.right.fs-18.pointer
         i.fa.fa-times
     .dialog-body
-        form.fs-12(action="/app/gear/user_submission" method="post")
+        form.fs-12(action="/gear/user_submission" method="post")
           label.block.fs-12.normal(for="retailer_name") Name of the store/retailer *
           input.full.padding-lr-5(type="text", name="retailer_name", id="retailer_name" required)
           br
@@ -104,7 +104,7 @@ block content
       - if((mode == "cho_tag_cho_loc") || (mode == "all_tag_cho_loc"))
         - if(mode == "cho_tag_cho_loc")
           .col-md-4
-            a(href="/app/gear/grouped?activity=" + tag.id title="All " + tag.tag_name + " stores by location")
+            a(href="/gear/grouped?activity=" + tag.id title="All " + tag.tag_name + " stores by location")
               .category-el
                 .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                   .right
@@ -114,7 +114,7 @@ block content
                       | All #{tag.tag_name} Stores
                   .info-overlay
         .col-md-4
-          a(href="/app/gear/grouped?location=" + city.id title="All stores in " + city.city_name + " by activity")
+          a(href="/gear/grouped?location=" + city.id title="All stores in " + city.city_name + " by activity")
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -124,7 +124,7 @@ block content
                     | Stores in #{city.city_name}
                 .info-overlay
         .col-md-4
-          a(href="/app/events/upcoming/grouped?location=" + city.id title="All Outdoor Events in " + city.city_name)
+          a(href="/events/upcoming/grouped?location=" + city.id title="All Outdoor Events in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -144,7 +144,7 @@ block content
                     | Outdoor schools in #{city.city_name}
                 .info-overlay
         .col-md-4
-          a(href="/app/groups/grouped?location=" + city.id title="All Active Outdoor groups in " + city.city_name)
+          a(href="/groups/grouped?location=" + city.id title="All Active Outdoor groups in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -155,7 +155,7 @@ block content
                 .info-overlay
       - if((mode == "all_tag_all_loc") || (mode == "cho_tag_all_loc") || (mode == "all_tag_cho_loc"))
         .col-md-4
-          a(href="/app/gear/grouped" title="All Gear Stores and Retailers by Activity")
+          a(href="/gear/grouped" title="All Gear Stores and Retailers by Activity")
             .category-el
               .info.clearfix
                 .right
@@ -165,7 +165,7 @@ block content
                     | All Stores by Activity
                 .info-overlay
         .col-md-4
-          a(href="/app/gear/grouped#by-location" title="All Gear Stores and Retailers by Location")
+          a(href="/gear/grouped#by-location" title="All Gear Stores and Retailers by Location")
             .category-el
               .info.clearfix
                 .right

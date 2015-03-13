@@ -6,44 +6,44 @@ div(class="navbar navbar-default navbar-fixed-top" role="navigation")
         span(class="icon-bar")
         span(class="icon-bar")
         span(class="icon-bar")
-      a(class="navbar-brand" href="/app/home") India Outside
+      a(class="navbar-brand" href="/") India Outside
     div(class="navbar-collapse collapse")
       ul(class="nav navbar-nav")
         - if(active_tab == 'home')
           li.active
-            a(href='/app/home') Home
+            a(href='/') Home
         - else
           li
-            a(href='/app/home') Home
+            a(href='/') Home
         - if(active_tab == 'events')
           li.active
-            a(href='/app/events/upcoming/grouped') Events
+            a(href='/events/upcoming/grouped') Events
         - else
           li
-            a(href='/app/events/upcoming/grouped') Events
+            a(href='/events/upcoming/grouped') Events
         - if(active_tab == 'gear')
           li.active
-            a(href='/app/gear/grouped') Gear 
+            a(href='/gear/grouped') Gear 
         - else
           li
-            a(href='/app/gear/grouped') Gear 
+            a(href='/gear/grouped') Gear 
         - if(active_tab == 'groups')
           li.active
-            a(href='/app/groups/grouped') Groups
+            a(href='/groups/grouped') Groups
         - else
           li
-            a(href='/app/groups/grouped') Groups
+            a(href='/groups/grouped') Groups
         - if(active_tab == 'schools')
           li.active
-            a(href='/app/schools/grouped') Learn
+            a(href='/schools/grouped') Learn
         - else
           li
-            a(href='/app/schools/grouped') Learn
-        li(class="social-icon")
-          a(href='TODO')
-            i(class="fa fa-twitter")
-            span(class="hide-for-small")  
-        li(class="social-icon")
-          a(href='TODO')
-            i(class="fa fa-facebook")
-            span(class="hide-for-small") 
+            a(href='/schools/grouped') Learn
+        //-li(class="social-icon")
+        //-  a(href='TODO')
+        //-    i(class="fa fa-twitter")
+        //-    span(class="hide-for-small")  
+        //-li(class="social-icon")
+        //-  a(href='TODO')
+        //-    i(class="fa fa-facebook")
+        //-    span(class="hide-for-small") 

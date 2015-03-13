@@ -16,11 +16,11 @@ exports.user_submission = function(req, res) {
   mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
-      res.redirect('/app/schools/grouped')
+      res.redirect('/schools/grouped')
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
-      res.redirect('/app/schools/grouped')
+      res.redirect('/schools/grouped')
     }
   })
 }
@@ -37,11 +37,11 @@ exports.user_error = function(req, res) {
   mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
-      res.redirect('/app/schools/' + req.param('school_city') + '/' + req.param('school_name') + '/' + req.param('school_id'))
+      res.redirect('/schools/' + req.param('school_city') + '/' + req.param('school_name') + '/' + req.param('school_id'))
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
-      res.redirect('/app/schools/' + req.param('school_city') + '/' + req.param('school_name') + '/' + req.param('school_id'))
+      res.redirect('/schools/' + req.param('school_city') + '/' + req.param('school_name') + '/' + req.param('school_id'))
     }
   })
 }
@@ -58,11 +58,11 @@ exports.user_info = function(req, res) {
   mail_transport.sendMail(mail_options, function(error, info) {
     if(error) {
       console.log('Error occurred: ' + JSON.stringify(error));
-      res.redirect('/app/schools/' + req.param('school_city') + '/' + req.param('school_name') + '/' + req.param('school_id'))
+      res.redirect('/schools/' + req.param('school_city') + '/' + req.param('school_name') + '/' + req.param('school_id'))
     }
     else {
       console.log('Message sent: ' + JSON.stringify(info));
-      res.redirect('/app/schools/' + req.param('school_city') + '/' + req.param('school_name') + '/' + req.param('school_id'))
+      res.redirect('/schools/' + req.param('school_city') + '/' + req.param('school_name') + '/' + req.param('school_id'))
     }
   })
 }

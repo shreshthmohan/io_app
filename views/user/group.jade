@@ -13,17 +13,17 @@ block content
               .info-media.clearfix
                 .info-box.col-xs-8
                   .info-box-sub
-                    a(href="/app/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
+                    a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
                       h2.sm #{group.group_name}
                     .city
                       span.fa.fa-map-marker.helper
                       | #{group.City.city_name}
                 .img-pre.col-xs-4.clearfix
                   - if(group.img_url_square)
-                      a(href="/app/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
+                      a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
                         img.right.b-l-1(src=group.img_url_square alt=group.group_name height="100px")
                   - else
-                      a(href="/app/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
+                      a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
                         i.fa.fa-group.right.b-l-1.img-alt
               .tags.clearfix
                 each tag in group.GroupTags
@@ -36,17 +36,17 @@ block content
               .info-media.clearfix
                 .infobox.col-xs-8
                   .info-box-sub
-                    a(href="/app/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                    a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
                       h2.sm #{group_tag.Group.group_name}
                     .city
                       span.fa.fa-map-marker.helper
                       | #{group_tag.Group.City.city_name}
                 .img-pre.col-xs-4.clearfix
                   - if(group_tag.Group.img_url_square)
-                      a(href="/app/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                      a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
                         img.right.b-l-1(src=group_tag.Group.img_url_square alt=group_tag.Group.group_name height="100px")
                   - else
-                      a(href="/app/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                      a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
                         i.fa.fa-group.right.b-l-1.img-alt
               .tags.clearfix
                 li.tag
@@ -65,7 +65,7 @@ block content
       span.dialog-close.right.fs-18.pointer
         i.fa.fa-times
     .dialog-body
-        form.fs-12(action="/app/groups/user_submission" method="post")
+        form.fs-12(action="/groups/user_submission" method="post")
           label.block.fs-12.normal(for="group_name") Name of the group *
           input.full.padding-lr-5(type="text", name="group_name", id="group_name" required)
           br
@@ -96,7 +96,7 @@ block content
       - if((mode == "cho_tag_cho_loc") || (mode == "all_tag_cho_loc"))
         - if(mode == "cho_tag_cho_loc")
           .col-md-4
-            a(href="/app/groups/grouped?activity=" + tag.id title="All Active Outdoor " + tag.tag_name + " groups by location")
+            a(href="/groups/grouped?activity=" + tag.id title="All Active Outdoor " + tag.tag_name + " groups by location")
               .category-el
                 .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                   .right
@@ -106,7 +106,7 @@ block content
                       | All #{tag.tag_name} Groups
                   .info-overlay
         .col-md-4
-          a(href="/app/groups/grouped?location=" + city.id title="All Active Outdoor Groups in " + city.city_name + " by Activity")
+          a(href="/groups/grouped?location=" + city.id title="All Active Outdoor Groups in " + city.city_name + " by Activity")
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -116,7 +116,7 @@ block content
                     | Groups in #{city.city_name}
                 .info-overlay
         .col-md-4
-          a(href="/app/events/upcoming/grouped?location=" + city.id title="All Outdoor Events in " + city.city_name)
+          a(href="/events/upcoming/grouped?location=" + city.id title="All Outdoor Events in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -136,7 +136,7 @@ block content
                     | Outdoor schools in #{city.city_name}
                 .info-overlay
         .col-md-4
-          a(href="/app/gear/grouped?location=" + city.id title="All Outdoor Gear Stores and Retailers in " + city.city_name)
+          a(href="/gear/grouped?location=" + city.id title="All Outdoor Gear Stores and Retailers in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -147,7 +147,7 @@ block content
                 .info-overlay
       - if((mode == "all_tag_all_loc") || (mode == "cho_tag_all_loc") || (mode == "all_tag_cho_loc"))
         .col-md-4
-          a(href="/app/grooups/grouped" title="All Active Outdoor Groups by Activity")
+          a(href="/grooups/grouped" title="All Active Outdoor Groups by Activity")
             .category-el
               .info.clearfix
                 .right
@@ -157,7 +157,7 @@ block content
                     | All Grousp by Activity
                 .info-overlay
         .col-md-4
-          a(href="/app/groups/grouped#by-location" title="All Active Outdoor Groups by Location")
+          a(href="/groups/grouped#by-location" title="All Active Outdoor Groups by Location")
             .category-el
               .info.clearfix
                 .right
