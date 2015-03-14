@@ -55,8 +55,20 @@
       }
       # redirect URLs with trailing / to those without 
       rewrite ^/(.*)/$ /$1 permanent;
+
+      location ~* \.(css|ico)$ {
+        expires 168h;
+        root /home/ubuntu/projects/io_app/public;
+      }
+
+      location ~* \.js$ {
+        root /home/ubuntu/projects/io_app/public/js;
+      }
     }
     // still need to add directives for static files
+
+3a. nginx gzip enabled:
+
 
 4a. stop — fast shutdown
     quit — graceful shutdown
@@ -81,3 +93,5 @@
 7. non-www domain is called root sub-domain
    Fixed root domain redirection by adding A name record in DNS zone file pointing to IP address of ec2 instance.
    
+8. Replacing text in multiple files example:
+    sed -i -- 's/user_form\.js/user_form.min.js/g' *
