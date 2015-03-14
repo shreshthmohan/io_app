@@ -2,7 +2,7 @@
   form.search.form-inline(action="/schools")
     .form-group
       label.sr-only(for="activity_school") Activity
-      select(class="form-control" required type="text" name="activity" id="activity_school")
+      select(class="form-control" name="activity" id="activity_school")
         - if(activity == null || activity == '' || activity == 0)
             option(value=0 selected="selected") All
         - else 
@@ -15,7 +15,7 @@
     span.filter-helper outdoor schools in
     .form-group
       label.sr-only(for="store_location") Activity
-      select(class="form-control" required type="text" name="location" id="store_location")
+      select(class="form-control" name="location" id="store_location")
         - if(loc == null || loc == '' || loc == 0)
             option(value=0 selected="selected") All
         - else 

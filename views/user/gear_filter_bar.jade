@@ -2,7 +2,7 @@
   form.search.form-inline(action="/app/gear")
     .form-group
       label.sr-only(for="activity_gear") Activity
-      select(class="form-control" required type="text" name="activity" id="activity_gear")
+      select(class="form-control" name="activity" id="activity_gear")
         - if(activity == null || activity == '' || activity == 0)
             option(value=0 selected="selected") All
         - else 
@@ -15,7 +15,7 @@
     span.filter-helper gear in
     .form-group
       label.sr-only(for="store_location") Activity
-      select(class="form-control" required type="text" name="location" id="store_location")
+      select(class="form-control" name="location" id="store_location")
         - if(loc == null || loc == '' || loc == 0)
             option(value=0 selected="selected") All Locations
         - else 

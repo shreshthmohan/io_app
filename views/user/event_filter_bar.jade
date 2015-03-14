@@ -2,7 +2,7 @@
   form(class="search form-inline" action="/events/upcoming")
     .form-group
       label.sr-only(for='event_activity') Activity
-      select(class="form-control" type="text" name="activity" id="event_activity")
+      select(class="form-control" name="activity" id="event_activity")
         - if(activity == null || activity == '' || activity == 0)
             option(value=0 selected="selected") All Activities
         - else 
@@ -14,7 +14,7 @@
               option(value=tag.id) #{tag.tag_name}
     .form-group
       label.sr-only(for='event_location') Location
-      select(class="form-control" type="text" name="location" id="event_location")
+      select(class="form-control" name="location" id="event_location")
         - if(loc == null || loc == '' || loc == 0)
             option(value=0 selected="selected") All Locations
         - else 
