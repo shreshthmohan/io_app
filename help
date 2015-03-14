@@ -61,14 +61,15 @@
         root /home/ubuntu/projects/io_app/public;
       }
 
-      location ~* \.js$ {
+      location ~/js \.js$ {
         root /home/ubuntu/projects/io_app/public/js;
       }
     }
     // still need to add directives for static files
 
 3a. nginx gzip enabled:
-
+    uncommented gzip settiings in /etc/nginx/nginx.conf
+    http://nginx.org/en/docs/http/ngx_http_gzip_module.html
 
 4a. stop — fast shutdown
     quit — graceful shutdown

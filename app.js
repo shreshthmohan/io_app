@@ -66,7 +66,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
 // TODO Change to a better favicon 
-app.use(connect.favicon('public/logo_by_jangid.ico'));
+app.use(connect.favicon('public/favicon.ico'));
 
 app.use(connect.logger('dev'))
 

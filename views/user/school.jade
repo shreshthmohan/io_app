@@ -13,17 +13,17 @@ block content
               .info-media.clearfix
                 .info-box.col-xs-8
                   .info-box-sub
-                    a(href="/app/schools/" + school.City.city_name_slug + "/" + school.school_name_slug + "/" + school.id)
+                    a(href="/schools/" + school.City.city_name_slug + "/" + school.school_name_slug + "/" + school.id)
                       h2.sm #{school.school_name}
                     .city
                       span.fa.fa-map-marker.helper
                       | #{school.City.city_name}
                 .img-pre.col-xs-4.clearfix
                   - if(school.img_url_square)
-                      a(href="/app/schools/" + school.City.city_name_slug + "/" + school.school_name_slug + "/" + school.id)
+                      a(href="/schools/" + school.City.city_name_slug + "/" + school.school_name_slug + "/" + school.id)
                         img.right.b-l-1(src=school.img_url_square alt=school.school_name height="100px")
                   - else
-                      a(href="/app/schools/" + school.City.city_name_slug + "/" + school.school_name_slug + "/" + school.id)
+                      a(href="/schools/" + school.City.city_name_slug + "/" + school.school_name_slug + "/" + school.id)
                         i.fa.fa-building.right.b-l-1.img-alt
               .tags.clearfix.border-top-gray
                 each tag in school.SchoolTags
@@ -36,17 +36,17 @@ block content
               .info-media.clearfix
                 .infobox.col-xs-8
                   .info-box-sub
-                    a(href="/app/schools/" + school_tag.School.City.city_name_slug + "/" + school_tag.School.school_name_slug + "/" + school_tag.School.id)
+                    a(href="/schools/" + school_tag.School.City.city_name_slug + "/" + school_tag.School.school_name_slug + "/" + school_tag.School.id)
                       h2.sm #{school_tag.School.school_name}
                     .city
                       span.fa.fa-map-marker.helper
                       | #{school_tag.School.City.city_name}
                 .img-pre.col-xs-4.clearfix
                   - if(school_tag.School.img_url_square)
-                      a(href="/app/schools/" + school_tag.School.City.city_name_slug + "/" + school_tag.School.school_name_slug + "/" + school_tag.School.id)
+                      a(href="/schools/" + school_tag.School.City.city_name_slug + "/" + school_tag.School.school_name_slug + "/" + school_tag.School.id)
                         img.right.b-l-1(src=school_tag.School.img_url_square alt=school_tag.School.school_name height="100px")
                   - else
-                      a(href="/app/schools/" + school_tag.School.City.city_name_slug + "/" + school_tag.School.school_name_slug + "/" + school_tag.School.id)
+                      a(href="/schools/" + school_tag.School.City.city_name_slug + "/" + school_tag.School.school_name_slug + "/" + school_tag.School.id)
                         i.fa.fa-building.right.b-l-1.img-alt
               .tags.clearfix.border-top-gray
                 li.tag
@@ -65,7 +65,7 @@ block content
       span.dialog-close.right.fs-18.pointer
         i.fa.fa-times
     .dialog-body
-        form.fs-12(action="/app/schools/user_submission" method="post")
+        form.fs-12(action="/schools/user_submission" method="post")
           label.block.fs-12.normal(for="school_name") Name of the outdoor school/coach *
           input.full.padding-lr-5(type="text", name="school_name", id="school_name" required)
           br
@@ -99,7 +99,7 @@ block content
       - if((mode == "cho_tag_cho_loc") || (mode == "all_tag_cho_loc"))
         - if(mode == "cho_tag_cho_loc")
           .col-md-4
-            a(href="/app/schools/grouped?activity=" + tag.id title="Places to learn " + tag.tag_name + " by location")
+            a(href="/schools/grouped?activity=" + tag.id title="Places to learn " + tag.tag_name + " by location")
               .category-el
                 .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                   .right
@@ -109,7 +109,7 @@ block content
                       | Learn #{tag.tag_name}
                   .info-overlay
         .col-md-4
-          a(href="/app/schools/grouped?location=" + city.id title="Places to learn a sport in " + city.city_name + " by activity")
+          a(href="/schools/grouped?location=" + city.id title="Places to learn a sport in " + city.city_name + " by activity")
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -119,7 +119,7 @@ block content
                     | Learn in #{city.city_name}
                 .info-overlay
         .col-md-4
-          a(href="/app/events/upcoming/grouped?location=" + city.id title="All Outdoor Events in " + city.city_name)
+          a(href="/events/upcoming/grouped?location=" + city.id title="All Outdoor Events in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -129,7 +129,7 @@ block content
                     | Events in #{city.city_name}
                 .info-overlay
         .col-md-4
-          a(href="/app/gear/grouped?location=" + city.id,  title="All Outdoor gear stores and retailers " + city.city_name)
+          a(href="/gear/grouped?location=" + city.id,  title="All Outdoor gear stores and retailers " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -139,7 +139,7 @@ block content
                     | Stores in #{city.city_name}
                 .info-overlay
         .col-md-4
-          a(href="/app/groups/grouped?location=" + city.id title="All Active Outdoor groups in " + city.city_name)
+          a(href="/groups/grouped?location=" + city.id title="All Active Outdoor groups in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
@@ -150,7 +150,7 @@ block content
                 .info-overlay
       - if((mode == "all_tag_all_loc") || (mode == "cho_tag_all_loc") || (mode == "all_tag_cho_loc"))
         .col-md-4
-          a(href="/app/schools/grouped" title="All Outdoor Schools by Activity")
+          a(href="/schools/grouped" title="All Outdoor Schools by Activity")
             .category-el
               .info.clearfix
                 .right
@@ -160,7 +160,7 @@ block content
                     | Outdoor Schools by Activity
                 .info-overlay
         .col-md-4
-          a(href="/app/schools/grouped#by-location" title="All Outdoor Schools by Location")
+          a(href="/schools/grouped#by-location" title="All Outdoor Schools by Location")
             .category-el
               .info.clearfix
                 .right

@@ -57,7 +57,7 @@ block content
   .row
     .sub-heading.text-center.margin-tb-10 Suggestions
     .col-md-4
-      a(href="/app/gear/grouped?location=" + retailer.City.id , title="All outdoor gear stores and retailers in " + retailer.City.city_name)
+      a(href="/gear/grouped?location=" + retailer.City.id , title="All outdoor gear stores and retailers in " + retailer.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
             .right
@@ -67,7 +67,7 @@ block content
                 | Stores in #{retailer.City.city_name}
             .info-overlay
     .col-md-4
-      a(href="/app/gear/grouped" title="All Gear Stores and Retailers by Activity")
+      a(href="/gear/grouped" title="All Gear Stores and Retailers by Activity")
         .category-el
           .info.clearfix
             .right
@@ -77,7 +77,7 @@ block content
                 | All Stores by Activity
             .info-overlay
     .col-md-4
-      a(href="/app/gear/grouped#by-location" title="All Gear Stores and Retailers by Location")
+      a(href="/gear/grouped#by-location" title="All Gear Stores and Retailers by Location")
         .category-el
           .info.clearfix
             .right
@@ -87,7 +87,7 @@ block content
                 | All Stores by Location
             .info-overlay
     .col-md-4
-      a(href="/app/events/upcoming/grouped?location=" + retailer.City.id , title="All outdoor events in " + retailer.City.city_name)
+      a(href="/events/upcoming/grouped?location=" + retailer.City.id , title="All outdoor events in " + retailer.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
             .right
@@ -98,7 +98,7 @@ block content
             .info-overlay
 
     .col-md-4
-      a(href="/app/schools/grouped?location=" + retailer.City.id , title="All outdoor schools in " + retailer.City.city_name)
+      a(href="/schools/grouped?location=" + retailer.City.id , title="All outdoor schools in " + retailer.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
             .right
@@ -108,7 +108,7 @@ block content
                 | Learn in #{retailer.City.city_name}
             .info-overlay
     .col-md-4
-      a(href="/app/groups/grouped?location=" + retailer.City.id title="All Active Outdoor groups in " + retailer.City.city_name)
+      a(href="/groups/grouped?location=" + retailer.City.id title="All Active Outdoor groups in " + retailer.City.city_name)
         .category-el
           .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
             .right
@@ -125,7 +125,7 @@ block content
       span.dialog-close.right.fs-18.pointer
         i.fa.fa-times
     .dialog-body
-        form.fs-12(action="/app/gear/user_error?retailer_id=" + retailer.id + "&retailer_name=" + retailer.retailer_name + "&retailer_city=" + retailer.City.city_name method="post")
+        form.fs-12(action="/gear/user_error?retailer_id=" + retailer.id + "&retailer_name=" + retailer.retailer_name + "&retailer_city=" + retailer.City.city_name method="post")
           label.block.fs-12.normal(for="errata_list") What's wrong? *
           input.full.padding-lr-5(type="text", name="errata_list", id="errata_list" required placeholder="Separate each item by a comma.")
           br
@@ -143,7 +143,7 @@ block content
       span.dialog-close.right.fs-18.pointer
         i.fa.fa-times
     .dialog-body
-        form.fs-12(action="/app/gear/user_info?retailer_id=" + retailer.id + "&retailer_name=" + retailer.retailer_name + "&retailer_city=" + retailer.City.city_name method="post")
+        form.fs-12(action="/gear/user_info?retailer_id=" + retailer.id + "&retailer_name=" + retailer.retailer_name + "&retailer_city=" + retailer.City.city_name method="post")
           label.block.fs-12.normal(for="missing_list") What's missing? *
           input.full.padding-lr-5(type="text", name="missing_list", id="missing_list" required placeholder="Separate each item by a comma.")
           br

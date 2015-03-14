@@ -23,7 +23,7 @@ block content
           each tag in tags
             - if(tag.group_count > 0)
                 .col-md-4
-                  a(href=city ? "/app/groups?activity=" + tag.id + "&location=" + city.id : "/app/groups/grouped?activity=" + tag.id + "&location=0", title=city ? "All " + tag.tag_name + " groups in " + city.city_name : "All " + tag.tag_name + " groups across India")
+                  a(href=city ? "/groups?activity=" + tag.id + "&location=" + city.id : "/groups/grouped?activity=" + tag.id + "&location=0", title=city ? "All " + tag.tag_name + " groups in " + city.city_name : "All " + tag.tag_name + " groups across India")
                     .category-el
                       .info.clearfix(style="background-image: url(" + tag.image_url + ");")
                         .info-text.col-xs-12
@@ -41,7 +41,7 @@ block content
           each city in cities
             -if(city.group_count > 0)
                 .col-md-4
-                  a(href="/app/groups?activity=" + tag.id + "&location=" + city.id, title="All " + tag.tag_name + " groups " + city.city_name)
+                  a(href="/groups?activity=" + tag.id + "&location=" + city.id, title="All " + tag.tag_name + " groups " + city.city_name)
                     .category-el
                       .info.clearfix(style="background-image: url(" + city.image_url + ");")
                         .info-text.col-xs-12
@@ -62,7 +62,7 @@ block content
           each city in cities
             -if(city.group_count > 0)
                 .col-md-4
-                  a(href="/app/groups/grouped?location=" + city.id, title="All active outdoor groups in " + city.city_name)
+                  a(href="/groups/grouped?location=" + city.id, title="All active outdoor groups in " + city.city_name)
                     .category-el
                       .info.clearfix(style="background-image: url(" + city.image_url + ");")
                         .info-text.col-xs-12
