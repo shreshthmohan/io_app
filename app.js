@@ -123,7 +123,7 @@ app.get('/', routes.index);
 // Checking if user is authenticated for every route except sign-in/up
 app.all('/app/admin*', auth_middleware.ensure_auth);
 // Adding a boolean 'admin' to res.locals
-app.all('/app/*', auth_middleware.add_admin_bool);
+app.all('/*', auth_middleware.add_admin_bool);
 
 ////////////////////////
 // Admin routes start //
