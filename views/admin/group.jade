@@ -16,6 +16,13 @@ block content
       | No web URL; add one:
       input(type="text", name="group_url")
     br
+    if(group.maturity)
+      #maturity #{group.maturity}
+      div(id="change_maturity" class="edit") edit
+    else
+      | No maturity, add
+      input(type="text", name="maturity")
+    br
     if (group.img_url_square)
       img(src=group.img_url_square id="img_url_square")
       div(id="change_img_url_square" class="edit") edit

@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
     group_name_slug:   {type: DataTypes.STRING(60), allowNull: false}, 
     img_url_square:    {type: DataTypes.STRING(555)},
     group_url:         {type: DataTypes.STRING(550)},// social link in all probability
-    comments:          {type: DataTypes.STRING(455)}
+    comments:          {type: DataTypes.STRING(455)},
+    maturity:          {type: DataTypes.STRING(25)}
   },
   {
     associate: function(models) {

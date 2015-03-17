@@ -16,6 +16,13 @@ block content
       | No web URL; add one:
       input(type="text", name="website_url")
     br
+    if(retailer.maturity)
+      #maturity #{retailer.maturity}
+      div(id="change_maturity" class="edit") edit
+    else
+      | No maturity, add
+      input(type="text", name="maturity")
+    br
     | Address: 
     br
     if (retailer.address_field)
