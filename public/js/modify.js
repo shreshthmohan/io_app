@@ -1,3 +1,13 @@
+// For events
+$(function() {
+  $('#change_maturity').click(function() {
+    $('#maturity').after('<input type="text" name="maturity" value="' + $('#maturity').text() + '"></input>');
+    $('#maturity').detach();
+    $('#change_maturity').detach();
+  });
+});
+
+
 // For individual city (city.jade)
 $(function() {
   $('#change_city_name').click(function() {

@@ -8,6 +8,8 @@
      "alter table Events modify column start_date date;"
      "alter table Events modify column end_date date;"
    TODO script.
+1a. To add new column to an existing table:
+    alter table Events add column column_name varchar(length);
 
 2. Import stuff from csv in to db table :
      Place csv in /tmp directory for ease

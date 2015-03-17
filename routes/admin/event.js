@@ -27,7 +27,8 @@ exports.create = function(req, res) {
       location_url:    req.param('location_url'),
       start_date:      req.param('start_date'),
       end_date:        req.param('end_date'),
-      comments:        req.param('comments')
+      comments:        req.param('comments'),
+      maturity:        req.param('maturity')
     })
     .success(function(race) { // using 'race', as event is a keyword 
       race.setCity(city).success(function() {
@@ -126,7 +127,8 @@ exports.modify = function(req, res) {
       address_field:   req.param('address_field'),
       location_url:    req.param('location_url'),
       img_url_square:  req.param('img_url_square'),
-      comments:        req.param('comments')
+      comments:        req.param('comments'),
+      maturity:        req.param('maturity')
     })
     .success(function(race) {
       if(req.param('social_link')) {
