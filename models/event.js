@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     // "alter table Events modify column end_date date;"
     // http://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html
     // ^ to properly display dates
-    comments:        {type: DataTypes.STRING(255)},
+    comments:        {type: DataTypes.TEXT},
     maturity:        {type: DataTypes.STRING(25)}
   },
   {

@@ -18,8 +18,7 @@ block content
             | #{school.address_field}
       - if(school.comments)
           span.description.inline-block
-            i.fa.fa-bars.w-20.gray 
-            | #{school.comments}
+            p.inline!= school.comments
       - if(school.Emails != '')
           ul.emails
             each mail in school.Emails

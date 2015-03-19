@@ -18,8 +18,7 @@ block content
             | #{retailer.address_field}
       - if(retailer.comments)
           span.description.block
-            i.fa.fa-bars.w-20.gray 
-            | #{retailer.comments}
+            p.inline!=  retailer.comments
       - if(retailer.Emails != '')
           ul.emails
             each mail in retailer.Emails

@@ -14,8 +14,7 @@ block content
         h2.md.inline #{group.City.city_name}
       - if(group.comments)
           span.description.block
-            i.fa.fa-bars.w-20.gray 
-            | #{group.comments}
+            p.inline!= group.comments
       - if(group.Emails != '')
           ul.emails
             each mail in group.Emails

@@ -139,7 +139,7 @@ $(function() {
 // To enable editing of comments 
 $(function() {
   $('#change_comments').click(function() {
-    $('#comments').after('<input type="text" name="comments" value="' + $('#comments').text() + '"></input>');
+    $('#comments').after('<textarea style="height: 10em; width: 100%;" type="text" name="comments">' + $('#comments').text() + '</textarea>');
     $('#comments').detach();
     $('#change_comments').detach();
   });

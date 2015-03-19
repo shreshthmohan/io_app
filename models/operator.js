@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     address_field:   {type: DataTypes.STRING(170)},
     location_url:    {type: DataTypes.STRING(255)},
     operator_email:  {type: DataTypes.STRING(50)},
-    comments:        {type: DataTypes.STRING(255)}
+    comments:        {type: DataTypes.TEXT}
   },
   {
     associate: function(models) { //create associations/foreign key constraint
