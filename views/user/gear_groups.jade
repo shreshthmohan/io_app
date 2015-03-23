@@ -25,7 +25,7 @@ block content
                 .col-md-4
                   a(href=city ? "/gear?activity=" + tag.id + "&location=" + city.id : "/gear/grouped?activity=" + tag.id + "&location=0", title=city ? "All " + tag.tag_name + " gear stores and retailers in " + city.city_name : "All " + tag.tag_name + " gear stores and retailers across India")
                     .category-el
-                      .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                      .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
                         .info-text.col-xs-12
                           h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
                             span.block.fs-16.padding-b-5
@@ -43,7 +43,7 @@ block content
                 .col-md-4
                   a(href="/gear?activity=" + tag.id + "&location=" + city.id, title="All " + tag.tag_name + " gear stores and retailers in " + city.city_name)
                     .category-el
-                      .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                      .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
                         .info-text.col-xs-12
                           h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
                             span.block.fs-16.padding-b-5
@@ -64,7 +64,7 @@ block content
                 .col-md-4
                   a(href="/gear/grouped?location=" + city.id, title="All gear stores and retailers in " + city.city_name)
                     .category-el
-                      .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                      .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
                         .info-text.col-xs-12
                           h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
                             span.block.fs-16.padding-b-5

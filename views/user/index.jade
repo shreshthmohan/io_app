@@ -131,7 +131,7 @@ block content
                       .col-md-4
                         a(href="/events/upcoming/grouped?activity=" + tag.id + "&location=0", title="All upcoming " + tag.tag_name  + " events all over India")
                           .category-el
-                            .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                            .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
                               .info-text.col-xs-12
                                 h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
                                   span.block.fs-16.padding-b-5
@@ -147,7 +147,7 @@ block content
                       .col-md-4
                         a(href="/events/upcoming/grouped?location=" + city.id, title="All upcoming events in " + city.city_name)
                           .category-el
-                            .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                            .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
                               .info-text.col-xs-12
                                 h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
                                   span.block.fs-16.padding-b-5
@@ -171,7 +171,7 @@ block content
                       .col-md-4
                         a(href="/gear/grouped?activity=" + tag.id)
                           .category-el
-                            .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                            .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
                               .info-text.col-xs-12
                                 h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
                                   span.block.fs-16.padding-b-5
@@ -187,7 +187,7 @@ block content
                       .col-md-4
                         a(href="/gear/grouped?location=" + city.id)
                           .category-el
-                            .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                            .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
                               .info-text.col-xs-12
                                 h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
                                   span.block.fs-16.padding-b-5
@@ -211,7 +211,7 @@ block content
                       .col-md-4
                         a(href="/groups/grouped?activity=" + tag.id + "&location=0", title="All " + tag.tag_name  + " groups across India")
                           .category-el
-                            .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                            .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
                               .info-text.col-xs-12
                                 h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
                                   span.block.fs-16.padding-b-5
@@ -227,7 +227,7 @@ block content
                       .col-md-4
                         a(href="/groups/grouped?activity=0&location=" + city.id, title="All outdoor groups in " + city.city_name)
                           .category-el
-                            .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                            .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
                               .info-text.col-xs-12
                                 h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
                                   span.block.fs-16.padding-b-5
@@ -251,7 +251,7 @@ block content
                       .col-md-4
                         a(href="/schools/grouped?activity=" + tag.id + "&location=0", title="To learn " + tag.tag_name  + " across India")
                           .category-el
-                            .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                            .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
                               .info-text.col-xs-12
                                 h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
                                   span.block.fs-16.padding-b-5
@@ -267,7 +267,7 @@ block content
                       .col-md-4
                         a(href="/schools/grouped?location=" + city.id, title="To learn an outdoor sport in " + city.city_name)
                           .category-el
-                            .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                            .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
                               .info-text.col-xs-12
                                 h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
                                   span.block.fs-16.padding-b-5
