@@ -2,7 +2,8 @@ var fs        = require('fs');
 var path      = require('path');
 var Sequelize = require('sequelize');
 var lodash    = require('lodash');
-var sequelize = new Sequelize('io_final', 'root', 'clock', {
+var sequelize = new Sequelize('io_final', 'root', process.env.io_db_pass, {
+  
   define: {
     charset: 'utf8',
     collation: 'utf8_general_ci'

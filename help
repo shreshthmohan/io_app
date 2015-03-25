@@ -98,3 +98,6 @@
    
 8. Replacing text in multiple files example:
     sed -i -- 's/user_form\.js/user_form.min.js/g' *
+
+9. When you want to access an environment variable in a bash script define the variable like this:
+     export var_name='var_value'
