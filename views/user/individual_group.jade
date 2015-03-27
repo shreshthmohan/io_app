@@ -31,7 +31,7 @@ block content
       .slinks.clearfix.margin-b-5
         each slink in group.SocialLinks
           include social_link_template
-      .tags           
+      .tag-container.clearfix
         each group_tag in group.GroupTags
           li.tag
             span
@@ -59,7 +59,7 @@ block content
     .col-md-4
       a(href="/groups/grouped" title="All Outdoor Groups by Activity")
         .category-el
-          .info.clearfix
+          .info.clearfix.all-tag-bg
             .right
               i.fa.fa-group.helper-icon
             .info-text.margin-top-90.col-xs-12
@@ -69,7 +69,7 @@ block content
     .col-md-4
       a(href="/groups/grouped#by-location" title="All Outdoor Groups by Location")
         .category-el
-          .info.clearfix
+          .info.clearfix.all-loc-bg
             .right
               i.fa.fa-group.helper-icon
             .info-text.margin-top-90.col-xs-12

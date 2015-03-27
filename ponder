@@ -173,6 +173,8 @@ DONEs:
     20. About Us (story)
     26. Suggestions in groups!
     24. Raw HTML allowed in comments field of entities
+    30. CRON job for creating a backup of DB DONE
+      1. http://www.noupe.com/development/10-ways-to-automatically-manually-backup-mysql-database.html
 
 TODOs:
 
@@ -207,8 +209,6 @@ TODOs:
     #28. User form for adding new stuff (need to think of engagement)
     #29. Facebook and Twitter pages (images for that)
       1. 
-    30. CRON job for creating a backup of DB
-      1. http://www.noupe.com/development/10-ways-to-automatically-manually-backup-mysql-database.html
     
 
 37. SEO
