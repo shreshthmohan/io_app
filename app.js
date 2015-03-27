@@ -229,7 +229,7 @@ app.post('/app/admin/events/create_new', admin_race.create);
 // List of cities as per events
 app.get('/app/admin/events', admin_race.cities);
 
-//app.get('/app/admin/events/:city_name', admin_city.event_list);
+app.get('/app/admin/events/city/:city_id', admin_city.event_list);
 // TODO fix
 
 app.get('/app/admin/events/:event_id', admin_race.individual);

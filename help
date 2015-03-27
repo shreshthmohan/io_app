@@ -101,3 +101,12 @@
 
 9. When you want to access an environment variable in a bash script define the variable like this:
      export var_name='var_value'
+
+10. To set following environment variables
+   io_db_pass
+   MG_DOMAIN
+   MG_API_KEY
+   bitbucket_pass
+11. You can see just cron jobs in that logfile by running
+      grep CRON /var/log/syslog
+    http://askubuntu.com/questions/23009/reasons-why-crontab-does-not-work

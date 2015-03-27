@@ -46,7 +46,7 @@ exports.retailer_list = function(req, res) {
 
 // List of events in given city
 exports.event_list = function(req, res) {
-  db.City.find({ where: {city_name: req.param('city_name')}})
+  db.City.find({ where: {id : req.param('city_id')}})
   .success(function(city) {
      db.Event.findAll({ where: {CityId: city.id}})
      .success(function(races) {
