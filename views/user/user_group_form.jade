@@ -1,0 +1,23 @@
+extends ../layout
+
+block content
+  .heading.text-center
+    h1.md Add a new group
+  .white-bg.padding-20.std-shadow
+    form.fs-12(action="/groups/user_submission" method="post")
+      label.block.fs-12.normal(for="group_name") Name of the group *
+      input.full.padding-lr-5(type="text", name="group_name", id="group_name" required)
+      br
+      label.block.fs-12.normal.margin-t-10(for="location") Location/City *
+      input.full.padding-lr-5(type="text", name="location", id="location" placeholder="Where is this group active? Or is it online or Pan-India?" required)
+      br
+      label.block.fs-12.normal.margin-t-10(for="group_url") Website Link
+      input.full.padding-lr-5(type="text", name="group_url", id="group_url")
+      br
+      label.block.fs-12.normal.margin-t-10(for="description" ) Description
+      textarea.full.padding-lr-5(type="text", name="description", id="description", placeholder="Any additional information, like organiser, sponsors, relevant links, emails, phone numbers and other details" style="height: 6em;")
+      br
+      label.block.fs-12.normal.margin-t-10(for="email") Your E-mail
+      input.full.padding-lr-5.margin-b-10(type="text", name="email", id="email" placeholder="Optional")
+      br
+      input(type="submit")

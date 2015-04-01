@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+  .heading.text-center
+    h1.md Add a gear store/retailer
+  .white-bg.padding-20.std-shadow
+    form.fs-12(action="/gear/user_submission" method="post")
+      label.block.fs-12.normal(for="retailer_name") Name of the store/retailer *
+      input.full.padding-lr-5(type="text", name="retailer_name", id="retailer_name" required)
+      br
+      label.block.fs-12.normal.margin-t-10(for="location") Location/City *
+      input.full.padding-lr-5(type="text", name="location", id="location" placeholder="Where is it?" required)
+      br
+      label.block.fs-12.normal.margin-t-10(for="address_field") Address
+      textarea.full.padding-lr-5(type="text", name="address_field", id="address_field" style="height: 4em;")
+      br
+      label.block.fs-12.normal.margin-t-10(for="website_url") Website Link
+      input.full.padding-lr-5(type="text", name="website_url", id="website_url")
+      br
+      label.block.fs-12.normal.margin-t-10(for="location_url") Google Maps Link
+      input.full.padding-lr-5(type="text", name="location_url", id="location_url")
+      br
+      label.block.fs-12.normal.margin-t-10(for="description" ) Description
+      textarea.full.padding-lr-5(type="text", name="description", id="description", placeholder="Any additional information, like organiser, sponsors, relevant links, emails, phone numbers and other details" style="height: 5em;")
+      br
+      label.block.fs-12.normal.margin-t-10(for="email") Your E-mail
+      input.full.padding-lr-5.margin-b-10(type="text", name="email", id="email" placeholder="Optional; we might send you an email when the event/race is listed.")
+      br
+      input(type="submit")

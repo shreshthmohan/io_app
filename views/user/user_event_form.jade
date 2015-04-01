@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+  .heading.text-center
+    h1.md Add a new event/race
+  .white-bg.padding-20.std-shadow
+    form.fs-12(action="/events/user_submission" method="post")
+      label.block.fs-12.normal(for="event_name") Name of the event/race *
+      input.full.padding-lr-5(type="text", name="event_name", id="event_name" required)
+      br
+      label.block.fs-12.normal.margin-t-10(for="dates") Dates *
+      input.full.padding-lr-5(type="text", name="dates", id="dates" placeholder="When does it start? When does it end?" required)
+      br
+      label.block.fs-12.normal.margin-t-10(for="location") Location/City *
+      input.full.padding-lr-5(type="text", name="location", id="location" placeholder="Where is it gonna be held?" required)
+      br
+      label.block.fs-12.normal.margin-t-10(for="event_url") Website Link
+      input.full.padding-lr-5(type="text", name="event_url", id="event_url")
+      br
+      label.block.fs-12.normal.margin-t-10(for="location_url") Google Maps Link
+      input.full.padding-lr-5(type="text", name="location_url", id="location_url" placeholder="Exact location")
+      br
+      label.block.fs-12.normal.margin-t-10(for="description" ) Description
+      textarea.full.padding-lr-5(type="text", name="description", id="description", placeholder="Any additional information, like organiser, sponsors, relevant links, emails, phone numbers and other details" style="height: 5em;")
+      br
+      label.block.fs-12.normal.margin-t-10(for="email") Your E-mail
+      input.full.padding-lr-5.margin-b-10(type="text", name="email", id="email" placeholder="Optional; we might send you an email when the event/race is listed.")
+      br
+      input(type="submit")

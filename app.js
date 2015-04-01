@@ -386,6 +386,8 @@ app.get('/events/upcoming/grouped', race.upcoming_grouped); // from home explore
 app.post('/events/user_submission', race.user_submission);
 app.post('/events/user_error', race.user_error);
 app.post('/events/user_info', race.user_info);
+//app.post('/events/event_form', race.new_event); //TODO should add new event directly to the db
+app.get('/events/event_form', race.event_form);
 
 // All events
 app.get('/events', function(req, res) {res.redirect('/events/upcoming')});
@@ -393,7 +395,7 @@ app.get('/events', function(req, res) {res.redirect('/events/upcoming')});
 
 // Individual event
 app.get('/events/:city_name_slug/:event_name_slug/:event_id', race.individual)
-// TODO: works fine even in someone tries to access /events/:some-text/:some-random-text/:event_id
+// TODO: works fine even if someone tries to access /events/:some-text/:some-random-text/:event_id
 // Need to figure out how to display correct name in URL bar. Some kind of redirection
 // Yes, redirection. Find out how much more resources this will use
 
@@ -406,6 +408,7 @@ app.get('/gear/grouped', gear.all_grouped);
 app.post('/gear/user_submission', gear.user_submission);
 app.post('/gear/user_error', gear.user_error);
 app.post('/gear/user_info', gear.user_info);
+app.get('/gear/retailer_form', gear.retailer_form);
 
 app.get('/gear/:city_name_slug/:retailer_name_slug/:retailer_id', gear.individual)
 
@@ -418,6 +421,7 @@ app.get('/groups/grouped', group.all_grouped);
 app.post('/groups/user_submission', group.user_submission);
 app.post('/groups/user_error', group.user_error);
 app.post('/groups/user_info', group.user_info);
+app.get('/groups/group_form', group.group_form);
 
 app.get('/groups/:city_name_slug/:group_name_slug/:group_id', group.individual)
 
@@ -430,6 +434,7 @@ app.get('/schools/grouped', school.all_grouped);
 app.post('/schools/user_submission', school.user_submission);
 app.post('/schools/user_error', school.user_error);
 app.post('/schools/user_info', school.user_info);
+app.get('/schools/school_form', school.school_form);
 
 app.get('/schools/:city_name_slug/:school_name_slug/:school_id', school.individual)
 

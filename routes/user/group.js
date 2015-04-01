@@ -67,6 +67,24 @@ exports.user_info = function(req, res) {
     }
   })
 }
+
+
+// Form to add a new group
+exports.group_form = function(req, res) {
+  db.City.findAll({
+    attributes: [
+      'id',
+      'city_name'
+    ]
+  })
+  .success(function(cities) {
+    res.render('user/user_group_form', {
+      title: 'Add a new group',
+      title_: 'Add a new group',
+      cities: cities
+    })
+  })
+}
 // Routing for list of groups
 exports.all = function(req, res) {
   var tag = req.param('activity');

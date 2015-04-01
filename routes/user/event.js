@@ -46,6 +46,23 @@ exports.user_error = function(req, res) {
   })
 }
 
+// Event form to add a new event
+exports.event_form = function(req, res) {
+  db.City.findAll({
+    attributes: [
+      'id',
+      'city_name'
+    ]
+  })
+  .success(function(cities) {
+    res.render('user/user_event_form', {
+      title: 'Add a new event/race',
+      title_: 'Add a new event/race',
+      cities: cities
+    })
+  })
+}
+
 // User form to provide additional information about event
 exports.user_info = function(req, res) {
   var email = req.param('email_info') ? req.param('email_info') : 'anon@email.com';

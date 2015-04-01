@@ -66,6 +66,24 @@ exports.user_info = function(req, res) {
     }
   })
 }
+
+// Form to add a new school
+exports.school_form = function(req, res) {
+  db.City.findAll({
+    attributes: [
+      'id',
+      'city_name'
+    ]
+  })
+  .success(function(cities) {
+    res.render('user/user_school_form', {
+      title: 'Add a new outdoor school',
+      title_: 'Add a new outdoor school',
+      cities: cities
+    })
+  })
+}
+
 // Routing for list of schools
 exports.all = function(req, res) {
   var tag = req.param('activity');

@@ -68,6 +68,23 @@ exports.user_info = function(req, res) {
   })
 }
 
+// Form to add a new retailer
+exports.retailer_form = function(req, res) {
+  db.City.findAll({
+    attributes: [
+      'id',
+      'city_name'
+    ]
+  })
+  .success(function(cities) {
+    res.render('user/user_retailer_form', {
+      title: 'Add a new store/retailer',
+      title_: 'Add a new store/retailer',
+      cities: cities
+    })
+  })
+}
+
 // Note: tag and activity have been used interchangeably
 
 // Routing for list of gear retailers
