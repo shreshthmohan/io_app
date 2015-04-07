@@ -438,6 +438,26 @@ app.get('/schools/school_form', school.school_form);
 
 app.get('/schools/:city_name_slug/:school_name_slug/:school_id', school.individual)
 
+
+// Everytime some user tries to access a page that does not exists
+// an error object will be passed to next
+app.get('*', function(req, res, next) {
+  var err = new Error();
+  err.status = 404;
+  next(err);
+});
+
+// https://blog.safaribooksonline.com/2014/03/12/error-handling-express-js-applications/
+
+// If 
+app.use(function(err, req, res, next) {
+  if(err.status !== 404) {
+    return next();
+  }
+  
+  res.status(404).render('user/404', {title_: 'Page not found'});
+})
+
 /////////////////////
 // User Routes end // 
 /////////////////////
