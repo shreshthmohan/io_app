@@ -36,6 +36,17 @@ block content
                     each subtag in race.EventSubtags
                       li.subtag
                         | #{subtag.Subtag.subtag_name}
+            div.col-md-4
+              .category-el.b-l-4.clearfix
+                .info-media.clearfix
+                  .col-xs-8.info-box
+                    .info-box-sub
+                      a(href="/events/event_form" target="_blank")
+                        h2.sm(title="An outdoor sports event/race") Did we miss something? Add an event/race
+                  .col-xs-4.img-pre.clearfix
+                    a(href="/events/event_form" target="_blank")
+                      i.fa.fa-flag.right.b-l-1.img-alt
+                .tags.clearfix.border-top-gray
         - else if((event_tags) && (event_tags != ''))
             each event_tag in event_tags
               div.col-md-4
@@ -64,6 +75,17 @@ block content
                     each subtag in event_tag.Event.EventSubtags
                       li.subtag
                         | #{subtag.Subtag.subtag_name}
+            div.col-md-4
+              .category-el.b-l-4.clearfix
+                .info-media.clearfix
+                  .col-xs-8.info-box
+                    .info-box-sub
+                      a(href="/events/event_form" target="_blank")
+                        h2.sm(title="An outdoor sports event/race") Did we miss something? Add an event/race
+                  .col-xs-4.img-pre.clearfix
+                    a(href="/events/event_form" target="_blank")
+                      i.fa.fa-flag.right.b-l-1.img-alt
+                .tags.clearfix.border-top-gray
         - else
           .col-md-12
             p.alert.alert-warning.text-center.br-0.std-shadow.fs-16

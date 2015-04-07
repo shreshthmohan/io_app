@@ -29,6 +29,17 @@ block content
                 each tag in school.SchoolTags
                   li.tag
                     | #{tag.Tag.tag_name}
+        .col-md-4
+          .category-el.b-l-4.clearfix
+            .info-media.clearfix
+              .info-box.col-xs-8
+                .info-box-sub
+                  a(href="/schools/school_form" target="_blank")
+                    h2.sm(title="A place where one can learn a new outdoor sport") Did we miss something? Add an outdoor school.
+              .img-pre.col-xs-4.clearfix
+                    a(href="/schools/school_form" target="_blank")
+                      i.fa.fa-building.right.b-l-1.img-alt
+            .tags.clearfix.border-top-gray
     - else if((school_tags) && (school_tags != ''))
         each school_tag in school_tags
           .col-md-4
@@ -51,6 +62,17 @@ block content
               .tags.clearfix.border-top-gray
                 li.tag
                   | #{tag.tag_name}
+        .col-md-4
+          .category-el.b-l-4.clearfix
+            .info-media.clearfix
+              .info-box.col-xs-8
+                .info-box-sub
+                  a(href="/schools/school_form" target="_blank")
+                    h2.sm(title="A place where one can learn a new outdoor sport") Did we miss something? Add an outdoor school.
+              .img-pre.col-xs-4.clearfix
+                    a(href="/schools/school_form" target="_blank")
+                      i.fa.fa-building.right.b-l-1.img-alt
+            .tags.clearfix.border-top-gray
     - else
       .col-md-12
         p.alert.alert-warning.text-center.br-0.std-shadow.fs-16

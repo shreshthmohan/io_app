@@ -31,6 +31,17 @@ block content
                     each tag in retailer.GearTags
                       li.tag
                         | #{tag.Tag.tag_name}
+            .col-md-4
+              .category-el.b-l-4.clearfix
+                .info-media.clearfix
+                  .info-box.col-xs-8
+                    .info-box-sub
+                      a(href="/gear/retailer_form" target="_blank")
+                        h2.sm Did we miss something? Add a store.
+                  .img-pre.col-xs-4.clearfix
+                        a(href="/gear/retailer_form" target="_blank")
+                          i.fa.fa-gear.right.b-l-1.img-alt
+                .tags.clearfix.border-top-gray
         - else if((gear_tags) && (gear_tags != ''))
             each gear_tag in gear_tags
               .col-md-4
@@ -53,6 +64,17 @@ block content
                   .tags.clearfix.border-top-gray
                     li.tag
                       | #{tag.tag_name}
+            .col-md-4
+              .category-el.b-l-4.clearfix
+                .info-media.clearfix
+                  .info-box.col-xs-8
+                    .info-box-sub
+                      a(href="/gear/retailer_form" target="_blank")
+                        h2.sm Did we miss something? Add a store.
+                  .img-pre.col-xs-4.clearfix
+                        a(href="/gear/retailer_form" target="_blank")
+                          i.fa.fa-gear.right.b-l-1.img-alt
+                .tags.clearfix.border-top-gray
         - else
           .col-md-12
             p.alert.alert-warning.text-center.br-0.std-shadow.fs-16
@@ -134,7 +156,7 @@ block content
                     | Events in #{city.city_name}
                 .info-overlay
         .col-md-4
-          a(href="todo" title="All Outdoor schools in " + city.city_name)
+          a(href="/schools/grouped?location=" + city.id title="All Outdoor schools in " + city.city_name)
             .category-el
               .info.clearfix(style="background-image: url(" + city.image_url + ");")
                 .right
