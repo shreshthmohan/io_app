@@ -175,6 +175,7 @@ DONEs:
     24. Raw HTML allowed in comments field of entities
     30. CRON job for creating a backup of DB DONE
       1. http://www.noupe.com/development/10-ways-to-automatically-manually-backup-mysql-database.html
+    31. Custom 404 DONE
 
 TODOs:
 
@@ -204,7 +205,7 @@ TODOs:
     22. Google Analytics
     #23. Dedicated pages for each City/Location and Activity.
     25. Mobile-compatible phone numbers
-    #26. Setup 404 page and other error response pages
+    #26. Setup internal server error response pages
     #27. Caching
     #28. User form for adding new stuff (need to think of engagement)
     #29. Facebook and Twitter pages (images for that)

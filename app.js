@@ -438,6 +438,9 @@ app.get('/schools/school_form', school.school_form);
 
 app.get('/schools/:city_name_slug/:school_name_slug/:school_id', school.individual)
 
+// Serving static files
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 // Everytime some user tries to access a page that does not exists
 // an error object will be passed to next
@@ -462,8 +465,6 @@ app.use(function(err, req, res, next) {
 // User Routes end // 
 /////////////////////
 
-// Serving static files
-app.use(express.static(path.join(__dirname, 'public')))
 
 if ('development' === app.get('env')) {
   app.use(connect.errorHandler())
