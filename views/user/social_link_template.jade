@@ -1,28 +1,28 @@
 li.social-link
   - if(slink.link.indexOf('facebook.com') > -1)
-      a(href=slink.link)
+      a(href=slink.link target="_blank")
         span.fa.fa-facebook-square.color-fb
   - else if(slink.link.indexOf('twitter.com') > -1)
-      a(href=slink.link)
+      a(href=slink.link target="_blank")
         span.fa.fa-twitter-square.color-tw
   - else if(slink.link.indexOf('plus.google.com') > -1)
-      a(href=slink.link)
+      a(href=slink.link target="_blank")
         span.fa.fa-google-plus-square.color-gp
   - else if(slink.link.indexOf('instagram.com') > -1)
-      a(href=slink.link)
+      a(href=slink.link target="_blank")
         span.fa.fa-instagram.color-in
   - else if(slink.link.indexOf('flickr.com') > -1)
-      a(href=slink.link)
+      a(href=slink.link target="_blank")
         span.fa.fa-flickr.color-flb
   - else if(slink.link.indexOf('youtube.com') > -1)
-      a(href=slink.link)
+      a(href=slink.link target="_blank")
         span.fa.fa-youtube-square.color-yt
   - else if(slink.link.indexOf('vimeo.com') > -1)
-      a(href=slink.link)
+      a(href=slink.link target="_blank")
         span.fa.fa-vimeo-square.color-vi
   - else if((slink.link.indexOf('explara.com') > -1) || (slink.link.indexOf('meraevents.com') > -1))
-      a(href=slink.link)
+      a(href=slink.link target="_blank")
         span.fa.fa-ticket
   - else
-      a(href=slink.link)
+      a(href=slink.link target="_blank")
          span.fa.fa-external-link-square
