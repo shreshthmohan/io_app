@@ -5,80 +5,81 @@ block content
   .filter-margin
   .heading.text-center
     h1.md= title_
-  .category-list.row
-    - if((groups) && (groups != ''))
-        each group in groups
+  .row
+    .category-list
+      - if((groups) && (groups != ''))
+          each group in groups
+            .col-md-4
+              .category-el.b-l-4.clearfix
+                .info-media.clearfix
+                  .info-box.col-xs-8
+                    .info-box-sub
+                      a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
+                        h2.sm #{group.group_name}
+                      .city
+                        span.fa.fa-map-marker.helper
+                        | #{group.City.city_name}
+                  .img-pre.col-xs-4.clearfix
+                    - if(group.img_url_square)
+                        a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
+                          img.right.b-l-1(src=group.img_url_square alt=group.group_name height="100px")
+                    - else
+                        a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
+                          i.fa.fa-group.right.b-l-1.img-alt
+                .tags.clearfix
+                  each tag in group.GroupTags
+                    li.tag
+                      | #{tag.Tag.tag_name}
           .col-md-4
             .category-el.b-l-4.clearfix
               .info-media.clearfix
                 .info-box.col-xs-8
                   .info-box-sub
-                    a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
-                      h2.sm #{group.group_name}
-                    .city
-                      span.fa.fa-map-marker.helper
-                      | #{group.City.city_name}
+                    a(href="/groups/group_form" target="_blank")
+                      h2.sm Did we miss something? Add an active outdoor group.
                 .img-pre.col-xs-4.clearfix
-                  - if(group.img_url_square)
-                      a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
-                        img.right.b-l-1(src=group.img_url_square alt=group.group_name height="100px")
-                  - else
-                      a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
-                        i.fa.fa-group.right.b-l-1.img-alt
-              .tags.clearfix
-                each tag in group.GroupTags
-                  li.tag
-                    | #{tag.Tag.tag_name}
-        .col-md-4
-          .category-el.b-l-4.clearfix
-            .info-media.clearfix
-              .info-box.col-xs-8
-                .info-box-sub
-                  a(href="/groups/group_form" target="_blank")
-                    h2.sm Did we miss something? Add an active outdoor group.
-              .img-pre.col-xs-4.clearfix
-                    a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
+                    a(href="/groups/group_form" target="_blank")
                       i.fa.fa-group.right.b-l-1.img-alt
-            .tags.clearfix
-    - else if((group_tags) && (group_tags != ''))
-        each group_tag in group_tags
+              .tags.clearfix
+      - else if((group_tags) && (group_tags != ''))
+          each group_tag in group_tags
+            .col-md-4
+              .category-el.b-l-4.clearfix
+                .info-media.clearfix
+                  .infobox.col-xs-8
+                    .info-box-sub
+                      a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                        h2.sm #{group_tag.Group.group_name}
+                      .city
+                        span.fa.fa-map-marker.helper
+                        | #{group_tag.Group.City.city_name}
+                  .img-pre.col-xs-4.clearfix
+                    - if(group_tag.Group.img_url_square)
+                        a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                          img.right.b-l-1(src=group_tag.Group.img_url_square alt=group_tag.Group.group_name height="100px")
+                    - else
+                        a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                          i.fa.fa-group.right.b-l-1.img-alt
+                .tags.clearfix
+                  li.tag
+                    | #{tag.tag_name}
           .col-md-4
             .category-el.b-l-4.clearfix
               .info-media.clearfix
-                .infobox.col-xs-8
+                .info-box.col-xs-8
                   .info-box-sub
-                    a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
-                      h2.sm #{group_tag.Group.group_name}
-                    .city
-                      span.fa.fa-map-marker.helper
-                      | #{group_tag.Group.City.city_name}
+                    a(href="/groups/group_form" target="_blank")
+                      h2.sm Did we miss something? Add an active outdoor group.
                 .img-pre.col-xs-4.clearfix
-                  - if(group_tag.Group.img_url_square)
-                      a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
-                        img.right.b-l-1(src=group_tag.Group.img_url_square alt=group_tag.Group.group_name height="100px")
-                  - else
-                      a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                    a(href="/groups/group_form" target="_blank")
                         i.fa.fa-group.right.b-l-1.img-alt
               .tags.clearfix
-                li.tag
-                  | #{tag.tag_name}
-        .col-md-4
-          .category-el.b-l-4.clearfix
-            .info-media.clearfix
-              .info-box.col-xs-8
-                .info-box-sub
-                  a(href="/groups/group_form" target="_blank")
-                    h2.sm Did we miss something? Add an active outdoor group.
-              .img-pre.col-xs-4.clearfix
-                    a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
-                      i.fa.fa-group.right.b-l-1.img-alt
-            .tags.clearfix
-    - else
-      .col-md-12
-        p.alert.alert-warning.text-center.br-0.std-shadow.fs-16
-            | Oops! We did not find anything. Sorry.
-            a#user-res.pointer  Let us know
-            |  of active outdoor groups!
+      - else
+        .col-md-12
+          p.alert.alert-warning.text-center.br-0.std-shadow.fs-16
+              | Oops! We did not find anything. Sorry.
+              a#user-res.pointer  Let us know
+              |  of active outdoor groups!
   .dialog-screen
   .dialog-container.col-md-4.col-md-offset-4#user-form
     .dialog-head-container.clearfix.text-center
