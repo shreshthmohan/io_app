@@ -26,6 +26,10 @@ block content
                   h3.md #{race.organiser_name}
             - else
                 h3.md #{race.organiser_name}
+      - if(race.address_field)
+          span.address.block
+            i.fa.fa-building.w-20.gray
+            | #{race.address_field}
       - if(race.comments)
           span.description.inline-block
             //-i.fa.fa-bars.w-20.gray 

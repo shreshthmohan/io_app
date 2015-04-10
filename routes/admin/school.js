@@ -51,7 +51,8 @@ exports.modify = function(req, res) {
       img_url_square:   req.param('img_url_square'),
       address_field:    req.param('address_field'),
       location_url:     req.param('location_url'),
-      comments:         req.param('comments')
+      comments:         req.param('comments'),
+      maturity:        req.param('maturity')
     }).success(function(school) {
        res.redirect('/app/admin/schools/' + school.id)
      })

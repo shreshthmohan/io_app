@@ -121,35 +121,35 @@ exports.upcoming = function(req, res) {
   var when   = req.param('date');
   if((loc == 0 || loc == null) && (tag == 0 || tag == null)) { // All locations and all activities
     if((when == '' || when == null)) {
-      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur + " and maturity = 'mature'")
     }
     else {
-      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur_cho + " and start_date >= STR_TO_DATE('" + when + "', '%d-%m-%Y') - interval " + int_dur_cho)
+      up_all_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur_cho + " and start_date >= STR_TO_DATE('" + when + "', '%d-%m-%Y') - interval " + int_dur_cho + " and maturity = 'mature'")
     }
   }
   else if (loc == 0) { // All locations and a chosen activity
     if((when == '' || when == null)) {
-      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur + " and maturity = 'mature'")
     }
     else {
-      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur_cho + " and start_date >= STR_TO_DATE('" + when + "', '%d-%m-%Y') - interval " + int_dur_cho)
+      up_all_loc_chosen_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur_cho + " and start_date >= STR_TO_DATE('" + when + "', '%d-%m-%Y') - interval " + int_dur_cho + " and maturity = 'mature'")
     }
   }
   else if (tag == 0) { // All activities for a chosen location
     if((when == '' || when == null)) {
-      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur + " and maturity = 'mature'")
     }
     else {
-      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur_cho + " and start_date >= STR_TO_DATE('" + when + "', '%d-%m-%Y') - interval " + int_dur_cho)
+      up_chosen_loc_all_tag(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur_cho + " and start_date >= STR_TO_DATE('" + when + "', '%d-%m-%Y') - interval " + int_dur_cho + " and maturity = 'mature'")
     }
   }
   else {
     if((when == '' || when == null)) {
-      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur)
+      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= NOW() + interval " + int_dur + " and maturity = 'mature'")
     }
     else {
-      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur)
-      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur_cho + " and start_date >= STR_TO_DATE('" + when + "', '%d-%m-%Y') - interval " + int_dur_cho)
+      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur + " and maturity = 'mature'")
+      up_both_loc_tag_chosen(req, res, "start_date >= NOW() and start_date <= STR_TO_DATE('" + when + "', '%d-%m-%Y') + interval " + int_dur_cho + " and start_date >= STR_TO_DATE('" + when + "', '%d-%m-%Y') - interval " + int_dur_cho + " and maturity = 'mature'")
     }
   }
 }
@@ -163,6 +163,7 @@ var up_all_loc_all_tag = function(req, res, where) {
       'event_name_slug',
       'img_url_square',
       'start_date',
+      'maturity',
       [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
       // There is some issue with sequelize when using fn, it seems values are not directly available,
       // for instance in this case (remember for loop) race.start_date_ed appears empty in jade output, whereas 
@@ -229,6 +230,7 @@ up_all_loc_chosen_tag = function(req, res, where) {
            'event_name',
            'event_name_slug',
            'img_url_square',
+           'maturity',
            [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
         }
       ],
@@ -266,6 +268,7 @@ up_chosen_loc_all_tag = function(req, res, where) {
       'event_name_slug',
       'img_url_square',
       'start_date',
+      'maturity',
       [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
     where: ["CityId = " + req.param('location') + " and " + where],
     order: 'start_date ASC',
@@ -329,6 +332,7 @@ up_both_loc_tag_chosen = function(req, res, where) {
            'event_name',
            'event_name_slug',
            'img_url_square',
+           'maturity',
            [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
         }
       ],

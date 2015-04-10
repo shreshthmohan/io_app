@@ -43,6 +43,7 @@ exports.modify = function(req, res) {
       address_field:    req.param('address_field'),
       location_url:     req.param('location_url'),
       img_url_square:   req.param('img_url_square'),
+      maturity:         req.param('maturity'),
       comments:         req.param('comments')}
     ).success(function(retailer) {
        res.redirect('/app/admin/gear/retailer/' + retailer.id)
