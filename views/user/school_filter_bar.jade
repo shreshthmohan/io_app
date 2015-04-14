@@ -4,9 +4,9 @@
       label.sr-only(for="activity_school") Activity
       select(class="form-control" name="activity" id="activity_school")
         - if(activity == null || activity == '' || activity == 0)
-            option(value=0 selected="selected") All
+            option(value=0 selected="selected") All activites
         - else 
-            option(value=0) All
+            option(value=0) All activites
         each tag in tags 
           - if(activity == tag.id)
               option(value=tag.id selected="selected") #{tag.tag_name}
@@ -17,9 +17,9 @@
       label.sr-only(for="store_location") Activity
       select(class="form-control" name="location" id="store_location")
         - if(loc == null || loc == '' || loc == 0)
-            option(value=0 selected="selected") All
+            option(value=0 selected="selected") All locations
         - else 
-            option(value=0) All
+            option(value=0) All locations
         each city in cities
           - if(loc== city.id)
               option(value=city.id selected="selected") #{city.city_name}
