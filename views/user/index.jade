@@ -95,188 +95,218 @@ block content
               each city in cities
                 option(value=city.id) #{city.city_name}
           button(type="submit" class="btn btn-warning ") Go!
+    include twitter_follow
   hr.home-hr
   .home-explore
     .row
-      .explore-head.text-center.border-gray
-        | Don't want to search? It's okay, you can explore too!
-    .row
-      .col-xs-12
-        //-.col-md-4.home-featured
-        //-  .row
-        //-    .home-category-head.text-center.border-gray Featured
-        .col-md-12.home-category-tabs
-          .row
-            ul
-              li.tab#event-tab.col-xs-3.text-center.active
-                | Events
-              li.tab#gear-tab.col-xs-3.text-center
-                | Gear
-              li.tab#group-tab.col-xs-3.text-center
-                | Groups
-              li.tab#learn-tab.col-xs-3.text-center
-                | Learn
-          .row
-            .tab-content-container.events-explore.active
-              .text-center.radio-helper
-                | Show Events by
-              form.home-explore-radio.text-center
-                input(id="event-activity" type="radio" name="choose-event" value="activity" checked="checked")
-                label(for="event-activity" class="home-explore-radio-label") Activity
-                input(id="event-location" type="radio" name="choose-event" value="location")
-                label(for="event-location" class="home-explore-radio-label") Location
-              .col-xs-12.tab-content.event-activity
-                each tag in tags
-                  - if(tag.event_count > 0)
-                      .col-md-4
-                        a(href="/events/upcoming/grouped?activity=" + tag.id + "&location=0", title="All upcoming " + tag.tag_name  + " events all over India")
-                          .category-el
-                            .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
-                              .info-text.col-xs-12
-                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                                  span.block.fs-16.padding-b-5
-                                    | #{tag.tag_name}
-                                  span.number.uppercase.block.fs-12
-                                    | #{tag.event_count} EVENT
-                                    - if(tag.event_count >1)
-                                      | S
-                               .info-overlay
-              .col-xs-12.tab-content.event-location
-                each city in cities
-                  - if(city.event_count > 0)
-                      .col-md-4
-                        a(href="/events/upcoming/grouped?location=" + city.id, title="All upcoming events in " + city.city_name)
-                          .category-el
-                            .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
-                              .info-text.col-xs-12
-                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                                  span.block.fs-16.padding-b-5
-                                    | #{city.city_name}
-                                  span.number.uppercase.block.fs-12
-                                    | #{city.event_count} EVENT
-                                    - if(city.event_count >1)
-                                      | S
-                              .info-overlay
-            .tab-content-container.gear-explore
-              .text-center.radio-helper
-                | Show Gear by
-              form.home-explore-radio.text-center
-                input(id="gear-activity" type="radio" name="choose-gear" value="activity")
-                label(for="gear-activity" class="home-explore-radio-label") Activity
-                input(id="gear-location" type="radio" name="choose-gear" value="location" checked="checked")
-                label(for="gear-location" class="home-explore-radio-label") Location
-              .col-xs-12.tab-content.gear-activity
-                each tag in tags
-                  - if(tag.retailer_count > 0)
-                      .col-md-4
-                        a(href="/gear/grouped?activity=" + tag.id)
-                          .category-el
-                            .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
-                              .info-text.col-xs-12
-                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                                  span.block.fs-16.padding-b-5
-                                    | #{tag.tag_name}
-                                  span.number.uppercase.block.fs-12
-                                    | #{tag.retailer_count} STORE
-                                    - if(tag.retailer_count > 1)
-                                      | S
-                               .info-overlay
-              .col-xs-12.tab-content.gear-location
-                each city in cities
-                  - if(city.retailer_count > 0)
-                      .col-md-4
-                        a(href="/gear/grouped?location=" + city.id)
-                          .category-el
-                            .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
-                              .info-text.col-xs-12
-                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                                  span.block.fs-16.padding-b-5
-                                    | #{city.city_name}
-                                  span.number.uppercase.block.fs-12
-                                    | #{city.retailer_count} STORE
-                                    - if(city.retailer_count >1)
-                                      | S
-                              .info-overlay
-            .tab-content-container.group-explore
-              .text-center.radio-helper
-                | Show Groups by
-              form.home-explore-radio.text-center
-                input(id="group-activity" type="radio" name="choose-group" value="activity")
-                label(for="group-activity" class="home-explore-radio-label") Activity
-                input(id="group-location" type="radio" name="choose-group" value="location" checked="checked")
-                label(for="group-location" class="home-explore-radio-label") Location
-              .col-xs-12.tab-content.group-activity
-                each tag in tags
-                  - if(tag.group_count > 0)
-                      .col-md-4
-                        a(href="/groups/grouped?activity=" + tag.id + "&location=0", title="All " + tag.tag_name  + " groups across India")
-                          .category-el
-                            .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
-                              .info-text.col-xs-12
-                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                                  span.block.fs-16.padding-b-5
-                                    | #{tag.tag_name}
-                                  span.number.uppercase.block.fs-12
-                                    | #{tag.group_count} GROUP
-                                    - if(tag.group_count >1)
-                                      | S
-                               .info-overlay
-              .col-xs-12.tab-content.group-location
-                each city in cities
-                  - if(city.group_count > 0)
-                      .col-md-4
-                        a(href="/groups/grouped?activity=0&location=" + city.id, title="All outdoor groups in " + city.city_name)
-                          .category-el
-                            .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
-                              .info-text.col-xs-12
-                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                                  span.block.fs-16.padding-b-5
-                                    | #{city.city_name}
-                                  span.number.uppercase.block.fs-12
-                                    | #{city.group_count} GROUP
-                                    - if(city.group_count >1)
-                                      | S
-                               .info-overlay
-            .tab-content-container.learn-explore
-              .text-center.radio-helper
-                | Show Outdoor Schools by
-              form.home-explore-radio.text-center
-                input(id="school-activity" type="radio" name="choose-school" value="activity")
-                label(for="school-activity" class="home-explore-radio-label") Activity
-                input(id="school-location" type="radio" name="choose-school" value="location" checked="checked")
-                label(for="school-location" class="home-explore-radio-label") Location
-              .col-xs-12.tab-content.school-activity
-                each tag in tags
-                  - if(tag.school_count > 0)
-                      .col-md-4
-                        a(href="/schools/grouped?activity=" + tag.id + "&location=0", title="To learn " + tag.tag_name  + " across India")
-                          .category-el
-                            .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
-                              .info-text.col-xs-12
-                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                                  span.block.fs-16.padding-b-5
-                                    | #{tag.tag_name}
-                                  span.number.uppercase.block.fs-12
-                                    | #{tag.school_count} OUTDOOR SCHOOL
-                                    - if(tag.school_count >1)
-                                      | S
-                               .info-overlay
-              .col-xs-12.tab-content.school-location
-                each city in cities 
-                  - if(city.school_count > 0)
-                      .col-md-4
-                        a(href="/schools/grouped?location=" + city.id, title="To learn an outdoor sport in " + city.city_name)
-                          .category-el
-                            .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
-                              .info-text.col-xs-12
-                                h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                                  span.block.fs-16.padding-b-5
-                                    | #{city.city_name}
-                                  span.number.uppercase.block.fs-12
-                                    | #{city.school_count} OUTDOOR SCHOOL
-                                    - if(city.school_count >1)
-                                      | S
-                               .info-overlay
+      .col-md-8
+        .row
+          .explore-head.text-center.border-gray
+            | Don't want to search? It's okay, you can explore too!
+        .row
+          .col-xs-12
+            //-.col-md-4.home-featured
+            //-  .row
+            //-    .home-category-head.text-center.border-gray Featured
+            .col-md-12.home-category-tabs
+              .row
+                ul
+                  li.tab#event-tab.col-xs-3.text-center.active
+                    | Events
+                  li.tab#gear-tab.col-xs-3.text-center
+                    | Gear
+                  li.tab#group-tab.col-xs-3.text-center
+                    | Groups
+                  li.tab#learn-tab.col-xs-3.text-center
+                    | Learn
+              .row
+                .tab-content-container.events-explore.active
+                  .text-center.radio-helper
+                    | Show Events by
+                  form.home-explore-radio.text-center
+                    input(id="event-activity" type="radio" name="choose-event" value="activity" checked="checked")
+                    label(for="event-activity" class="home-explore-radio-label") Activity
+                    input(id="event-location" type="radio" name="choose-event" value="location")
+                    label(for="event-location" class="home-explore-radio-label") Location
+                  .col-xs-12.tab-content.event-activity
+                    each tag in tags
+                      - if(tag.event_count > 0)
+                          .col-md-6
+                            a(href="/events/upcoming/grouped?activity=" + tag.id + "&location=0", title="All upcoming " + tag.tag_name  + " events all over India")
+                              .category-el
+                                .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
+                                  .info-text.col-xs-12
+                                    h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                      span.block.fs-16.padding-b-5
+                                        | #{tag.tag_name}
+                                      span.number.uppercase.block.fs-12
+                                        | #{tag.event_count} EVENT
+                                        - if(tag.event_count >1)
+                                          | S
+                                   .info-overlay
+                  .col-xs-12.tab-content.event-location
+                    each city in cities
+                      - if(city.event_count > 0)
+                          .col-md-6
+                            a(href="/events/upcoming/grouped?location=" + city.id, title="All upcoming events in " + city.city_name)
+                              .category-el
+                                .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
+                                  .info-text.col-xs-12
+                                    h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                      span.block.fs-16.padding-b-5
+                                        | #{city.city_name}
+                                      span.number.uppercase.block.fs-12
+                                        | #{city.event_count} EVENT
+                                        - if(city.event_count >1)
+                                          | S
+                                  .info-overlay
+                .tab-content-container.gear-explore
+                  .text-center.radio-helper
+                    | Show Gear by
+                  form.home-explore-radio.text-center
+                    input(id="gear-activity" type="radio" name="choose-gear" value="activity")
+                    label(for="gear-activity" class="home-explore-radio-label") Activity
+                    input(id="gear-location" type="radio" name="choose-gear" value="location" checked="checked")
+                    label(for="gear-location" class="home-explore-radio-label") Location
+                  .col-xs-12.tab-content.gear-activity
+                    each tag in tags
+                      - if(tag.retailer_count > 0)
+                          .col-md-6
+                            a(href="/gear/grouped?activity=" + tag.id)
+                              .category-el
+                                .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
+                                  .info-text.col-xs-12
+                                    h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                      span.block.fs-16.padding-b-5
+                                        | #{tag.tag_name}
+                                      span.number.uppercase.block.fs-12
+                                        | #{tag.retailer_count} STORE
+                                        - if(tag.retailer_count > 1)
+                                          | S
+                                   .info-overlay
+                  .col-xs-12.tab-content.gear-location
+                    each city in cities
+                      - if(city.retailer_count > 0)
+                          .col-md-6
+                            a(href="/gear/grouped?location=" + city.id)
+                              .category-el
+                                .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
+                                  .info-text.col-xs-12
+                                    h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                      span.block.fs-16.padding-b-5
+                                        | #{city.city_name}
+                                      span.number.uppercase.block.fs-12
+                                        | #{city.retailer_count} STORE
+                                        - if(city.retailer_count >1)
+                                          | S
+                                  .info-overlay
+                .tab-content-container.group-explore
+                  .text-center.radio-helper
+                    | Show Groups by
+                  form.home-explore-radio.text-center
+                    input(id="group-activity" type="radio" name="choose-group" value="activity")
+                    label(for="group-activity" class="home-explore-radio-label") Activity
+                    input(id="group-location" type="radio" name="choose-group" value="location" checked="checked")
+                    label(for="group-location" class="home-explore-radio-label") Location
+                  .col-xs-12.tab-content.group-activity
+                    each tag in tags
+                      - if(tag.group_count > 0)
+                          .col-md-6
+                            a(href="/groups/grouped?activity=" + tag.id + "&location=0", title="All " + tag.tag_name  + " groups across India")
+                              .category-el
+                                .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
+                                  .info-text.col-xs-12
+                                    h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                      span.block.fs-16.padding-b-5
+                                        | #{tag.tag_name}
+                                      span.number.uppercase.block.fs-12
+                                        | #{tag.group_count} GROUP
+                                        - if(tag.group_count >1)
+                                          | S
+                                   .info-overlay
+                  .col-xs-12.tab-content.group-location
+                    each city in cities
+                      - if(city.group_count > 0)
+                          .col-md-6
+                            a(href="/groups/grouped?activity=0&location=" + city.id, title="All outdoor groups in " + city.city_name)
+                              .category-el
+                                .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
+                                  .info-text.col-xs-12
+                                    h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                      span.block.fs-16.padding-b-5
+                                        | #{city.city_name}
+                                      span.number.uppercase.block.fs-12
+                                        | #{city.group_count} GROUP
+                                        - if(city.group_count >1)
+                                          | S
+                                   .info-overlay
+                .tab-content-container.learn-explore
+                  .text-center.radio-helper
+                    | Show Outdoor Schools by
+                  form.home-explore-radio.text-center
+                    input(id="school-activity" type="radio" name="choose-school" value="activity")
+                    label(for="school-activity" class="home-explore-radio-label") Activity
+                    input(id="school-location" type="radio" name="choose-school" value="location" checked="checked")
+                    label(for="school-location" class="home-explore-radio-label") Location
+                  .col-xs-12.tab-content.school-activity
+                    each tag in tags
+                      - if(tag.school_count > 0)
+                          .col-md-6
+                            a(href="/schools/grouped?activity=" + tag.id + "&location=0", title="To learn " + tag.tag_name  + " across India")
+                              .category-el
+                                .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
+                                  .info-text.col-xs-12
+                                    h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                      span.block.fs-16.padding-b-5
+                                        | #{tag.tag_name}
+                                      span.number.uppercase.block.fs-12
+                                        | #{tag.school_count} OUTDOOR SCHOOL
+                                        - if(tag.school_count >1)
+                                          | S
+                                   .info-overlay
+                  .col-xs-12.tab-content.school-location
+                    each city in cities 
+                      - if(city.school_count > 0)
+                          .col-md-6
+                            a(href="/schools/grouped?location=" + city.id, title="To learn an outdoor sport in " + city.city_name)
+                              .category-el
+                                .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
+                                  .info-text.col-xs-12
+                                    h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                      span.block.fs-16.padding-b-5
+                                        | #{city.city_name}
+                                      span.number.uppercase.block.fs-12
+                                        | #{city.school_count} OUTDOOR SCHOOL
+                                        - if(city.school_count >1)
+                                          | S
+                                   .info-overlay
 
+      .col-md-4
+        .row
+          .explore-head.text-center.border-gray
+            | Featured
+        .row
+          .col-md-12
+            a(href="//incrediblespiti.com" target="_blank")
+              .category-el
+                .info.clearfix(style="background-image: url('http://www.explorespiti.incrediblespiti.com/wp-content/uploads/2015/01/G0020126_a.jpg');")
+                  .info-text.col-xs-12
+                    h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                      span.block.fs-16.padding-b-5
+                        | INCREDIBLE SPITI
+                      span.number.uppercase.block.fs-12
+                        | TREKKING, MOTORCYCLING, SAFARIS
+                   .info-overlay
+        .row
+          .explore-head.text-center.border-gray
+            | Follow Us
+        .row
+          .col-xs-12
+            .fb-page(data-href="https://www.facebook.com/indiaoutside" data-width="100%" data-hide-cover="false" data-show-facepile="true" data-show-posts="true")
+              .fb-xfbml-parse-ignore
+                blockquote(cite="https://www.facebook.com/indiaoutside")
+                  a(href="https://www.facebook.com/indiaoutside") India Outside
+          .col-xs-12
+            include twitter_include
 block extrajs
   script(src="/js/home.min.js")
