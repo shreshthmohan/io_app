@@ -4,7 +4,7 @@
       label.sr-only(for="activity_gear") Activity
       select(class="form-control" name="activity" id="activity_gear")
         - if(activity == null || activity == '' || activity == 0)
-            option(value=0 selected="selected") All activities
+            option(value=0 selected="selected") All
         - else 
             option(value=0) All activities
         each tag in tags 
