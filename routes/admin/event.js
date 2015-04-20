@@ -24,6 +24,8 @@ exports.create = function(req, res) {
       organiser_name:  req.param('organiser_name'),
       organiser_url:   req.param('organiser_url'),
       address_field:   req.param('address_field'),
+      img_url_square:  req.param('img_url_square'),
+      img_url_rect:    req.param('img_url_rect'),
       location_url:    req.param('location_url'),
       start_date:      req.param('start_date'),
       end_date:        req.param('end_date'),
@@ -127,6 +129,7 @@ exports.modify = function(req, res) {
       address_field:   req.param('address_field'),
       location_url:    req.param('location_url'),
       img_url_square:  req.param('img_url_square'),
+      img_url_rect:    req.param('img_url_rect'),
       comments:        req.param('comments'),
       maturity:        req.param('maturity')
     })

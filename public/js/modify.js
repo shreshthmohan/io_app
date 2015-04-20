@@ -113,6 +113,14 @@ $(function() {
   });
 });
 
+$(function() {
+  $('#change_img_url_rect').click(function() {
+    $('#img_url_rect').after("<input type='text' name='img_url_rect' value='" + $('#img_url_rect').attr("src") + "'></input>");
+    $('#img_url_rect').detach();
+    $('#change_img_url_rect').detach();
+  });
+});
+
 // For individual event (event.jade)
 // To enable editing of start date
 $(function() {

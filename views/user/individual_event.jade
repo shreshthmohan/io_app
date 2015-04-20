@@ -2,138 +2,143 @@ extends ../layout
 
 block content
   .row
-    .entity.col-md-8.std-shadow.col-md-offset-2
-      - if(race.event_url) 
-          a(href=race.event_url target='_blank')
-            h1.lg.inline #{race.event_name}
-            span.fa.fa-external-link.margin-l-5.fs-16
-      - else
-          h1.lg #{race.event_name}
-      span.dates.fs-14
-        span.fa.fa-calendar.w-20.gray
-        | #{race.dataValues.start_date_f}
-        - if(race.dataValues.end_date_f)
-          - if(race.dataValues.start_date_f != race.dataValues.end_date_f)
-              |   -  #{race.dataValues.end_date_f}
-      span.location
-        span.fa.fa-map-marker.fs-16.gray.w-20
-        h2.md.inline #{race.City.city_name}
-      - if(race.organiser_name)
-          span.organiser
-            span.gray.fs-14.margin-r-5 by
-            - if(race.organiser_url)
-                a(href=race.organiser_url target='_blank')
-                  h3.md #{race.organiser_name}
-            - else
-                h3.md #{race.organiser_name}
-      - if(race.address_field)
-          span.address.block
-            i.fa.fa-building.w-20.gray
-            | #{race.address_field}
-      - if(race.comments)
-          span.description.inline-block
-            //-i.fa.fa-bars.w-20.gray 
-            p.inline!= race.comments
-      - if(race.Emails != '')
-          ul.emails
-            each mail in race.Emails
-              li.email
-                span.fa.fa-envelope-square.gray.w-20
-                a(href="mailto:" + mail.email target="_blank")
-                  | #{mail.email}
-      - if(race.PhoneNumbers != '')
-          ul.numbers
-            each number in race.PhoneNumbers
-              li.number
-                span.fa.fa-phone-square.gray.w-20
-                | #{number.number}
-      .slinks.clearfix.margin-b-5
-        each slink in race.SocialLinks
-          include social_link_template
-      .tag-container.clearfix
-        each event_tag in race.EventTags
-          li.tag
-            span
-              | #{event_tag.Tag.tag_name}
-        each event_subtag in race.EventSubtags
-          li.subtag
-            span
-              | #{event_subtag.Subtag.subtag_name}
-      .user-res.fs-12
-        a#user-error.pointer(title="Report error in information") Report error
-        |  or 
-        a#user-info.pointer(title="Add missing information") missing info
-        |  about this event.
-      - if(race.location_url)
-        .map-embed.margin-t-10
-          iframe(src=race.location_url width="100%" height="300" frameborder="0" style="border:0")
-      - if(admin)
-        .admin_link
-          | Dear Admin, if you see something wrong or missing with this event you can modify it 
-          a(href="/app/admin/events/" + race.id, target="_blank") here
-        
+    .col-md-8
+      .col-md-12
+        .entity.col-md-12.std-shadow
+          - if(race.img_url_rect) 
+              a(href=race.event_url target='_blank')
+                img.individual-cover(src=race.img_url_rect title=race.event_name + " in " + race.City.city_name)
+          - if(race.event_url) 
+              a(href=race.event_url target='_blank')
+                h1.lg.inline #{race.event_name}
+                span.fa.fa-external-link.margin-l-5.fs-16
+          - else
+              h1.lg #{race.event_name}
+          span.dates.fs-14
+            span.fa.fa-calendar.w-20.gray
+            | #{race.dataValues.start_date_f}
+            - if(race.dataValues.end_date_f)
+              - if(race.dataValues.start_date_f != race.dataValues.end_date_f)
+                  |   -  #{race.dataValues.end_date_f}
+          span.location
+            span.fa.fa-map-marker.fs-16.gray.w-20
+            h2.md.inline #{race.City.city_name}
+          - if(race.organiser_name)
+              span.organiser
+                span.gray.fs-14.margin-r-5 by
+                - if(race.organiser_url)
+                    a(href=race.organiser_url target='_blank')
+                      h3.md #{race.organiser_name}
+                - else
+                    h3.md #{race.organiser_name}
+          - if(race.address_field)
+              span.address.block
+                i.fa.fa-building.w-20.gray
+                | #{race.address_field}
+          - if(race.comments)
+              span.description.inline-block
+                //-i.fa.fa-bars.w-20.gray 
+                p.inline!= race.comments
+          - if(race.Emails != '')
+              ul.emails
+                each mail in race.Emails
+                  li.email
+                    span.fa.fa-envelope-square.gray.w-20
+                    a(href="mailto:" + mail.email target="_blank")
+                      | #{mail.email}
+          - if(race.PhoneNumbers != '')
+              ul.numbers
+                each number in race.PhoneNumbers
+                  li.number
+                    span.fa.fa-phone-square.gray.w-20
+                    | #{number.number}
+          .slinks.clearfix.margin-b-5
+            each slink in race.SocialLinks
+              include social_link_template
+          .tag-container.clearfix
+            each event_tag in race.EventTags
+              li.tag
+                span
+                  | #{event_tag.Tag.tag_name}
+            each event_subtag in race.EventSubtags
+              li.subtag
+                span
+                  | #{event_subtag.Subtag.subtag_name}
+          .user-res.fs-12
+            a#user-error.pointer(title="Report error in information") Report error
+            |  or 
+            a#user-info.pointer(title="Add missing information") missing info
+            |  about this event.
+          - if(race.location_url)
+            .map-embed.margin-t-10
+              iframe(src=race.location_url width="100%" height="300" frameborder="0" style="border:0")
+          - if(admin)
+            .admin_link
+              | Dear Admin, if you see something wrong or missing with this event you can modify it 
+              a(href="/app/admin/events/" + race.id, target="_blank") here
+      .col-md-12
+        .sub-heading.text-center.margin-tb-10 Suggestions
+      .col-md-6
+        a(href="/events/upcoming/grouped?location=" + race.City.id , title="All outdoor events in " + race.City.city_name)
+          .category-el
+            .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
+              .right
+                i.fa.fa-flag-checkered.helper-icon
+              .info-text.margin-top-90.col-xs-12
+                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                  | Events in #{race.City.city_name}
+              .info-overlay
+      .col-md-6
+        a(href="/events/upcoming/grouped" title="All Outdoor Events and Races by Activity")
+          .category-el
+            .info.clearfix.all-tag-bg
+              .right
+                i.fa.fa-flag-checkered.helper-icon
+              .info-text.margin-top-90.col-xs-12
+                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                  | All Events by Activity
+              .info-overlay
+      .col-md-6
+        a(href="/events/upcoming/grouped#by-location" title="All Outdoor Events and Races by Location")
+          .category-el
+            .info.clearfix.all-loc-bg
+              .right
+                i.fa.fa-flag-checkered.helper-icon
+              .info-text.margin-top-90.col-xs-12
+                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                  | All Events by Location
+              .info-overlay
+      .col-md-6
+        a(href="/gear/grouped?location=" + race.City.id , title="All outdoor gear stores and retailers in " + race.City.city_name)
+          .category-el
+            .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
+              .right
+                i.fa.fa-gear.helper-icon
+              .info-text.margin-top-90.col-xs-12
+                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                  | Stores in #{race.City.city_name}
+              .info-overlay
+      .col-md-6
+        a(href="/schools/grouped?location=" + race.City.id , title="All outdoor schools in " + race.City.city_name)
+          .category-el
+            .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
+              .right
+                i.fa.fa-building-o.helper-icon
+              .info-text.margin-top-90.col-xs-12
+                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                  | Learn in #{race.City.city_name}
+              .info-overlay
+      .col-md-6
+        a(href="/groups/grouped?location=" + race.City.id title="All Active Outdoor groups in " + race.City.city_name)
+          .category-el
+            .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
+              .right
+                i.fa.fa-group.helper-icon
+              .info-text.col-xs-12
+                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                  | Groups in #{race.City.city_name}
+              .info-overlay
   .row
-    .sub-heading.text-center.margin-tb-10 Suggestions
-    .col-md-4
-      a(href="/events/upcoming/grouped?location=" + race.City.id , title="All outdoor events in " + race.City.city_name)
-        .category-el
-          .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
-            .right
-              i.fa.fa-flag-checkered.helper-icon
-            .info-text.margin-top-90.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | Events in #{race.City.city_name}
-            .info-overlay
-    .col-md-4
-      a(href="/events/upcoming/grouped" title="All Outdoor Events and Races by Activity")
-        .category-el
-          .info.clearfix.all-tag-bg
-            .right
-              i.fa.fa-flag-checkered.helper-icon
-            .info-text.margin-top-90.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | All Events by Activity
-            .info-overlay
-    .col-md-4
-      a(href="/events/upcoming/grouped#by-location" title="All Outdoor Events and Races by Location")
-        .category-el
-          .info.clearfix.all-loc-bg
-            .right
-              i.fa.fa-flag-checkered.helper-icon
-            .info-text.margin-top-90.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | All Events by Location
-            .info-overlay
-    .col-md-4
-      a(href="/gear/grouped?location=" + race.City.id , title="All outdoor gear stores and retailers in " + race.City.city_name)
-        .category-el
-          .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
-            .right
-              i.fa.fa-gear.helper-icon
-            .info-text.margin-top-90.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | Stores in #{race.City.city_name}
-            .info-overlay
-    .col-md-4
-      a(href="/schools/grouped?location=" + race.City.id , title="All outdoor schools in " + race.City.city_name)
-        .category-el
-          .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
-            .right
-              i.fa.fa-building-o.helper-icon
-            .info-text.margin-top-90.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | Learn in #{race.City.city_name}
-            .info-overlay
-    .col-md-4
-      a(href="/groups/grouped?location=" + race.City.id title="All Active Outdoor groups in " + race.City.city_name)
-        .category-el
-          .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
-            .right
-              i.fa.fa-group.helper-icon
-            .info-text.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | Groups in #{race.City.city_name}
-            .info-overlay
   .dialog-screen
   .dialog-container.col-md-4.col-md-offset-4#user-form-error
     .dialog-head-container.clearfix.text-center

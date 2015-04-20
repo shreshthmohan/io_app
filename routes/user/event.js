@@ -592,7 +592,7 @@ exports.individual = function(req, res) {
       'id',
       'event_name',
       'event_name_slug',
-      'img_url_square',
+      'img_url_rect',
       'event_url',
       'organiser_name',
       'organiser_url',

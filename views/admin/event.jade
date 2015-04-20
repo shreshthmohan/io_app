@@ -59,6 +59,13 @@ block content
       | No image URL; add(square, 160x160?): 
       input(type="text", name="img_url_square")
     br
+    if(race.img_url_rect)
+      img(src=race.img_url_rect id="img_url_rect" class="data")
+      div(id="change_img_url_rect" class="edit") edit
+    else
+      | No image URL; add(rectangle): 
+      input(type="text", name="img_url_rect")
+    br
     | Comments: 
     if (race.comments)
       div(id="comments" class="data") #{race.comments}
