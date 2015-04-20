@@ -445,9 +445,10 @@ var grouped = function(req, res) {
       cities.forEach(function(c) {
         promises.push(
           db.Event.count({
-            where: Sequelize.and(
-              {CityId: c.id},
-              {start_date: {gte: new Date()}})
+            where: {
+              CityId: c.id,
+              start_date: {gte: new Date()},
+              maturity: 'mature'}
           })
           .then(function(event_count) {
             city = c.toJSON();
