@@ -32,7 +32,7 @@ var lessParserOptions = {}
 var lessCompilerOptions = {}
 
 // To change env
-app.settings.env = 'production';
+//app.settings.env = 'production';
 
 app.use(lessMiddleware(
   __dirname + '/stylesheets' 
