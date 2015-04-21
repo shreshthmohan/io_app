@@ -287,12 +287,12 @@ block content
           .explore-head.text-center.border-gray
             | Follow Us
         .row
-          .col-xs-12
+          .col-xs-12(style="margin-bottom: 15px;")
             .fb-page(data-href="https://www.facebook.com/indiaoutside" data-width="500px" data-hide-cover="false" data-show-facepile="true" data-show-posts="true")
               .fb-xfbml-parse-ignore
                 blockquote(cite="https://www.facebook.com/indiaoutside")
                   a(href="https://www.facebook.com/indiaoutside") India Outside
-          //.col-xs-12
-          //  include twitter_include
+          .col-xs-12(style="margin-bottom: 15px;")
+            include twitter_include
 block extrajs
   script(src="/js/home.min.js")
