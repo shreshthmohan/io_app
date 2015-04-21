@@ -29,6 +29,7 @@ exports.create = function(req, res) {
        school_name_slug: slugify(req.param('school_name')),
        website_url:      req.param('website_url'),
        img_url_square:   req.param('img_url_square'),
+       img_url_rect:    req.param('img_url_rect'),
        address_field:    req.param('address_field'),
        location_url:     req.param('location_url'),
        comments:         req.param('comments')
@@ -49,6 +50,7 @@ exports.modify = function(req, res) {
     school.updateAttributes({
       website_url:        req.param('website_url'),
       img_url_square:   req.param('img_url_square'),
+      img_url_rect:    req.param('img_url_rect'),
       address_field:    req.param('address_field'),
       location_url:     req.param('location_url'),
       comments:         req.param('comments'),

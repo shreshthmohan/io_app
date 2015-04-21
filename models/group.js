@@ -3,6 +3,7 @@ module.exports = function(sequelize, DataTypes) {
     group_name:        {type: DataTypes.STRING(60), allowNull: false}, 
     group_name_slug:   {type: DataTypes.STRING(60), allowNull: false}, 
     img_url_square:    {type: DataTypes.STRING(555)},
+    img_url_rect:      {type: DataTypes.STRING(555)},
     group_url:         {type: DataTypes.STRING(550)},// social link in all probability
     comments:          {type: DataTypes.TEXT},
     maturity:          {type: DataTypes.STRING(25)}

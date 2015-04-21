@@ -2,110 +2,123 @@ extends ../layout
 
 block content
   .row
-    .entity.col-md-8.std-shadow.col-md-offset-2
-      - if(group.group_url) 
-          a(href=group.group_url target='_blank')
-            h1.lg.inline #{group.group_name}
-            span.fa.fa-external-link.margin-l-5.fs-16
-      - else
-          h1.lg #{group.group_name}
-      span.location
-        span.fa.fa-map-marker.w-20.fs-16.gray
-        h2.md.inline #{group.City.city_name}
-      - if(group.comments)
-          span.description.block
-            p.inline!= group.comments
-      - if(group.Emails != '')
-          ul.emails
-            each mail in group.Emails
-              li.email
-                span.fa.fa-envelope-square.w-20.gray
-                a(href="mailto:" + mail.email target="_blank")
-                  | #{mail.email}
-      - if(group.PhoneNumbers != '')
-          ul.numbers
-            each number in group.PhoneNumbers
-              li.number
-                span.fa.fa-phone-square.w-20.gray
-                | #{number.number}
-      .slinks.clearfix.margin-b-5
-        each slink in group.SocialLinks
-          include social_link_template
-      .tag-container.clearfix
-        each group_tag in group.GroupTags
-          li.tag
-            span
-              | #{group_tag.Tag.tag_name}
-      .user-res.fs-12
-        a#user-error.pointer(title="Report wrong or outdated information") Report error
-        |  or 
-        a#user-info.pointer(title="Add missing information") missing info
-        |  about this outdoor group.
-      - if(admin)
-          | Dear Admin, if you see something wrong or missing with this group you can modify it 
-          a(href="/app/admin/groups/" + group.id, target="_blank") here
-  .row
-    .sub-heading.text-center.margin-tb-10 Suggestions
+    .col-md-8
+      .col-md-12
+        .entity.col-md-12.std-shadow
+          - if(group.img_url_rect) 
+            .col-md-12(style="padding: 0;")  
+              - if(group.group_url) 
+                a(href=group.group_url target='_blank')
+                  img.individual-cover(src=group.img_url_rect title=group.group_name + " in " + group.City.city_name)
+              - else
+                img.individual-cover(src=group.img_url_rect title=group.group_name + " in " + group.City.city_name)
+          - if(group.group_url) 
+              a(href=group.group_url target='_blank')
+                h1.lg.inline #{group.group_name}
+                span.fa.fa-external-link.margin-l-5.fs-16
+          - else
+              h1.lg #{group.group_name}
+          span.location
+            span.fa.fa-map-marker.w-20.fs-16.gray
+            h2.md.inline #{group.City.city_name}
+          - if(group.comments)
+              span.description.block
+                p.inline!= group.comments
+          - if(group.Emails != '')
+              ul.emails
+                each mail in group.Emails
+                  li.email
+                    span.fa.fa-envelope-square.w-20.gray
+                    a(href="mailto:" + mail.email target="_blank")
+                      | #{mail.email}
+          - if(group.PhoneNumbers != '')
+              ul.numbers
+                each number in group.PhoneNumbers
+                  li.number
+                    span.fa.fa-phone-square.w-20.gray
+                    | #{number.number}
+          .slinks.clearfix.margin-b-5
+            each slink in group.SocialLinks
+              include social_link_template
+          .tag-container.clearfix
+            each group_tag in group.GroupTags
+              li.tag
+                span
+                  | #{group_tag.Tag.tag_name}
+          .user-res.fs-12
+            a#user-error.pointer(title="Report wrong or outdated information") Report error
+            |  or 
+            a#user-info.pointer(title="Add missing information") missing info
+            |  about this outdoor group.
+          - if(admin)
+              | Dear Admin, if you see something wrong or missing with this group you can modify it 
+              a(href="/app/admin/groups/" + group.id, target="_blank") here
+          .fb-comments(data-href="http://www.indiaoutside.org/groups/" + group.City.city_name_slug + "/" + group.event_name_slug + "/" + group.id data-numposts="5" data-width="100%" data-colorscheme="light")
+      .col-md-12
+        .sub-heading.text-center.margin-tb-10 Suggestions
+      .col-md-6
+        a(href="/groups/grouped?location=" + group.City.id title="All Active Outdoor groups in " + group.City.city_name)
+          .category-el
+            .info.clearfix(style="background-image: url(" + group.City.image_url + ");")
+              .right
+                i.fa.fa-group.helper-icon
+              .info-text.col-xs-12
+                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                  | Groups in #{group.City.city_name}
+              .info-overlay
+      .col-md-6
+        a(href="/groups/grouped" title="All Outdoor Groups by Activity")
+          .category-el
+            .info.clearfix.all-tag-bg
+              .right
+                i.fa.fa-group.helper-icon
+              .info-text.margin-top-90.col-xs-12
+                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                  | All Groups by Activity
+              .info-overlay
+      .col-md-6
+        a(href="/groups/grouped#by-location" title="All Outdoor Groups by Location")
+          .category-el
+            .info.clearfix.all-loc-bg
+              .right
+                i.fa.fa-group.helper-icon
+              .info-text.margin-top-90.col-xs-12
+                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                  | All Groups by Location
+              .info-overlay
+      .col-md-6
+        a(href="/events/upcoming/grouped?location=" + group.City.id , title="All outdoor events in " + group.City.city_name)
+          .category-el
+            .info.clearfix(style="background-image: url(" + group.City.image_url + ");")
+              .right
+                i.fa.fa-flag-checkered.helper-icon
+              .info-text.margin-top-90.col-xs-12
+                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                  | Events in #{group.City.city_name}
+              .info-overlay
+      .col-md-6
+        a(href="/gear/grouped?location=" + group.City.id , title="All outdoor gear stores and retailers in " + group.City.city_name)
+          .category-el
+            .info.clearfix(style="background-image: url(" + group.City.image_url + ");")
+              .right
+                i.fa.fa-gear.helper-icon
+              .info-text.margin-top-90.col-xs-12
+                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                  | Stores in #{group.City.city_name}
+              .info-overlay
+      .col-md-6
+        a(href="/schools/grouped?location=" + group.City.id , title="All outdoor schools in " + group.City.city_name)
+          .category-el
+            .info.clearfix(style="background-image: url(" + group.City.image_url + ");")
+              .right
+                i.fa.fa-building-o.helper-icon
+              .info-text.margin-top-90.col-xs-12
+                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                  | Learn in #{group.City.city_name}
+              .info-overlay
     .col-md-4
-      a(href="/groups/grouped?location=" + group.City.id title="All Active Outdoor groups in " + group.City.city_name)
-        .category-el
-          .info.clearfix(style="background-image: url(" + group.City.image_url + ");")
-            .right
-              i.fa.fa-group.helper-icon
-            .info-text.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | Groups in #{group.City.city_name}
-            .info-overlay
-    .col-md-4
-      a(href="/groups/grouped" title="All Outdoor Groups by Activity")
-        .category-el
-          .info.clearfix.all-tag-bg
-            .right
-              i.fa.fa-group.helper-icon
-            .info-text.margin-top-90.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | All Groups by Activity
-            .info-overlay
-    .col-md-4
-      a(href="/groups/grouped#by-location" title="All Outdoor Groups by Location")
-        .category-el
-          .info.clearfix.all-loc-bg
-            .right
-              i.fa.fa-group.helper-icon
-            .info-text.margin-top-90.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | All Groups by Location
-            .info-overlay
-    .col-md-4
-      a(href="/events/upcoming/grouped?location=" + group.City.id , title="All outdoor events in " + group.City.city_name)
-        .category-el
-          .info.clearfix(style="background-image: url(" + group.City.image_url + ");")
-            .right
-              i.fa.fa-flag-checkered.helper-icon
-            .info-text.margin-top-90.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | Events in #{group.City.city_name}
-            .info-overlay
-    .col-md-4
-      a(href="/gear/grouped?location=" + group.City.id , title="All outdoor gear stores and retailers in " + group.City.city_name)
-        .category-el
-          .info.clearfix(style="background-image: url(" + group.City.image_url + ");")
-            .right
-              i.fa.fa-gear.helper-icon
-            .info-text.margin-top-90.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | Stores in #{group.City.city_name}
-            .info-overlay
-    .col-md-4
-      a(href="/schools/grouped?location=" + group.City.id , title="All outdoor schools in " + group.City.city_name)
-        .category-el
-          .info.clearfix(style="background-image: url(" + group.City.image_url + ");")
-            .right
-              i.fa.fa-building-o.helper-icon
-            .info-text.margin-top-90.col-xs-12
-              span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                | Learn in #{group.City.city_name}
-            .info-overlay
+      include featured
+      include social_links
   .dialog-screen
   .dialog-container.col-md-4.col-md-offset-4#user-form-error
     .dialog-head-container.clearfix.text-center

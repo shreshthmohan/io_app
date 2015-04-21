@@ -46,6 +46,13 @@ block content
       | No image URL; add(square, 160x160?): 
       input(type="text", name="img_url_square")
     br
+    if (school.img_url_rect)
+      img(src=school.img_url_rect id="img_url_rect")
+      div(id="change_img_url_rect" class="edit") edit
+    else
+      | No image URL; add(rectangle):
+      input(type="text", name="img_url_rect")
+    br
     | Comments: 
     if (school.comments)
       div(id="comments" class="data") #{school.comments}

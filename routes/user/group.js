@@ -457,7 +457,7 @@ exports.individual = function(req, res) {
     attributes: [
       'id',
       'group_name',
-      'img_url_square',
+      'img_url_rect',
       'group_name_slug',
       'group_url',
       'comments']

@@ -29,6 +29,7 @@ exports.create = function(req, res) {
        group_name_slug:  slugify(req.param('group_name')),
        group_url:        req.param('group_url'),
        img_url_square:   req.param('img_url_square'),
+       img_url_rect:    req.param('img_url_rect'),
        comments:         req.param('comments'),
        maturity:        req.param('maturity')
      }).success(function(group){
@@ -48,6 +49,7 @@ exports.modify = function(req, res) {
     group.updateAttributes({
       group_url:        req.param('group_url'),
       img_url_square:   req.param('img_url_square'),
+      img_url_rect:    req.param('img_url_rect'),
       comments:         req.param('comments'),
       maturity:        req.param('maturity')
     }).success(function(group) {

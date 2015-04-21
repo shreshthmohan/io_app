@@ -458,7 +458,7 @@ exports.individual = function(req, res) {
     attributes: [
       'id',
       'retailer_name',
-      'img_url_square',
+      'img_url_rect',
       'retailer_name_slug',
       'website_url',
       'location_url',
@@ -466,7 +466,6 @@ exports.individual = function(req, res) {
       'comments']
   })
   .success(function(retailer) {
-     console.log(JSON.stringify(retailer))
      res.render('user/individual_retailer', {
        active_tab: 'gear',
        title_: retailer.retailer_name + ' in ' + retailer.City.city_name,

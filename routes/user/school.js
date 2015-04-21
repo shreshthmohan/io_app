@@ -456,7 +456,7 @@ exports.individual = function(req, res) {
     attributes: [
       'id',
       'school_name',
-      'img_url_square',
+      'img_url_rect',
       'school_name_slug',
       'website_url',
       'location_url',

@@ -23,6 +23,7 @@ exports.create = function(req, res) {
        address_field:    req.param('address_field'),
        location_url:     req.param('location_url'),
        img_url_square:   req.param('img_url_square'),
+       img_url_rect:    req.param('img_url_rect'),
        comments:         req.param('comments')
      }).success(function(retailer){
           retailer.setCity(city).success(function() { // adds FK in retailer
@@ -43,6 +44,7 @@ exports.modify = function(req, res) {
       address_field:    req.param('address_field'),
       location_url:     req.param('location_url'),
       img_url_square:   req.param('img_url_square'),
+      img_url_rect:    req.param('img_url_rect'),
       maturity:         req.param('maturity'),
       comments:         req.param('comments')}
     ).success(function(retailer) {
