@@ -10,6 +10,8 @@
    TODO script.
 1a. To add new column to an existing table:
     alter table Events add column column_name varchar(length);
+1b. Delete row from mysql table:
+    delete from table_name where column_name=value
 
 2. Import stuff from csv in to db table :
      Place csv in /tmp directory for ease

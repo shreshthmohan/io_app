@@ -399,7 +399,6 @@ var grouped_by_activity_chosen_loc = function(req, res) {
 var grouped_by_location_chosen_tag = function(req, res) {
   db.City.findAll()
   .then(function(cities) {
-    console.log(JSON.stringify(cities))
     var promises = []
     var city
     cities.forEach(function(c) {

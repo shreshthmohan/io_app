@@ -1,5 +1,24 @@
 extends ../layout
 
+
+block meta
+  - var desc_tags = ''
+  each gear_tag, i in retailer.GearTags
+      - if(i == retailer.GearTags.length - 1)
+          - desc_tags = desc_tags + gear_tag.Tag.tag_name
+      - else if((i == retailer.GearTags.length - 2) && (i > 0))
+          - desc_tags = desc_tags + gear_tag.Tag.tag_name + " and "
+      - else
+          - desc_tags = desc_tags + gear_tag.Tag.tag_name + ", "
+  meta(name="description" content= "Get " + desc_tags + " gear and equipment at " + retailer.retailer_name + " in " + retailer.City.city_name + ". Find contact, location on map, phone numbers, emails of the retailer/store.")
+  meta(name="og:description" content= "Get " + desc_tags + " gear and equipment at " + retailer.retailer_name + " in " + retailer.City.city_name + ". Find contact, location on map, phone numbers, emails of the retailer/store.")
+  meta(property="og:title" content=retailer.retailer_name + " in " + retailer.City.city_name)
+  - if(retailer.img_url_rect)
+      meta(property="og:image" content=retailer.img_url_rect)
+  - else
+      meta(property="og:image" content="https://c2.staticflickr.com/8/7615/16942465932_032fa89386_b.jpg")
+  meta(property="og:url" content="http://www.indiaoutside.org/gear/" + retailer.City.city_name_slug + "/" + retailer.retailer_name_slug + "/" + retailer.id)
+
 block content
   .row
     .col-md-8

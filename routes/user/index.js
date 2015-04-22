@@ -91,7 +91,7 @@ exports.index = function(req, res) {
     .then(function(cities_c) {
       res.render('user/index', {
         active_tab: 'home',
-        title_: 'Adventure Outdoors India - Running, Cycling, Trekking, Surfing, Kayaking, Rafting & More ',
+        title_: 'Adventure Outdoors - Running, Cycling, Trekking, Surfing, Kayaking, Rafting, Slacklining, Skateboarding & More ',
         cities: cities_c,
         tags: tags_c
       })
