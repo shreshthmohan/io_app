@@ -210,6 +210,8 @@ TODOs:
     #28. User form for adding new stuff (need to think of engagement)
     #29. Facebook and Twitter pages (images for that)
       1. 
+    30. Faced some issue with an event ... unable to fetch because EventTags had a row with TagId=NULL!!
+        This should not have happened. TODO fix
     
 
 37. SEO

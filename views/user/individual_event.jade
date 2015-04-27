@@ -1,5 +1,23 @@
 extends ../layout
 
+block meta
+  - var desc_tags = ''
+  each event_tag, i in race.EventTags
+      - if(i == race.EventTags.length - 1)
+          - desc_tags = desc_tags + event_tag.Tag.tag_name
+      - else if((i == race.EventTags.length - 2) && (i > 0))
+          - desc_tags = desc_tags + event_tag.Tag.tag_name + " and "
+      - else
+          - desc_tags = desc_tags + event_tag.Tag.tag_name + ", "
+  meta(name="description" content= desc_tags + " at " + race.event_name + " in " + race.City.city_name + ". Find contact, location on map, phone numbers, emails of the race/event.")
+  meta(property="og:description" content= "Get " + desc_tags + " gear and equipment at " + race.event_name + " in " + race.City.city_name + ". Find contact, location on map, phone numbers, emails of the race/store.")
+  meta(property="og:title" content=race.event_name + " in " + race.City.city_name)
+  - if(race.img_url_rect)
+      meta(property="og:image" content=race.img_url_rect)
+  - else
+      meta(property="og:image" content="https://c2.staticflickr.com/8/7615/16942465932_032fa89386_b.jpg")
+  meta(property="og:url" content="http://www.indiaoutside.org/events/" + race.City.city_name_slug + "/" + race.event_name_slug + "/" + race.id)
+
 block content
   .row
     .col-md-8
@@ -29,9 +47,9 @@ block content
                 span.gray.fs-14.margin-r-5 by
                 - if(race.organiser_url)
                     a(href=race.organiser_url target='_blank')
-                      h3.md #{race.organiser_name}
+                      h3.md.inline #{race.organiser_name}
                 - else
-                    h3.md #{race.organiser_name}
+                    h3.md.inline #{race.organiser_name}
           - if(race.address_field)
               span.address.block
                 i.fa.fa-building.w-20.gray

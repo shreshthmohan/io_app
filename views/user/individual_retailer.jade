@@ -1,6 +1,5 @@
 extends ../layout
 
-
 block meta
   - var desc_tags = ''
   each gear_tag, i in retailer.GearTags
@@ -11,7 +10,7 @@ block meta
       - else
           - desc_tags = desc_tags + gear_tag.Tag.tag_name + ", "
   meta(name="description" content= "Get " + desc_tags + " gear and equipment at " + retailer.retailer_name + " in " + retailer.City.city_name + ". Find contact, location on map, phone numbers, emails of the retailer/store.")
-  meta(name="og:description" content= "Get " + desc_tags + " gear and equipment at " + retailer.retailer_name + " in " + retailer.City.city_name + ". Find contact, location on map, phone numbers, emails of the retailer/store.")
+  meta(property="og:description" content= "Get " + desc_tags + " gear and equipment at " + retailer.retailer_name + " in " + retailer.City.city_name + ". Find contact, location on map, phone numbers, emails of the retailer/store.")
   meta(property="og:title" content=retailer.retailer_name + " in " + retailer.City.city_name)
   - if(retailer.img_url_rect)
       meta(property="og:image" content=retailer.img_url_rect)

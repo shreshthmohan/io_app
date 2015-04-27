@@ -44,7 +44,7 @@ exports.modify = function(req, res) {
       address_field:    req.param('address_field'),
       location_url:     req.param('location_url'),
       img_url_square:   req.param('img_url_square'),
-      img_url_rect:    req.param('img_url_rect'),
+      img_url_rect:     req.param('img_url_rect'),
       maturity:         req.param('maturity'),
       comments:         req.param('comments')}
     ).success(function(retailer) {
