@@ -438,6 +438,8 @@ app.get('/schools/school_form', school.school_form);
 
 app.get('/schools/:city_name_slug/:school_name_slug/:school_id', school.individual)
 
+app.get('/teach_cg', routes.teach_cg);
+
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')))
 
