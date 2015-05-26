@@ -119,6 +119,7 @@ app.get('/log_out', user.log_out);
 // Redirect users from root to home
 //app.get('/', function(req, res) {res.redirect('/app/home')})
 app.get('/', routes.index);
+app.get('/alt', routes.index_alt);
 
 // Checking if user is authenticated for every route except sign-in/up
 app.all('/app/admin*', auth_middleware.ensure_auth);
@@ -395,6 +396,7 @@ app.get('/events', function(req, res) {res.redirect('/events/upcoming')});
 
 // Individual event
 app.get('/events/:city_name_slug/:event_name_slug/:event_id', race.individual)
+//app.get('/events_test/:city_name_slug/:event_name_slug/:event_id', race.individual_test)
 // TODO: works fine even if someone tries to access /events/:some-text/:some-random-text/:event_id
 // Need to figure out how to display correct name in URL bar. Some kind of redirection
 // Yes, redirection. Find out how much more resources this will use

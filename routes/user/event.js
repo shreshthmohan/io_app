@@ -572,45 +572,6 @@ var grouped_by_location_chosen_tag = function(req, res) {
   })
 }
 
-// Individual events
-exports.individual = function(req, res) {
-  db.Event.find({
-    where: {id: req.param('event_id')},
-    include: [ 
-      db.City,
-      db.Email,
-      db.SocialLink,
-      db.PhoneNumber,
-      {
-        model: db.EventTag,
-        include: [db.Tag]},
-      {
-        model: db.EventSubtag,
-        include: [db.Subtag]}
-      ],
-    attributes: [
-      'id',
-      'event_name',
-      'event_name_slug',
-      'img_url_rect',
-      'event_url',
-      'organiser_name',
-      'organiser_url',
-      'location_url',
-      'address_field',
-      'comments',
-      [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'),
-       'start_date_f'],
-      [Sequelize.fn('date_format', Sequelize.col('end_date'), '%e %M %Y'), 'end_date_f']]
-    })
-  .success(function(race) {
-     res.render('user/individual_event', {
-       active_tab: 'events',
-       title_: race.event_name + ' in ' + race.City.city_name,
-       race: race}) 
-  }) 
-}
-
 // TODO: past events 
 
 
@@ -688,6 +649,99 @@ exports.all = function(req,res) {
   })
 }
 
+// individual event
+// with "smart" suggestions
+exports.individual = function(req, res) {
+  db.Event.find({
+    where: {id: req.param('event_id')},
+    include: [ 
+      db.City,
+      db.Email,
+      db.SocialLink,
+      db.PhoneNumber,
+      {
+        model: db.EventTag,
+        include: [db.Tag]},
+      {
+        model: db.EventSubtag,
+        include: [db.Subtag]}
+      ],
+    attributes: [
+      'id',
+      'event_name',
+      'event_name_slug',
+      'img_url_rect',
+      'event_url',
+      'organiser_name',
+      'organiser_url',
+      'location_url',
+      'address_field',
+      'comments',
+      [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'),
+       'start_date_f'],
+      [Sequelize.fn('date_format', Sequelize.col('end_date'), '%e %M %Y'), 'end_date_f']]
+    })
+  .success(function(race) {
+    var promises = [];
+    var race_w_suggestion = race.toJSON();
+    promises.push(
+      db.Event.count({
+        where: Sequelize.and(
+          {CityId: race.City.id},
+          {start_date: {gte: new Date()}})
+      })
+      .then(function(event_count) {
+        race_w_suggestion.city_event_count = event_count;
+        return race_w_suggestion
+      })
+    )
+    promises.push(
+      db.Event.count({
+        where: {start_date: {gte: new Date()}}
+      })
+      .then(function(total_event_count) {
+        race_w_suggestion.event_count = total_event_count;
+        return race_w_suggestion
+      })
+    )
+    promises.push(
+      db.Retailer.count({
+        where: {CityId: race.City.id}
+      })
+      .then(function(store_count) {
+        race_w_suggestion.store_count = store_count;
+        return race_w_suggestion
+      })
+    )
+    promises.push(
+      db.School.count({
+        where: {CityId: race.City.id}
+      })
+      .then(function(school_count) {
+        race_w_suggestion.school_count = school_count;
+        return race_w_suggestion
+      })
+    )
+    promises.push(
+      db.Group.count({
+        where: {CityId: race.City.id}
+      })
+      .then(function(group_count) {
+        race_w_suggestion.group_count = group_count;
+        return race_w_suggestion
+      })
+    )
+    return Promise.all(promises);
+  })
+  .then(function(race_c) {
+     console.log(JSON.stringify(race_c))
+     res.render('user/individual_event', {
+       active_tab: 'events',
+       title_: race_c[0].event_name + ' in ' + race_c[0].City.city_name,
+       race: race_c[0]}) 
+  }) 
+}
+
 // for refering to raw MySQL queries
 /*
 // all upcoming events
@@ -701,5 +755,47 @@ exports.upcoming = function(req,res) {
       races: races
     })
   })
+}
+*/
+// Individual events: 
+// without "smart" suggestions
+/*
+exports.individual = function(req, res) {
+  db.Event.find({
+    where: {id: req.param('event_id')},
+    include: [ 
+      db.City,
+      db.Email,
+      db.SocialLink,
+      db.PhoneNumber,
+      {
+        model: db.EventTag,
+        include: [db.Tag]},
+      {
+        model: db.EventSubtag,
+        include: [db.Subtag]}
+      ],
+    attributes: [
+      'id',
+      'event_name',
+      'event_name_slug',
+      'img_url_rect',
+      'event_url',
+      'organiser_name',
+      'organiser_url',
+      'location_url',
+      'address_field',
+      'comments',
+      [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'),
+       'start_date_f'],
+      [Sequelize.fn('date_format', Sequelize.col('end_date'), '%e %M %Y'), 'end_date_f']]
+    })
+  .success(function(race) {
+     console.log(JSON.stringify(race))
+     res.render('user/individual_event', {
+       active_tab: 'events',
+       title_: race.event_name + ' in ' + race.City.city_name,
+       race: race}) 
+  }) 
 }
 */

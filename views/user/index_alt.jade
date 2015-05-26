@@ -10,98 +10,29 @@ block meta
 block content
   .home-search.border-gray
     .home-search-sub
-      h1.text-shadow-2.white Look for Adventure!
-      form(class="home-radio")
-        input(id="gear" type="radio" name="search" value="gear")
-        label(for="gear" class="home-radio-label") Gear
-        input(id="events" type="radio" name="search" value="events" checked="checked")
-        label(for="events" class="home-radio-label") Events 
-        input(id="groups" type="radio" name="search" value="groups")
-        label(for="groups" class="home-radio-label") Groups
-        input(id="learn" type="radio" name="search" value="learn")
-        label(for="learn" class="home-radio-label") Learn
-      .gear
-        h2.white.text-shadow-1  Get equipped.
-        form.search.form-inline(action="/gear")
-          .form-group
+      h1.text-shadow-2.white.index-head Look for Adventure!
+      .cont
+        form.search.form-inline.inline(action="/gear")
+          .form-group.what.gray-tbg
+            h2.white.text-shadow-1(title="Choose an outdoor sport/activity") What?
             label.sr-only(for="activity_gear") Activity
             select(class="form-control" required name="activity" id="activity_gear")
               option(value='' selected="selected" disabled="disabled") Choose activity
               option(value=0) All
               each tag in tags
                 option(value=tag.id) #{tag.tag_name}
-          span.search-helper.text-shadow-1 gear in
-          .form-group
+            button(type="submit" class="btn btn-warning ") Go!
+        span.search-helper.text-shadow-1.fs-20 or
+        form.search.form-inline.inline(action="/gear")
+          .form-group.where.gray-tbg
+            h2.white.text-shadow-1(title="Choose an location") Where?
             label.sr-only(for="store_location") Activity
             select(class="form-control" required name="location" id="store_location")
               option(value='' selected="selected" disabled="disabled") Choose location
               option(value=0) All locations
               each city in cities
                 option(value=city.id) #{city.city_name}
-          button(type="submit" class="btn btn-warning ") Go!
-      .events
-        h2.white.text-shadow-1 Upcoming Races and Events.
-        form.search.form-inline(action="/events/upcoming")
-          .form-group
-            label.sr-only(for='event_activity') Activity
-            select(class="form-control" required name="activity" id="event_activity")
-              option(value='' selected="selected" disabled="disabled") Choose activity
-              option(value=0) All
-              each tag in tags
-                option(value=tag.id) #{tag.tag_name}
-          .form-group
-            label.sr-only(for='event_location') Location
-            select(class="form-control" name="location" id="event_location" required)
-              option(value='' selected="selected" disabled="disabled") Choose location 
-              option(value=0) All
-              each city in cities
-                option(value=city.id) #{city.city_name}
-          .form-group
-            label.sr-only(for="when") When
-            .input-group
-              .input-group-addon
-                span.fa.fa-calendar
-              input(class="form-control" type="text" name="date" placeholder="when" id="when")
-          button(type="submit" class="btn btn-warning ") Go! 
-      .groups
-        h2.white.text-shadow-1 Join the community.
-        form.search.form-inline(action="/groups")
-          .form-group
-            label.sr-only(for="activity_group") Activity
-            select(class="form-control" required name="activity" id="activity_group")
-              option(value='' selected="selected" disabled="disabled") Choose activity
-              option(value=0) All
-              each tag in tags
-                option(value=tag.id) #{tag.tag_name}
-          span.search-helper.text-shadow-1 groups in
-          .form-group
-            label.sr-only(for="group_location") Activity
-            select(class="form-control" required name="location" id="group_location")
-              option(value='' selected="selected" disabled="disabled") Choose location
-              option(value=0) All locations
-              each city in cities
-                option(value=city.id) #{city.city_name}
-          button(type="submit" class="btn btn-warning ") Go!
-      .learn
-        h2.white.text-shadow-1 Learn those moves.
-        form.search.form-inline(action="/schools")
-          span.search-helper.text-shadow-2 Learn 
-          .form-group
-            label.sr-only(for="activity_school") Activity
-            select(class="form-control" required name="activity" id="activity_school")
-              option(value='' selected="selected" disabled="disabled") Choose activity
-              option(value=0) All Activities 
-              each tag in tags
-                option(value=tag.id) #{tag.tag_name}
-          span.search-helper.text-shadow-2 in
-          .form-group
-            label.sr-only(for="school_location") Activity
-            select(class="form-control" required name="location" id="school_location")
-              option(value='' selected="selected" disabled="disabled") Choose location
-              option(value=0) All locations
-              each city in cities
-                option(value=city.id) #{city.city_name}
-          button(type="submit" class="btn btn-warning ") Go!
+            button(type="submit" class="btn btn-warning ") Go!
       .tw-box
         include twitter_follow
   hr.home-hr

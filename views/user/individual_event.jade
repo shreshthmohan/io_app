@@ -35,10 +35,10 @@ block content
               h1.lg #{race.event_name}
           span.dates.fs-14
             span.fa.fa-calendar.w-20.gray
-            | #{race.dataValues.start_date_f}
-            - if(race.dataValues.end_date_f)
-              - if(race.dataValues.start_date_f != race.dataValues.end_date_f)
-                  |   -  #{race.dataValues.end_date_f}
+            | #{race.start_date_f}
+            - if(race.end_date_f)
+              - if(race.start_date_f != race.end_date_f)
+                  |   -  #{race.end_date_f}
           span.location
             span.fa.fa-map-marker.fs-16.gray.w-20
             h2.md.inline #{race.City.city_name}
@@ -98,16 +98,17 @@ block content
           .fb-comments(data-href="http://www.indiaoutside.org/events/" + race.City.city_name_slug + "/" + race.event_name_slug + "/" + race.id data-numposts="5" data-width="100%" data-colorscheme="light")
       .col-md-12
         .sub-heading.text-center.margin-tb-10 Suggestions
-      .col-md-6
-        a(href="/events/upcoming/grouped?location=" + race.City.id , title="All outdoor events in " + race.City.city_name)
-          .category-el
-            .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
-              .right
-                i.fa.fa-flag-checkered.helper-icon
-              .info-text.margin-top-90.col-xs-12
-                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                  | Events in #{race.City.city_name}
-              .info-overlay
+      - if (race.city_event_count > 1)
+        .col-md-6
+          a(href="/events/upcoming/grouped?location=" + race.City.id , title="All outdoor events in " + race.City.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
+                .right
+                  i.fa.fa-flag-checkered.helper-icon
+                .info-text.margin-top-90.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | #{race.city_event_count - 1} other Events in #{race.City.city_name}
+                .info-overlay
       .col-md-6
         a(href="/events/upcoming/grouped" title="All Outdoor Events and Races by Activity")
           .category-el
@@ -128,36 +129,48 @@ block content
                 span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                   | All Events by Location
               .info-overlay
-      .col-md-6
-        a(href="/gear/grouped?location=" + race.City.id , title="All outdoor gear stores and retailers in " + race.City.city_name)
-          .category-el
-            .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
-              .right
-                i.fa.fa-gear.helper-icon
-              .info-text.margin-top-90.col-xs-12
-                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                  | Stores in #{race.City.city_name}
-              .info-overlay
-      .col-md-6
-        a(href="/schools/grouped?location=" + race.City.id , title="All outdoor schools in " + race.City.city_name)
-          .category-el
-            .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
-              .right
-                i.fa.fa-building-o.helper-icon
-              .info-text.margin-top-90.col-xs-12
-                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                  | Learn in #{race.City.city_name}
-              .info-overlay
-      .col-md-6
-        a(href="/groups/grouped?location=" + race.City.id title="All Active Outdoor groups in " + race.City.city_name)
-          .category-el
-            .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
-              .right
-                i.fa.fa-group.helper-icon
-              .info-text.col-xs-12
-                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                  | Groups in #{race.City.city_name}
-              .info-overlay
+      - if(race.store_count > 0)
+        .col-md-6
+          a(href="/gear/grouped?location=" + race.City.id , title="All outdoor gear stores and retailers in " + race.City.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
+                .right
+                  i.fa.fa-gear.helper-icon
+                .info-text.margin-top-90.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    - if (race.store_count > 1)
+                      | #{race.store_count} Stores in #{race.City.city_name}
+                    - else
+                      | 1 Store in #{race.City.city_name}
+                .info-overlay
+      - if(race.school_count > 0)
+        .col-md-6
+          a(href="/schools/grouped?location=" + race.City.id , title="All outdoor schools in " + race.City.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
+                .right
+                  i.fa.fa-building-o.helper-icon
+                .info-text.margin-top-90.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    - if (race.school_count > 1)
+                      | #{race.school_count} outdoor schools in #{race.City.city_name}
+                    - else
+                      | 1 outdoor school in #{race.City.city_name}
+                .info-overlay
+      - if(race.group_count > 0)
+        .col-md-6
+          a(href="/groups/grouped?location=" + race.City.id title="All Active Outdoor groups in " + race.City.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
+                .right
+                  i.fa.fa-group.helper-icon
+                .info-text.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    - if (race.group_count > 1)
+                      | #{race.group_count} groups in #{race.City.city_name}
+                    - else
+                      | 1 group in #{race.City.city_name}
+                .info-overlay
     .col-md-4
       include featured
       include social_links
