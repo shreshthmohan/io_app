@@ -693,6 +693,23 @@ li.tag, li.subtag {
   padding: 0px;
   left: 0;
 }
+  
+.city-entities {
+  z-index: 1050;
+  background-color: white;
+  position: absolute;
+  top: 50px;
+  display: none;
+  padding: 0px;
+  left: 0;
+}
+  
+  
+  
+  
+  
+  
+  
 
 .dialog-screen {
   z-index: 1049;
@@ -804,6 +821,10 @@ h1.lg {
   text-transform: uppercase;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 //////////////////
 // Home explore //
 //////////////////
@@ -906,6 +927,11 @@ li.tab.active {
 .tab-content-container.active {
   display: block;
   z-index: 2;
+}
+
+.tab-content-container.events-info.active, .tab-content-container.retailers-info.active, .tab-content-container.groups-info.active, .tab-content-container.schools-info.active {
+  display: block;
+  z-index: 1032;
 }
 
 .radio-helper {

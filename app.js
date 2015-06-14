@@ -14,6 +14,7 @@ var gear     = require('./routes/user/gear');
 var group    = require('./routes/user/group');
 var school   = require('./routes/user/school');
 var user     = require('./routes/user/user')
+var activity = require('./routes/user/activity')
 
 var http     = require('http');
 var path     = require('path');
@@ -32,7 +33,7 @@ var lessParserOptions = {}
 var lessCompilerOptions = {}
 
 // To change env
-app.settings.env = 'production';
+//app.settings.env = 'production';
 
 app.use(lessMiddleware(
   __dirname + '/stylesheets' 
@@ -440,6 +441,10 @@ app.get('/schools/school_form', school.school_form);
 
 app.get('/schools/:city_name_slug/:school_name_slug/:school_id', school.individual)
 
+// Activity routes
+app.get('/activity/:tag_id', activity.index);
+
+
 app.get('/teach_cg', routes.teach_cg);
 
 // Serving static files
@@ -464,6 +469,9 @@ app.use(function(err, req, res, next) {
   
   res.status(404).render('user/404', {title_: 'Page not found'});
 })
+
+
+
 
 /////////////////////
 // User Routes end // 

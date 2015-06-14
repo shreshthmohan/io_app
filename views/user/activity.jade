@@ -1,0 +1,91 @@
+extends ../layout
+
+block meta
+
+block content
+  .heading.text-center
+    h1.md
+      span.capitalize #{tag.tag_name}
+      span  in India
+  .row
+    .col-md-8
+      .row
+        .category-list
+          each city in cities
+            - if ((city.retailers != '') || (city.events != '') || (city.groups != '') || (city.schools != ''))
+              .col-md-12
+                .category-el
+                  .col-md-4
+                    .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
+                      .info-text.col-xs-12
+                        h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                          span.block.fs-16.padding-b-5
+                            | #{city.city_name}
+                          span.number.uppercase.block.fs-12
+                      .info-overlay
+                  .col-md-8.white-bg
+                    .info.clearfix
+                      .info-text.col-xs-12
+                        h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                          span.block.fs-16.padding-b-5
+                            a(id='event-info-' + city.id title=tag.tag_name + " events in " + city.city_name)
+                              | #{city.event_count} EVENTS
+                            |    
+                            a(id='retailer-info-' + city.id title=tag.tag_name + " gear stores in " + city.city_name)
+                              | #{city.retailer_count} STORES
+                            |    
+                            a(id='group-info-' + city.id title=tag.tag_name + " groups in " + city.city_name)
+                              | #{city.group_count} GROUPS
+                            |    
+                            a(id='school-info-' + city.id title="Learn " + tag.tag_name + " in " + city.city_name)
+                              | #{city.school_count} SCHOOLS
+                          span.number.uppercase.block.fs-12
+                          each event_tag in city.events
+                            div
+                              | #{event_tag.Event.event_name}
+                          each retailer_tag in city.retailers
+                            div
+                              | #{retailer_tag.Retailer.retailer_name}
+                          each group_tag in city.groups
+                            div
+                              | #{group_tag.Group.group_name}
+                          each school_tag in city.schools
+                            div
+                              | #{school_tag.School.school_name}
+  .dialog-screen
+  each city in cities
+    .dialog-container.col-md-4.col-md-offset-4.city-entities(id='details' + city.id)
+      .dialog-head-container.clearfix.text-center
+        span.dialog-head.fs-16.uppercase.inline-block.padding-tb-10
+          | Details
+        span.dialog-close.right.fs-18.pointer
+          i.fa.fa-times
+      .dialog-body
+        .row
+          .col-xs-12
+            .col-md-12.home-category-tabs
+              .row
+                ul
+                  li.tab#event-tab.col-xs-3.text-center.active
+                    | Events
+                  li.tab#gear-tab.col-xs-3.text-center
+                    | Gear
+                  li.tab#group-tab.col-xs-3.text-center
+                    | Groups
+                  li.tab#learn-tab.col-xs-3.text-center
+                    | Learn
+              .row
+                .tab-content-container.events-info
+                  each event_tag in city.events
+                    | #{event_tag.Event.event_name}
+                .tab-content-container.retailers-info
+                  each retailer_tag in city.retailers
+                    | #{retailer_tag.Retailer.retailer_name}
+                .tab-content-container.groups-info
+                  each group_tag in city.groups
+                    | #{group_tag.Group.group_name}
+                .tab-content-container.schools-info
+                  each school_tag in city.schools
+                    | #{school_tag.School.school_name}
+block extrajs
+  script(src="/js/activity_pop.js")
