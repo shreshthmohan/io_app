@@ -28,16 +28,16 @@ block content
                       .info-text.col-xs-12
                         h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
                           span.block.fs-16.padding-b-5
-                            a(id='event-info-' + city.id title=tag.tag_name + " events in " + city.city_name)
+                            a.pointer-on-hover(id='event-info-' + city.id title=tag.tag_name + " events in " + city.city_name)
                               | #{city.event_count} EVENTS
                             |    
-                            a(id='retailer-info-' + city.id title=tag.tag_name + " gear stores in " + city.city_name)
+                            a.pointer-on-hover(id='retailer-info-' + city.id title=tag.tag_name + " gear stores in " + city.city_name)
                               | #{city.retailer_count} STORES
                             |    
-                            a(id='group-info-' + city.id title=tag.tag_name + " groups in " + city.city_name)
+                            a.pointer-on-hover(id='group-info-' + city.id title=tag.tag_name + " groups in " + city.city_name)
                               | #{city.group_count} GROUPS
                             |    
-                            a(id='school-info-' + city.id title="Learn " + tag.tag_name + " in " + city.city_name)
+                            a.pointer-on-hover(id='school-info-' + city.id title="Learn " + tag.tag_name + " in " + city.city_name)
                               | #{city.school_count} SCHOOLS
                           span.number.uppercase.block.fs-12
                           each event_tag in city.events
@@ -66,13 +66,13 @@ block content
             .col-md-12.home-category-tabs
               .row
                 ul
-                  li.tab#event-tab.col-xs-3.text-center.active
+                  li.tab.event-tab.col-xs-3.text-center
                     | Events
-                  li.tab#gear-tab.col-xs-3.text-center
+                  li.tab.gear-tab.col-xs-3.text-center
                     | Gear
-                  li.tab#group-tab.col-xs-3.text-center
+                  li.tab.group-tab.col-xs-3.text-center
                     | Groups
-                  li.tab#learn-tab.col-xs-3.text-center
+                  li.tab.learn-tab.col-xs-3.text-center
                     | Learn
               .row
                 .tab-content-container.events-info
