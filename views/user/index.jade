@@ -10,7 +10,7 @@ block meta
 block content
   .home-search.border-gray
     .home-search-sub
-      h1.text-shadow-2.white Look for Adventure!
+      h1.text-shadow-2.white Get Outdoors!
       form(class="home-radio")
         input(id="gear" type="radio" name="search" value="gear")
         label(for="gear" class="home-radio-label") Gear
@@ -21,7 +21,7 @@ block content
         input(id="learn" type="radio" name="search" value="learn")
         label(for="learn" class="home-radio-label") Learn
       .gear
-        h2.white.text-shadow-1  Get equipped.
+        h2.io-yellow Get equipped.
         form.search.form-inline(action="/gear")
           .form-group
             label.sr-only(for="activity_gear") Activity
@@ -40,7 +40,7 @@ block content
                 option(value=city.id) #{city.city_name}
           button(type="submit" class="btn btn-warning ") Go!
       .events
-        h2.white.text-shadow-1 Upcoming Races and Events.
+        h2.io-yellow Upcoming Races and Events
         form.search.form-inline(action="/events/upcoming")
           .form-group
             label.sr-only(for='event_activity') Activity
@@ -64,7 +64,7 @@ block content
               input(class="form-control" type="text" name="date" placeholder="when" id="when")
           button(type="submit" class="btn btn-warning ") Go! 
       .groups
-        h2.white.text-shadow-1 Join the community.
+        h2.io-yellow Join the community.
         form.search.form-inline(action="/groups")
           .form-group
             label.sr-only(for="activity_group") Activity
@@ -83,7 +83,7 @@ block content
                 option(value=city.id) #{city.city_name}
           button(type="submit" class="btn btn-warning ") Go!
       .learn
-        h2.white.text-shadow-1 Learn those moves.
+        h2.io-yellow Learn those moves.
         form.search.form-inline(action="/schools")
           span.search-helper.text-shadow-2 Learn 
           .form-group
@@ -293,13 +293,10 @@ block content
         include featured
         .row
           .explore-head.text-center.border-gray
-            | Follow Us
+            | Stay Updated
         .row
           .col-xs-12(style="margin-bottom: 15px;")
-            .fb-page(data-href="https://www.facebook.com/indiaoutside" data-width="500px" data-hide-cover="false" data-show-facepile="true" data-show-posts="true")
-              .fb-xfbml-parse-ignore
-                blockquote(cite="https://www.facebook.com/indiaoutside")
-                  a(href="https://www.facebook.com/indiaoutside") India Outside
+            include fb_page_plugin
           .col-xs-12(style="margin-bottom: 15px;")
             include twitter_include
 block extrajs
