@@ -3,67 +3,75 @@ extends ../layout
 block meta
 
 block content
-  .heading.text-center
-    h1.md
-      span.capitalize #{tag.tag_name}
-      span  in India
   .row
     .col-md-8
-      .row
+        .heading.text-center
+          h1.md
+            span.capitalize #{tag.tag_name}
+            span  in India
         .category-list
           each city in cities
             - if ((city.retailers != '') || (city.events != '') || (city.groups != '') || (city.schools != ''))
-              .col-md-12
-                .category-el
-                  .col-md-4
-                    .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
-                      .info-text.col-xs-12
-                        h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                          span.block.fs-16.padding-b-5
+                .category-el.clearfix
+                  .col-md-3.padding-l-0.padding-r-0
+                    .city-title-container.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
+                  .col-md-3.padding-l-0.padding-r-0
+                    .city-title-container.clearfix
+                      .city-text.col-xs-12
+                        h2.sm.bob.absolute.padding-tb-5.padding-lr-10
+                          span.block.fs-18.padding-4-6.black-bg.white
                             | #{city.city_name}
                           span.number.uppercase.block.fs-12
-                      .info-overlay
-                  .col-md-8.white-bg
-                    .info.clearfix
-                      .info-text.col-xs-12
-                        h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                          span.block.fs-16.padding-b-5
-                            a.pointer-on-hover(id='event-info-' + city.id title=tag.tag_name + " events in " + city.city_name)
-                              | #{city.event_count} EVENTS
-                            |    
-                            a.pointer-on-hover(id='retailer-info-' + city.id title=tag.tag_name + " gear stores in " + city.city_name)
-                              | #{city.retailer_count} STORES
-                            |    
-                            a.pointer-on-hover(id='group-info-' + city.id title=tag.tag_name + " groups in " + city.city_name)
-                              | #{city.group_count} GROUPS
-                            |    
-                            a.pointer-on-hover(id='school-info-' + city.id title="Learn " + tag.tag_name + " in " + city.city_name)
-                              | #{city.school_count} SCHOOLS
-                          span.number.uppercase.block.fs-12
-                          each event_tag in city.events
-                            div
-                              | #{event_tag.Event.event_name}
-                          each retailer_tag in city.retailers
-                            div
-                              | #{retailer_tag.Retailer.retailer_name}
-                          each group_tag in city.groups
-                            div
-                              | #{group_tag.Group.group_name}
-                          each school_tag in city.schools
-                            div
-                              | #{school_tag.School.school_name}
+                  .col-md-6.white-bg.padding-l-0.padding-r-0
+                    .city-title-container.clearfix
+                      .city-text.col-xs-12
+                        .padding-tb-5.padding-lr-10
+                          span.block.fs-15.padding-tb-5.margin-t-5
+                            - if (city.event_count)
+                              a.margin-b-5.inline-block.pointer-on-hover.event-count.white-hover(id='event-info-' + city.id title=tag.tag_name + " events in " + city.city_name)
+                                | #{city.event_count} Event
+                                - if (city.event_count > 1)
+                                  | s
+                            - if (city.retailer_count)
+                              a.margin-b-5.inline-block.pointer-on-hover.store-count.white-hover(id='retailer-info-' + city.id title=tag.tag_name + " gear stores in " + city.city_name)
+                                | #{city.retailer_count} Store
+                                - if (city.retailer_count > 1)
+                                  | s
+                            - if (city.group_count)
+                              a.margin-b-5.inline-block.pointer-on-hover.group-count.white-hover(id='group-info-' + city.id title=tag.tag_name + " groups in " + city.city_name)
+                                | #{city.group_count} Group
+                                - if (city.group_count > 1)
+                                  | s
+                            - if (city.school_count)
+                              a.margin-b-5.inline-block.pointer-on-hover.school-count.white-hover(id='school-info-' + city.id title="Learn " + tag.tag_name + " in " + city.city_name)
+                                | #{city.school_count} School
+                                - if (city.school_count > 1)
+                                  | s
+    .col-md-4
+      include featured
+      .row
+        .explore-head.text-center.border-gray
+          | Stay Updated
+      .row
+        .col-xs-12(style="margin-bottom: 15px;")
+          include fb_page_plugin
   .dialog-screen
   each city in cities
-    .dialog-container.col-md-4.col-md-offset-4.city-entities(id='details' + city.id)
-      .dialog-head-container.clearfix.text-center
-        span.dialog-head.fs-16.uppercase.inline-block.padding-tb-10
-          | Details
-        span.dialog-close.right.fs-18.pointer
-          i.fa.fa-times
-      .dialog-body
+    .dialog-container.col-md-4.city-entities(id='details' + city.id)
+      .dialog-head-container.city-info-banner.clearfix.text-center(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
+        .city-banner-overlay
+          span.dialog-close.right.fs-30.pointer.text-shadow-1.white
+            i.fa.fa-times
+          span.padding-tb-5.fs-24.inline-block.city-activity-title.white.text-shadow-1
+            span.capitalize
+              | #{tag.tag_name}
+            |  in 
+            span.capitalize
+              |  #{city.city_name}
+      .city-activity-body
         .row
           .col-xs-12
-            .col-md-12.home-category-tabs
+            .col-md-12
               .row
                 ul
                   li.tab.event-tab.col-xs-3.text-center
@@ -75,17 +83,84 @@ block content
                   li.tab.learn-tab.col-xs-3.text-center
                     | Learn
               .row
-                .tab-content-container.events-info
-                  each event_tag in city.events
-                    | #{event_tag.Event.event_name}
-                .tab-content-container.retailers-info
-                  each retailer_tag in city.retailers
-                    | #{retailer_tag.Retailer.retailer_name}
-                .tab-content-container.groups-info
-                  each group_tag in city.groups
-                    | #{group_tag.Group.group_name}
-                .tab-content-container.schools-info
-                  each school_tag in city.schools
-                    | #{school_tag.School.school_name}
+                .events-info
+                  .entity-list
+                    each event_tag in city.events
+                      .category-el.b-l-4.clearfix
+                        .info-media.clearfix
+                          .col-xs-8.info-box
+                            .info-box-sub
+                              a(href="/events/" + city.city_name_slug + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
+                                h3.md #{event_tag.Event.event_name}
+                              .city
+                                span.fa.fa-map-marker.helper
+                                | #{city.city_name}
+                              span.fa.fa-calendar.date.helper
+                              span.date_value
+                                | #{event_tag.Event.dataValues.start_date_f}
+                          .col-xs-4.img-pre.clearfix
+                            - if(event_tag.Event.img_url_square)
+                                a(href="/events/" + city.city_name_slug + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
+                                  img.right.b-l-1(src=event_tag.Event.img_url_square alt=event_tag.Event.event_name height="100px")
+                            - else
+                                a(href="/events/" + city.city_name_slug + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
+                                  i.fa.fa-flag.right.b-l-1.img-alt
+                .retailers-info
+                  .entity-list
+                    each retailer_tag in city.retailers
+                      .category-el.b-l-4.clearfix
+                        .info-media.clearfix
+                          .info-box.col-xs-8
+                            .info-box-sub
+                              a(href="/gear/" + city.city_name_slug + "/" + retailer_tag.Retailer.retailer_name_slug + "/" + retailer_tag.Retailer.id)
+                                h3.md #{retailer_tag.Retailer.retailer_name}
+                              .city
+                                span.fa.fa-map-marker.helper
+                                | #{city.city_name}
+                          .img-pre.col-xs-4.clearfix
+                            - if(retailer_tag.Retailer.img_url_square)
+                                a(href="/gear/" + city.city_name_slug + "/" + retailer_tag.Retailer.retailer_name_slug + "/" + retailer_tag.Retailer.id)
+                                  img.right.b-l-1(src=retailer_tag.Retailer.img_url_square alt=retailer_tag.Retailer.retailer_name height="100px")
+                            - else
+                                a(href="/gear/" + city.city_name_slug + "/" + retailer_tag.Retailer.retailer_name_slug + "/" + retailer_tag.Retailer.id)
+                                  i.fa.fa-gear.right.b-l-1.img-alt
+                .groups-info
+                  .entity-list
+                    each group_tag in city.groups
+                      .category-el.b-l-4.clearfix
+                        .info-media.clearfix
+                          .info-box.col-xs-8
+                            .info-box-sub
+                              a(href="/groups/" + city.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                                h3.md #{group_tag.Group.group_name}
+                              .city
+                                span.fa.fa-map-marker.helper
+                                | #{city.city_name}
+                          .img-pre.col-xs-4.clearfix
+                            - if(group_tag.Group.img_url_square)
+                                a(href="/groups/" + city.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                                  img.right.b-l-1(src=group_tag.Group.img_url_square alt=group_tag.Group.group_name height="100px")
+                            - else
+                                a(href="/groups/" + city.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                                  i.fa.fa-group.right.b-l-1.img-alt
+                .schools-info
+                  .entity-list
+                    each school_tag in city.schools
+                      .category-el.b-l-4.clearfix
+                        .info-media.clearfix
+                          .info-box.col-xs-8
+                            .info-box-sub
+                              a(href="/schools/" + city.city_name_slug + "/" + school_tag.School.school_name_slug + "/" + school_tag.School.id)
+                                h3.md #{school_tag.School.school_name}
+                              .city
+                                span.fa.fa-map-marker.helper
+                                | #{city.city_name}
+                          .img-pre.col-xs-4.clearfix
+                            - if(school_tag.School.img_url_square)
+                                a(href="/schools/" + city.city_name_slug + "/" + school_tag.School.school_name_slug + "/" + school_tag.School.id)
+                                  img.right.b-l-1(src=school_tag.School.img_url_square alt=school_tag.School.school_name height="100px")
+                            - else
+                                a(href="/schools/" + city.city_name_slug + "/" + school_tag.School.school_name_slug + "/" + school_tag.School.id)
+                                  i.fa.fa-building.right.b-l-1.img-alt
 block extrajs
   script(src="/js/activity_pop.js")

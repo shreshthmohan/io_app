@@ -24,8 +24,11 @@ exports.index = function(req, res) {
                   {start_date: {gte: new Date()}},
                   {CityId: c.id}
                 ),
+                order: 'start_date ASC',
                 attributes: [
+                  'id',
                   'event_name',
+                  'event_name_slug',
                   'img_url_square',
                   [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
               }]
@@ -37,11 +40,7 @@ exports.index = function(req, res) {
                 where: Sequelize.and(
                   {start_date: {gte: new Date()}},
                   {CityId: c.id}
-                ),
-                attributes: [
-                  'event_name',
-                  'img_url_square',
-                  [Sequelize.fn('date_format', Sequelize.col('start_date'), '%e %M %Y'), 'start_date_f']],
+                )
               }]
             }),
             db.GearTag.findAll({
@@ -50,7 +49,9 @@ exports.index = function(req, res) {
                 model: db.Retailer,
                 where: {CityId: c.id},
                 attributes: [
+                  'id',
                   'retailer_name',
+                  'retailer_name_slug',
                   'img_url_square'
                 ]
               }]
@@ -59,11 +60,7 @@ exports.index = function(req, res) {
               where: {TagId: req.param('tag_id')},
               include: [{
                 model: db.Retailer,
-                where: {CityId: c.id},
-                attributes: [
-                  'retailer_name',
-                  'img_url_square'
-                ]
+                where: {CityId: c.id}
               }]
             }),
             db.GroupTag.findAll({
@@ -72,7 +69,9 @@ exports.index = function(req, res) {
                 model: db.Group,
                 where: {CityId: c.id},
                 attributes: [
+                  'id',
                   'group_name',
+                  'group_name_slug',
                   'img_url_square'
                 ]
               }]
@@ -81,11 +80,7 @@ exports.index = function(req, res) {
               where: {TagId: req.param('tag_id')},
               include: [{
                 model: db.Group,
-                where: {CityId: c.id},
-                attributes: [
-                  'group_name',
-                  'img_url_square'
-                ]
+                where: {CityId: c.id}
               }]
             }),
             db.SchoolTag.findAll({
@@ -94,7 +89,9 @@ exports.index = function(req, res) {
                 model: db.School,
                 where: {CityId: c.id},
                 attributes: [
+                  'id',
                   'school_name',
+                  'school_name_slug',
                   'img_url_square'
                 ]
               }]
@@ -103,11 +100,7 @@ exports.index = function(req, res) {
               where: {TagId: req.param('tag_id')},
               include: [{
                 model: db.School,
-                where: {CityId: c.id},
-                attributes: [
-                  'school_name',
-                  'img_url_square'
-                ]
+                where: {CityId: c.id}
               }]
             })
           ])
