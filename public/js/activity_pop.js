@@ -43,7 +43,7 @@ $(document).ready(function(){
   })
   $('.gear-tab').click(function() {
     $(this).addClass("active").siblings().removeClass("active")
-    $('.schools-info').addClass("active").siblings().removeClass("active");
+    $('.retailers-info').addClass("active").siblings().removeClass("active");
   })
   $('.learn-tab').click(function() {
     $(this).addClass("active").siblings().removeClass("active")
