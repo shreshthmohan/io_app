@@ -3,83 +3,173 @@ extends ../layout
 block content
   include group_filter_bar
   .filter-margin
-  .heading.text-center
-    h1.md= title_
   .row
-    .category-list
-      - if((groups) && (groups != ''))
-          each group in groups
-            .col-md-4
-              .category-el.b-l-4.clearfix
-                .info-media.clearfix
-                  .info-box.col-xs-8
-                    .info-box-sub
-                      a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
-                        h2.sm #{group.group_name}
-                      .city
-                        span.fa.fa-map-marker.helper
-                        | #{group.City.city_name}
-                  .img-pre.col-xs-4.clearfix
-                    - if(group.img_url_square)
-                        a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
-                          img.right.b-l-1(src=group.img_url_square alt=group.group_name height="100px")
-                    - else
-                        a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
+    .col-md-8
+      .heading.text-center
+        h1.md= title_
+      .row
+        .category-list
+          - if((groups) && (groups != ''))
+              each group in groups
+                .col-md-6
+                  .category-el.b-l-4.clearfix
+                    .info-media.clearfix
+                      .info-box.col-xs-8
+                        .info-box-sub
+                          a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
+                            h2.sm #{group.group_name}
+                          .city
+                            span.fa.fa-map-marker.helper
+                            | #{group.City.city_name}
+                      .img-pre.col-xs-4.clearfix
+                        - if(group.img_url_square)
+                            a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
+                              img.right.b-l-1(src=group.img_url_square alt=group.group_name height="100px")
+                        - else
+                            a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
+                              i.fa.fa-group.right.b-l-1.img-alt
+                    .tags.clearfix
+                      each tag in group.GroupTags
+                        li.tag
+                          | #{tag.Tag.tag_name}
+              .col-md-6
+                .category-el.b-l-4.clearfix
+                  .info-media.clearfix
+                    .info-box.col-xs-8
+                      .info-box-sub
+                        a(href="/groups/group_form" target="_blank")
+                          h2.sm Did we miss something? Add an active outdoor group.
+                    .img-pre.col-xs-4.clearfix
+                        a(href="/groups/group_form" target="_blank")
                           i.fa.fa-group.right.b-l-1.img-alt
-                .tags.clearfix
-                  each tag in group.GroupTags
-                    li.tag
-                      | #{tag.Tag.tag_name}
-          .col-md-4
-            .category-el.b-l-4.clearfix
-              .info-media.clearfix
-                .info-box.col-xs-8
-                  .info-box-sub
-                    a(href="/groups/group_form" target="_blank")
-                      h2.sm Did we miss something? Add an active outdoor group.
-                .img-pre.col-xs-4.clearfix
-                    a(href="/groups/group_form" target="_blank")
-                      i.fa.fa-group.right.b-l-1.img-alt
-              .tags.clearfix
-      - else if((group_tags) && (group_tags != ''))
-          each group_tag in group_tags
-            .col-md-4
-              .category-el.b-l-4.clearfix
-                .info-media.clearfix
-                  .infobox.col-xs-8
-                    .info-box-sub
-                      a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
-                        h2.sm #{group_tag.Group.group_name}
-                      .city
-                        span.fa.fa-map-marker.helper
-                        | #{group_tag.Group.City.city_name}
-                  .img-pre.col-xs-4.clearfix
-                    - if(group_tag.Group.img_url_square)
-                        a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
-                          img.right.b-l-1(src=group_tag.Group.img_url_square alt=group_tag.Group.group_name height="100px")
-                    - else
-                        a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
-                          i.fa.fa-group.right.b-l-1.img-alt
-                .tags.clearfix
-                  li.tag
-                    | #{tag.tag_name}
-          .col-md-4
-            .category-el.b-l-4.clearfix
-              .info-media.clearfix
-                .info-box.col-xs-8
-                  .info-box-sub
-                    a(href="/groups/group_form" target="_blank")
-                      h2.sm Did we miss something? Add an active outdoor group.
-                .img-pre.col-xs-4.clearfix
-                    a(href="/groups/group_form" target="_blank")
-                        i.fa.fa-group.right.b-l-1.img-alt
-              .tags.clearfix
-      - else
+                  .tags.clearfix
+          - else if((group_tags) && (group_tags != ''))
+              each group_tag in group_tags
+                .col-md-6
+                  .category-el.b-l-4.clearfix
+                    .info-media.clearfix
+                      .infobox.col-xs-8
+                        .info-box-sub
+                          a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                            h2.sm #{group_tag.Group.group_name}
+                          .city
+                            span.fa.fa-map-marker.helper
+                            | #{group_tag.Group.City.city_name}
+                      .img-pre.col-xs-4.clearfix
+                        - if(group_tag.Group.img_url_square)
+                            a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                              img.right.b-l-1(src=group_tag.Group.img_url_square alt=group_tag.Group.group_name height="100px")
+                        - else
+                            a(href="/groups/" + group_tag.Group.City.city_name_slug + "/" + group_tag.Group.group_name_slug + "/" + group_tag.Group.id)
+                              i.fa.fa-group.right.b-l-1.img-alt
+                    .tags.clearfix
+                      li.tag
+                        | #{tag.tag_name}
+              .col-md-6
+                .category-el.b-l-4.clearfix
+                  .info-media.clearfix
+                    .info-box.col-xs-8
+                      .info-box-sub
+                        a(href="/groups/group_form" target="_blank")
+                          h2.sm Did we miss something? Add an active outdoor group.
+                    .img-pre.col-xs-4.clearfix
+                        a(href="/groups/group_form" target="_blank")
+                            i.fa.fa-group.right.b-l-1.img-alt
+                  .tags.clearfix
+          - else
+            .col-md-12
+              p.alert.alert-warning.text-center.br-0.std-shadow.fs-16
+                  | Oops! We did not find anything. Sorry.
+                  a#user-res.pointer  Let us know
+                  |  of active outdoor groups!
+      .row
         .col-md-12
-          p.alert.alert-warning.text-center.br-0.std-shadow.fs-16
-              | Oops! We did not find anything. Sorry.
-              a#user-res.pointer  Let us know
-              |  of active outdoor groups!
+          .sub-heading.text-center.margin-b-10 Suggestions
+        .suggestion-container
+          //-.col-md-6
+          //-  a(href="todo")
+          //-    .category-el
+          //-      .info.clearfix
+          //-        .info-text.col-xs-12
+          //-          span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+          //-            | Stores Online
+          //-        .info-overlay
+          - if((mode == "cho_tag_cho_loc") || (mode == "all_tag_cho_loc"))
+            - if(mode == "cho_tag_cho_loc")
+              .col-md-6
+                a(href="/groups/grouped?activity=" + tag.id title="All Active Outdoor " + tag.tag_name + " groups by location")
+                  .category-el
+                    .info.clearfix(style="background-image: url(" + tag.image_url + ");")
+                      .right
+                        i.fa.fa-group.helper-icon
+                      .info-text.col-xs-12
+                        span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                          | All #{tag.tag_name} Groups
+                      .info-overlay
+            .col-md-6
+              a(href="/groups/grouped?location=" + city.id title="All Active Outdoor Groups in " + city.city_name + " by Activity")
+                .category-el
+                  .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                    .right
+                      i.fa.fa-group.helper-icon
+                    .info-text.col-xs-12
+                      span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                        | Groups in #{city.city_name}
+                    .info-overlay
+            .col-md-6
+              a(href="/events/upcoming/grouped?location=" + city.id title="All Outdoor Events in " + city.city_name)
+                .category-el
+                  .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                    .right
+                      i.fa.fa-flag-checkered.helper-icon
+                    .info-text.col-xs-12
+                      span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                        | Events in #{city.city_name}
+                    .info-overlay
+            .col-md-6
+              a(href="/schools/grouped?location=" + city.id title="All Outdoor schools in " + city.city_name)
+                .category-el
+                  .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                    .right
+                      i.fa.fa-building-o.helper-icon
+                    .info-text.col-xs-12
+                      span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                        | Outdoor schools in #{city.city_name}
+                    .info-overlay
+            .col-md-6
+              a(href="/gear/grouped?location=" + city.id title="All Outdoor Gear Stores and Retailers in " + city.city_name)
+                .category-el
+                  .info.clearfix(style="background-image: url(" + city.image_url + ");")
+                    .right
+                      i.fa.fa-gear.helper-icon
+                    .info-text.col-xs-12
+                      span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                        | Stores in #{city.city_name}
+                    .info-overlay
+          - if((mode == "all_tag_all_loc") || (mode == "cho_tag_all_loc") || (mode == "all_tag_cho_loc"))
+            .col-md-6
+              a(href="/grooups/grouped" title="All Active Outdoor Groups by Activity")
+                .category-el
+                  .info.clearfix
+                    .right
+                      i.fa.fa-group.helper-icon
+                    .info-text.col-xs-12
+                      span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                        | All Grousp by Activity
+                    .info-overlay
+            .col-md-6
+              a(href="/groups/grouped#by-location" title="All Active Outdoor Groups by Location")
+                .category-el
+                  .info.clearfix
+                    .right
+                      i.fa.fa-group.helper-icon
+                    .info-text.col-xs-12
+                      span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                        | All Groups by Location
+                    .info-overlay
+    .col-md-4
+      include featured
+      include social_display
   .dialog-screen
   .dialog-container.col-md-4.col-md-offset-4#user-form
     .dialog-head-container.clearfix.text-center
@@ -105,90 +195,5 @@ block content
           input.full.padding-lr-5.margin-b-10(type="text", name="email", id="email" placeholder="Optional")
           br
           input(type="submit")
-  .row
-    .col-md-12
-      .sub-heading.text-center.margin-b-10 Suggestions
-    .suggestion-container
-      //-.col-md-4
-      //-  a(href="todo")
-      //-    .category-el
-      //-      .info.clearfix
-      //-        .info-text.col-xs-12
-      //-          span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-      //-            | Stores Online
-      //-        .info-overlay
-      - if((mode == "cho_tag_cho_loc") || (mode == "all_tag_cho_loc"))
-        - if(mode == "cho_tag_cho_loc")
-          .col-md-4
-            a(href="/groups/grouped?activity=" + tag.id title="All Active Outdoor " + tag.tag_name + " groups by location")
-              .category-el
-                .info.clearfix(style="background-image: url(" + tag.image_url + ");")
-                  .right
-                    i.fa.fa-group.helper-icon
-                  .info-text.col-xs-12
-                    span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                      | All #{tag.tag_name} Groups
-                  .info-overlay
-        .col-md-4
-          a(href="/groups/grouped?location=" + city.id title="All Active Outdoor Groups in " + city.city_name + " by Activity")
-            .category-el
-              .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                .right
-                  i.fa.fa-group.helper-icon
-                .info-text.col-xs-12
-                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                    | Groups in #{city.city_name}
-                .info-overlay
-        .col-md-4
-          a(href="/events/upcoming/grouped?location=" + city.id title="All Outdoor Events in " + city.city_name)
-            .category-el
-              .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                .right
-                  i.fa.fa-flag-checkered.helper-icon
-                .info-text.col-xs-12
-                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                    | Events in #{city.city_name}
-                .info-overlay
-        .col-md-4
-          a(href="/schools/grouped?location=" + city.id title="All Outdoor schools in " + city.city_name)
-            .category-el
-              .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                .right
-                  i.fa.fa-building-o.helper-icon
-                .info-text.col-xs-12
-                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                    | Outdoor schools in #{city.city_name}
-                .info-overlay
-        .col-md-4
-          a(href="/gear/grouped?location=" + city.id title="All Outdoor Gear Stores and Retailers in " + city.city_name)
-            .category-el
-              .info.clearfix(style="background-image: url(" + city.image_url + ");")
-                .right
-                  i.fa.fa-gear.helper-icon
-                .info-text.col-xs-12
-                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                    | Stores in #{city.city_name}
-                .info-overlay
-      - if((mode == "all_tag_all_loc") || (mode == "cho_tag_all_loc") || (mode == "all_tag_cho_loc"))
-        .col-md-4
-          a(href="/grooups/grouped" title="All Active Outdoor Groups by Activity")
-            .category-el
-              .info.clearfix
-                .right
-                  i.fa.fa-group.helper-icon
-                .info-text.col-xs-12
-                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                    | All Grousp by Activity
-                .info-overlay
-        .col-md-4
-          a(href="/groups/grouped#by-location" title="All Active Outdoor Groups by Location")
-            .category-el
-              .info.clearfix
-                .right
-                  i.fa.fa-group.helper-icon
-                .info-text.col-xs-12
-                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                    | All Groups by Location
-                .info-overlay
 block extrajs
   script(src="/js/user_form.min.js")

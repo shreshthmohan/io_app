@@ -49,12 +49,7 @@ block content
                                   | s
     .col-md-4
       include featured
-      .row
-        .explore-head.text-center.border-gray
-          | Stay Updated
-      .row
-        .col-xs-12(style="margin-bottom: 15px;")
-          include fb_page_plugin
+      include social_display
   .dialog-screen
   each city in cities
     .dialog-container.col-md-4.city-entities(id='details' + city.id)
