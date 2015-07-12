@@ -120,7 +120,7 @@ app.get('/log_out', user.log_out);
 // Redirect users from root to home
 //app.get('/', function(req, res) {res.redirect('/app/home')})
 app.get('/', routes.index);
-app.get('/alt', routes.index_alt);
+//app.get('/alt', routes.index_alt);
 
 // Checking if user is authenticated for every route except sign-in/up
 app.all('/app/admin*', auth_middleware.ensure_auth);
@@ -443,9 +443,6 @@ app.get('/schools/:city_name_slug/:school_name_slug/:school_id', school.individu
 
 // Activity routes
 app.get('/activity/:tag_id', activity.index);
-
-
-app.get('/teach_cg', routes.teach_cg);
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')))

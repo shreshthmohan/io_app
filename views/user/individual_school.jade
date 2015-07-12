@@ -9,6 +9,7 @@ block meta
           - desc_tags = desc_tags + school_tag.Tag.tag_name + " and "
       - else
           - desc_tags = desc_tags + school_tag.Tag.tag_name + ", "
+  include meta_layout
   meta(name="description" content= "Engage in " + desc_tags + " at " + school.school_name + " in " + school.City.city_name + ". Find website, activites, phone numbers, emails of the outdoor school.")
   meta(property="og:description" content= "Engage in " + desc_tags + " at " + school.school_name + " in " + school.City.city_name + ". Find website, activites, phone numbers, emails of the outdoor school.")
   meta(property="og:title" content=school.school_name + " in " + school.City.city_name + " | India Outside")

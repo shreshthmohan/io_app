@@ -1,6 +1,17 @@
 extends ../layout
 
 block meta
+  include meta_layout
+  meta(name="description" content= tag.tag_name + " in India. Find about events, races, gear stores, active groups, outdoor schools, coaches across India.")
+  meta(property="og:description" content= tag.tag_name + " in India. Find about events, races, gear stores, active groups, outdoor schools, coaches across India.")
+  meta(name="twitter:description" content= tag.tag_name + " in India. Find about events, races, gear stores, active groups, outdoor schools, coaches across India.")
+  - if(tag.image_url)
+      meta(property="og:image" content=tag.image_url)
+      meta(name="twitter:image:src" content=tag.image_url)
+  - else
+      meta(property="og:image" content="https://c2.staticflickr.com/8/7615/16942465932_032fa89386_b.jpg")
+      meta(name="twitter:image:src" content="https://c2.staticflickr.com/8/7615/16942465932_032fa89386_b.jpg")
+  //- TODO meta(property="og:url" content="http://www.indiaoutside.org/activity/" + tag.City.city_name_slug + "/" + race.event_name_slug + "/" + race.id)
 
 block content
   .row

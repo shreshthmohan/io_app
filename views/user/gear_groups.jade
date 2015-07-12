@@ -1,5 +1,25 @@
 extends ../layout
 
+block meta
+  include meta_layout
+   - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
+       - if(city)
+           meta(name="description" content="Find detailed information about all outdoor and adventure gear stores and retailer in " + city.city_name)
+           meta(property="og:description" content="Find detailed information about all outdoor and adventure gear stores and retailers in " + city.city_name)
+           meta(name="twitter:description" content="Find detailed information about all outdoor and adventure gear stores and retailers in " + city.city_name)
+       - else
+           meta(name="description" content="Find detailed information about all gear stores and retailers across India, in outdoor sports like running, cycling, surfing, rock climbing, paragliding, kayaking ...")
+           meta(property="og:description" content="Find detailed information about all gear stores and retailers across India, in outdoor sports like running, cycling, surfing, rock climbing, paragliding, kayaking ...")
+           meta(name="twitter:description" content="Find detailed information about all gear stores and retailers across India, in outdoor sports like running, cycling, surfing, rock climbing, paragliding, kayaking ...")
+   - else if (group_mode == 'cho_tag_all_loc')
+       meta(name="description" content="Find detailed information about all " + tag.tag_name + " gear stores and retailers across India")
+       meta(property="og:description" content="Find detailed information about all " + tag.tag_name + " gear stores and retailers across India")
+       meta(name="twitter:description" content="Find detailed information about all " + tag.tag_name + " gear stores and retailers across India")
+   meta(property="og:image" content="https://c2.staticflickr.com/8/7615/16942465932_032fa89386_b.jpg")
+   meta(name="twitter:image:src" content="https://c2.staticflickr.com/8/7615/16942465932_032fa89386_b.jpg")
+   meta(property="og:url" content="http://www.indiaoutside.org/gear/grouped")
+   // - TODO ^ proper location and tag
+
 block content
   include gear_filter_bar
   .filter-margin

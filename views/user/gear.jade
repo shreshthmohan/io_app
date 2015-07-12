@@ -1,5 +1,25 @@
 extends ../layout
 
+block meta
+  include meta_layout
+  - if(mode == 'all_tag_all_loc' || mode == 'all_tag_cho_loc')
+      - if(city)
+          meta(name="description" content="All outdoor and adventure events and races in " + city.city_name)
+          meta(property="og:description" content="All outdoor and adventure events and races in " + city.city_name)
+          meta(name="twitter:description" content="All outdoor and adventure events and races in " + city.city_name)
+      - else
+          meta(name="description" content="All events across India, in outdoor sports like running, cycling, surfing, rock climbing, paragliding, kayaking ...")
+          meta(property="og:description" content="All events across India, in outdoor sports like running, cycling, surfing, rock climbing, paragliding, kayaking ...")
+          meta(name="twitter:description" content="All events across India, in outdoor sports like running, cycling, surfing, rock climbing, paragliding, kayaking ...")
+  - else if (mode == 'cho_tag_all_loc')
+      meta(name="description" content="All " + tag.tag_name + " events and races across India")
+      meta(property="og:description" content="All " + tag.tag_name + " events and races across India")
+      meta(name="twitter:description" content="All " + tag.tag_name + " events and races across India")
+  meta(property="og:image" content="https://c2.staticflickr.com/8/7615/16942465932_032fa89386_b.jpg")
+  meta(name="twitter:image:src" content="https://c2.staticflickr.com/8/7615/16942465932_032fa89386_b.jpg")
+  meta(property="og:url" content="http://www.indiaoutside.org/gear")
+  // - TODO ^ proper location and tag
+
 block content
   include gear_filter_bar
   .filter-margin
