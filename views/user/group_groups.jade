@@ -2,7 +2,7 @@ extends ../layout
 
 block meta
   include meta_layout
-  - if(mode == 'all_tag_all_loc' || mode == 'all_tag_cho_loc')
+  - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
       - if(city)
           meta(name="description" content="All active outdoor groups in " + city.city_name)
           meta(property="og:description" content="All active outdoor groups in " + city.city_name)
@@ -11,7 +11,7 @@ block meta
           meta(name="description" content="All active outdoor groups across India, in outdoor sports like running, cycling, surfing, rock climbing, paragliding, kayaking ...")
           meta(property="og:description" content="All active outdoor groups across India, in outdoor sports like running, cycling, surfing, rock climbing, paragliding, kayaking ...")
           meta(name="twitter:description" content="All active outdoor groups across India, in outdoor sports like running, cycling, surfing, rock climbing, paragliding, kayaking ...")
-  - else if (mode == 'cho_tag_all_loc')
+  - else if (group_mode == 'cho_tag_all_loc')
       meta(name="description" content="All " + tag.tag_name + " active outdoor groups and races across India")
       meta(property="og:description" content="All " + tag.tag_name + " active outdoor groups and races across India")
       meta(name="twitter:description" content="All " + tag.tag_name + " active outdoor groups and races across India")

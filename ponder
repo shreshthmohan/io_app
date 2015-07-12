@@ -176,6 +176,14 @@ DONEs:
     30. CRON job for creating a backup of DB DONE
       1. http://www.noupe.com/development/10-ways-to-automatically-manually-backup-mysql-database.html
     31. Custom 404 DONE
+    29. Facebook and Twitter pages (images for that) DONE
+    4a Comment system
+    5a SEO: basic meta desciption tags for Google. FB OG and Twitter Cards
+    10. Think about photos (it'd be much better if we had them, for engagement) DONE
+        Using images captured by a friend. TODO edit more of my images and host them!
+    13. To fit featured in page (and keep it on the top, we can add a 12-wide div before all the other category grouped lists)
+        when more categories are added.TODO 
+    23b Dedicated pages for each Activity.
 
 TODOs:
 
@@ -188,28 +196,22 @@ TODOs:
        3. User forms on individual pages
          TODO: testing: initially use this email system before adding new entities
          Add user and admin links for the entity
-    4. Comment system and/or review system.
+    4b Replace comment system by a Review system
     #5. SEO:
-         1. meta tags
          2. rich snippets
          3. sitemap
-    10. Think about photos (it'd be much better if we had them, for engagement) partially DONE
-        Using images captured by a friend. TODO edit more of my images and host them!
     11. Titles for each element that appear on hover.
     ##12. Populate data. Fix and/or remove old data.
-    13. To fit featured in page (and keep it on the top, we can add a 12-wide div before all the other category grouped lists)
-        when more categories are added. LATER
     16. Add images to tags for each category
     19. Cross-browser testing esp. IE
     21. Images: figure out how to attribute.
     22. Google Analytics
-    #23. Dedicated pages for each City/Location and Activity.
+    #23a. Dedicated pages for each City/Location
+    23b Dedicated pages for each Activity. fix mobile view pop up; width reduces as we move from left tab to right
     25. Mobile-compatible phone numbers
     #26. Setup internal server error response pages
-    #27. Caching
+    #27. Caching DONE?
     #28. User form for adding new stuff (need to think of engagement)
-    #29. Facebook and Twitter pages (images for that)
-      1. 
     30. Faced some issue with an event ... unable to fetch because EventTags had a row with TagId=NULL!!
         This should not have happened. TODO fix
     
