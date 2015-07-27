@@ -444,6 +444,14 @@ app.get('/schools/:city_name_slug/:school_name_slug/:school_id', school.individu
 // Activity routes
 app.get('/activity/:tag_id', activity.index);
 
+// Help climbers: static page
+app.get('/help_climbers',
+  function(req, res) {
+    res.render('user/help_climbers', {
+      title_: 'Help these climbers get to an International competition'
+    }  
+)});
+
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')))
 
