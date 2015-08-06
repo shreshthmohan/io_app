@@ -61,9 +61,10 @@ block content
               include social_link_template
           .tag-container.clearfix
             each group_tag in group.GroupTags
-              li.tag
-                span
-                  | #{group_tag.Tag.tag_name}
+              a(href="/activity/" + group_tag.Tag.id + "/" + group_tag.Tag.tag_name_slug title= group_tag.Tag.tag_name + " in India")
+                li.tag
+                  span
+                    | #{group_tag.Tag.tag_name}
           .user-res.fs-12
             a#user-error.pointer(title="Report wrong or outdated information") Report error
             |  or 

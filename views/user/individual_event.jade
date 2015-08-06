@@ -79,9 +79,10 @@ block content
               include social_link_template
           .tag-container.clearfix
             each event_tag in race.EventTags
-              li.tag
-                span
-                  | #{event_tag.Tag.tag_name}
+                a(href="/activity/" + event_tag.Tag.id + "/" + event_tag.Tag.tag_name_slug title= event_tag.Tag.tag_name + " in India")
+                  li.tag
+                      span
+                        | #{event_tag.Tag.tag_name}
             each event_subtag in race.EventSubtags
               li.subtag
                 span

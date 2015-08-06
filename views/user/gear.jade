@@ -49,8 +49,9 @@ block content
                             i.fa.fa-gear.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
                     each tag in retailer.GearTags
-                      li.tag
-                        | #{tag.Tag.tag_name}
+                      a(href="/activity/" + tag.Tag.id + "/" + tag.Tag.tag_name_slug title= tag.Tag.tag_name + " in India")
+                        li.tag
+                          | #{tag.Tag.tag_name}
             .col-md-6
               .category-el.b-l-4.clearfix
                 .info-media.clearfix
@@ -82,8 +83,9 @@ block content
                           a(href="/gear/" + gear_tag.Retailer.City.city_name_slug + "/" + gear_tag.Retailer.retailer_name_slug + "/" + gear_tag.Retailer.id)
                             i.fa.fa-gear.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
-                    li.tag
-                      | #{tag.tag_name}
+                    a(href="/activity/" + tag.id + "/" + tag.tag_name_slug title= tag.tag_name + " in India")
+                      li.tag
+                        | #{tag.tag_name}
             .col-md-6
               .category-el.b-l-4.clearfix
                 .info-media.clearfix

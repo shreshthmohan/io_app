@@ -56,8 +56,9 @@ block content
                                 i.fa.fa-flag.right.b-l-1.img-alt
                       .tags.clearfix.border-top-gray
                         each tag in race.EventTags
-                          li.tag
-                            | #{tag.Tag.tag_name}
+                          a(href="/activity/" + tag.Tag.id + "/" + tag.Tag.tag_name_slug title= tag.Tag.tag_name + " in India")
+                            li.tag
+                              | #{tag.Tag.tag_name}
                         each subtag in race.EventSubtags
                           li.subtag
                             | #{subtag.Subtag.subtag_name}
@@ -95,8 +96,9 @@ block content
                               a(href="/events/" + event_tag.Event.City.city_name_slug + "/" + event_tag.Event.event_name_slug + "/" + event_tag.Event.id)
                                 i.fa.fa-flag.right.b-l-1.img-alt
                       .tags.clearfix.border-top-gray
-                        li.tag
-                          | #{tag.tag_name}
+                        a(href="/activity/" + tag.id + "/" + tag.tag_name_slug title= tag.tag_name + " in India")
+                          li.tag
+                            | #{tag.tag_name}
                         each subtag in event_tag.Event.EventSubtags
                           li.subtag
                             | #{subtag.Subtag.subtag_name}

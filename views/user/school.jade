@@ -50,8 +50,9 @@ block content
                             i.fa.fa-building.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
                     each tag in school.SchoolTags
-                      li.tag
-                        | #{tag.Tag.tag_name}
+                      a(href="/activity/" + tag.Tag.id + "/" + tag.Tag.tag_name_slug title= tag.Tag.tag_name + " in India")
+                        li.tag
+                          | #{tag.Tag.tag_name}
             .col-md-6
               .category-el.b-l-4.clearfix
                 .info-media.clearfix
@@ -83,8 +84,9 @@ block content
                           a(href="/schools/" + school_tag.School.City.city_name_slug + "/" + school_tag.School.school_name_slug + "/" + school_tag.School.id)
                             i.fa.fa-building.right.b-l-1.img-alt
                   .tags.clearfix.border-top-gray
-                    li.tag
-                      | #{tag.tag_name}
+                    a(href="/activity/" + tag.id + "/" + tag.tag_name_slug title= tag.tag_name + " in India")
+                      li.tag
+                        | #{tag.tag_name}
             .col-md-6
               .category-el.b-l-4.clearfix
                 .info-media.clearfix

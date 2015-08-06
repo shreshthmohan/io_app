@@ -51,8 +51,9 @@ block content
                               i.fa.fa-group.right.b-l-1.img-alt
                     .tags.clearfix
                       each tag in group.GroupTags
-                        li.tag
-                          | #{tag.Tag.tag_name}
+                        a(href="/activity/" + event_tag.Tag.id + "/" + event_tag.Tag.tag_name_slug title= event_tag.Tag.tag_name + " in India")
+                          li.tag
+                            | #{tag.Tag.tag_name}
               .col-md-6
                 .category-el.b-l-4.clearfix
                   .info-media.clearfix

@@ -63,9 +63,10 @@ block content
               include social_link_template
           .tag-container.clearfix           
             each school_tag in school.SchoolTags
-              li.tag
-                span
-                  | #{school_tag.Tag.tag_name}
+              a(href="/activity/" + school_tag.Tag.id + "/" + school_tag.Tag.tag_name_slug title= school_tag.Tag.tag_name + " in India")
+                li.tag
+                  span
+                    | #{school_tag.Tag.tag_name}
           .user-res.fs-12
             a#user-error.pointer(title="Report wrong or outdated information") Report error
             |  or 
