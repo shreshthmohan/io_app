@@ -56,6 +56,9 @@ app.use(lessMiddleware(
     // Note: If compress: true, then dumpLineNumbers will be ignored
   }))
 
+if (app.get('env') === 'development') {
+  app.locals.pretty = true;
+}
 // www.example.com:8080
 // localhost:8080
 // TODO Find out how www.example.com will work instead of
@@ -396,7 +399,7 @@ app.get('/events', function(req, res) {res.redirect('/events/upcoming')});
 // TODO: better URLs: /events/upcoming/running/bengaluru/1/2
 
 // Individual event
-app.get('/events/:city_name_slug/:event_name_slug/:event_id', race.individual)
+app.get('/events/:city_name_slug/:event_name_slug/:event_id', race.check)
 //app.get('/events_test/:city_name_slug/:event_name_slug/:event_id', race.individual_test)
 // TODO: works fine even if someone tries to access /events/:some-text/:some-random-text/:event_id
 // Need to figure out how to display correct name in URL bar. Some kind of redirection
@@ -413,7 +416,7 @@ app.post('/gear/user_error', gear.user_error);
 app.post('/gear/user_info', gear.user_info);
 app.get('/gear/retailer_form', gear.retailer_form);
 
-app.get('/gear/:city_name_slug/:retailer_name_slug/:retailer_id', gear.individual)
+app.get('/gear/:city_name_slug/:retailer_name_slug/:retailer_id', gear.check)
 
 //////////////////
 // Group routes //
@@ -426,7 +429,7 @@ app.post('/groups/user_error', group.user_error);
 app.post('/groups/user_info', group.user_info);
 app.get('/groups/group_form', group.group_form);
 
-app.get('/groups/:city_name_slug/:group_name_slug/:group_id', group.individual)
+app.get('/groups/:city_name_slug/:group_name_slug/:group_id', group.check)
 
 ///////////////////
 // School routes //
@@ -439,10 +442,11 @@ app.post('/schools/user_error', school.user_error);
 app.post('/schools/user_info', school.user_info);
 app.get('/schools/school_form', school.school_form);
 
-app.get('/schools/:city_name_slug/:school_name_slug/:school_id', school.individual)
+app.get('/schools/:city_name_slug/:school_name_slug/:school_id', school.check)
 
 // Activity routes
-app.get('/activity/:tag_id', activity.index);
+app.get('/activity/:tag_id', activity.redir);
+app.get('/activity/:tag_id/:tag_name_slug', activity.check);
 
 // Help climbers: static page
 app.get('/help_climbers',
