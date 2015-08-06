@@ -1,4 +1,5 @@
 var db = require('../../models');
+var slugify = require('./slugify');
 
 exports.index = function(req, res) {
   db.City.findAll().success(function(cities){
@@ -42,6 +43,7 @@ exports.add_tag = function(req, res) {
   if(req.param('new_tag')) {
     db.Tag.create({
       tag_name:  req.param('new_tag'),
+      tag_name_slug:  slugify(req.param('new_tag')),
       image_url: req.param('new_tag_image_url')
     })
     .success(function(tag) {
@@ -68,7 +70,8 @@ exports.modify_tag_name = function(req, res) {
   db.Tag.find({where: {id: req.param('tag_id')}})
   .success(function(tag) {
     tag.updateAttributes({
-      tag_name: req.param('new_tag_name')
+      tag_name: req.param('new_tag_name'),
+      tag_name_slug:  slugify(req.param('new_tag_name'))
     })
     .success(function(new_tag) {
       res.redirect('/app/admin/tag/' + new_tag.id)

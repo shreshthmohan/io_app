@@ -2,7 +2,7 @@ module.exports = function(sequelize, DataTypes) {
   var Tag = sequelize.define('Tag',
   {
     tag_name: {type: DataTypes.STRING(30), allowNull: false},
-    //tag_name_slug: {type: DataTypes.STRING(30), allowNull: false}, //TODO
+    tag_name_slug: {type: DataTypes.STRING(30), allowNull: false}, //TODO
     image_url: {type: DataTypes.STRING(550)}
   },
   {
