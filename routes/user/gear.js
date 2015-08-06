@@ -443,7 +443,7 @@ var gear_grouped_by_location_chosen_tag = function(req, res) {
 }
 
 // Individual retailers
-exports.individual = function(req, res) {
+var render_page = function(req, res) {
   db.Retailer.find({
     where: {id: req.param('retailer_id')},
     include: [ 
@@ -471,4 +471,19 @@ exports.individual = function(req, res) {
        title_: retailer.retailer_name + ' in ' + retailer.City.city_name,
        retailer: retailer}) 
   }) 
+}
+
+exports.check = function(req, res) {
+  db.Retailer.find({
+    where: {id: req.param('retailer_id')},
+    include: [db.City]
+  })
+  .success(function(retailer) {
+    if ((req.param('retailer_name_slug') == retailer.retailer_name_slug) && (req.param('city_name_slug') == retailer.City.city_name_slug)) {
+      render_page(req, res)
+    }
+    else {
+      res.redirect(301, '/gear/' + retailer.City.city_name_slug + '/' + retailer.retailer_name_slug + '/' + retailer.id)
+    }
+  })
 }

@@ -181,7 +181,3 @@ exports.index_alt = function(req, res) {
     })
   })
 }
-
-exports.teach_cg = function(req, res) {
-  res.render('user/teach_cg');
-}

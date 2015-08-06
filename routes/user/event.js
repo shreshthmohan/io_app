@@ -651,7 +651,7 @@ exports.all = function(req,res) {
 
 // individual event
 // with "smart" suggestions
-exports.individual = function(req, res) {
+var render_page = function(req, res) {
   db.Event.find({
     where: {id: req.param('event_id')},
     include: [ 
@@ -740,6 +740,21 @@ exports.individual = function(req, res) {
        title_: race_c[0].event_name + ' in ' + race_c[0].City.city_name,
        race: race_c[0]}) 
   }) 
+}
+
+exports.check = function(req, res) {
+  db.Event.find({
+    where: {id: req.param('event_id')},
+    include: [db.City]
+  })
+  .success(function(race) {
+    if ((req.param('event_name_slug') == race.event_name_slug) && (req.param('city_name_slug') == race.City.city_name_slug)) {
+      render_page(req, res)
+    }
+    else {
+      res.redirect(301, '/events/' + race.City.city_name_slug + '/' + race.event_name_slug + '/' + race.id)
+    }
+  })
 }
 
 // for refering to raw MySQL queries

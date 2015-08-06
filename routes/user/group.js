@@ -441,7 +441,7 @@ var group_grouped_by_location_chosen_tag = function(req, res) {
 }
 
 // Individual groups
-exports.individual = function(req, res) {
+var render_page = function(req, res) {
   db.Group.find({
     where: {id: req.param('group_id')},
     include: [ 
@@ -467,4 +467,19 @@ exports.individual = function(req, res) {
        title_: group.group_name + ' in ' + group.City.city_name,
        group: group}) 
   }) 
+}
+
+exports.check = function(req, res) {
+  db.Group.find({
+    where: {id: req.param('group_id')},
+    include: [db.City]
+  })
+  .success(function(group) {
+    if ((req.param('group_name_slug') == group.group_name_slug) && (req.param('city_name_slug') == group.City.city_name_slug)) {
+      render_page(req, res)
+    }
+    else {
+      res.redirect(301, '/groups/' + group.City.city_name_slug + '/' + group.group_name_slug + '/' + group.id)
+    }
+  })
 }

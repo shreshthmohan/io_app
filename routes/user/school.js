@@ -440,7 +440,7 @@ var grouped_by_location_chosen_tag = function(req, res) {
 }
 
 // Individual schools
-exports.individual = function(req, res) {
+var render_page = function(req, res) {
   db.School.find({
     where: {id: req.param('school_id')},
     include: [ 
@@ -468,4 +468,19 @@ exports.individual = function(req, res) {
        title_: school.school_name + ' in ' + school.City.city_name,
        school: school}) 
   }) 
+}
+
+exports.check = function(req, res) {
+  db.School.find({
+    where: {id: req.param('school_id')},
+    include: [db.City]
+  })
+  .success(function(school) {
+    if ((req.param('school_name_slug') == school.school_name_slug) && (req.param('city_name_slug') == school.City.city_name_slug)) {
+      render_page(req, res)
+    }
+    else {
+      res.redirect(301, '/school/' + school.City.city_name_slug + '/' + school.school_name_slug + '/' + school.id)
+    }
+  })
 }
