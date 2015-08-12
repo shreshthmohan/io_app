@@ -2,69 +2,69 @@ extends ../layout
 
 block meta
   include meta_layout
-  meta(name="description" content= tag.tag_name + " in India. Find about events, races, gear stores, active groups, outdoor schools, coaches across India.")
-  meta(property="og:description" content= tag.tag_name + " in India. Find about events, races, gear stores, active groups, outdoor schools, coaches across India.")
-  meta(name="twitter:description" content= tag.tag_name + " in India. Find about events, races, gear stores, active groups, outdoor schools, coaches across India.")
-  - if(tag.image_url)
-      meta(property="og:image" content=tag.image_url)
-      meta(name="twitter:image:src" content=tag.image_url)
+  meta(name="description" content= "Get outdoors in " + city.city_name + ". Find about events, races, gear stores, active groups, outdoor schools, coaches.")
+  meta(property="og:description" content= "Get outdoors in " + city.city_name + ". Find about events, races, gear stores, active groups, outdoor schools, coaches.")
+  meta(name="twitter:description" content= "Get outdoors in " + city.city_name + ". Find about events, races, gear stores, active groups, outdoor schools, coaches.")
+  - if(city.image_url)
+      meta(property="og:image" content=city.image_url)
+      meta(name="twitter:image:src" content=city.image_url)
   - else
       meta(property="og:image" content="https://c2.staticflickr.com/8/7615/16942465932_032fa89386_b.jpg")
       meta(name="twitter:image:src" content="https://c2.staticflickr.com/8/7615/16942465932_032fa89386_b.jpg")
-  meta(property="og:url" content="http://www.indiaoutside.org/activity/" + tag.id + "/" + tag.tag_name_slug)
+  meta(property="og:url" content="http://www.indiaoutside.org/city/" + city.id + "/" + city.city_name_slug)
 
 block content
   .row
     .col-md-8
         .heading.text-center
           h1.md
-            span.capitalize #{tag.tag_name}
-            span  in India
+            span Outdoor Sports in 
+            span.capitalize #{city.city_name}
         .category-list
-          each city in cities
-            - if ((city.retailers != '') || (city.events != '') || (city.groups != '') || (city.schools != ''))
+          each tag in tags
+            - if ((tag.retailers != '') || (tag.events != '') || (tag.groups != '') || (tag.schools != ''))
                 .category-el.clearfix
                   .col-md-3.padding-l-0.padding-r-0
-                    .city-title-container.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
+                    .city-title-container.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
                   .col-md-3.padding-l-0.padding-r-0
                     .city-title-container.clearfix
                       .city-text.col-xs-12
                         h2.sm.bob.absolute.padding-tb-5.padding-lr-10
-                          span.block.fs-18.padding-4-6.black-bg.white
-                            | #{city.city_name}
+                          span.block.fs-18.padding-4-6.black-bg.white.capitalize
+                            | #{tag.tag_name}
                           span.number.uppercase.block.fs-12
                   .col-md-6.white-bg.padding-l-0.padding-r-0
                     .city-title-container.clearfix
                       .city-text.col-xs-12
                         .padding-tb-5.padding-lr-10
                           span.block.fs-15.padding-tb-5.margin-t-5
-                            - if (city.event_count)
-                              a.margin-b-5.inline-block.pointer-on-hover.event-count.white-hover(id='event-info-' + city.id title=tag.tag_name + " events in " + city.city_name)
-                                | #{city.event_count} Event
-                                - if (city.event_count > 1)
+                            - if (tag.event_count)
+                              a.margin-b-5.inline-block.pointer-on-hover.event-count.white-hover(id='event-info-' + tag.id title=tag.tag_name + " events in " + city.city_name)
+                                | #{tag.event_count} Event
+                                - if (tag.event_count > 1)
                                   | s
-                            - if (city.retailer_count)
-                              a.margin-b-5.inline-block.pointer-on-hover.store-count.white-hover(id='retailer-info-' + city.id title=tag.tag_name + " gear stores in " + city.city_name)
-                                | #{city.retailer_count} Store
-                                - if (city.retailer_count > 1)
+                            - if (tag.retailer_count)
+                              a.margin-b-5.inline-block.pointer-on-hover.store-count.white-hover(id='retailer-info-' + tag.id title=tag.tag_name + " gear stores in " + city.city_name)
+                                | #{tag.retailer_count} Store
+                                - if (tag.retailer_count > 1)
                                   | s
-                            - if (city.group_count)
-                              a.margin-b-5.inline-block.pointer-on-hover.group-count.white-hover(id='group-info-' + city.id title=tag.tag_name + " groups in " + city.city_name)
-                                | #{city.group_count} Group
-                                - if (city.group_count > 1)
+                            - if (tag.group_count)
+                              a.margin-b-5.inline-block.pointer-on-hover.group-count.white-hover(id='group-info-' + tag.id title=tag.tag_name + " groups in " + city.city_name)
+                                | #{tag.group_count} Group
+                                - if (tag.group_count > 1)
                                   | s
-                            - if (city.school_count)
-                              a.margin-b-5.inline-block.pointer-on-hover.school-count.white-hover(id='school-info-' + city.id title="Learn " + tag.tag_name + " in " + city.city_name)
-                                | #{city.school_count} School
-                                - if (city.school_count > 1)
+                            - if (tag.school_count)
+                              a.margin-b-5.inline-block.pointer-on-hover.school-count.white-hover(id='school-info-' + tag.id title="Learn " + tag.tag_name + " in " + city.city_name)
+                                | #{tag.school_count} School
+                                - if (tag.school_count > 1)
                                   | s
     .col-md-4
       include featured
       include social_display
   .dialog-screen
-  each city in cities
-    .dialog-container.col-md-4.col-xs-10.city-entities(id='details' + city.id)
-      .dialog-head-container.city-info-banner.clearfix.text-center(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
+  each tag in tags
+    .dialog-container.col-md-4.col-xs-10.city-entities(id='details' + tag.id)
+      .dialog-head-container.city-info-banner.clearfix.text-center(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
         .city-banner-overlay
           span.dialog-close.right.fs-30.pointer.text-shadow-1.white
             i.fa.fa-times
@@ -91,7 +91,7 @@ block content
               .row
                 .events-info
                   .entity-list
-                    each event_tag in city.events
+                    each event_tag in tag.events
                       .category-el.b-l-4.clearfix
                         .info-media.clearfix
                           .col-xs-8.info-box
@@ -113,7 +113,7 @@ block content
                                   i.fa.fa-flag.right.b-l-1.img-alt
                 .retailers-info
                   .entity-list
-                    each retailer_tag in city.retailers
+                    each retailer_tag in tag.retailers
                       .category-el.b-l-4.clearfix
                         .info-media.clearfix
                           .info-box.col-xs-8
@@ -132,7 +132,7 @@ block content
                                   i.fa.fa-gear.right.b-l-1.img-alt
                 .groups-info
                   .entity-list
-                    each group_tag in city.groups
+                    each group_tag in tag.groups
                       .category-el.b-l-4.clearfix
                         .info-media.clearfix
                           .info-box.col-xs-8
@@ -151,7 +151,7 @@ block content
                                   i.fa.fa-group.right.b-l-1.img-alt
                 .schools-info
                   .entity-list
-                    each school_tag in city.schools
+                    each school_tag in tag.schools
                       .category-el.b-l-4.clearfix
                         .info-media.clearfix
                           .info-box.col-xs-8

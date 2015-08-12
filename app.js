@@ -15,6 +15,7 @@ var group    = require('./routes/user/group');
 var school   = require('./routes/user/school');
 var user     = require('./routes/user/user')
 var activity = require('./routes/user/activity')
+var city     = require('./routes/user/city')
 
 var http     = require('http');
 var path     = require('path');
@@ -447,6 +448,10 @@ app.get('/schools/:city_name_slug/:school_name_slug/:school_id', school.check)
 // Activity routes
 app.get('/activity/:tag_id', activity.redir);
 app.get('/activity/:tag_id/:tag_name_slug', activity.check);
+
+//City routes
+app.get('/city/:city_id', city.redir);
+app.get('/city/:city_id/:city_name_slug', city.check);
 
 // Help climbers: static page
 app.get('/help_climbers',

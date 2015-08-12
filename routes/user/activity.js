@@ -271,7 +271,6 @@ var render_page = function(tag, req, res) {
       return Promise.all(promises);
     })
     .then(function(cities_c) {
-      console.log(JSON.stringify(cities_c))
       res.render('user/activity', {
         title_: tag.tag_name + ' in India: Events, Races, Outdoor Schools, Groups, Gear stores',
         cities: cities_c,
