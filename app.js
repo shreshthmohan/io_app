@@ -460,7 +460,7 @@ app.get('/help_climbers',
 app.use(express.static(path.join(__dirname, 'public')))
 
 
-// Everytime some user tries to access a page that does not exists
+// Everytime some user tries to access a page that does not exist
 // an error object will be passed to next
 app.get('*', function(req, res, next) {
   var err = new Error();
@@ -469,8 +469,7 @@ app.get('*', function(req, res, next) {
 });
 
 // https://blog.safaribooksonline.com/2014/03/12/error-handling-express-js-applications/
-
-// If 
+// The function defined below is an error middleware. "Error middleware is differentiated from regular middleware/routes by their characteristic four argument functions: err, req, res and next."
 app.use(function(err, req, res, next) {
   if(err.status !== 404) {
     return next();
