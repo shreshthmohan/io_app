@@ -1146,11 +1146,16 @@ a.pointer-on-hover {
   padding: 4px 6px;
 }
 
-a.white-hover {
+.white-hover {
   &:hover {
     background-color: white;
+    color: @gray-light20;
   } 
 
+}
+
+.no-text-decoration:hover {
+  text-decoration: none;
 }
 
 .event-count, .group-count, .school-count, .store-count {

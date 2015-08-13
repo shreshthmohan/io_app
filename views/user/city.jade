@@ -30,8 +30,9 @@ block content
                     .city-title-container.clearfix
                       .city-text.col-xs-12
                         h2.sm.bob.absolute.padding-tb-5.padding-lr-10
-                          span.block.fs-18.padding-4-6.black-bg.white.capitalize
-                            | #{tag.tag_name}
+                          a.no-text-decoration(href='/activity/' + tag.id + '/' + tag.tag_name_slug title="Everything about " + tag.tag_name + " in India")
+                            span.block.fs-18.padding-4-6.black-bg.white.capitalize.white-hover
+                              | #{tag.tag_name}
                           span.number.uppercase.block.fs-12
                   .col-md-6.white-bg.padding-l-0.padding-r-0
                     .city-title-container.clearfix
