@@ -50,10 +50,11 @@ block content
                             a(href="/groups/" + group.City.city_name_slug + "/" + group.group_name_slug + "/" + group.id)
                               i.fa.fa-group.right.b-l-1.img-alt
                     .tags.clearfix
-                      each tag in group.GroupTags
-                        a(href="/activity/" + event_tag.Tag.id + "/" + event_tag.Tag.tag_name_slug title= event_tag.Tag.tag_name + " in India")
-                          li.tag
-                            | #{tag.Tag.tag_name}
+                      - if(group.GroupTags)
+                          each tag in group.GroupTags
+                            a(href="/activity/" + tag.Tag.id + "/" + tag.Tag.tag_name_slug title= tag.Tag.tag_name + " in India")
+                              li.tag
+                                | #{tag.Tag.tag_name}
               .col-md-6
                 .category-el.b-l-4.clearfix
                   .info-media.clearfix

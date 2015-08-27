@@ -757,6 +757,16 @@ exports.check = function(req, res) {
   })
 }
 
+
+// list of cities with events in various sports
+/*
+exports.city_list = function(req, res) {
+  db.City.findAll({
+    include: 
+  })
+}
+*/
+
 // for refering to raw MySQL queries
 /*
 // all upcoming events
