@@ -394,6 +394,7 @@ app.post('/events/user_error', race.user_error);
 app.post('/events/user_info', race.user_info);
 //app.post('/events/event_form', race.new_event); //TODO should add new event directly to the db
 app.get('/events/event_form', race.event_form);
+app.get('/city_event_list', race.city_list);
 
 // All events
 app.get('/events', function(req, res) {res.redirect('/events/upcoming')});
@@ -448,6 +449,7 @@ app.get('/schools/:city_name_slug/:school_name_slug/:school_id', school.check)
 // Activity routes
 app.get('/activity/:tag_id', activity.redir);
 app.get('/activity/:tag_id/:tag_name_slug', activity.check);
+app.get('/activity_list', activity.list);
 
 //City routes
 app.get('/city/:city_id', city.redir);

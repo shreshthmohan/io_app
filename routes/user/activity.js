@@ -277,4 +277,11 @@ var render_page = function(tag, req, res) {
         tag: tag
       })
     })
-  }
+}
+
+exports.list = function(req, res) {
+  db.Tag.findAll()
+  .then(function(tags) {
+    res.send(JSON.stringify(tags))
+  })
+}

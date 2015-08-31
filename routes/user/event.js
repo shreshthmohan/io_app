@@ -759,13 +759,40 @@ exports.check = function(req, res) {
 
 
 // list of cities with events in various sports
-/*
+
 exports.city_list = function(req, res) {
-  db.City.findAll({
-    include: 
+  db.City.findAll()
+  .then(function(cities) {
+    var promises = []
+    var city
+    cities.forEach(function(c) {
+      promises.push(
+        db.EventTag.findAll({
+          include: [{
+            model: db.Event,
+            where: Sequelize.and(
+              {start_date: {gte: new Date()}},
+              {CityId: c.id}
+            ),
+            attributes: [
+              'id'
+            ]
+          }]
+        })
+        .then(function(tags) {
+          city = c.toJSON();
+          city.tags = tags;
+          return city
+        })
+      )
+    })
+    return Promise.all(promises);
+  })
+  .then(function(cities_a) {
+    res.send(JSON.stringify(cities_a))
   })
 }
-*/
+
 
 // for refering to raw MySQL queries
 /*
