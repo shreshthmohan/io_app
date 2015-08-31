@@ -26,7 +26,7 @@ block content
         .entity.col-md-12.std-shadow
           - if(retailer.img_url_rect) 
             .col-md-12(style="padding: 0;")  
-              a(href=retailer.retailer_url target='_blank')
+              a(href=retailer.website_url target='_blank')
                 img.individual-cover(src=retailer.img_url_rect title=retailer.retailer_name + " in " + retailer.City.city_name)
           - if(retailer.website_url) 
               a(href=retailer.website_url target='_blank')

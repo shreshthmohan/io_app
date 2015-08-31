@@ -24,76 +24,81 @@ block meta
 block content
   include school_filter_bar
   .filter-margin
-  .heading.text-center.border-gray
-    - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
-        h1.md All Outdoor Schools 
-          - if(city)
-              | in #{city.city_name}
-          -else
-              | across India
-    - else if (group_mode == 'cho_tag_all_loc')
-        h1.md To learn #{tag.tag_name} across India
-    - else
-        h1.md ERROR!
   .row
-    - if(group_mode == 'all_tag_all_loc')
-      .col-md-12
-        .sub-heading.text-center.margin-b-10
-          | By Activity
-    .category-list
-      - if((group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc') && (tags != ''))
-          each tag in tags
-            - if(tag.school_count > 0)
-                .col-md-4
-                  a(href=city ? "/schools?activity=" + tag.id + "&location=" + city.id : "/schools/grouped?activity=" + tag.id + "&location=0", title=city ? "Learn " + tag.tag_name + " in " + city.city_name : "Learn " + tag.tag_name + " anywhere in India")
-                    .category-el
-                      .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
-                        .info-text.col-xs-12
-                          h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                            span.block.fs-16.padding-b-5
-                              | #{tag.tag_name}
-                            span.number.uppercase.block.fs-12
-                              | #{tag.school_count} SCHOOL
-                              - if(tag.school_count > 1)
-                                | S
-                              - if(city)
-                                |  IN #{city.city_name}
-                        .info-overlay
-      - else
-          each city in cities
-            -if(city.school_count > 0)
-                .col-md-4
-                  a(href="/schools?activity=" + tag.id + "&location=" + city.id, title="All " + tag.tag_name + " schools " + city.city_name)
-                    .category-el
-                      .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
-                        .info-text.col-xs-12
-                          h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                            span.block.fs-16.padding-b-5
-                              | #{city.city_name}
-                            span.number.uppercase.block.fs-12
-                              | #{city.school_count} #{tag.tag_name} SCHOOL
-                              - if(city.school_count > 1)
-                                | S
-                        .info-overlay
-  - if(group_mode == 'all_tag_all_loc')
-    span.anchor#by-location
-    .row
-      .col-md-12
-        .sub-heading.text-center.margin-b-10
-          | By Location
-      .category-list
-        each city in cities
-          -if(city.school_count > 0)
-              .col-md-4
-                a(href="/schools/grouped?location=" + city.id, title="All outdoor schools in " + city.city_name)
-                  .category-el
-                    .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
-                      .info-text.col-xs-12
-                        h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
-                          span.block.fs-16.padding-b-5
-                            | #{city.city_name}
-                          span.number.uppercase.block.fs-12
-                            | #{city.school_count} SCHOOL
-                            - if(city.school_count > 1)
-                              | S
-                      .info-overlay
+    .col-md-8
+      .heading.text-center.border-gray
+        - if(group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc')
+            h1.md All Outdoor Schools 
+              - if(city)
+                  | in #{city.city_name}
+              -else
+                  | across India
+        - else if (group_mode == 'cho_tag_all_loc')
+            h1.md To learn #{tag.tag_name} across India
+        - else
+            h1.md ERROR!
+      .row
+        - if(group_mode == 'all_tag_all_loc')
+          .col-md-12
+            .sub-heading.text-center.margin-b-10
+              | By Activity
+        .category-list
+          - if((group_mode == 'all_tag_all_loc' || group_mode == 'all_tag_cho_loc') && (tags != ''))
+              each tag in tags
+                - if(tag.school_count > 0)
+                    .col-md-6
+                      a(href=city ? "/schools?activity=" + tag.id + "&location=" + city.id : "/schools/grouped?activity=" + tag.id + "&location=0", title=city ? "Learn " + tag.tag_name + " in " + city.city_name : "Learn " + tag.tag_name + " anywhere in India")
+                        .category-el
+                          .info.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
+                            .info-text.col-xs-12
+                              h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                span.block.fs-16.padding-b-5
+                                  | #{tag.tag_name}
+                                span.number.uppercase.block.fs-12
+                                  | #{tag.school_count} SCHOOL
+                                  - if(tag.school_count > 1)
+                                    | S
+                                  - if(city)
+                                    |  IN #{city.city_name}
+                            .info-overlay
+          - else
+              each city in cities
+                -if(city.school_count > 0)
+                    .col-md-6
+                      a(href="/schools?activity=" + tag.id + "&location=" + city.id, title="All " + tag.tag_name + " schools " + city.city_name)
+                        .category-el
+                          .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
+                            .info-text.col-xs-12
+                              h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                                span.block.fs-16.padding-b-5
+                                  | #{city.city_name}
+                                span.number.uppercase.block.fs-12
+                                  | #{city.school_count} #{tag.tag_name} SCHOOL
+                                  - if(city.school_count > 1)
+                                    | S
+                            .info-overlay
+      - if(group_mode == 'all_tag_all_loc')
+        span.anchor#by-location
+        .row
+          .col-md-12
+            .sub-heading.text-center.margin-b-10
+              | By Location
+          .category-list
+            each city in cities
+              -if(city.school_count > 0)
+                  .col-md-6
+                    a(href="/schools/grouped?location=" + city.id, title="All outdoor schools in " + city.city_name)
+                      .category-el
+                        .info.clearfix(style=city.image_url ? "background-image: url(" + city.image_url + ");" : "")
+                          .info-text.col-xs-12
+                            h2.sm.uppercase.bob.absolute.padding-tb-5.padding-lr-10
+                              span.block.fs-16.padding-b-5
+                                | #{city.city_name}
+                              span.number.uppercase.block.fs-12
+                                | #{city.school_count} SCHOOL
+                                - if(city.school_count > 1)
+                                  | S
+                          .info-overlay
+    .col-md-4
+      include featured
+      include social_display

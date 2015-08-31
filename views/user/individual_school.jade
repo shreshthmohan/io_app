@@ -27,7 +27,7 @@ block content
         .entity.col-md-12.std-shadow
           - if(school.img_url_rect) 
             .col-md-12(style="padding: 0;")  
-              a(href=school.school_url target='_blank')
+              a(href=school.website_url target='_blank')
                 img.individual-cover(src=school.img_url_rect title=school.school_name + " in " + school.City.city_name)
           - if(school.website_url) 
               a(href=school.website_url target='_blank')
