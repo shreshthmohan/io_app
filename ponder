@@ -214,6 +214,10 @@ TODOs:
     #28. User form for adding new stuff (need to think of engagement)
     30. Faced some issue with an event ... unable to fetch because EventTags had a row with TagId=NULL!!
         This should not have happened. TODO fix
+    31. Ad platform:
+       /ad/all
+       /ad/tag
+
     
 
 37. SEO

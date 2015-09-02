@@ -25,9 +25,9 @@ block content
             - if ((tag.retailers != '') || (tag.events != '') || (tag.groups != '') || (tag.schools != ''))
                 .category-el.clearfix
                   .col-md-3.padding-l-0.padding-r-0
-                    .city-title-container.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
+                    a(href='/activity/' + tag.id + '/' + tag.tag_name_slug title="Everything about " + tag.tag_name + " in India")
+                      .city-title-container.clearfix(style=tag.image_url ? "background-image: url(" + tag.image_url + ");" : "")
                   .col-md-3.padding-l-0.padding-r-0
-                    .city-title-container.clearfix
                       .city-text.col-xs-12
                         h2.sm.bob.absolute.padding-tb-5.padding-lr-10
                           a.no-text-decoration(href='/activity/' + tag.id + '/' + tag.tag_name_slug title="Everything about " + tag.tag_name + " in India")
@@ -35,7 +35,6 @@ block content
                               | #{tag.tag_name}
                           span.number.uppercase.block.fs-12
                   .col-md-6.white-bg.padding-l-0.padding-r-0
-                    .city-title-container.clearfix
                       .city-text.col-xs-12
                         .padding-tb-5.padding-lr-10
                           span.block.fs-15.padding-tb-5.margin-t-5
