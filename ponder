@@ -215,10 +215,16 @@ TODOs:
     30. Faced some issue with an event ... unable to fetch because EventTags had a row with TagId=NULL!!
         This should not have happened. TODO fix
     31. Ad platform:
-       /ad/all
-       /ad/tag
+       /ad/all :
+         no queries; ad is global, to be displayed irrespective of tag or location (so all would be ideally displayed on homepage
+         Also an ad tagged as 'all' can be displayed across the website
 
-    
+       /ad?tags=[1,2,3]&num=5 : more targeted ads. pass a list of tags and get all ads for those ads
+       /ad/city=3&num=5 : similar to above, just for targeted location
+       For above apis, say we get a reqest like /ad/tag/?tags=1,3,5 using req.param('tags') works fine, but it has been
+       deprecated in the favor of req.params.tags which doesn't seem to be working properly
+       So apparently I should be using req.body.tags for the above
+       distribute ads 
 
 37. SEO
     Rich snippets: https://support.google.com/webmasters/topic/4598337?hl=en&ref_topic=3309300
