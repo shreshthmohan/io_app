@@ -118,7 +118,6 @@ exports.index = function(req, res) {
             return city
           })
         )
-
       })
       return Promise.all(promises);
     })

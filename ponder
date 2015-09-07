@@ -225,6 +225,11 @@ TODOs:
        deprecated in the favor of req.params.tags which doesn't seem to be working properly
        So apparently I should be using req.body.tags for the above
        distribute ads 
+       POST /ad/create
+       GET /app/admin/ad/:ad_id (modify form)
+       POST /app/admin/ad/:ad_id/modify
+       GET /ad/list_all
+       Individual entity: get ads for each tag listed and for the entity city. But how to avoid redundant fetches?
 
 37. SEO
     Rich snippets: https://support.google.com/webmasters/topic/4598337?hl=en&ref_topic=3309300

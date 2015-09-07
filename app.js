@@ -7,6 +7,7 @@ var admin_retailer = require('./routes/admin/retailer');
 var admin_race     = require('./routes/admin/event');
 var admin_group    = require('./routes/admin/group');
 var admin_school   = require('./routes/admin/school');
+var admin_advert   = require('./routes/admin/advert');
 
 var routes   = require('./routes/user');
 var race     = require('./routes/user/event');
@@ -145,6 +146,10 @@ app.post('/app/admin/sign_up', user.sign_up);
 app.get('/app/admin', admin_routes.index);
 
 app.get('/app/admin/error', admin_routes.error);
+
+app.get('/app/admin/ad/create', admin_advert.create_form);
+app.get('/api/get_ad', admin_advert.get);
+app.post('/app/admin/ad/create', admin_advert.create);
 
 // Create gear retailer
 app.get('/app/admin/gear/create_retailer', admin_retailer.create_form);

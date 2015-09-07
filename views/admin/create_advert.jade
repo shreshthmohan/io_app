@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  .heading.text-center
+    h1.md= title
+  .white-bg.padding-20.std-shadow
+    form(action="/app/admin/ad/create" method="post")
+      label.block.fs-12.normal(for="title") Ad heading/title
+      input.full.padding-lr-5(type="text", name="title", id="title" required placeholder="Heading of your ad. Name of your business/event/organisation or such")
+      br
+      label.block.fs-12.normal.margin-t-10(for="description") Ad pitch excerpt
+      input.full.padding-lr-5(type="text", name="description", id="description" required  placeholder="Some details about your ad pitch. Maximum 60 characters")
+      br
+      label.block.fs-12.normal.margin-t-10(for="image_url") Image to go with your ad
+      input.full.padding-lr-5(type="text", name="image_url", id="image_url" required  placeholder="Preferably rectangular, atleast 370 pixels wide and 140 pixels high for best appearance")
+      br
+      label.block.fs-12.normal.margin-t-10(for="web_url") Target link
+      input.full.padding-lr-5(type="text", name="web_url", id="web_url" required  placeholder="URL where the ad should lead")
+      br
+      label.block.fs-12.normal.margin-t-10(for="campaign_start_date") Campaign Start Date
+      input.full.padding-lr-5(type="text", name="campaign_start_date", id="campaign_start_date" required placeholder="yyyy-mm-dd")
+      br
+      label.block.fs-12.normal.margin-t-10(for="campaign_end_date") Campaign End Date
+      input.full.padding-lr-5(type="text", name="campaign_end_date", id="campaign_end_date" required placeholder="yyyy-mm-dd")
+      br
+      label.block.fs-12.normal.margin-t-10(for="active") Ad active?
+      input(type="radio" value="1" name="active", id="active")
+      | Yes
+      input(type="radio" value="0" name="active", id="inactive")
+      | No
+      br
+      label.block.fs-12.normal.margin-t-10(for="active") Tag(s)
+        each tag in tags
+          input(type="checkbox" name="tags" value= tag.id)
+          | #{tag.tag_name}
+      br
+      label.block.fs-12.normal.margin-t-10(for="all") All pages?
+      input(type="radio" value="1" name="all", id="all")
+      | Yes
+      input(type="radio" value="0" name="all", id="not_all")
+      | No
+      br
+      span.yellow-bg
+        | If you say "Yes" to "All pages?" the cities and tags you choose will be obviously be ignored
+      label.block.fs-12.normal.margin-t-10() Cit(y/ies)
+        each city in cities
+          input(type="checkbox" name="cities" value= city.id)
+          | #{city.city_name}
+      br
+      input(type="submit")
