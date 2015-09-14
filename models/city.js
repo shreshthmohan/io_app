@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   {
     city_name:      {type: DataTypes.STRING(30), allowNull: false},
     city_name_slug: {type: DataTypes.STRING(30), allowNull: false},
-    image_url:      {type: DataTypes.STRING(550)}
+    image_url:      {type: DataTypes.STRING(1000)}
   },
   {
     associate: function(models) {

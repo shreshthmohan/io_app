@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   {
     tag_name: {type: DataTypes.STRING(30), allowNull: false},
     tag_name_slug: {type: DataTypes.STRING(30), allowNull: false}, //TODO
-    image_url: {type: DataTypes.STRING(550)}
+    image_url: {type: DataTypes.STRING(1000)}
   },
   {
     associate: function(models) {

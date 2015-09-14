@@ -2,7 +2,7 @@ module.exports = function(sequelize, DataTypes) {
   var Advert = sequelize.define('Advert', {
     title:                {type: DataTypes.STRING(30), allowNull: false},
     description:          {type: DataTypes.STRING(60), allowNull: false},
-    image_url:            {type: DataTypes.STRING(555), allowNull: false},
+    image_url:            {type: DataTypes.STRING(1000), allowNull: false},
     web_url:              {type: DataTypes.STRING(555), allowNull: false},
     campaign_start_date:  {type: DataTypes.DATEONLY, allowNull: false}, // This is MySQL DATETIME 
     campaign_end_date:    {type: DataTypes.DATEONLY, allowNull: false},

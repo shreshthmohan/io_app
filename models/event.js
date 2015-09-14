@@ -8,8 +8,8 @@ module.exports = function(sequelize, DataTypes) {
     organiser_url:   {type: DataTypes.STRING(555)},
     address_field:   {type: DataTypes.STRING(255)},
     location_url:    {type: DataTypes.STRING(555)},
-    img_url_square:  {type: DataTypes.STRING(555)},
-    img_url_rect:    {type: DataTypes.STRING(555)},
+    img_url_square:  {type: DataTypes.STRING(1000)},
+    img_url_rect:    {type: DataTypes.STRING(1000)},
     start_date:      {type: DataTypes.DATE}, // This is MySQL DATETIME 
     end_date:        {type: DataTypes.DATE},
     // ^ http://dev.mysql.com/doc/refman/5.5/en/datetime.html
