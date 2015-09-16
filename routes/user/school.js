@@ -439,7 +439,8 @@ var grouped_by_location_chosen_tag = function(req, res) {
   })
 }
 
-// Individual schools
+// individual school view
+// with smart suggestions
 var render_page = function(req, res) {
   db.School.find({
     where: {id: req.param('school_id')},
@@ -463,11 +464,36 @@ var render_page = function(req, res) {
       'comments']
   })
   .success(function(school) {
-     res.render('user/individual_school', {
-       active_tab: 'schools',
-       title_: school.school_name + ' in ' + school.City.city_name,
-       school: school}) 
+    var school_w_suggestion = school.toJSON();
+    return Promise.all([
+      db.Event.count({
+        where: {CityId: school.City.id}
+      }),
+      db.Retailer.count({
+        where: {CityId: school.City.id}
+      }),
+      db.School.count({
+        where: {CityId: school.City.id}
+      }),
+      db.Group.count({
+        where: {CityId: school.City.id}
+      })
+    ])
+    .spread( function (event_count, store_count, school_count, group_count) {
+      school_w_suggestion.city_event_count = event_count;
+      school_w_suggestion.store_count = store_count;
+      school_w_suggestion.school_count = school_count;
+      school_w_suggestion.group_count = group_count;
+      return school_w_suggestion
+    })
   }) 
+  .then(function(school_c) {
+    res.render('user/individual_school', {
+      active_tab: 'schools',
+      title_: school_c.school_name + ' in ' + school_c.City.city_name,
+      school: school_c
+    }) 
+  })
 }
 
 exports.check = function(req, res) {

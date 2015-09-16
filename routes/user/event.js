@@ -696,15 +696,6 @@ var render_page = function(req, res) {
       })
     )
     promises.push(
-      db.Event.count({
-        where: {start_date: {gte: new Date()}}
-      })
-      .then(function(total_event_count) {
-        race_w_suggestion.event_count = total_event_count;
-        return race_w_suggestion
-      })
-    )
-    promises.push(
       db.Retailer.count({
         where: {CityId: race.City.id}
       })
@@ -734,7 +725,6 @@ var render_page = function(req, res) {
     return Promise.all(promises);
   })
   .then(function(race_c) {
-     console.log(JSON.stringify(race_c))
      res.render('user/individual_event', {
        active_tab: 'events',
        title_: race_c[0].event_name + ' in ' + race_c[0].City.city_name,

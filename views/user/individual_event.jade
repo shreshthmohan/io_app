@@ -29,9 +29,9 @@ block content
           - if(race.img_url_rect) 
             .col-md-12(style="padding: 0;")  
               a(href=race.event_url target='_blank')
-                img.individual-cover(src=race.img_url_rect title=race.event_name + " in " + race.City.city_name)
+                img.individual-cover(src=race.img_url_rect title= "Visit website of " + race.event_name)
           - if(race.event_url) 
-              a(href=race.event_url target='_blank')
+              a(href=race.event_url title= "Visit website of " + race.event_name target='_blank')
                 h1.lg.inline #{race.event_name}
                 span.fa.fa-external-link.margin-l-5.fs-16
           - else
@@ -102,6 +102,15 @@ block content
           .fb-comments(data-href="http://www.indiaoutside.org/events/" + race.City.city_name_slug + "/" + race.event_name_slug + "/" + race.id data-numposts="5" data-width="100%" data-colorscheme="light")
       .col-md-12
         .sub-heading.text-center.margin-tb-10 Suggestions
+      each event_tag in race.EventTags
+        .col-md-6
+          a(href="/activity/" + event_tag.Tag.id + "/" + event_tag.Tag.tag_name_slug title= event_tag.Tag.tag_name + " in India")
+            .category-el
+              .info.clearfix(style="background-image: url(" + event_tag.Tag.image_url + ");")
+                .info-text.bottom-20.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | #{event_tag.Tag.tag_name} in India
+                .info-overlay
       - if (race.city_event_count > 1)
         .col-md-6
           a(href="/events/upcoming/grouped?location=" + race.City.id , title="All outdoor events in " + race.City.city_name)
@@ -109,9 +118,12 @@ block content
               .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
                 .right
                   i.fa.fa-flag-checkered.helper-icon
-                .info-text.margin-top-90.col-xs-12
+                .info-text.bottom-20.col-xs-12
                   span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                    | #{race.city_event_count - 1} other Events in #{race.City.city_name}
+                    - if (race.city_event_count > 2)
+                      | #{race.city_event_count - 1} other Events in #{race.City.city_name}
+                    - else
+                      | 1 Event in #{race.City.city_name}
                 .info-overlay
       .col-md-6
         a(href="/events/upcoming/grouped" title="All Outdoor Events and Races by Activity")
@@ -119,7 +131,7 @@ block content
             .info.clearfix.all-tag-bg
               .right
                 i.fa.fa-flag-checkered.helper-icon
-              .info-text.margin-top-90.col-xs-12
+              .info-text.bottom-20.col-xs-12
                 span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                   | All Events by Activity
               .info-overlay
@@ -129,7 +141,7 @@ block content
             .info.clearfix.all-loc-bg
               .right
                 i.fa.fa-flag-checkered.helper-icon
-              .info-text.margin-top-90.col-xs-12
+              .info-text.bottom-20.col-xs-12
                 span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                   | All Events by Location
               .info-overlay
@@ -140,7 +152,7 @@ block content
               .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
                 .right
                   i.fa.fa-gear.helper-icon
-                .info-text.margin-top-90.col-xs-12
+                .info-text.bottom-20.col-xs-12
                   span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                     - if (race.store_count > 1)
                       | #{race.store_count} Stores in #{race.City.city_name}
@@ -154,7 +166,7 @@ block content
               .info.clearfix(style="background-image: url(" + race.City.image_url + ");")
                 .right
                   i.fa.fa-building-o.helper-icon
-                .info-text.margin-top-90.col-xs-12
+                .info-text.bottom-20.col-xs-12
                   span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                     - if (race.school_count > 1)
                       | #{race.school_count} outdoor schools in #{race.City.city_name}

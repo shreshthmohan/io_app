@@ -443,6 +443,7 @@ var gear_grouped_by_location_chosen_tag = function(req, res) {
 }
 
 // Individual retailers
+// with smart suggestions
 var render_page = function(req, res) {
   db.Retailer.find({
     where: {id: req.param('retailer_id')},
@@ -466,6 +467,30 @@ var render_page = function(req, res) {
       'comments']
   })
   .success(function(retailer) {
+    var retailer_w_suggestion = retailer.toJSON();
+    return Promise.all([
+      db.Event.count({
+        where: {CityId: retailer.City.id}
+      }),
+      db.Retailer.count({
+        where: {CityId: retailer.City.id}
+      }),
+      db.School.count({
+        where: {CityId: retailer.City.id}
+      }),
+      db.Group.count({
+        where: {CityId: retailer.City.id}
+      })
+    ])
+    .spread( function (event_count, store_count, school_count, group_count) {
+        retailer_w_suggestion.city_event_count = event_count;
+        retailer_w_suggestion.store_count = store_count;
+        retailer_w_suggestion.school_count = school_count;
+        retailer_w_suggestion.group_count = group_count;
+        return retailer_w_suggestion
+    })
+  })
+  .then(function(retailer) {
      res.render('user/individual_retailer', {
        active_tab: 'gear',
        title_: retailer.retailer_name + ' in ' + retailer.City.city_name,

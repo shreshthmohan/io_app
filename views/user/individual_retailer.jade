@@ -82,23 +82,36 @@ block content
           .fb-comments(data-href="http://www.indiaoutside.org/gear/" + retailer.City.city_name_slug + "/" + retailer.retailer_name_slug + "/" + retailer.id data-numposts="5" data-width="100%" data-colorscheme="light")
       .col-md-12
         .sub-heading.text-center.margin-tb-10 Suggestions
-      .col-md-6
-        a(href="/gear/grouped?location=" + retailer.City.id , title="All outdoor gear stores and retailers in " + retailer.City.city_name)
-          .category-el
-            .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
-              .right
-                i.fa.fa-gear.helper-icon
-              .info-text.margin-top-90.col-xs-12
-                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                  | Stores in #{retailer.City.city_name}
-              .info-overlay
+      each gear_tag in retailer.GearTags
+        .col-md-6
+          a(href="/activity/" + gear_tag.Tag.id + "/" + gear_tag.Tag.tag_name_slug title= gear_tag.Tag.tag_name + " in India")
+            .category-el
+              .info.clearfix(style="background-image: url(" + gear_tag.Tag.image_url + ");")
+                .info-text.bottom-20.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    | #{gear_tag.Tag.tag_name} in India
+                .info-overlay
+      - if(retailer.store_count > 1)
+        .col-md-6
+          a(href="/gear/grouped?location=" + retailer.City.id , title="All outdoor gear stores and retailers in " + retailer.City.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
+                .right
+                  i.fa.fa-gear.helper-icon
+                .info-text.bottom-20.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    - if (retailer.store_count > 2)
+                      | #{retailer.store_count - 1} other Stores in #{retailer.City.city_name}
+                    - else
+                      | 1 Store in #{retailer.City.city_name}
+                .info-overlay
       .col-md-6
         a(href="/gear/grouped" title="All Gear Stores and Retailers by Activity")
           .category-el
             .info.clearfix.all-tag-bg
               .right
                 i.fa.fa-gear.helper-icon
-              .info-text.margin-top-90.col-xs-12
+              .info-text.bottom-20.col-xs-12
                 span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                   | All Stores by Activity
               .info-overlay
@@ -108,41 +121,52 @@ block content
             .info.clearfix.all-loc-bg
               .right
                 i.fa.fa-gear.helper-icon
-              .info-text.margin-top-90.col-xs-12
+              .info-text.bottom-20.col-xs-12
                 span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
                   | All Stores by Location
               .info-overlay
-      .col-md-6
-        a(href="/events/upcoming/grouped?location=" + retailer.City.id , title="All outdoor events in " + retailer.City.city_name)
-          .category-el
-            .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
-              .right
-                i.fa.fa-flag-checkered.helper-icon
-              .info-text.margin-top-90.col-xs-12
-                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                  | Events in #{retailer.City.city_name}
-              .info-overlay
-
-      .col-md-6
-        a(href="/schools/grouped?location=" + retailer.City.id , title="All outdoor schools in " + retailer.City.city_name)
-          .category-el
-            .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
-              .right
-                i.fa.fa-building-o.helper-icon
-              .info-text.margin-top-90.col-xs-12
-                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                  | Learn in #{retailer.City.city_name}
-              .info-overlay
-      .col-md-6
-        a(href="/groups/grouped?location=" + retailer.City.id title="All Active Outdoor groups in " + retailer.City.city_name)
-          .category-el
-            .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
-              .right
-                i.fa.fa-group.helper-icon
-              .info-text.col-xs-12
-                span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
-                  | Groups in #{retailer.City.city_name}
-              .info-overlay
+      - if (retailer.city_event_count > 1)
+        .col-md-6
+          a(href="/events/upcoming/grouped?location=" + retailer.City.id , title="All outdoor events in " + retailer.City.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
+                .right
+                  i.fa.fa-flag-checkered.helper-icon
+                .info-text.bottom-20.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    - if (retailer.city_event_count > 1)
+                      | #{retailer.city_event_count} Events in #{retailer.City.city_name}
+                    - else
+                      | 1 Event in #{retailer.City.city_name}
+                .info-overlay
+      - if(retailer.school_count > 0)
+        .col-md-6
+          a(href="/schools/grouped?location=" + retailer.City.id , title="All outdoor schools in " + retailer.City.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
+                .right
+                  i.fa.fa-building-o.helper-icon
+                .info-text.bottom-20.col-xs-12
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    - if (retailer.school_count > 1)
+                      | #{retailer.school_count} outdoor schools in #{retailer.City.city_name}
+                    - else
+                      | 1 outdoor school in #{retailer.City.city_name}
+                .info-overlay
+      - if(retailer.group_count > 0)
+        .col-md-6
+          a(href="/groups/grouped?location=" + retailer.City.id title="All Active Outdoor groups in " + retailer.City.city_name)
+            .category-el
+              .info.clearfix(style="background-image: url(" + retailer.City.image_url + ");")
+                .right
+                  i.fa.fa-group.helper-icon
+                .info-text.col-xs-12.bottom-20
+                  span.number.padding-lr-5.uppercase.fs-12.bob.padding-tb-5
+                    - if (retailer.group_count > 1)
+                      | #{retailer.group_count} groups in #{retailer.City.city_name}
+                    - else
+                      | 1 group in #{retailer.City.city_name}
+                .info-overlay
     .col-md-4
       include featured
       include social_display

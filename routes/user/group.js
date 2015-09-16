@@ -440,7 +440,9 @@ var group_grouped_by_location_chosen_tag = function(req, res) {
   })
 }
 
+
 // Individual groups
+// with smart suggestions
 var render_page = function(req, res) {
   db.Group.find({
     where: {id: req.param('group_id')},
@@ -462,11 +464,35 @@ var render_page = function(req, res) {
       'comments']
   })
   .success(function(group) {
+    var group_w_suggestion = group.toJSON();
+    return Promise.all([
+      db.Event.count({
+        where: {CityId: group.City.id}
+      }),
+      db.Retailer.count({
+        where: {CityId: group.City.id}
+      }),
+      db.School.count({
+        where: {CityId: group.City.id}
+      }),
+      db.Group.count({
+        where: {CityId: group.City.id}
+      })
+    ])
+    .spread( function (event_count, store_count, school_count, group_count) {
+        group_w_suggestion.city_event_count = event_count;
+        group_w_suggestion.store_count = store_count;
+        group_w_suggestion.school_count = school_count;
+        group_w_suggestion.group_count = group_count;
+        return group_w_suggestion
+    })
+  })
+  .then(function(group) {
      res.render('user/individual_group', {
        active_tab: 'groups',
        title_: group.group_name + ' in ' + group.City.city_name,
        group: group}) 
-  }) 
+  })
 }
 
 exports.check = function(req, res) {
