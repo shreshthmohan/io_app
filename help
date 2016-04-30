@@ -82,6 +82,8 @@
     Example:
     sudo nginx -s reload
 
+4b. nginx error log: /var/log/nginx/error.log
+
 5. MySQL update data in existing field
    UPDATE tutorials_tbl SET tutorial_title='Learning JAVA' WHERE tutorial_id=3;
 
